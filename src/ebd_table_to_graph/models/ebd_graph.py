@@ -1,7 +1,7 @@
 """
 contains the graph side of things
 """
-from networkx import DiGraph
+from networkx import DiGraph  # type:ignore[import]
 
 # pylint:disable=too-few-public-methods
 

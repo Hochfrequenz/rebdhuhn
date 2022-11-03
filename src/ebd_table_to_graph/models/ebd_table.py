@@ -52,7 +52,7 @@ class EbdCheckResult:
     """
 
     subsequent_step_number: Optional[str] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.matches_re(r"^\d+\*?$"))
+        validator=attrs.validators.optional(attrs.validators.matches_re(r"^(?:\d+\*?)|(Ende)$"))
     )
     """
     Key of the following/subsequent step, e.g. '2', or '6*' or None, if there is no follow up step

@@ -104,7 +104,7 @@ class EbdTableRow:
     E.g. 'Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?'
     The German column header is 'Prüfschritt'.
     """
-    check_results: List[EbdTableSubRow] = attrs.field(
+    sub_rows: List[EbdTableSubRow] = attrs.field(
         validator=attrs.validators.deep_iterable(
             member_validator=attrs.validators.instance_of(EbdTableSubRow),
             iterable_validator=attrs.validators.min_len(2),
@@ -113,6 +113,17 @@ class EbdTableRow:
     """
     One table row splits into multiple sub rows: one sub row for each check result (ja/nein)
     """
+
+    def has_subsequent_steps(self) -> bool:
+        """
+        return true iff there are any subsequent steps after this row, meaning: this is not a loose end of the graph
+        """
+        for sub_row in self.sub_rows:
+            if sub_row.check_result.subsequent_step_number:
+                if sub_row.check_result.subsequent_step_number != "Ende":
+                    # "Ende" actually occurs in E_0003 or E_0025 🙈
+                    return True
+        return False
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

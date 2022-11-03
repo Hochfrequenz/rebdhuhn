@@ -19,7 +19,7 @@ class TestEbdTableModels:
                         EbdTableRow(
                             step_number="1",
                             description="Erfolgt die Aktivierung nach Abluaf der Clearingfrist für die KBKA?",
-                            check_results=[
+                            sub_rows=[
                                 EbdTableSubRow(
                                     check_result=EbdCheckResult(result=True, subsequent_step_number=None),
                                     result_code="A01",
@@ -43,3 +43,70 @@ class TestEbdTableModels:
         The test is successful already if the instantiation in the parametrization worked
         """
         assert table is not None
+
+    @pytest.mark.parametrize(
+        "row,expected_result",
+        [
+            pytest.param(
+                EbdTableRow(
+                    step_number="1",
+                    description="Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                            result_code="A01",
+                            note="Cluster Ablehnung\nFristüberschreitung",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number="2"),
+                            result_code=None,
+                            note=None,
+                        ),
+                    ],
+                ),
+                True,
+            ),
+            pytest.param(
+                EbdTableRow(
+                    step_number="2",
+                    description="""Ist in der Kündigung die Angabe der Identifikationslogik mit
+dem Wert „Marktlokations-ID“ angegeben?""",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number="3"),
+                            result_code=None,
+                            note=None,
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number="4"),
+                            result_code=None,
+                            note=None,
+                        ),
+                    ],
+                ),
+                True,
+            ),
+            pytest.param(
+                EbdTableRow(
+                    step_number="2",
+                    description="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+                            result_code="A02",
+                            note="Gewählter Zeitpunkt nicht zulässig",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number="Ende"),
+                            result_code=None,
+                            note=None,
+                        ),
+                    ],
+                ),
+                False,
+            ),
+        ],
+    )
+    def test_has_subsequent_steps(self, row: EbdTableRow, expected_result: bool):
+        actual = row.has_subsequent_steps()
+        assert actual == expected_result

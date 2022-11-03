@@ -6,7 +6,7 @@
 ![Black status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Black/badge.svg)
 ![PyPi Status Badge](https://img.shields.io/pypi/v/ebd_table_to_graph)
 
-This repository contains the source code of the Python package `ebd_table_to_graph`.
+This repository contains the source code of the Python package [`ebd_table_to_graph`](https://pypi.org/project/ebd_table_to_graph).
 
 ## Rationale
 

@@ -8,6 +8,7 @@ from typing import List, Optional
 import attrs
 
 
+# pylint:disable=too-few-public-methods
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableMetaData:
     """
@@ -129,3 +130,6 @@ class EbdTable:
             member_validator=attrs.validators.instance_of(EbdTableRow), iterable_validator=attrs.validators.min_len(1)
         ),
     )
+    """
+    rows are the body of the table
+    """

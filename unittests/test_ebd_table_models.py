@@ -33,7 +33,8 @@ class TestEbdTableModels:
                             ],
                         )
                     ],
-                )
+                ),
+                id="Erste Zeile von E_0015",
             )
         ],
     )
@@ -41,4 +42,4 @@ class TestEbdTableModels:
         """
         The test is successful already if the instantiation in the parametrization worked
         """
-        pass
+        assert table is not None

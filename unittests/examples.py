@@ -5,6 +5,10 @@ https://www.edi-energy.de/index.php?id=38&tx_bdew_bdew%5Buid%5D=1486&tx_bdew_bde
 from ebd_table_to_graph import EbdTable
 from ebd_table_to_graph.models.ebd_table import EbdCheckResult, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
+# todo @ konstantin
+# the "manual" EBDs that cause problems with the existing code are e.g.:
+# E_0011, E_0401, E_0453, E_0455, E_0462
+# see https://github.com/Hochfrequenz/ebd_parser-backend/pull/189/files
 # E_0003 is pretty short
 # https://www.entscheidungsbaumdiagramm.de/diagram?ebdKey=E_0003&formatVersion=FV2204
 table_e0003 = EbdTable(

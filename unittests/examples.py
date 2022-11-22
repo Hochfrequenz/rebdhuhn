@@ -322,7 +322,7 @@ table_e0015 = EbdTable(
 )
 
 
-# E_0401 is rather fucked up
+# E_0401 is rather fucked up. This is, because it is technically a graph and not tree anymore
 # https://www.entscheidungsbaumdiagramm.de/diagram?ebdKey=E_0401&formatVersion=FV2204
 table_e0401 = EbdTable(
     metadata=EbdTableMetaData(
@@ -618,3 +618,6 @@ bleibt unverändert bestehen.""",
         ),
     ],
 )
+
+# for further even harder examples of graphs (not trees), please see E_0462
+# https://www.entscheidungsbaumdiagramm.de/diagram?ebdKey=E_0462&formatVersion=FV2204

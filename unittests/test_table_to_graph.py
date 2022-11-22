@@ -12,7 +12,7 @@ class TestEbdTableModels:
             pytest.param(table_e0003, EbdGraph()),  # easy
             pytest.param(table_e0025, EbdGraph()),  # easy-medium
             pytest.param(table_e0015, EbdGraph()),  # medium
-            pytest.param(table_e0401, EbdGraph()),  # hard
+            pytest.param(table_e0401, EbdGraph()),  # hard (because it's not a tree but only a directed graph)
         ],
     )
     def test_instantiation(self, table: EbdTable, expected_result: EbdGraph):

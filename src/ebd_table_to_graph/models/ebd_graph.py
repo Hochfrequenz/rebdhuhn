@@ -45,6 +45,11 @@ class DecisionNode:
     (e.g. "Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?")
     """
 
+    step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+\*?"))
+    """
+    number of the Prüfschritt, e.g. '1', '2' or '6*'
+    """
+
     question: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     the questions which is asked at this node in the tree

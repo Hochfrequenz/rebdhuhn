@@ -16,9 +16,9 @@ class TestEbdTableModels:
             pytest.param(
                 table_e0003,
                 [
-                    DecisionNode(question="Erfolgt der Eingang der Bestellung fristgerecht?"),
+                    DecisionNode(step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"),
                     OutcomeNode(result_code="A01", note="Fristüberschreitung"),
-                    DecisionNode(question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"),
+                    DecisionNode(step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"),
                     OutcomeNode(result_code="A02", note="Gewählter Zeitpunkt nicht zulässig"),
                 ],
             )

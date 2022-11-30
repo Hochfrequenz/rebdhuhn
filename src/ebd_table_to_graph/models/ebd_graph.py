@@ -81,7 +81,6 @@ a union type hint for all possible nodes within an EBD Graph
 """
 
 
-
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdGraph:
     """

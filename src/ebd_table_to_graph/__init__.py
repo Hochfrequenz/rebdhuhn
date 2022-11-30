@@ -3,6 +3,8 @@ contains the conversion logic
 """
 from typing import Dict, List, Optional
 
+from networkx import DiGraph  # type:ignore[import]
+
 from ebd_table_to_graph.models.ebd_graph import (
     DecisionNode,
     EbdGraph,

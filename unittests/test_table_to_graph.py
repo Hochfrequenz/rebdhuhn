@@ -3,7 +3,14 @@ from typing import List
 import pytest  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
-from ebd_table_to_graph import EbdGraph, EbdGraphMetaData, convert_table_to_graph, get_all_edges, get_all_nodes
+from ebd_table_to_graph import (
+    EbdGraph,
+    EbdGraphMetaData,
+    convert_table_to_digraph,
+    convert_table_to_graph,
+    get_all_edges,
+    get_all_nodes,
+)
 from ebd_table_to_graph.models.ebd_graph import (
     DecisionNode,
     EbdGraphEdge,
@@ -63,6 +70,12 @@ class TestEbdTableModels:
                         ),
                         target=OutcomeNode(result_code="A02", note="Gewählter Zeitpunkt nicht zulässig"),
                     ),
+                    ToYesEdge(
+                        source=DecisionNode(
+                            step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"
+                        ),
+                        target=EndNode(),
+                    ),
                 ],
             )
         ],
@@ -70,6 +83,37 @@ class TestEbdTableModels:
     def test_get_all_edges(self, table: EbdTable, expected_result: List[EbdGraphEdge]):
         actual = get_all_edges(table)
         assert actual == expected_result
+
+    @pytest.mark.parametrize(
+        "table,expected_description",
+        [
+            pytest.param(
+                table_e0003,
+                "DiGraph with 5 nodes and 4 edges",
+                # 5 nodes = 2 decision nodes + ["A01", "A02", EndNode]
+                # 4 edges = 2*Ja +2*Nein
+            ),
+            pytest.param(
+                table_e0015,
+                "DiGraph with 22 nodes and 12 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0025,
+                "DiGraph with 9 nodes and 5 edges",
+                # todo: check if result is ok
+            ),
+        ],
+    )
+    def test_table_to_digraph(self, table: EbdTable, expected_description: str):
+        actual = convert_table_to_digraph(table)
+        assert str(actual) == expected_description
+        return
+        import matplotlib.pyplot as plt  # type:ignore[import]
+        from networkx import draw_networkx  # type:ignore[import]
+
+        draw_networkx(actual)
+        plt.show()
 
     @pytest.mark.parametrize(
         "table,expected_result",

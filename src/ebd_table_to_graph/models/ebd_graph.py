@@ -81,32 +81,6 @@ a union type hint for all possible nodes within an EBD Graph
 """
 
 
-class EbdGraphEdge:
-    """
-    base class of all edges in an EBD Graph
-    """
-
-    source: EbdGraphNodes = attrs.field()
-    """
-    the origin/source of the edge
-    """
-    target: EbdGraphNodes = attrs.field()
-    """
-    the destination/target of the edge
-    """
-
-
-class ToYesEdge(EbdGraphEdge):
-    """
-    an edge that connects a DecisionNode with the positive next step
-    """
-
-
-class ToNoEdge(EbdGraphEdge):
-    """
-    an edge that connects a DecisionNode with the negative next step
-    """
-
 
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdGraph:

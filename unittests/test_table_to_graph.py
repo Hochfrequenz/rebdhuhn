@@ -1,12 +1,33 @@
+from typing import List
+
 import pytest  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
-from ebd_table_to_graph import EbdGraph, EbdGraphMetaData, convert_table_to_graph
+from ebd_table_to_graph import EbdGraph, EbdGraphMetaData, convert_table_to_graph, get_all_nodes
+from ebd_table_to_graph.models.ebd_graph import DecisionNode, EbdGraphNodes, OutcomeNode
 from ebd_table_to_graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 
 class TestEbdTableModels:
+    @pytest.mark.parametrize(
+        "table,expected_result",
+        [
+            pytest.param(
+                table_e0003,
+                [
+                    DecisionNode(question="Erfolgt der Eingang der Bestellung fristgerecht?"),
+                    OutcomeNode(result_code="A01", note="Fristüberschreitung"),
+                    DecisionNode(question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"),
+                    OutcomeNode(result_code="A02", note="Gewählter Zeitpunkt nicht zulässig"),
+                ],
+            )
+        ],
+    )
+    def test_get_all_nodes(self, table: EbdTable, expected_result: List[EbdGraphNodes]):
+        actual = get_all_nodes(table)
+        assert actual == expected_result
+
     @pytest.mark.parametrize(
         "table,expected_result",
         [

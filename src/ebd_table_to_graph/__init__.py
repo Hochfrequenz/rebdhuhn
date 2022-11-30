@@ -3,7 +3,6 @@ contains the conversion logic
 """
 from typing import Dict, List, Optional
 
-
 from ebd_table_to_graph.models.ebd_graph import (
     DecisionNode,
     EbdGraph,

@@ -68,6 +68,8 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 if row_index == 0:
                     outcome_node = start_node
                     del start_node
+                elif row_index == len(table.rows) - 1:
+                    outcome_node = EndNode()
                 else:
                     continue
             # outcome_node is not None below this line
@@ -87,18 +89,29 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     return result
 
 
+def convert_table_to_digraph(table: EbdTable) -> DiGraph:
+    """
+    converts an EbdTable into a directed graph (networkx)
+    """
+    result: DiGraph = DiGraph()
+    result.add_nodes_from(get_all_nodes(table))
+    result.add_edges_from([(edge.source, edge.target) for edge in get_all_edges(table)])
+    return result
+
+
 def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     converts the given table into a graph
     """
     if table is None:
         raise ValueError("table must not be None")
-    graph = DiGraph()
+    raise NotImplementedError("Todo @Leon")
+    # pylint: disable=unreachable
+    graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
         chapter=table.metadata.chapter,
         sub_chapter=table.metadata.sub_chapter,
         role=table.metadata.role,
     )
-    _ = EbdGraph(metadata=graph_metadata, graph=graph)
-    raise NotImplementedError("Todo @Leon")
+    return EbdGraph(metadata=graph_metadata, graph=graph)

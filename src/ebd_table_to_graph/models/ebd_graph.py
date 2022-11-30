@@ -121,15 +121,27 @@ class EbdGraphEdge:
     """
 
 
+@attrs.define(auto_attribs=True, kw_only=True)
 class ToYesEdge(EbdGraphEdge):
     """
     an edge that connects a DecisionNode with the positive next step
     """
 
+    source: DecisionNode = attrs.field(validator=attrs.validators.instance_of(DecisionNode))
+    """
+    the source whose outcome is True ("Ja")
+    """
 
+
+@attrs.define(auto_attribs=True, kw_only=True)
 class ToNoEdge(EbdGraphEdge):
     """
     an edge that connects a DecisionNode with the negative next step
+    """
+
+    source: DecisionNode = attrs.field(validator=attrs.validators.instance_of(DecisionNode))
+    """
+    ths source whose outcome is False ("Nein")
     """
 
 

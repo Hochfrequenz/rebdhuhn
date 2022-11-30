@@ -1,7 +1,8 @@
 """
 contains the graph side of things
 """
-from typing import Optional, Union
+from abc import ABC, abstractmethod
+from typing import Optional
 
 import attrs
 from networkx import DiGraph  # type:ignore[import]
@@ -38,8 +39,23 @@ class EbdGraphMetaData:
     """
 
 
-@attrs.define(auto_attribs=True, kw_only=True)
-class DecisionNode:
+class EbdGraphNode(ABC):
+    """
+    Abstract Base Class of all Nodes in the EBD Graph
+    This class defines the methods the nodes have to implement.
+    All inheriting classes should use frozen = True as attrs-argument.
+    """
+
+    @abstractmethod
+    def get_key(self) -> str:
+        """
+        returns a key that is unique for this node in the entire graph
+        """
+        raise NotImplementedError("The child class has to implement this method")
+
+
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+class DecisionNode(EbdGraphNode):
     """
     A decision node is a question that can be answered with "ja" or "nein"
     (e.g. "Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?")
@@ -55,16 +71,17 @@ class DecisionNode:
     the questions which is asked at this node in the tree
     """
 
+    def get_key(self) -> str:
+        return self.step_number
 
-@attrs.define(auto_attribs=True, kw_only=True)
-class OutcomeNode:
+
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+class OutcomeNode(EbdGraphNode):
     """
     An outcome node is a leaf of the Entscheidungsbaum tree. It has no subsequent steps.
     """
 
-    result_code: Optional[str] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.matches_re(r"^[A-Z]\d+$"))
-    )
+    result_code: str = attrs.field(validator=attrs.validators.matches_re(r"^[A-Z]\d+$"))
     """
     The outcome of the decision tree check; e.g. 'A55'
     """
@@ -74,11 +91,46 @@ class OutcomeNode:
     An optional note for this outcome; e.g. 'Cluster:Ablehnung\nFristüberschreitung'
     """
 
+    def get_key(self) -> str:
+        return self.result_code
 
-EbdGraphNodes = Union[DecisionNode, OutcomeNode]
-"""
-a union type hint for all possible nodes within an EBD Graph
-"""
+
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+class EndNode(EbdGraphNode):
+    """
+    There is only one end node per graph. It is the "exit" of the decision tree.
+    """
+
+    def get_key(self) -> str:
+        return "Ende"
+
+
+@attrs.define(auto_attribs=True, kw_only=True)
+class EbdGraphEdge:
+    """
+    base class of all edges in an EBD Graph
+    """
+
+    source: EbdGraphNode = attrs.field()
+    """
+    the origin/source of the edge
+    """
+    target: EbdGraphNode = attrs.field()
+    """
+    the destination/target of the edge
+    """
+
+
+class ToYesEdge(EbdGraphEdge):
+    """
+    an edge that connects a DecisionNode with the positive next step
+    """
+
+
+class ToNoEdge(EbdGraphEdge):
+    """
+    an edge that connects a DecisionNode with the negative next step
+    """
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

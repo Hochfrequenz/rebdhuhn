@@ -45,6 +45,11 @@ class DecisionNode:
     (e.g. "Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?")
     """
 
+    step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+\*?"))
+    """
+    number of the Prüfschritt, e.g. '1', '2' or '6*'
+    """
+
     question: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     the questions which is asked at this node in the tree
@@ -74,6 +79,33 @@ EbdGraphNodes = Union[DecisionNode, OutcomeNode]
 """
 a union type hint for all possible nodes within an EBD Graph
 """
+
+
+class EbdGraphEdge:
+    """
+    base class of all edges in an EBD Graph
+    """
+
+    source: EbdGraphNodes = attrs.field()
+    """
+    the origin/source of the edge
+    """
+    target: EbdGraphNodes = attrs.field()
+    """
+    the destination/target of the edge
+    """
+
+
+class ToYesEdge(EbdGraphEdge):
+    """
+    an edge that connects a DecisionNode with the positive next step
+    """
+
+
+class ToNoEdge(EbdGraphEdge):
+    """
+    an edge that connects a DecisionNode with the negative next step
+    """
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

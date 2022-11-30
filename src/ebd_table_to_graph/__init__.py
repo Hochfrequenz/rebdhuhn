@@ -5,14 +5,7 @@ from typing import List, Optional
 
 from networkx import DiGraph  # type:ignore[import]
 
-from ebd_table_to_graph.models.ebd_graph import (
-    DecisionNode,
-    EbdGraph,
-    EbdGraphEdge,
-    EbdGraphMetaData,
-    EbdGraphNodes,
-    OutcomeNode,
-)
+from ebd_table_to_graph.models.ebd_graph import DecisionNode, EbdGraph, EbdGraphMetaData, EbdGraphNodes, OutcomeNode
 from ebd_table_to_graph.models.ebd_table import EbdTable, EbdTableRow, EbdTableSubRow
 
 

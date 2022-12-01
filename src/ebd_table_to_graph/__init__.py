@@ -3,7 +3,8 @@ contains the conversion logic
 """
 from typing import Dict, List, Optional
 
-from networkx import DiGraph  # type:ignore[import]
+from networkx import DiGraph, draw_networkx  # type:ignore[import]
+from networkx.drawing import nx_pydot
 
 from ebd_table_to_graph.models.ebd_graph import (
     DecisionNode,
@@ -32,7 +33,10 @@ def _convert_row_to_decision_node(row: EbdTableRow) -> DecisionNode:
     """
     converts a row into a decision node
     """
-    return DecisionNode(step_number=row.step_number, question=row.description)
+    return DecisionNode(step_number=row.step_number, question=row.description.replace(":", ""))
+    # ValueError: Node names and attributes should not contain ":" unless they are quoted with "".
+    # For example the string 'attribute:data1' should be written as '"attribute:data1"'.
+    # The strings have to be explicitly quoted to be used with pydot.
 
 
 def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
@@ -99,13 +103,20 @@ def convert_table_to_digraph(table: EbdTable) -> DiGraph:
     return result
 
 
+def plot_graph(graph: EbdGraph) -> None:
+    pydot_layout = nx_pydot.pydot_layout(graph.graph, prog="dot")
+    draw_networkx(graph.graph, pos=pydot_layout)
+    import matplotlib.pyplot as plt  # type:ignore[import]
+
+    plt.show()
+
+
 def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     converts the given table into a graph
     """
     if table is None:
         raise ValueError("table must not be None")
-    raise NotImplementedError("Todo @Leon")
     # pylint: disable=unreachable
     graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
@@ -115,3 +126,4 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         role=table.metadata.role,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph)
+    raise NotImplementedError("Todo @Leon")

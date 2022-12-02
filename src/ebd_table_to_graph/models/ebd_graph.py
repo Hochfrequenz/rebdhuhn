@@ -55,7 +55,7 @@ class EbdGraphNode(ABC):
 
 
 @attrs.define(auto_attribs=True, kw_only=True, frozen=True)
-class DecisionNode(EbdGraphNode):
+class DecisionNode(EbdGraphNode):  # networkx requirement: nodes are hashable (frozen=True)
     """
     A decision node is a question that can be answered with "ja" or "nein"
     (e.g. "Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?")
@@ -75,7 +75,7 @@ class DecisionNode(EbdGraphNode):
         return self.step_number
 
 
-@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)
 class OutcomeNode(EbdGraphNode):
     """
     An outcome node is a leaf of the Entscheidungsbaum tree. It has no subsequent steps.
@@ -95,7 +95,7 @@ class OutcomeNode(EbdGraphNode):
         return self.result_code
 
 
-@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)
 class EndNode(EbdGraphNode):
     """
     There is only one end node per graph. It is the "exit" of the decision tree.

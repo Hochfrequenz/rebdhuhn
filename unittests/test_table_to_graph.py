@@ -3,7 +3,7 @@ from typing import List
 import pytest  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
-from ebd_table_to_graph import (
+from ebdtable2graph import (
     EbdGraph,
     EbdGraphMetaData,
     convert_table_to_digraph,
@@ -11,7 +11,7 @@ from ebd_table_to_graph import (
     get_all_edges,
     get_all_nodes,
 )
-from ebd_table_to_graph.models.ebd_graph import (
+from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
     EbdGraphEdge,
     EbdGraphNode,
@@ -20,7 +20,7 @@ from ebd_table_to_graph.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebd_table_to_graph.models.ebd_table import EbdTable
+from ebdtable2graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 

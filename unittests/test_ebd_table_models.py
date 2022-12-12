@@ -1,6 +1,6 @@
 import pytest  # type:ignore[import]
 
-from ebd_table_to_graph.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from ebdtable2graph.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 
 class TestEbdTableModels:

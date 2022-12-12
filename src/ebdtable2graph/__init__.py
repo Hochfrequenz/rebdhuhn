@@ -5,7 +5,7 @@ from typing import Dict, List, Optional
 
 from networkx import DiGraph  # type:ignore[import]
 
-from ebd_table_to_graph.models.ebd_graph import (
+from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
     EbdGraph,
     EbdGraphEdge,
@@ -16,7 +16,7 @@ from ebd_table_to_graph.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebd_table_to_graph.models.ebd_table import EbdTable, EbdTableRow, EbdTableSubRow
+from ebdtable2graph.models.ebd_table import EbdTable, EbdTableRow, EbdTableSubRow
 
 
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:

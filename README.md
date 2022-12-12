@@ -11,7 +11,7 @@ This repository contains the source code of the Python package [`ebd_table_to_gr
 ## Rationale
 
 Assume, that you scraped the Entscheidungsbaumdiagramm tables by EDI@Energy from their somewhat "digitized" PDF/DOCX files.
-Also assume, that the result of your scraping is a [`ebd_table_to_graph.models.EbdTable`](src/ebd_table_to_graph/models/ebd_table.py).
+Also assume, that the result of your scraping is a [`ebd_table_to_graph.models.EbdTable`](src/ebdtable2graph/models/ebd_table.py).
 
 The package `ebd_table_to_graph` contains logic to convert your scraped data into a graph.
 This graph can then be exported e.g. as UML.

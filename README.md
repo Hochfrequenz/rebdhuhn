@@ -1,4 +1,4 @@
-# ebd_table_to_graph
+# ebdtable2graph
 
 ![Unittests status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Coverage/badge.svg)

@@ -69,7 +69,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
     result: List[EbdGraphEdge] = []
 
-    for row_index, row in enumerate(table.rows):
+    for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
         for sub_row in row.sub_rows:
             if sub_row.check_result.subsequent_step_number is not None:

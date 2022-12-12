@@ -106,7 +106,7 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     if table is None:
         raise ValueError("table must not be None")
-    raise NotImplementedError("Todo @Leon")
+    # raise NotImplementedError("Todo @Leon")
     # pylint: disable=unreachable
     graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
@@ -116,3 +116,46 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         role=table.metadata.role,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph)
+
+
+def convert_graph_to_plantuml(graph: EbdGraph) -> str:
+    """
+    converts given graph to plantuml code
+    """
+    plantuml_code: str = (
+        "@startuml\n"
+        "skinparam Shadowing false\n"
+        "skinparam NoteBorderColor #f3f1f6\n"
+        "skinparam NoteBackgroundColor #f3f1f6\n"
+        "skinparam NoteFontSize 12\n"
+        "skinparam ActivityBorderColor none\n"
+        "skinparam ActivityBackgroundColor #7a8da1\n"
+        "skinparam ActivityFontSize 16\n"
+        "skinparam ArrowColor #7aab8a\n"
+        "skinparam ArrowFontSize 16\n"
+        "skinparam ActivityDiamondBackgroundColor #7aab8a\n"
+        "skinparam ActivityDiamondBorderColor #7aab8a\n"
+        "skinparam ActivityDiamondFontSize 18\n"
+        "skinparam defaultFontName DejaVu Serif Condensed\n"
+        "skinparam ActivityEndColor #669580\n"
+        "\n"
+        "header\n"
+        "<b>FV2210\n"
+        "2022-12-12\n"
+        "endheader\n"
+        "\n"
+        "title\n"
+        f"{graph.metadata.chapter}\n"
+        "\n"
+        f"{graph.metadata.sub_chapter}\n"
+        "\n"
+        "\n"
+        "\n"
+        "end title\n"
+        f":<b>{graph.metadata.ebd_code}</b>;\n"
+        "note right\n"
+        f"<b><i>Prüfende Rolle: {graph.metadata.role}\n"
+        "end note\n"
+    )
+
+    return plantuml_code + "@enduml"

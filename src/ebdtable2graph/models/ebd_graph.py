@@ -53,6 +53,9 @@ class EbdGraphNode(ABC):
         """
         raise NotImplementedError("The child class has to implement this method")
 
+    def __str__(self):
+        return self.get_key()
+
 
 @attrs.define(auto_attribs=True, kw_only=True, frozen=True)
 class DecisionNode(EbdGraphNode):  # networkx requirement: nodes are hashable (frozen=True)

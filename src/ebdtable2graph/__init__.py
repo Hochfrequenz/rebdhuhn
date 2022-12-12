@@ -35,12 +35,19 @@ def _convert_row_to_decision_node(row: EbdTableRow) -> DecisionNode:
     return DecisionNode(step_number=row.step_number, question=row.description)
 
 
+def _yes_no_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge:
+    if decision:
+        return ToYesEdge(source=source, target=target)
+    return ToNoEdge(source=source, target=target)
+
+
 def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
     """
     Returns a list with all nodes from the table.
     Nodes may both be actual EBD check outcome codes (e.g. "A55") but also points where decisions are made.
     """
     result: List[EbdGraphNode] = []
+    contains_ende = False
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
         result.append(decision_node)
@@ -48,7 +55,9 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
             outcome_node = _convert_sub_row_to_outcome_node(sub_row)
             if outcome_node is not None:
                 result.append(outcome_node)
-    result.append(EndNode())
+            if not contains_ende and sub_row.check_result.subsequent_step_number == "Ende":
+                contains_ende = True
+                result.append(EndNode())
     return result
 
 
@@ -59,32 +68,24 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     """
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
     result: List[EbdGraphEdge] = []
-    start_node: DecisionNode = _convert_row_to_decision_node(table.rows[0])
+
     for row_index, row in enumerate(table.rows):
         decision_node = _convert_row_to_decision_node(row)
         for sub_row in row.sub_rows:
-            outcome_node: Optional[EbdGraphNode] = _convert_sub_row_to_outcome_node(sub_row)
-            if outcome_node is None:
-                if row_index == 0:
-                    outcome_node = start_node
-                    del start_node
-                elif row_index == len(table.rows) - 1:
-                    outcome_node = EndNode()
-                else:
-                    continue
-            # outcome_node is not None below this line
-            edge: EbdGraphEdge
-            if sub_row.check_result.subsequent_step_number is None:
-                if sub_row.check_result.result is True:
-                    edge = ToYesEdge(source=decision_node, target=outcome_node)
-                else:
-                    edge = ToNoEdge(source=decision_node, target=outcome_node)
+            if sub_row.check_result.subsequent_step_number is not None:
+                edge = _yes_no_edge(
+                    sub_row.check_result.result,
+                    source=decision_node,
+                    target=nodes[sub_row.check_result.subsequent_step_number],
+                )
             else:
-                next_node = nodes[sub_row.check_result.subsequent_step_number]
-                if sub_row.check_result.result is True:
-                    edge = ToYesEdge(source=decision_node, target=next_node)
-                else:
-                    edge = ToNoEdge(source=decision_node, target=next_node)
+                outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
+                assert outcome_node is not None
+                edge = _yes_no_edge(
+                    sub_row.check_result.result,
+                    source=decision_node,
+                    target=nodes[outcome_node.result_code],
+                )
             result.append(edge)
     return result
 

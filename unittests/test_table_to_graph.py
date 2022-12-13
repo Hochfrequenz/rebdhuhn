@@ -17,6 +17,7 @@ from ebdtable2graph.models.ebd_graph import (
     EbdGraphNode,
     EndNode,
     OutcomeNode,
+    StartNode,
     ToNoEdge,
     ToYesEdge,
 )
@@ -31,6 +32,7 @@ class TestEbdTableModels:
             pytest.param(
                 table_e0003,
                 [
+                    StartNode(),
                     DecisionNode(step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"),
                     OutcomeNode(result_code="A01", note="Fristüberschreitung"),
                     DecisionNode(step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"),
@@ -50,6 +52,12 @@ class TestEbdTableModels:
             pytest.param(
                 table_e0003,
                 [
+                    EbdGraphEdge(
+                        source=StartNode(),
+                        target=DecisionNode(
+                            step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"
+                        ),
+                    ),
                     ToNoEdge(
                         source=DecisionNode(
                             step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"
@@ -89,18 +97,18 @@ class TestEbdTableModels:
         [
             pytest.param(
                 table_e0003,
-                "DiGraph with 5 nodes and 4 edges",
+                "DiGraph with 6 nodes and 5 edges",
                 # 5 nodes = 2 decision nodes + ["A01", "A02", EndNode]
                 # 4 edges = 2*Ja +2*Nein
             ),
             pytest.param(
                 table_e0015,
-                "DiGraph with 21 nodes and 20 edges",
+                "DiGraph with 22 nodes and 21 edges",
                 # todo: check if result is ok
             ),
             pytest.param(
                 table_e0025,
-                "DiGraph with 9 nodes and 10 edges",
+                "DiGraph with 10 nodes and 11 edges",
                 # todo: check if result is ok
             ),
         ],

@@ -13,6 +13,7 @@ from ebdtable2graph.models.ebd_graph import (
     EbdGraphNode,
     EndNode,
     OutcomeNode,
+    StartNode,
     ToNoEdge,
     ToYesEdge,
 )
@@ -46,7 +47,7 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
     Returns a list with all nodes from the table.
     Nodes may both be actual EBD check outcome codes (e.g. "A55") but also points where decisions are made.
     """
-    result: List[EbdGraphNode] = []
+    result: List[EbdGraphNode] = [StartNode()]
     contains_ende = False
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
@@ -67,7 +68,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     Edges connect decisions with outcomes or subsequent steps.
     """
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
-    result: List[EbdGraphEdge] = []
+    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=nodes["1"])]
 
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)

@@ -108,6 +108,18 @@ class EndNode(EbdGraphNode):
         return "Ende"
 
 
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)
+class StartNode(EbdGraphNode):
+    """
+    There is only one starting node per graph; e.g. 'E0401'. This starting node is always connected to a very first
+    decision node by a "normal" edge.
+    Note: The information 'E0401' is stored in the metadata instance not in the starting node.
+    """
+
+    def get_key(self) -> str:
+        return "Start"
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdGraphEdge:
     """

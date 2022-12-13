@@ -95,12 +95,12 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 table_e0015,
-                "DiGraph with 22 nodes and 12 edges",
+                "DiGraph with 21 nodes and 20 edges",
                 # todo: check if result is ok
             ),
             pytest.param(
                 table_e0025,
-                "DiGraph with 9 nodes and 5 edges",
+                "DiGraph with 9 nodes and 10 edges",
                 # todo: check if result is ok
             ),
         ],

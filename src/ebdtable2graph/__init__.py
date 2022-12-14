@@ -3,6 +3,7 @@ contains the conversion logic
 """
 from typing import Dict, Generator, List, Optional, Tuple
 
+import requests
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
 
 from ebdtable2graph.models.ebd_graph import (
@@ -126,7 +127,8 @@ def _find_last_common_ancestor(paths: List[List[str]]) -> str:
     This function calculates the last common ancestor node for the defined paths.
     For this, we assume that the graph contains no loops.
     """
-    reference_path = paths.pop()  # it's arbitrary which of the paths is the chosen one
+    paths = paths.copy()
+    reference_path = paths.pop().copy()  # it's arbitrary which of the paths is the chosen one
     reference_path.pop()  # The last entry in a path is always the target node in which we are not interested
     for node in reversed(reference_path):
         if all([node in path for path in paths]):  # If node is present in all paths aka is a common ancestor node
@@ -152,6 +154,35 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
         assert common_ancestor != "Start", "Last common ancestor should always be at least the first decision node '1'."
         # Annotate the common ancestor for later plantuml conversion
         graph.nodes[common_ancestor]["append_node"] = node
+        for path in paths:
+            graph.nodes[path[-2]]["skip_node"] = node
+
+
+def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode) -> Optional[DecisionNode]:
+    match [node1, node2]:
+        case [DecisionNode() as dec_node, OutcomeNode() | EndNode() as out_node] | [
+            OutcomeNode() | EndNode() as out_node,
+            DecisionNode() as dec_node,
+        ] if graph.in_degree(out_node.__str__()) == 1:
+            return dec_node
+        case _:
+            return None
+
+
+def _mark_skips_to_appendix(graph: DiGraph) -> None:
+    for node in graph:
+        if not isinstance(graph.nodes[node]["node"], DecisionNode):
+            continue
+        node_to_appendix: Optional[DecisionNode] = _appendix_choice_for_nodes(
+            graph, *[graph.nodes[neighbor]["node"] for neighbor in graph[node]]
+        )
+        if node_to_appendix is not None:
+            if "append_node" in graph.nodes[node]:
+                assert (
+                    node_to_appendix.__str__() == graph.nodes[node]["append_node"]
+                ), "Cannot push more than one different node to appendix"
+            graph.nodes[node]["skip_node"] = node_to_appendix.__str__()
+            graph.nodes[node]["append_node"] = node_to_appendix.__str__()
 
 
 def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
@@ -203,19 +234,25 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     assert graph.out_degree(node) == 2, "A decision node must have exactly two outgoing edges (yes / no)."
 
     yes_edge, no_edge = _get_yes_no_edges(graph, node)
+    yes_node = yes_edge.target.__str__()
+    no_node = no_edge.target.__str__()
+
     result = f"{indent}if ({decision_node.question}) then (ja)\n"
-    result += _convert_node_to_plantuml(graph, yes_edge.target.__str__(), indent + add_indent)
+    if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != yes_node:
+        result += _convert_node_to_plantuml(graph, yes_node, indent + add_indent)
     result += f"{indent}else (nein)\n"
-    result += _convert_node_to_plantuml(graph, no_edge.target.__str__(), indent + add_indent)
+    if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != no_node:
+        result += _convert_node_to_plantuml(graph, no_node, indent + add_indent)
     result += f"{indent}endif\n"
+
     if "append_node" in graph.nodes[node]:
-        result += _convert_node_to_plantuml(graph, graph.nodes[node]["append_node"].__str__(), indent, appendix=True)
+        result += _convert_node_to_plantuml(graph, graph.nodes[node]["append_node"].__str__(), indent)
     return result
 
 
-def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str, appendix: bool = False) -> str:
-    if graph.in_degree(node) > 1 and not appendix:
-        return ""
+def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
+    # if graph.in_degree(node) > 1 and not appendix:
+    #     return ""
     match graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_plantuml(graph, node, indent)
@@ -233,6 +270,7 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     """
     nx_graph = graph.graph
     _mark_last_common_ancestors(nx_graph)
+    _mark_skips_to_appendix(nx_graph)
     plantuml_code: str = (
         "@startuml\n"
         "skinparam Shadowing false\n"
@@ -274,3 +312,13 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     plantuml_code += _convert_node_to_plantuml(nx_graph, "1", "")
 
     return plantuml_code + "\n@enduml\n"
+
+
+def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
+    url = "https://kroki.io"
+    answer = requests.post(
+        url,
+        json={"diagram_source": plantuml_code, "diagram_type": "plantuml", "output_format": "svg"},
+        timeout=5,
+    )
+    return answer.text

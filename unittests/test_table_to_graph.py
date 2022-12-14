@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 from typing import List
 
 import pytest  # type:ignore[import]
@@ -7,6 +9,7 @@ from ebdtable2graph import (
     EbdGraph,
     EbdGraphMetaData,
     convert_graph_to_plantuml,
+    convert_plantuml_to_svg_kroki,
     convert_table_to_digraph,
     convert_table_to_graph,
     get_all_edges,
@@ -118,14 +121,17 @@ class TestEbdTableModels:
         actual = convert_table_to_digraph(table)
         assert str(actual) == expected_description
         # return
-        import matplotlib.pyplot as plt  # type:ignore[import]
-        from networkx import draw_networkx  # type:ignore[import]
-        from networkx import all_simple_paths
+        # import matplotlib.pyplot as plt  # type:ignore[import]
+        # from networkx import draw_networkx  # type:ignore[import]
+        # draw_networkx(actual)
+        # plt.show()
 
         ebd_graph = convert_table_to_graph(table)
         plantuml_code = convert_graph_to_plantuml(ebd_graph)
-        draw_networkx(actual)
-        # plt.show()
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)
+        os.makedirs(Path.cwd() / "output", exist_ok=True)
+        with open(Path.cwd() / "output" / f"{ebd_graph.metadata.ebd_code}.svg", "w+", encoding="utf-8") as svg_file:
+            svg_file.write(svg_code)
 
     @pytest.mark.parametrize(
         "table,expected_result",

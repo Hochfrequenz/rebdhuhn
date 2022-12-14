@@ -6,6 +6,7 @@ from networkx import DiGraph  # type:ignore[import]
 from ebdtable2graph import (
     EbdGraph,
     EbdGraphMetaData,
+    convert_graph_to_plantuml,
     convert_table_to_digraph,
     convert_table_to_graph,
     get_all_edges,
@@ -116,12 +117,15 @@ class TestEbdTableModels:
     def test_table_to_digraph(self, table: EbdTable, expected_description: str):
         actual = convert_table_to_digraph(table)
         assert str(actual) == expected_description
-        return
+        # return
         import matplotlib.pyplot as plt  # type:ignore[import]
         from networkx import draw_networkx  # type:ignore[import]
+        from networkx import all_simple_paths
 
+        ebd_graph = convert_table_to_graph(table)
+        plantuml_code = convert_graph_to_plantuml(ebd_graph)
         draw_networkx(actual)
-        plt.show()
+        # plt.show()
 
     @pytest.mark.parametrize(
         "table,expected_result",

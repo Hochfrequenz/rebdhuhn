@@ -115,23 +115,35 @@ class TestEbdTableModels:
                 "DiGraph with 10 nodes and 11 edges",
                 # todo: check if result is ok
             ),
+            pytest.param(
+                table_e0401,
+                "DiGraph with 23 nodes and 27 edges",
+                # todo: check if result is ok
+            ),
         ],
     )
     def test_table_to_digraph(self, table: EbdTable, expected_description: str):
+        """
+        Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
+        manually. The test only checks if the svg can be built.
+        """
         actual = convert_table_to_digraph(table)
         assert str(actual) == expected_description
         # return
         # import matplotlib.pyplot as plt  # type:ignore[import]
-        # from networkx import draw_networkx  # type:ignore[import]
-        # draw_networkx(actual)
+        # import networkx as nx  # type:ignore[import]
+        #
+        # nx.draw(actual, pos=nx.kamada_kawai_layout(actual), labels={node: node for node in actual}, node_size=600)
         # plt.show()
 
         ebd_graph = convert_table_to_graph(table)
         plantuml_code = convert_graph_to_plantuml(ebd_graph)
-        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
         os.makedirs(Path.cwd() / "output", exist_ok=True)
         with open(Path.cwd() / "output" / f"{ebd_graph.metadata.ebd_code}.svg", "w+", encoding="utf-8") as svg_file:
             svg_file.write(svg_code)
+        with open(Path.cwd() / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8") as uml_file:
+            uml_file.write(plantuml_code)
 
     @pytest.mark.parametrize(
         "table,expected_result",

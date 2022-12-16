@@ -5,6 +5,7 @@ from typing import Dict, Generator, List, Optional, Tuple
 
 import requests
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
+from requests import codes
 
 from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
@@ -110,8 +111,6 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     if table is None:
         raise ValueError("table must not be None")
-    # raise NotImplementedError("Todo @Leon")
-    # pylint: disable=unreachable
     graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
@@ -124,7 +123,8 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
 
 def _find_last_common_ancestor(paths: List[List[str]]) -> str:
     """
-    This function calculates the last common ancestor node for the defined paths.
+    This function calculates the last common ancestor node for the defined paths (these paths should be all paths
+    between two nodes in the graph).
     For this, we assume that the graph contains no loops.
     """
     paths = paths.copy()
@@ -159,6 +159,10 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
 
 
 def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode) -> Optional[DecisionNode]:
+    """
+    This function decides if the two following nodes of a decision node should be drawn top to bottom instead of next
+    to each other.
+    """
     match [node1, node2]:
         case [DecisionNode() as dec_node, OutcomeNode() | EndNode() as out_node] | [
             OutcomeNode() | EndNode() as out_node,
@@ -170,6 +174,11 @@ def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGr
 
 
 def _mark_skips_to_appendix(graph: DiGraph) -> None:
+    """
+    This is a little function to improve the layout of the graph. For this, we want to draw decision nodes with an
+    outcome node on the one hand and a decision node on the other hand from top to bottom (to avoid hilariously broad
+    plots). See E_0015 for a good example.
+    """
     for node in graph:
         if not isinstance(graph.nodes[node]["node"], DecisionNode):
             continue
@@ -186,6 +195,9 @@ def _mark_skips_to_appendix(graph: DiGraph) -> None:
 
 
 def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
+    """
+    A shorthand to get the yes-edge and the no-edge of a decision node.
+    """
     yes_edge: ToYesEdge
     no_edge: ToNoEdge
     for edge in graph[node].values():
@@ -204,10 +216,21 @@ def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
     return yes_edge, no_edge
 
 
-add_indent = "    "  # This is just for style purposes to make the plantuml files readable.
+add_indent = "    "  # This is just for style purposes to make the plantuml files human-readable.
+
+
+def _escape_for_plantuml(input: str) -> str:
+    """
+    Plantuml has sometimes problems with the character ')'. Therefore, we escape it with the respective HTML code since
+    Plantuml supports HTML.
+    """
+    return input.replace(")", "&#41;")
 
 
 def _convert_end_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
+    """
+    Converts an EndNode to plantuml code.
+    """
     end_node: EndNode = graph.nodes[node]["node"]
     assert isinstance(end_node, EndNode), f"{node} is not an end node."
 
@@ -215,6 +238,9 @@ def _convert_end_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str
 
 
 def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
+    """
+    Converts an OutcomeNode to plantuml code.
+    """
     outcome_node: OutcomeNode = graph.nodes[node]["node"]
     assert isinstance(outcome_node, OutcomeNode), f"{node} is not an outcome node."
 
@@ -222,13 +248,16 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     return (
         f"{indent}:{outcome_node.result_code};\n"
         f"{indent}note left\n"
-        f"{indent}{add_indent}{note}\n"
+        f"{indent}{add_indent}{_escape_for_plantuml(note)}\n"
         f"{indent}endnote\n"
         f"{indent}kill;\n"
     )
 
 
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
+    """
+    Converts a DecisionNode to plantuml code.
+    """
     decision_node: DecisionNode = graph.nodes[node]["node"]
     assert isinstance(decision_node, DecisionNode), f"{node} is not a decision node."
     assert graph.out_degree(node) == 2, "A decision node must have exactly two outgoing edges (yes / no)."
@@ -237,7 +266,9 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     yes_node = yes_edge.target.__str__()
     no_node = no_edge.target.__str__()
 
-    result = f"{indent}if ({decision_node.question}) then (ja)\n"
+    result = (
+        f"{indent}if (<b>{decision_node.step_number}: </b> {_escape_for_plantuml(decision_node.question)}) then (ja)\n"
+    )
     if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != yes_node:
         result += _convert_node_to_plantuml(graph, yes_node, indent + add_indent)
     result += f"{indent}else (nein)\n"
@@ -251,8 +282,10 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
 
 
 def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
-    # if graph.in_degree(node) > 1 and not appendix:
-    #     return ""
+    """
+    A shorthand to convert an arbitrary node to plantuml code. It just determines the node type and calls the
+    respective function.
+    """
     match graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_plantuml(graph, node, indent)
@@ -266,7 +299,7 @@ def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
 
 def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     """
-    Converts given graph to plantuml code.
+    Converts given graph to plantuml code and returns it as a string.
     """
     nx_graph = graph.graph
     _mark_last_common_ancestors(nx_graph)
@@ -315,10 +348,18 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
 
 
 def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
+    """
+    Converts plantuml code to svg (code). It uses kroki.io
+    """
     url = "https://kroki.io"
     answer = requests.post(
         url,
         json={"diagram_source": plantuml_code, "diagram_type": "plantuml", "output_format": "svg"},
         timeout=5,
     )
+    if answer.status_code != 200:
+        raise ValueError(
+            f"Error while converting plantuml to svg: {answer.status_code}: {codes[answer.status_code]}. "
+            f"{answer.text}"
+        )
     return answer.text

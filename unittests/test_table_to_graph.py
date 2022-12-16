@@ -139,13 +139,13 @@ class TestEbdTableModels:
         ebd_graph = convert_table_to_graph(table)
         plantuml_code = convert_graph_to_plantuml(ebd_graph)
         svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
-        os.makedirs(Path.cwd() / "unittests" / "output", exist_ok=True)
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
-            Path.cwd() / "unittests" / "output" / f"{ebd_graph.metadata.ebd_code}.svg", "w+", encoding="utf-8"
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.svg", "w+", encoding="utf-8"
         ) as svg_file:
             svg_file.write(svg_code)
         with open(
-            Path.cwd() / "unittests" / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
 

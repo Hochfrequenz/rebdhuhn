@@ -125,6 +125,7 @@ def _find_last_common_ancestor(paths: List[List[str]]) -> str:
     This function calculates the last common ancestor node for the defined paths (these paths should be all paths
     between two nodes in the graph).
     For this, we assume that the graph contains no loops.
+    Returns the key of the (common ancestor) node.
     """
     paths = paths.copy()
     reference_path = paths.pop().copy()  # it's arbitrary which of the paths is the chosen one
@@ -137,11 +138,22 @@ def _find_last_common_ancestor(paths: List[List[str]]) -> str:
 
 def _mark_last_common_ancestors(graph: DiGraph) -> None:
     """
-    Marks the last common ancestor node for each node with an indegree > 1.
+    Marks the last common ancestor node for each node with an indegree > 1. An indegree is the number of edges pointing
+    towards the respective node.
     I.e. if a node is the target of more than one `YesNoEdge`, we want to find the last common node from each possible
     path from the start node to the respective node.
     We need to know that to construct the plantuml code correctly. The node will be placed right after the plantuml code
     of the last common node.
+
+    Implementation details:
+    In general the plantuml code is nested as a bunch of if-else branches. These if-else branches are equivalent to
+    decision nodes.
+    But if you place something after an if-else both branches (of the if and the else case) will be merged and connected
+    to the stuff after this if-else. We call this stuff the "appendix" of that if-else branch aka decision node.
+    If we want to cut a branch e.g. on an OutcomeNode, we will use the `kill` statement.
+
+    To achieve the desired result we have to place the nodes with indegree > 1 (i.e. targeted by more than one edge)
+    below the code of the last common ancestor.
     """
     for node in graph:
         in_degree: int = graph.in_degree(node)
@@ -157,12 +169,13 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
             graph.nodes[path[-2]]["skip_node"] = node
 
 
-def _appendix_choice_for_nodes(  # type:ignore[return]
-    graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode
-) -> Optional[DecisionNode]:
+def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode) -> Optional[DecisionNode]:
     """
     This function decides if the two following nodes of a decision node should be drawn top to bottom instead of next
     to each other.
+
+    This function returns the node to be sent to appendix or None (if the nodes should be drawn next to each other).
+    See `_mark_skips_to_appendix` below for more details.
     """
     match [node1, node2]:
         case [DecisionNode() as dec_node, OutcomeNode() | EndNode() as out_node] | [
@@ -173,8 +186,8 @@ def _appendix_choice_for_nodes(  # type:ignore[return]
         ) == 1:
             # pylint doesn't seem to work well with structural pattern matching.
             return dec_node
-        case _:
-            return None
+
+    return None
 
 
 def _mark_skips_to_appendix(graph: DiGraph) -> None:
@@ -182,6 +195,16 @@ def _mark_skips_to_appendix(graph: DiGraph) -> None:
     This is a little function to improve the layout of the graph. For this, we want to draw decision nodes with an
     outcome node on the one hand and a decision node on the other hand from top to bottom (to avoid hilariously broad
     plots). See E_0015 for a good example.
+    This function sets for the respective decision nodes the attributes `skip_node` and `append_node`.
+
+    Implementation details:
+    In general nested structures are drawn next to each other. As a workaround, we draw the decision node (if the other
+    one is an OutcomeNode or an EndNode) below the other. To achieve this, we omit the whole part of the decision node
+    and instead place it after the whole branch. This will create our desired result.
+
+    Therefore, if a (decision) node is chosen to be drawn under the rest it will be sent to "appendix".
+    I.e. the node gets its following node as entry in `append_node` (to place below it) and `skip_node` attribute
+    (to omit the code inside the branch).
     """
     for node in graph:
         if not isinstance(graph.nodes[node]["node"], DecisionNode):
@@ -350,7 +373,7 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
 
 def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
     """
-    Converts plantuml code to svg (code). It uses kroki.io
+    Converts plantuml code to svg (code) and returns the result as string. It uses kroki.io.
     """
     url = "https://kroki.io"
     answer = requests.post(

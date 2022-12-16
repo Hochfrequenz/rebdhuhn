@@ -3,9 +3,8 @@ contains the conversion logic
 """
 from typing import Dict, Generator, List, Optional, Tuple
 
-import requests
+import requests  # pylint: disable=import-error
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
-from requests import codes
 
 from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
@@ -131,7 +130,7 @@ def _find_last_common_ancestor(paths: List[List[str]]) -> str:
     reference_path = paths.pop().copy()  # it's arbitrary which of the paths is the chosen one
     reference_path.pop()  # The last entry in a path is always the target node in which we are not interested
     for node in reversed(reference_path):
-        if all([node in path for path in paths]):  # If node is present in all paths aka is a common ancestor node
+        if all(node in path for path in paths):  # If node is present in all paths aka is a common ancestor node
             return node
     raise ValueError("No common ancestor found.")
 
@@ -158,7 +157,9 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
             graph.nodes[path[-2]]["skip_node"] = node
 
 
-def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode) -> Optional[DecisionNode]:
+def _appendix_choice_for_nodes(  # type:ignore[return]
+    graph: DiGraph, node1: EbdGraphNode, node2: EbdGraphNode
+) -> Optional[DecisionNode]:
     """
     This function decides if the two following nodes of a decision node should be drawn top to bottom instead of next
     to each other.
@@ -167,7 +168,10 @@ def _appendix_choice_for_nodes(graph: DiGraph, node1: EbdGraphNode, node2: EbdGr
         case [DecisionNode() as dec_node, OutcomeNode() | EndNode() as out_node] | [
             OutcomeNode() | EndNode() as out_node,
             DecisionNode() as dec_node,
-        ] if graph.in_degree(out_node.__str__()) == 1:
+        ] if graph.in_degree(
+            str(out_node)  # pylint: disable=used-before-assignment
+        ) == 1:
+            # pylint doesn't seem to work well with structural pattern matching.
             return dec_node
         case _:
             return None
@@ -188,10 +192,10 @@ def _mark_skips_to_appendix(graph: DiGraph) -> None:
         if node_to_appendix is not None:
             if "append_node" in graph.nodes[node]:
                 assert (
-                    node_to_appendix.__str__() == graph.nodes[node]["append_node"]
+                    str(node_to_appendix) == graph.nodes[node]["append_node"]
                 ), "Cannot push more than one different node to appendix"
-            graph.nodes[node]["skip_node"] = node_to_appendix.__str__()
-            graph.nodes[node]["append_node"] = node_to_appendix.__str__()
+            graph.nodes[node]["skip_node"] = str(node_to_appendix)
+            graph.nodes[node]["append_node"] = str(node_to_appendix)
 
 
 def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
@@ -216,15 +220,15 @@ def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
     return yes_edge, no_edge
 
 
-add_indent = "    "  # This is just for style purposes to make the plantuml files human-readable.
+ADD_INDENT = "    "  # This is just for style purposes to make the plantuml files human-readable.
 
 
-def _escape_for_plantuml(input: str) -> str:
+def _escape_for_plantuml(input_str: str) -> str:
     """
     Plantuml has sometimes problems with the character ')'. Therefore, we escape it with the respective HTML code since
     Plantuml supports HTML.
     """
-    return input.replace(")", "&#41;")
+    return input_str.replace(")", "&#41;")
 
 
 def _convert_end_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
@@ -244,14 +248,11 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     outcome_node: OutcomeNode = graph.nodes[node]["node"]
     assert isinstance(outcome_node, OutcomeNode), f"{node} is not an outcome node."
 
-    note = outcome_node.note.replace("\n", f"\n{indent}{add_indent}")
-    return (
-        f"{indent}:{outcome_node.result_code};\n"
-        f"{indent}note left\n"
-        f"{indent}{add_indent}{_escape_for_plantuml(note)}\n"
-        f"{indent}endnote\n"
-        f"{indent}kill;\n"
-    )
+    result = f"{indent}:{outcome_node.result_code};\n"
+    if outcome_node.note is not None:
+        note = outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
+        result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
+    return f"{result}{indent}kill;\n"
 
 
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
@@ -263,21 +264,21 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     assert graph.out_degree(node) == 2, "A decision node must have exactly two outgoing edges (yes / no)."
 
     yes_edge, no_edge = _get_yes_no_edges(graph, node)
-    yes_node = yes_edge.target.__str__()
-    no_node = no_edge.target.__str__()
+    yes_node = str(yes_edge.target)
+    no_node = str(no_edge.target)
 
     result = (
         f"{indent}if (<b>{decision_node.step_number}: </b> {_escape_for_plantuml(decision_node.question)}) then (ja)\n"
     )
     if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != yes_node:
-        result += _convert_node_to_plantuml(graph, yes_node, indent + add_indent)
+        result += _convert_node_to_plantuml(graph, yes_node, indent + ADD_INDENT)
     result += f"{indent}else (nein)\n"
     if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != no_node:
-        result += _convert_node_to_plantuml(graph, no_node, indent + add_indent)
+        result += _convert_node_to_plantuml(graph, no_node, indent + ADD_INDENT)
     result += f"{indent}endif\n"
 
     if "append_node" in graph.nodes[node]:
-        result += _convert_node_to_plantuml(graph, graph.nodes[node]["append_node"].__str__(), indent)
+        result += _convert_node_to_plantuml(graph, str(graph.nodes[node]["append_node"]), indent)
     return result
 
 
@@ -359,7 +360,7 @@ def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
     )
     if answer.status_code != 200:
         raise ValueError(
-            f"Error while converting plantuml to svg: {answer.status_code}: {codes[answer.status_code]}. "
+            f"Error while converting plantuml to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
             f"{answer.text}"
         )
     return answer.text

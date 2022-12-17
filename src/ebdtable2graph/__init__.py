@@ -148,7 +148,7 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
     Implementation details:
     In general the plantuml code is nested as a bunch of if-else branches. These if-else branches are equivalent to
     decision nodes.
-    But if you place something after an if-else both branches (of the if and the else case) will be merged and connected
+    But if you place something after an if-else, both branches (of the if and the else case) will be merged and connected
     to the stuff after this if-else. We call this stuff the "appendix" of that if-else branch aka decision node.
     If we want to cut a branch e.g. on an OutcomeNode, we will use the `kill` statement.
 
@@ -243,7 +243,7 @@ def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
     return yes_edge, no_edge
 
 
-ADD_INDENT = "    "  # This is just for style purposes to make the plantuml files human-readable.
+ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
 
 def _escape_for_plantuml(input_str: str) -> str:

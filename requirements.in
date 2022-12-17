@@ -1,3 +1,4 @@
 attrs
 networkx
+requests
 # add all the dependencies from there to setup.cfg also

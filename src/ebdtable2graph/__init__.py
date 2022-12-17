@@ -148,9 +148,9 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
     Implementation details:
     In general the plantuml code is nested as a bunch of if-else branches. These if-else branches are equivalent to
     decision nodes.
-    But if you place something after an if-else, both branches (of the if and the else case) will be merged and connected
-    to the stuff after this if-else. We call this stuff the "appendix" of that if-else branch aka decision node.
-    If we want to cut a branch e.g. on an OutcomeNode, we will use the `kill` statement.
+    But if you place something after an if-else, both branches (of the if and the else case) will be merged and
+    connected to the stuff after this if-else. We call this stuff the "appendix" of that if-else branch aka decision
+    node. If we want to cut a branch e.g. on an OutcomeNode, we will use the `kill` statement.
 
     To achieve the desired result we have to place the nodes with indegree > 1 (i.e. targeted by more than one edge)
     below the code of the last common ancestor.

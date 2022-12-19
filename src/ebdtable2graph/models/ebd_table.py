@@ -90,7 +90,7 @@ class EbdTableSubRow:
 # pylint: disable=unused-argument
 def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTableSubRow]):
     """
-    Check that string in the instance attribute value is not empty
+    Check that the subrows cover both a True and a False outcome
     """
     for boolean in [True, False]:
         if not any(True for sub_row in value if sub_row.check_result.result is boolean):

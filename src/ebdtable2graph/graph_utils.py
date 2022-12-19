@@ -3,7 +3,7 @@ This module contains utility function for interaction with EbdGraphs and its DiG
 Some of these functions may store some information in the "attribute dictionaries" of the DiGraph nodes
 (for later use in the conversion logic).
 """
-from typing import List, Optional, Tuple
+from typing import List, Optional, Set, Tuple, Type
 
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
 
@@ -131,3 +131,12 @@ def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
     assert "yes_edge" in locals(), f"No yes edge found for node {node}"
     assert "no_edge" in locals(), f"No no edge found for node {node}"
     return yes_edge, no_edge
+
+
+def _decision_node_splits_to(graph: DiGraph, node: str) -> Set[Type[EbdGraphNode]]:
+    if not isinstance(graph.nodes[node]["node"], DecisionNode):
+        raise ValueError(f"Provided node '{node}' is not a DecisionNode.")
+
+    neighbor_types = {type(graph.nodes[neighbor]["node"]) for neighbor in graph[node]}
+    assert len(neighbor_types) == 2
+    return neighbor_types

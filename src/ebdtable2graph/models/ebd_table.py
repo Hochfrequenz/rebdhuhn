@@ -92,6 +92,8 @@ def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTa
     """
     Check that the subrows cover both a True and a False outcome
     """
+    # We implicitly assume that the value (list) provided already has exactly two entries.
+    # This is enforced by other validators
     for boolean in [True, False]:
         if not any(True for sub_row in value if sub_row.check_result.result is boolean):
             raise ValueError(

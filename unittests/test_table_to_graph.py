@@ -6,8 +6,6 @@ import pytest  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
 from ebdtable2graph import (
-    EbdGraph,
-    EbdGraphMetaData,
     convert_graph_to_plantuml,
     convert_plantuml_to_svg_kroki,
     convert_table_to_digraph,
@@ -15,6 +13,7 @@ from ebdtable2graph import (
     get_all_edges,
     get_all_nodes,
 )
+from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
 from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
     EbdGraphEdge,

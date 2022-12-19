@@ -87,6 +87,20 @@ class EbdTableSubRow:
     """
 
 
+# pylint: disable=unused-argument
+def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTableSubRow]):
+    """
+    Check that the subrows cover both a True and a False outcome
+    """
+    # We implicitly assume that the value (list) provided already has exactly two entries.
+    # This is enforced by other validators
+    for boolean in [True, False]:
+        if not any(True for sub_row in value if sub_row.check_result.result is boolean):
+            raise ValueError(
+                f"Exactly one of the entries in {attribute.name} has to have check_result.result {boolean}"
+            )
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableRow:
     """
@@ -107,7 +121,9 @@ class EbdTableRow:
     sub_rows: List[EbdTableSubRow] = attrs.field(
         validator=attrs.validators.deep_iterable(
             member_validator=attrs.validators.instance_of(EbdTableSubRow),
-            iterable_validator=attrs.validators.min_len(2),
+            iterable_validator=attrs.validators.and_(
+                attrs.validators.min_len(2), attrs.validators.max_len(2), _check_that_both_true_and_false_occur
+            ),
         ),
     )
     """

@@ -18,7 +18,7 @@ class TestEbdTableModels:
                     rows=[
                         EbdTableRow(
                             step_number="1",
-                            description="Erfolgt die Aktivierung nach Abluaf der Clearingfrist für die KBKA?",
+                            description="Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
                             sub_rows=[
                                 EbdTableSubRow(
                                     check_result=EbdCheckResult(result=True, subsequent_step_number=None),

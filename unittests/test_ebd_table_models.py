@@ -110,3 +110,16 @@ dem Wert „Marktlokations-ID“ angegeben?""",
     def test_has_subsequent_steps(self, row: EbdTableRow, expected_result: bool):
         actual = row.has_subsequent_steps()
         assert actual == expected_result
+
+    def test_answer_code_aastersik(self):
+        """
+        This is an example from 6.27.1 E_0455_Information prüfen.
+        The tests asserts that the validator of the result code allow the result code 'A**' which is used in E_0455.
+        """
+        sub_row = EbdTableSubRow(
+            result_code="A**",
+            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+            note="Stammdaten wurden übernommen.\nHinweis A**: Es werden alle gemerkten Ant-wortcodes der vorhergehenden Prüfschritte übermittelt",
+        )
+        assert isinstance(sub_row, EbdTableSubRow)
+        assert sub_row.result_code == "A**"

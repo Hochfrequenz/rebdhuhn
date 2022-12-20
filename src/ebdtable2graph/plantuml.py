@@ -134,7 +134,6 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     """
     nx_graph = graph.graph
     _mark_last_common_ancestors(nx_graph)
-    # _mark_skips_to_appendix(nx_graph)
     plantuml_code: str = (
         "@startuml\n"
         "skinparam Shadowing false\n"

@@ -29,7 +29,7 @@ def _draw_node1_below_node2(graph: DiGraph, node1: str, node2: str) -> bool:
     """
     return (
         isinstance(graph.nodes[node1]["node"], DecisionNode)
-        and (isinstance(graph.nodes[node2]["node"], OutcomeNode) or isinstance(graph.nodes[node2]["node"], EndNode))
+        and isinstance(graph.nodes[node2]["node"], (OutcomeNode, EndNode))
         and graph.in_degree(node2) == 1
     )
 

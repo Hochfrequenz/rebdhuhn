@@ -138,6 +138,16 @@ class TestEbdTableModels:
         ) as uml_file:
             uml_file.write(plantuml_code)
 
+    def test_table_e0401_too_complex_for_plantuml(self):
+        """
+        Test the conversion pipeline for E_0401. In this case the plantuml conversion should fail because the graph is
+        too complex for this implementation.
+        """
+        with pytest.raises(AssertionError) as exc:
+            _ = convert_graph_to_plantuml(convert_table_to_graph(table_e0401))
+
+        assert "graph is too complex" in str(exc.value)
+
     @pytest.mark.parametrize(
         "table,expected_result",
         [

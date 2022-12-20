@@ -1,10 +1,12 @@
 """
 This module contains logic to convert EbdGraph data to plantuml code and further to parse this code to SVG images.
 """
+from collections import namedtuple
+
 import requests  # pylint: disable=import-error
 from networkx import DiGraph  # type:ignore[import]
 
-from ebdtable2graph.graph_utils import _get_yes_no_edges, _mark_last_common_ancestors, _mark_skips_to_appendix
+from ebdtable2graph.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
 from ebdtable2graph.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -16,6 +18,20 @@ def _escape_for_plantuml(input_str: str) -> str:
     Plantuml supports HTML.
     """
     return input_str.replace(")", "&#41;")
+
+
+def _draw_node1_below_node2(graph: DiGraph, node1: str, node2: str) -> bool:
+    """
+    Used in `_convert_decision_node_to_plantuml`. Decides if `node1` should be drawn under `node2`.
+    This is the case if `node1` is a `DecisionNode` and `node2` is either an `OutcomeNode` or an `EndNode`
+    with indegree == 1.
+    This kind of workaround is used just for layout purposes.
+    """
+    return (
+        isinstance(graph.nodes[node1]["node"], DecisionNode)
+        and isinstance(graph.nodes[node2]["node"], (OutcomeNode, EndNode))
+        and graph.in_degree(node2) == 1
+    )
 
 
 def _convert_end_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
@@ -45,6 +61,13 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
     """
     Converts a DecisionNode to plantuml code.
+    DecisionNodes will be converted to a nested if-else structure with the if-branch as the yes-edge and the else-branch
+    as the no-edge. Those branches will contain the code of the following nodes recursively. This creates the nested
+    structure.
+    But there are some exceptions. E.g. if a (following) node is the target of more than one edge (i.e. indegree > 1)
+    this node has to be placed under the last common ancestor to properly create the "merge nodes".
+    Additionally, the same technique will be used to simply draw DecisionNodes below OutcomeNodes since OutcomeNodes
+    doesn't have any following nodes. This will improve the layout drastically for EBDs like E_0015.
     """
     decision_node: DecisionNode = graph.nodes[node]["node"]
     assert isinstance(decision_node, DecisionNode), f"{node} is not a decision node."
@@ -54,18 +77,38 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     yes_node = str(yes_edge.target)
     no_node = str(no_edge.target)
 
+    Cases = namedtuple("Cases", "yes_below_no no_below_yes common_ancestor")
+    cases = Cases(
+        _draw_node1_below_node2(graph, yes_node, no_node),
+        _draw_node1_below_node2(graph, no_node, yes_node),
+        COMMON_ANCESTOR_FIELD in graph.nodes[node],
+    )
+    assert cases.count(True) <= 1, "This cannot actually fail."
+
     result = (
         f"{indent}if (<b>{decision_node.step_number}: </b> {_escape_for_plantuml(decision_node.question)}) then (ja)\n"
     )
-    if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != yes_node:
+    if not cases.yes_below_no and not graph.in_degree(yes_node) > 1:
+        # Draw the following node here only if it shouldn't be drawn under the no-branch and if it isn't a node with
+        # indegree > 1.
         result += _convert_node_to_plantuml(graph, yes_node, indent + ADD_INDENT)
     result += f"{indent}else (nein)\n"
-    if "skip_node" not in graph.nodes[node] or graph.nodes[node]["skip_node"] != no_node:
+    if not cases.no_below_yes and not graph.in_degree(no_node) > 1:
+        # Draw the following node here only if it shouldn't be drawn under the yes-branch and if it isn't a node with
+        # indegree > 1.
         result += _convert_node_to_plantuml(graph, no_node, indent + ADD_INDENT)
     result += f"{indent}endif\n"
 
-    if "append_node" in graph.nodes[node]:
-        result += _convert_node_to_plantuml(graph, str(graph.nodes[node]["append_node"]), indent)
+    # Appendix part
+    if cases.yes_below_no:
+        result += _convert_decision_node_to_plantuml(graph, yes_node, indent)
+    elif cases.no_below_yes:
+        result += _convert_decision_node_to_plantuml(graph, no_node, indent)
+    elif cases.common_ancestor:
+        assert (
+            len(graph.nodes[node][COMMON_ANCESTOR_FIELD]) == 1
+        ), "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex."
+        result += _convert_node_to_plantuml(graph, graph.nodes[node][COMMON_ANCESTOR_FIELD][0], indent)
     return result
 
 
@@ -91,7 +134,6 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     """
     nx_graph = graph.graph
     _mark_last_common_ancestors(nx_graph)
-    _mark_skips_to_appendix(nx_graph)
     plantuml_code: str = (
         "@startuml\n"
         "skinparam Shadowing false\n"

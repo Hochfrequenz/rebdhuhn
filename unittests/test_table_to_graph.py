@@ -100,8 +100,6 @@ class TestEbdTableModels:
             pytest.param(
                 table_e0003,
                 "DiGraph with 6 nodes and 5 edges",
-                # 5 nodes = 2 decision nodes + ["A01", "A02", EndNode]
-                # 4 edges = 2*Ja +2*Nein
             ),
             pytest.param(
                 table_e0015,
@@ -113,11 +111,6 @@ class TestEbdTableModels:
                 "DiGraph with 10 nodes and 11 edges",
                 # todo: check if result is ok
             ),
-            pytest.param(
-                table_e0401,
-                "DiGraph with 23 nodes and 27 edges",
-                # todo: check if result is ok
-            ),
         ],
     )
     def test_table_to_digraph(self, table: EbdTable, expected_description: str):
@@ -125,16 +118,9 @@ class TestEbdTableModels:
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
         """
-        actual = convert_table_to_digraph(table)
-        assert str(actual) == expected_description
-        # return
-        # import matplotlib.pyplot as plt  # type:ignore[import]
-        # import networkx as nx  # type:ignore[import]
-        #
-        # nx.draw(actual, pos=nx.kamada_kawai_layout(actual), labels={node: node for node in actual}, node_size=600)
-        # plt.show()
-
         ebd_graph = convert_table_to_graph(table)
+        assert str(ebd_graph.graph) == expected_description
+
         plantuml_code = convert_graph_to_plantuml(ebd_graph)
         svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
@@ -146,6 +132,16 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
+
+    def test_table_e0401_too_complex_for_plantuml(self):
+        """
+        Test the conversion pipeline for E_0401. In this case the plantuml conversion should fail because the graph is
+        too complex for this implementation.
+        """
+        with pytest.raises(AssertionError) as exc:
+            _ = convert_graph_to_plantuml(convert_table_to_graph(table_e0401))
+
+        assert "graph is too complex" in str(exc.value)
 
     @pytest.mark.parametrize(
         "table,expected_result",

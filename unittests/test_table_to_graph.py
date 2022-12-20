@@ -111,11 +111,6 @@ class TestEbdTableModels:
                 "DiGraph with 10 nodes and 11 edges",
                 # todo: check if result is ok
             ),
-            # pytest.param(
-            #     table_e0401,
-            #     "DiGraph with 23 nodes and 27 edges",
-            #     # todo: check if result is ok
-            # ),
         ],
     )
     def test_table_to_digraph(self, table: EbdTable, expected_description: str):

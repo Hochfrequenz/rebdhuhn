@@ -130,9 +130,11 @@ class EbdTableRow:
     One table row splits into multiple sub rows: one sub row for each check result (ja/nein)
     """
     use_cases: Optional[List[str]] = attrs.field(
-        validator=attrs.validators.deep_iterable(
-            member_validator=attrs.validators.instance_of(str),
-            iterable_validator=attrs.validators.min_len(1),  # if the list is not None, it has to have entries
+        validator=attrs.validators.optional(
+            attrs.validators.deep_iterable(  # type:ignore[arg-type]
+                member_validator=attrs.validators.instance_of(str),
+                iterable_validator=attrs.validators.min_len(1),  # if the list is not None, it has to have entries
+            )
         ),
         default=None,
     )

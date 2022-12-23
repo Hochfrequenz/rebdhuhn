@@ -146,14 +146,21 @@ class EbdTableRow:
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
-class CollectAnswerCodesInstruction:
+class MultiStepInstruction:
     """
+    This class generally models plain text instructions that shall be applied to multiple steps in an EBD from a
+    specified step number onwards. It'll be clearer with two examples.
+
+    Example A:
+    Sometimes, the checks described in the EBDs are not thought to be performed once per message, but once per MaLo.
+    In German the instruction says: 'Je Marktlokation erfolgen die nachstehenden Prüfungen:'
+
+    Example B:
     Sometimes the EBDs are not though to return only a single answer code but allow to collect multiple answer codes and
     return them all together. Technically this means: Don't exit the tree at the first sub row without a subsequent step
     but continue and perform the following checks as well.
     In German the instruction says:
     'Alle festgestellten Antworten sind anzugeben, soweit im Format möglich (maximal 8 Antwortcodes)*.'
-    This class models such an instruction.
     """
 
     first_step_number_affected: str = attrs.field(validator=attrs.validators.matches_re(_STEP_NUMBER_REGEX))
@@ -163,7 +170,10 @@ class CollectAnswerCodesInstruction:
     """
     instruction_text: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
-    The instruction as plain text; e.g. 'Alle festgestellten Antworten sind anzugeben, soweit...'
+    Contains the instruction as plain text.
+    Examples:
+    'Alle festgestellten Antworten sind anzugeben, soweit...'
+    'Je Marktlokation erfolgen die nachstehenden Prüfungen'
     """
 
 
@@ -185,10 +195,16 @@ class EbdTable:
     """
     rows are the body of the table
     """
-    collect_answer_codes_instruction: Optional[CollectAnswerCodesInstruction] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.instance_of(CollectAnswerCodesInstruction)), default=None
+    multi_step_instructions: Optional[List[MultiStepInstruction]] = attrs.field(
+        validator=attrs.validators.optional(
+            attrs.validators.deep_iterable(  # type:ignore[arg-type]
+                member_validator=attrs.validators.instance_of(MultiStepInstruction),
+                iterable_validator=attrs.validators.min_len(1),  # if the list is not None, then it has to have entries
+            )
+        ),
+        default=None,
     )
     """
-    If this is not None, it means that from some point in the EBD onwards, the user is thought to start collecting
-    multiple answer codes.
+    If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
+    instructions. There might be more than one of these instructions in one EBD table.
     """

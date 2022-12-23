@@ -1,12 +1,12 @@
 import pytest  # type:ignore[import]
 
 from ebdtable2graph.models.ebd_table import (
-    CollectAnswerCodesInstruction,
     EbdCheckResult,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
+    MultiStepInstruction,
 )
 
 
@@ -139,10 +139,12 @@ dem Wert „Marktlokations-ID“ angegeben?""",
                 sub_chapter="6.18.1 E_0453_Änderung prüfen",
                 role="ÜNB",
             ),
-            collect_answer_codes_instruction=CollectAnswerCodesInstruction(
-                instruction_text="Alle festgestellten Antworten sind anzugeben, soweit im Format möglich (maximal 8 Antwortcodes)*.",
-                first_step_number_affected="4",
-            ),
+            multi_step_instructions=[
+                MultiStepInstruction(
+                    instruction_text="Alle festgestellten Antworten sind anzugeben, soweit im Format möglich (maximal 8 Antwortcodes)*.",
+                    first_step_number_affected="4",
+                )
+            ],
             rows=[
                 # ... steps 1-3
                 EbdTableRow(
@@ -164,5 +166,5 @@ dem Wert „Marktlokations-ID“ angegeben?""",
                 # ... all the other steps 5-27
             ],
         )
-        assert snippet_from_e0453.collect_answer_codes_instruction is not None
+        assert snippet_from_e0453.multi_step_instructions is not None
         # If it can be instantiated that's test enough for the model.

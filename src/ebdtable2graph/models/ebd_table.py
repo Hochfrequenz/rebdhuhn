@@ -129,6 +129,20 @@ class EbdTableRow:
     """
     One table row splits into multiple sub rows: one sub row for each check result (ja/nein)
     """
+    use_cases: Optional[List[str]] = attrs.field(
+        validator=attrs.validators.deep_iterable(
+            member_validator=attrs.validators.instance_of(str),
+            iterable_validator=attrs.validators.min_len(1),  # if the list is not None, it has to have entries
+        ),
+        default=None,
+    )
+    """
+    If certain rows of the EBD table are only relevant for specific use cases/scenarios, you can denote them here.
+    E.g. E_0462 step_number 15 may only be applied for use_cases=["Einzug"].
+    and E_0462 step_number 16 is only relevant for use_cases=["Einzug",	"iMS/kME mit RLM"].
+
+    None means, there are no restrictions to when the check from the row shall be performed.
+    """
 
     def has_subsequent_steps(self) -> bool:
         """

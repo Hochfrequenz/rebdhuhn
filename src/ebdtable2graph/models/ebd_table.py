@@ -101,13 +101,16 @@ def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTa
             )
 
 
+_STEP_NUMBER_REGEX = r"\d+\*?"  #: regex used to validate step numbers, e.g. '4' or '7*'
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableRow:
     """
     A single row inside the Prüfschritt-Tabelle
     """
 
-    step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+\*?"))
+    step_number: str = attrs.field(validator=attrs.validators.matches_re(_STEP_NUMBER_REGEX))
     """
     number of the Prüfschritt, e.g. '1', '2' or '6*'
     The German column header is 'Nr'.
@@ -143,6 +146,28 @@ class EbdTableRow:
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
+class CollectAnswerCodesInstruction:
+    """
+    Sometimes the EBDs are not though to return only a single answer code but allow to collect multiple answer codes and
+    return them all together. Technically this means: Don't exit the tree at the first sub row without a subsequent step
+    but continue and perform the following checks as well.
+    In German the instruction says:
+    'Alle festgestellten Antworten sind anzugeben, soweit im Format möglich (maximal 8 Antwortcodes)*.'
+    This class models such an instruction.
+    """
+
+    first_step_number_affected: str = attrs.field(validator=attrs.validators.matches_re(_STEP_NUMBER_REGEX))
+    """
+    The first step number/row that is affected by the instruction. If the instruction occurs before e.g. step '4',
+    then '4' is the first_step_number_affected.
+    """
+    instruction_text: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    The instruction as plain text; e.g. 'Alle festgestellten Antworten sind anzugeben, soweit...'
+    """
+
+
+@attrs.define(auto_attribs=True, kw_only=True)
 class EbdTable:
     """
     A Table is a list of rows + some metadata
@@ -159,4 +184,11 @@ class EbdTable:
     )
     """
     rows are the body of the table
+    """
+    collect_answer_codes_instruction: Optional[CollectAnswerCodesInstruction] = attrs.field(
+        validator=attrs.validators.optional(attrs.validators.instance_of(CollectAnswerCodesInstruction)), default=None
+    )
+    """
+    If this is not None, it means that from some point in the EBD onwards, the user is thought to start collecting
+    multiple answer codes.
     """

@@ -12,6 +12,7 @@ from ebdtable2graph import (
     convert_table_to_graph,
 )
 from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
+from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
 from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
@@ -122,16 +123,60 @@ class TestEbdTableModels:
         assert str(ebd_graph.graph) == expected_description
 
         plantuml_code = convert_graph_to_plantuml(ebd_graph)
-        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
-        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
-        with open(
-            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.svg", "w+", encoding="utf-8"
-        ) as svg_file:
-            svg_file.write(svg_code)
         with open(
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+        with open(
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"
+        ) as svg_file:
+            svg_file.write(svg_code)
+
+    @pytest.mark.parametrize(
+        "table,expected_description",
+        [
+            pytest.param(
+                table_e0003,
+                "DiGraph with 6 nodes and 5 edges",
+            ),
+            pytest.param(
+                table_e0015,
+                "DiGraph with 22 nodes and 21 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0025,
+                "DiGraph with 10 nodes and 11 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0401,
+                "DiGraph with 23 nodes and 27 edges",
+                # todo: check if result is ok
+            ),
+        ],
+    )
+    def test_table_to_digraph_dot(self, table: EbdTable, expected_description: str):
+        """
+        Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
+        manually. The test only checks if the svg can be built.
+        """
+        ebd_graph = convert_table_to_graph(table)
+        assert str(ebd_graph.graph) == expected_description
+
+        dot_code = convert_graph_to_dot(ebd_graph)
+        with open(
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.dot", "w+", encoding="utf-8"
+        ) as uml_file:
+            uml_file.write(dot_code)
+        svg_code = convert_dot_to_svg_kroki(dot_code)  # Raises an error if conversion fails
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+        with open(
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.dot.svg", "w+", encoding="utf-8"
+        ) as svg_file:
+            svg_file.write(svg_code)
 
     def test_table_e0401_too_complex_for_plantuml(self):
         """

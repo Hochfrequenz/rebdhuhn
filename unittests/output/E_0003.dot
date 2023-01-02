@@ -1,0 +1,14 @@
+digraph D {
+    "Start" [shape=box, style=rounded, label="Start"];
+    "1" [shape=box, style="filled", fillcolor="green", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
+    "A01" [shape=box, style="filled", fillcolor="red", label=<A01<BR align="left"/>>];
+    "2" [shape=box, style="filled", fillcolor="green", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
+    "A02" [shape=box, style="filled", fillcolor="red", label=<A02<BR align="left"/>>];
+    "Ende" [shape=box, style=rounded, label="Ende"];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Nein"];
+    "1" -> "2" [label="Ja"];
+    "2" -> "A02" [label="Nein"];
+    "2" -> "Ende" [label="Ja"];
+}

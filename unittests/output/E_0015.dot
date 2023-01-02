@@ -1,0 +1,46 @@
+digraph D {
+    "Start" [shape=box, style=rounded, label="Start"];
+    "1" [shape=box, style="filled", fillcolor="green", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?<BR align="left"/>>];
+    "A01" [shape=box, style="filled", fillcolor="red", label=<A01<BR align="left"/>>];
+    "2" [shape=box, style="filled", fillcolor="green", label=<<B>2: </B>Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
+    "A02" [shape=box, style="filled", fillcolor="red", label=<A02<BR align="left"/>>];
+    "3" [shape=box, style="filled", fillcolor="green", label=<<B>3: </B>Ist die richtige Regelzone angegeben<BR align="left"/>>];
+    "A03" [shape=box, style="filled", fillcolor="red", label=<A03<BR align="left"/>>];
+    "4" [shape=box, style="filled", fillcolor="green", label=<<B>4: </B>Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?<BR align="left"/>>];
+    "A04" [shape=box, style="filled", fillcolor="red", label=<A04<BR align="left"/>>];
+    "5" [shape=box, style="filled", fillcolor="green", label=<<B>5: </B>Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?<BR align="left"/>>];
+    "A05" [shape=box, style="filled", fillcolor="red", label=<A05<BR align="left"/>>];
+    "6" [shape=box, style="filled", fillcolor="green", label=<<B>6: </B>Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?<BR align="left"/>>];
+    "A06" [shape=box, style="filled", fillcolor="red", label=<A06<BR align="left"/>>];
+    "7" [shape=box, style="filled", fillcolor="green", label=<<B>7: </B>Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?<BR align="left"/>>];
+    "A07" [shape=box, style="filled", fillcolor="red", label=<A07<BR align="left"/>>];
+    "8" [shape=box, style="filled", fillcolor="green", label=<<B>8: </B>Ist der ÜNB zur Aktivierung des ZRT berechtigt?<BR align="left"/>>];
+    "A08" [shape=box, style="filled", fillcolor="red", label=<A08<BR align="left"/>>];
+    "9" [shape=box, style="filled", fillcolor="green", label=<<B>9: </B>Passt die OBIS-Kennzahl zum ZRT?<BR align="left"/>>];
+    "A09" [shape=box, style="filled", fillcolor="red", label=<A09<BR align="left"/>>];
+    "10" [shape=box, style="filled", fillcolor="green", label=<<B>10: </B>Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?<BR align="left"/>>];
+    "A10" [shape=box, style="filled", fillcolor="red", label=<A10<BR align="left"/>>];
+    "A11" [shape=box, style="filled", fillcolor="red", label=<A11<BR align="left"/>>];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Ja"];
+    "1" -> "2" [label="Nein"];
+    "2" -> "A02" [label="Nein"];
+    "2" -> "3" [label="Ja"];
+    "3" -> "A03" [label="Nein"];
+    "3" -> "4" [label="Ja"];
+    "4" -> "A04" [label="Nein"];
+    "4" -> "5" [label="Ja"];
+    "5" -> "A05" [label="Nein"];
+    "5" -> "6" [label="Ja"];
+    "6" -> "A06" [label="Ja"];
+    "6" -> "7" [label="Nein"];
+    "7" -> "A07" [label="Ja"];
+    "7" -> "8" [label="Nein"];
+    "8" -> "A08" [label="Nein"];
+    "8" -> "9" [label="Ja"];
+    "9" -> "A09" [label="Nein"];
+    "9" -> "10" [label="Ja"];
+    "10" -> "A10" [label="Ja"];
+    "10" -> "A11" [label="Nein"];
+}

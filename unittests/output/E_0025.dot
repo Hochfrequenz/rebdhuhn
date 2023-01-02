@@ -1,0 +1,24 @@
+digraph D {
+    "Start" [shape=box, style=rounded, label="Start"];
+    "1" [shape=box, style="filled", fillcolor="green", label=<<B>1: </B>Erfolgt der Eingang der Prüfmitteilung nach Ablauf der Clearingfrist für die KBKA?<BR align="left"/>>];
+    "A01" [shape=box, style="filled", fillcolor="red", label=<A01<BR align="left"/>>];
+    "2" [shape=box, style="filled", fillcolor="green", label=<<B>2: </B>Befindet sich der MaBiS-ZP auf der Aggregationsebene RZ?<BR align="left"/>>];
+    "3" [shape=box, style="filled", fillcolor="green", label=<<B>3: </B>Hat der BKV für den BK dieses MaBiS-ZP in diesem Bilanzie-<BR align="left"/>rungsmonat die Aggregationsebene RZ abbestellt?<BR align="left"/>>];
+    "Ende" [shape=box, style=rounded, label="Ende"];
+    "4" [shape=box, style="filled", fillcolor="green", label=<<B>4: </B>Hat der BKV dem BIKO für diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Prüfungen auf Ebene des BG<BR align="left"/>stattfinden müssen?<BR align="left"/>>];
+    "A02" [shape=box, style="filled", fillcolor="red", label=<A02<BR align="left"/>>];
+    "5" [shape=box, style="filled", fillcolor="green", label=<<B>5: </B>Hat der BKV dem BIKO für diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Prüfungen auf Ebene des BG<BR align="left"/>stattfinden müssen?<BR align="left"/>>];
+    "A03" [shape=box, style="filled", fillcolor="red", label=<A03<BR align="left"/>>];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Ja"];
+    "1" -> "2" [label="Nein"];
+    "2" -> "3" [label="Nein"];
+    "2" -> "5" [label="Ja"];
+    "3" -> "4" [label="Nein"];
+    "3" -> "Ende" [label="Ja"];
+    "4" -> "A02" [label="Nein"];
+    "4" -> "Ende" [label="Ja"];
+    "5" -> "A03" [label="Ja"];
+    "5" -> "Ende" [label="Nein"];
+}

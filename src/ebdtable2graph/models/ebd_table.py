@@ -101,13 +101,16 @@ def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTa
             )
 
 
+_STEP_NUMBER_REGEX = r"\d+\*?"  #: regex used to validate step numbers, e.g. '4' or '7*'
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableRow:
     """
     A single row inside the Prüfschritt-Tabelle
     """
 
-    step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+\*?"))
+    step_number: str = attrs.field(validator=attrs.validators.matches_re(_STEP_NUMBER_REGEX))
     """
     number of the Prüfschritt, e.g. '1', '2' or '6*'
     The German column header is 'Nr'.
@@ -159,6 +162,38 @@ class EbdTableRow:
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
+class MultiStepInstruction:
+    """
+    This class generally models plain text instructions that shall be applied to multiple steps in an EBD from a
+    specified step number onwards. It'll be clearer with two examples.
+
+    Example A:
+    Sometimes, the checks described in the EBDs are not thought to be performed once per message, but once per MaLo.
+    In German the instruction says: 'Je Marktlokation erfolgen die nachstehenden Prüfungen:'
+
+    Example B:
+    Sometimes the EBDs are not though to return only a single answer code but allow to collect multiple answer codes and
+    return them all together. Technically this means: Don't exit the tree at the first sub row without a subsequent step
+    but continue and perform the following checks as well.
+    In German the instruction says:
+    'Alle festgestellten Antworten sind anzugeben, soweit im Format möglich (maximal 8 Antwortcodes)*.'
+    """
+
+    first_step_number_affected: str = attrs.field(validator=attrs.validators.matches_re(_STEP_NUMBER_REGEX))
+    """
+    The first step number/row that is affected by the instruction. If the instruction occurs before e.g. step '4',
+    then '4' is the first_step_number_affected.
+    """
+    instruction_text: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    Contains the instruction as plain text.
+    Examples:
+    'Alle festgestellten Antworten sind anzugeben, soweit...'
+    'Je Marktlokation erfolgen die nachstehenden Prüfungen'
+    """
+
+
+@attrs.define(auto_attribs=True, kw_only=True)
 class EbdTable:
     """
     A Table is a list of rows + some metadata
@@ -175,4 +210,17 @@ class EbdTable:
     )
     """
     rows are the body of the table
+    """
+    multi_step_instructions: Optional[List[MultiStepInstruction]] = attrs.field(
+        validator=attrs.validators.optional(
+            attrs.validators.deep_iterable(  # type:ignore[arg-type]
+                member_validator=attrs.validators.instance_of(MultiStepInstruction),
+                iterable_validator=attrs.validators.min_len(1),  # if the list is not None, then it has to have entries
+            )
+        ),
+        default=None,
+    )
+    """
+    If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
+    instructions. There might be more than one of these instructions in one EBD table.
     """

@@ -118,6 +118,28 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         actual = row.has_subsequent_steps()
         assert actual == expected_result
 
+    def test_ebd_table_row_use_cases(self):
+        row_17_in_e0462 = EbdTableRow(
+            step_number="17",
+            description="Liegt das Eingangsdatum der Anmeldung mehr als sechs Wochen nach dem Lieferbeginndatum der Anmeldung?",
+            use_cases=["Einzug", "kME ohne RLM/mME/ Pauschalanlage"],
+            sub_rows=[
+                EbdTableSubRow(
+                    check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                    result_code="A06",
+                    note="Cluster: Ablehnung\nFristüberschreitung bei kME ohne RLM/mME/ Pauschalanlage",
+                ),
+                EbdTableSubRow(
+                    check_result=EbdCheckResult(result=False, subsequent_step_number="21"),
+                    result_code=None,
+                    note=None,
+                ),
+            ],
+        )
+        assert isinstance(row_17_in_e0462, EbdTableRow)
+        assert row_17_in_e0462.use_cases is not None
+        # if it can be instantiated with use cases that's a good enough test for the model
+
     def test_answer_code_aastersik(self):
         """
         This is an example from 6.27.1 E_0455_Information prüfen.

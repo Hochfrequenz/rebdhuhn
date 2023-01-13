@@ -2,12 +2,13 @@
 contains the graph side of things
 """
 from abc import ABC, abstractmethod
-from typing import Optional
+from typing import List, Optional
 
 import attrs
 from networkx import DiGraph  # type:ignore[import]
 
 # pylint:disable=too-few-public-methods
+from ebdtable2graph.models.ebd_table import MultiStepInstruction
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
@@ -134,6 +135,12 @@ class EbdGraphEdge:
     """
     the destination/target of the edge
     """
+    note: Optional[str] = attrs.field(validator=attrs.validators.optional(attrs.validators.instance_of(str)))
+    """
+    An optional note for this edge.
+    If the note doesn't refer to a OutcomeNode - e.g. 'Cluster:Ablehnung\nFristüberschreitung' -
+    the note will be a property of the edge.
+    """
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
@@ -174,6 +181,20 @@ class EbdGraph:
     graph: DiGraph = attrs.field(validator=attrs.validators.instance_of(DiGraph))
     """
     The networkx graph
+    """
+
+    multi_step_instructions: Optional[List[MultiStepInstruction]] = attrs.field(
+        validator=attrs.validators.optional(
+            attrs.validators.deep_iterable(  # type:ignore[arg-type]
+                member_validator=attrs.validators.instance_of(MultiStepInstruction),
+                iterable_validator=attrs.validators.min_len(1),  # if the list is not None, then it has to have entries
+            )
+        ),
+        default=None,
+    )
+    """
+    If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
+    instructions. There might be more than one of these instructions in one EBD table.
     """
 
     # pylint:disable=fixme

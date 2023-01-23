@@ -24,7 +24,7 @@ from ebdtable2graph.models import (
 
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
     """
-    converts a sub_row into an outcome node (or None if not applicable)
+    Converts a sub_row into an outcome node (or None if not applicable).
     """
     if sub_row.result_code is not None:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)

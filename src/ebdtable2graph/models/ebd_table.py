@@ -211,6 +211,7 @@ class EbdTable:
     """
     rows are the body of the table
     """
+    # pylint: disable=duplicate-code
     multi_step_instructions: Optional[List[MultiStepInstruction]] = attrs.field(
         validator=attrs.validators.optional(
             attrs.validators.deep_iterable(  # type:ignore[arg-type]

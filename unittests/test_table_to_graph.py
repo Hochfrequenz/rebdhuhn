@@ -60,12 +60,14 @@ class TestEbdTableModels:
                         target=DecisionNode(
                             step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"
                         ),
+                        note=None,
                     ),
                     ToNoEdge(
                         source=DecisionNode(
                             step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"
                         ),
                         target=OutcomeNode(result_code="A01", note="Fristüberschreitung"),
+                        note=None,
                     ),
                     ToYesEdge(
                         source=DecisionNode(
@@ -74,18 +76,21 @@ class TestEbdTableModels:
                         target=DecisionNode(
                             step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"
                         ),
+                        note=None,
                     ),
                     ToNoEdge(
                         source=DecisionNode(
                             step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"
                         ),
                         target=OutcomeNode(result_code="A02", note="Gewählter Zeitpunkt nicht zulässig"),
+                        note=None,
                     ),
                     ToYesEdge(
                         source=DecisionNode(
                             step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"
                         ),
                         target=EndNode(),
+                        note=None,
                     ),
                 ],
             )

@@ -45,7 +45,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
         f'<U>Hinweis:</U><BR align="left"/>{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>'
         f"</FONT>"
     )
-    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#cca9ab", label=<{formatted_label}>];'
+    return f'{indent}"{node}" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cca9ab", label=<{formatted_label}>];'
 
 
 def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -120,7 +120,11 @@ def _convert_edges_to_dot(ebd_graph: EbdGraph, indent: str) -> List[str]:
 def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     nx_graph = ebd_graph.graph
     _mark_last_common_ancestors(nx_graph)
-    dot_code = "digraph D {\n"
+    header = (
+        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
+        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.sub_chapter}</FONT></B><BR/><BR/><BR/><BR/>'
+    )
+    dot_code = "digraph D {\n" f'{ADD_INDENT}labelloc="t";\n{ADD_INDENT}label=<{header}>;\n'
     assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
     assert "1" in nx_graph["Start"], "Start node must be connected to decision node '1'."
     dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"

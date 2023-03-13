@@ -40,8 +40,8 @@ def _convert_row_to_decision_node(row: EbdTableRow) -> DecisionNode:
 
 def _yes_no_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge:
     if decision:
-        return ToYesEdge(source=source, target=target)
-    return ToNoEdge(source=source, target=target)
+        return ToYesEdge(source=source, target=target, note=None)
+    return ToNoEdge(source=source, target=target, note=None)
 
 
 def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
@@ -70,7 +70,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     Edges connect decisions with outcomes or subsequent steps.
     """
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
-    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=nodes["1"])]
+    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=nodes["1"], note=None)]
 
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
@@ -118,4 +118,4 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         sub_chapter=table.metadata.sub_chapter,
         role=table.metadata.role,
     )
-    return EbdGraph(metadata=graph_metadata, graph=graph)
+    return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)

@@ -2,7 +2,7 @@ name: "Formatting"
 
 on: [push]
 jobs:
-  black:
+  check:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

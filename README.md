@@ -17,12 +17,15 @@ The package `ebdtable2graph` contains logic to convert your scraped data into a 
 This graph can then be exported e.g. as SVG and/or UML.
 
 ## How to use `ebdtable2graph`?
+
 Install the package from pypi:
+
 ```bash
 pip install ebdtable2graph
 ```
 
 ### Create an Instance of `EbdTable`
+
 `EbdTable` contains the raw data by BDEW in a machine-readable format.
 Creating instances of `EbdTable` is out of scope for this package.
 Ask Hochfrequenz for support on this topic.
@@ -82,6 +85,7 @@ assert isinstance(ebd_graph, EbdGraph)
 ```
 
 #### Export as PlantUML
+
 ```python
 from ebdtable2graph import convert_graph_to_plantuml
 
@@ -91,6 +95,7 @@ with open("e_0003.puml", "w+", encoding="utf-8") as uml_file:
 ```
 
 The file `e_0003.puml` now looks like this:
+
 ```puml
 @startuml
 ...
@@ -115,6 +120,7 @@ endif
 ```
 
 #### Export as SVG
+
 You can also export the graph as SVG
 
 ```python
@@ -124,6 +130,7 @@ svg_code = convert_plantuml_to_svg_kroki(plantuml_code)
 with open("e_0003.svg", "w+", encoding="utf-8") as svg_file:
     svg_file.write(svg_code)
 ```
+
 ![](mwe_e0003.svg)
 
 ## How to use this Repository on Your Machine (for development)

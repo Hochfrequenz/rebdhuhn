@@ -1,3 +1,4 @@
+import cattrs
 import pytest  # type:ignore[import]
 
 from ebdtable2graph.models.ebd_table import (
@@ -50,6 +51,9 @@ class TestEbdTableModels:
         The test is successful already if the instantiation in the parametrization worked
         """
         assert table is not None
+        serialized_table = cattrs.unstructure(table)
+        deserialized_table = cattrs.structure(serialized_table, EbdTable)
+        assert deserialized_table == table
 
     @pytest.mark.parametrize(
         "row,expected_result",

@@ -135,4 +135,4 @@ dmypy.json
 
 # Output from unitstests
 
-unitstests/output/*
+unittests/output/*

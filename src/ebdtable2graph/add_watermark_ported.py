@@ -9,10 +9,9 @@ from io import BytesIO
 from pathlib import Path
 from typing import TextIO, Tuple, Union
 
+from ebd_parser.flatebdline import FormatVersion
 from lxml import etree  # type:ignore[import]
 from svgutils.compose import SVG, Figure  # type:ignore[import]
-
-from ebd_parser.flatebdline import FormatVersion
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8

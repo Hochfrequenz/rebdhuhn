@@ -11,6 +11,7 @@ from ebdtable2graph import (
     convert_table_to_digraph,
     convert_table_to_graph,
 )
+from ebdtable2graph.add_watermark import add_watermark
 from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
 from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
@@ -26,8 +27,6 @@ from ebdtable2graph.models.ebd_graph import (
 )
 from ebdtable2graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
-
-from ebdtable2graph.add_watermark import add_watermark
 
 # from ebd_drawer.tools import svg_comparison
 

@@ -5,10 +5,10 @@ of the smallest dimension of the EBD diagram.
 Afterwards it gets placed into the center of the EBD diagram.
 """
 
+import re
 from io import BytesIO
 from pathlib import Path
 from typing import TextIO, Tuple, Union
-import re
 
 from lxml import etree  # type:ignore[import]
 from svgutils.compose import SVG, Figure  # type:ignore[import]

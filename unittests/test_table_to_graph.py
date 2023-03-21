@@ -28,7 +28,8 @@ from ebdtable2graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 from ebdtable2graph.add_watermark import add_watermark
-#from ebd_drawer.tools import svg_comparison
+
+# from ebd_drawer.tools import svg_comparison
 
 
 class TestEbdTableModels:
@@ -193,7 +194,9 @@ class TestEbdTableModels:
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(
-            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_without_watermark.dot.svg", "w+", encoding="utf-8"
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_without_watermark.dot.svg",
+            "w+",
+            encoding="utf-8",
         ) as svg_file:
             svg_file.write(svg_code)
 
@@ -206,7 +209,6 @@ class TestEbdTableModels:
         file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark.dot.svg"
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_with_watermark.decode())
-
 
     def test_table_e0401_too_complex_for_plantuml(self):
         """

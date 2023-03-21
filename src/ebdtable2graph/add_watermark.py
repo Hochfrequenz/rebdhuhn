@@ -13,7 +13,7 @@ import re
 from lxml import etree  # type:ignore[import]
 from svgutils.compose import SVG, Figure  # type:ignore[import]
 
-#from ebd_parser.flatebdline import FormatVersion
+# from ebd_parser.flatebdline import FormatVersion
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
@@ -29,7 +29,7 @@ def convert_dimension_to_float(dimension: str) -> float:
     if dimension[-2:] == "px":
         dimension = float(dimension[:-2])
     elif dimension[-2:] == "pt":
-        dimension = float(dimension[:-2])*4/3
+        dimension = float(dimension[:-2]) * 4 / 3
     elif re.match(r"^[\d.]+$", dimension) is not None:  # assume the default unit is px
         dimension = float(dimension)
     else:
@@ -101,7 +101,7 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
     return ebd_with_watermark
 
 
-#def add_watermark_to_manual_svg(format_version: FormatVersion, ebd_number: str):
+# def add_watermark_to_manual_svg(format_version: FormatVersion, ebd_number: str):
 #    """
 #    Adds the watermark to the manual svgs.
 #    :param format_version: e.g. FormatVersion.FV2110

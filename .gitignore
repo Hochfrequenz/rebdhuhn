@@ -133,6 +133,3 @@ dmypy.json
 # vscode settings
 .vscode/
 
-# Output from unitstests
-
-unittests/output/*

@@ -25,14 +25,14 @@ def convert_dimension_to_float(dimension: str) -> float:
     """
 
     if dimension[-2:] == "px":
-        dimension = float(dimension[:-2])
+        dimension_float = float(dimension[:-2])
     elif dimension[-2:] == "pt":
-        dimension = float(dimension[:-2]) * 4 / 3
+        dimension_float = float(dimension[:-2]) * 4 / 3
     elif re.match(r"^[\d.]+$", dimension) is not None:  # assume the default unit is px
-        dimension = float(dimension)
+        dimension_float = float(dimension)
     else:
         raise ValueError("unsupported unit type")
-    return dimension
+    return dimension_float
 
 
 def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, float]:

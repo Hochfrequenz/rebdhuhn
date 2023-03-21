@@ -84,16 +84,4 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
 
-    # the following lines are needed if we have to create a new test_compare.svg file
-    # please do not delete them.
-    # Figure(
-    #     ebd_width_in_px,
-    #     ebd_height_in_px,
-    #     SVG(path_to_hf_logo).scale(scale).move(move_x, move_y),
-    #     etree.fromstring(ebd_svg_as_bytes),
-    # ).save("test_compare.svg")
-
-    # with open("awesome_watermark.svg", "w") as output:
-    #     output.write(ebd_with_watermark.decode())
-
     return ebd_with_watermark

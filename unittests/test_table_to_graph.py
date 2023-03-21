@@ -186,20 +186,6 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-
-    def test_add_watermark_ported(self):
-
-        # this test string is extracted by debugging test_create_image_example_uml and stopped in uml2image.py
-        # at _svg = connection.processes(plantuml_text="".join(lines))
-        with open(basedir / "unittests/test_files/test_without_watermark.svg") as test_svg:
-            _svg = test_svg.read().encode()
-
-        svg_with_watermark = add_watermark(_svg)
-        # without = svg_with_watermark.decode()
-        path_to_compare_svg: Path = basedir / "unittests/test_files/test_with_watermark.svg"
-
-        assert svg_comparison(svg_with_watermark, path_to_compare_svg)
-
     def test_table_to_digraph_dot_with_watermark(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)

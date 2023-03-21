@@ -97,20 +97,3 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
     #     output.write(ebd_with_watermark.decode())
 
     return ebd_with_watermark
-
-
-# def add_watermark_to_manual_svg(format_version: FormatVersion, ebd_number: str):
-#    """
-#    Adds the watermark to the manual svgs.
-#    :param format_version: e.g. FormatVersion.FV2110
-#    :param ebd_number: e.g. "E_0011"
-#    """
-#    file_path = Path.cwd() / "data/manual_ebd" / format_version.name / f"{ebd_number}.svg"
-#
-#    with open(file_path, encoding="utf-8") as ebd_svg:
-#        svg_without_watermark = ebd_svg.read().encode()
-#
-#    svg_with_watermark = add_watermark(svg_without_watermark)
-#
-#    with open(file_path, "w", encoding="utf-8") as ebd_svg:
-#        ebd_svg.write(svg_with_watermark.decode())

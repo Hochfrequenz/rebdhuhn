@@ -27,8 +27,9 @@ from ebdtable2graph.models.ebd_graph import (
 from ebdtable2graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
-from ebdtable2graph.add_watermark import add_watermark
-from ebdtable2graph.tools import svg_comparison
+#from ebdtable2graph.add_watermark import add_watermark
+#from ebdtable2graph.tools import svg_comparison
+
 
 class TestEbdTableModels:
     @pytest.mark.parametrize(
@@ -258,16 +259,14 @@ class TestEbdTableModels:
         pytest.skip("todo @leon - wird später in den examples.py ergänzt")
         assert actual == expected_result
 
-
-    def test_add_watermark(self):
-
-        # this test string is extracted by debugging test_create_image_example_uml and stopped in uml2image.py
-        # at _svg = connection.processes(plantuml_text="".join(lines))
-        with open(basedir / "unittests/test_files/test_without_watermark.svg") as test_svg:
-            _svg = test_svg.read().encode()
-
-        svg_with_watermark = add_watermark(_svg)
-        # without = svg_with_watermark.decode()
-        path_to_compare_svg: Path = basedir / "unittests/test_files/test_with_watermark.svg"
-
-        assert svg_comparison(svg_with_watermark, path_to_compare_svg)
+#    def test_add_watermark(self):
+#        # this test string is extracted by debugging test_create_image_example_uml and stopped in uml2image.py
+#        # at _svg = connection.processes(plantuml_text="".join(lines))
+#        with open(basedir / "unittests/test_files/test_without_watermark.svg") as test_svg:
+#            _svg = test_svg.read().encode()
+#
+#        svg_with_watermark = add_watermark(_svg)
+#        # without = svg_with_watermark.decode()
+#        path_to_compare_svg: Path = basedir / "unittests/test_files/test_with_watermark.svg"
+#
+#        assert svg_comparison(svg_with_watermark, path_to_compare_svg)

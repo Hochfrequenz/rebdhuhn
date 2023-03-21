@@ -82,7 +82,7 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
     ebd_with_watermark = Figure(
         ebd_width_in_px,
         ebd_height_in_px,
-        SVG(path_to_hf_logo).scale(scale).move(move_x, move_y),
+        SVG(str(path_to_hf_logo)).scale(scale).move(move_x, move_y),
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
 

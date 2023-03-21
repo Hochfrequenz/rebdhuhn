@@ -171,7 +171,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     assert "1" in nx_graph["Start"], "Start node must be connected to decision node '1'."
     dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
     dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
-
+    dot_code += "\n    bgcolor=\"transparent\";\n"
     return dot_code + "}"
 
 

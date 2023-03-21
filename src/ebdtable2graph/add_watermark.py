@@ -8,6 +8,7 @@ Afterwards it gets placed into the center of the EBD diagram.
 from io import BytesIO
 from pathlib import Path
 from typing import TextIO, Tuple, Union
+import re
 
 from lxml import etree  # type:ignore[import]
 from svgutils.compose import SVG, Figure  # type:ignore[import]
@@ -24,9 +25,16 @@ def convert_dimension_to_float(dimension: str) -> float:
     Finally the dimension string is converted into float.
     :param dimension: dimension string of a svg image
     """
-    if dimension[-2:] == "pt":
-        dimension = dimension[:-2]
-    return float(dimension)
+
+    if dimension[-2:] == "px":
+        dimension = float(dimension[:-2])
+    elif dimension[-2:] == "pt":
+        dimension = float(dimension[:-2])*4/3
+    elif re.match(r"^[\d.]+$", dimension) is not None:  # assume the default unit is px
+        dimension = float(dimension)
+    else:
+        raise ValueError("unsupported unit type")
+    return dimension
 
 
 def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, float]:

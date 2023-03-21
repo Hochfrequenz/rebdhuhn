@@ -2,4 +2,6 @@ attrs
 networkx
 requests
 cattrs
+lxml
+svgutils
 # add all the dependencies from there to setup.cfg also

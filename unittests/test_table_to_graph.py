@@ -208,14 +208,6 @@ class TestEbdTableModels:
             ebd_svg.write(svg_with_watermark.decode())
 
 
-
-        #with open(
-        #    Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark.dot.svg", "w+", encoding="utf-8"
-        #) as svg_file:
-        #    svg_file.write(svg_code_with_watermark)
-
-
-
     def test_table_e0401_too_complex_for_plantuml(self):
         """
         Test the conversion pipeline for E_0401. In this case the plantuml conversion should fail because the graph is

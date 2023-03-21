@@ -28,8 +28,6 @@ from ebdtable2graph.models.ebd_graph import (
 from ebdtable2graph.models.ebd_table import EbdTable
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
-# from ebd_drawer.tools import svg_comparison
-
 
 class TestEbdTableModels:
     @pytest.mark.parametrize(

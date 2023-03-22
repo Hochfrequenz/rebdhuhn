@@ -197,7 +197,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-        svg_without_watermark = svg_code.encode('utf-8')
+        svg_without_watermark = svg_code.encode("utf-8")
 
         svg_with_watermark = add_watermark(svg_without_watermark)
 

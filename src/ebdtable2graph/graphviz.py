@@ -194,7 +194,7 @@ def convert_dot_to_svg_kroki(dot_code: str, watermark=True) -> str:
         )
     if watermark:
         svg_code_without_watermark = answer.text
-        svg_out = add_watermark(svg_code_without_watermark.encode()).decode('utf-8')
+        svg_out = add_watermark(svg_code_without_watermark.encode()).decode("utf-8")
     else:
         svg_out = answer.text
     return svg_out

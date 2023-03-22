@@ -176,7 +176,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     return dot_code + "}"
 
 
-def convert_dot_to_svg_kroki(dot_code: str, watermark=True) -> str:
+def convert_dot_to_svg_kroki(dot_code: str, add_watermark_bool: bool = True) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
     Then add the HF watermark to the svg code
@@ -192,7 +192,7 @@ def convert_dot_to_svg_kroki(dot_code: str, watermark=True) -> str:
             f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
             f"{answer.text}"
         )
-    if watermark:
+    if add_watermark_bool:
         svg_code_without_watermark = answer.text
         svg_out = add_watermark(svg_code_without_watermark.encode()).decode("utf-8")
     else:

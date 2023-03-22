@@ -16,9 +16,15 @@ charset-normalizer==2.1.1
     # via requests
 idna==3.4
     # via requests
+lxml==4.9.2
+    # via
+    #   -r requirements.in
+    #   svgutils
 networkx==3.0
     # via -r requirements.in
 requests==2.28.2
+    # via -r requirements.in
+svgutils==0.3.4
     # via -r requirements.in
 urllib3==1.26.13
     # via requests

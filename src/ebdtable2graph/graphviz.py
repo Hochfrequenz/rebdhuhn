@@ -5,6 +5,7 @@ from typing import List
 
 import requests
 
+from ebdtable2graph.add_watermark import add_watermark
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
 from ebdtable2graph.models import (
     DecisionNode,
@@ -193,7 +194,6 @@ def convert_dot_to_svg_kroki(dot_code: str) -> str:
         )
 
     svg_code_without_watermark = answer.text
-    svg_code_with_watermark = add_watermark(svg_without_watermark.encode())
+    svg_code_with_watermark = add_watermark(svg_code_without_watermark.encode()).decode('utf-8')
 
-
-    return answer.text
+    return svg_code_with_watermark

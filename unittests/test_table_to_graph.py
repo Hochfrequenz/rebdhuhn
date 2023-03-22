@@ -187,7 +187,7 @@ class TestEbdTableModels:
     def test_table_to_digraph_dot_with_watermark(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
-        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark_bool=False)  # Raises an error if conversion fails
+        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark=False)  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(

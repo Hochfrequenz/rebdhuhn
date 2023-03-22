@@ -5,7 +5,7 @@ from typing import List
 
 import requests
 
-from ebdtable2graph.add_watermark import add_watermark
+from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
 from ebdtable2graph.models import (
     DecisionNode,
@@ -176,7 +176,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     return dot_code + "}"
 
 
-def convert_dot_to_svg_kroki(dot_code: str, add_watermark_bool: bool = True) -> str:
+def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
     Then add the HF watermark to the svg code
@@ -192,9 +192,9 @@ def convert_dot_to_svg_kroki(dot_code: str, add_watermark_bool: bool = True) -> 
             f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
             f"{answer.text}"
         )
-    if add_watermark_bool:
+    if add_watermark:
         svg_code_without_watermark = answer.text
-        svg_out = add_watermark(svg_code_without_watermark.encode()).decode("utf-8")
+        svg_out = add_watermark_function(svg_code_without_watermark.encode()).decode("utf-8")
     else:
         svg_out = answer.text
     return svg_out

@@ -64,7 +64,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cca9ab", label=<{formatted_label}>];'
+        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<{formatted_label}>];'
     )
 
 

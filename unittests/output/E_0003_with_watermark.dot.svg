@@ -50,7 +50,7 @@
 <!-- A01 -->
 <g id="node3" class="node">
 <title>A01</title>
-<polygon fill="#cca9ab" stroke="black" points="390.5,-151 245.5,-151 245.5,-101 390.5,-101 390.5,-151"/>
+<polygon fill="#cfb986" stroke="black" points="390.5,-151 245.5,-151 245.5,-101 390.5,-101 390.5,-151"/>
 <text text-anchor="start" x="302.5" y="-134.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="257.5" y="-122.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="257.5" y="-110.4" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
@@ -79,7 +79,7 @@
 <!-- A02 -->
 <g id="node5" class="node">
 <title>A02</title>
-<polygon fill="#cca9ab" stroke="black" points="656.5,-50 421.5,-50 421.5,0 656.5,0 656.5,-50"/>
+<polygon fill="#cfb986" stroke="black" points="656.5,-50 421.5,-50 421.5,0 656.5,0 656.5,-50"/>
 <text text-anchor="start" x="523.5" y="-33.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="433.5" y="-21.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="433.5" y="-9.4" font-family="Times,serif" font-size="12.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>

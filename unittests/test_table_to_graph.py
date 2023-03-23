@@ -187,7 +187,7 @@ class TestEbdTableModels:
     def test_table_to_digraph_dot_with_watermark(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
-        svg_code = convert_dot_to_svg_kroki(dot_code)  # Raises an error if conversion fails
+        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark=False)  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(
@@ -197,9 +197,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-        file_path = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_without_watermark.dot.svg"
-        with open(file_path, encoding="utf-8") as ebd_svg:
-            svg_without_watermark = ebd_svg.read().encode()
+        svg_without_watermark = svg_code.encode("utf-8")
 
         svg_with_watermark = add_watermark(svg_without_watermark)
 

@@ -11,7 +11,7 @@ from ebdtable2graph import (
     convert_table_to_digraph,
     convert_table_to_graph,
 )
-from ebdtable2graph.add_watermark import add_watermark
+from ebdtable2graph.add_watermark import add_watermark, add_background
 from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
 from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
@@ -187,7 +187,7 @@ class TestEbdTableModels:
     def test_table_to_digraph_dot_with_watermark(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
-        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark=False)  # Raises an error if conversion fails
+        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark=False, add_background=False)  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(
@@ -201,9 +201,30 @@ class TestEbdTableModels:
 
         svg_with_watermark = add_watermark(svg_without_watermark)
 
+
         file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark.dot.svg"
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_with_watermark.decode())
+
+    def test_table_to_digraph_dot_with_background(self):
+        ebd_graph = convert_table_to_graph(table_e0003)
+        dot_code = convert_graph_to_dot(ebd_graph)
+        svg_code = convert_dot_to_svg_kroki(dot_code, add_watermark=False, add_background=False)  # Raises an error if conversion fails
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+
+        with open(
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_without_watermark.dot.svg",
+            "w+",
+            encoding="utf-8",
+        ) as svg_file:
+            svg_file.write(svg_code)
+
+        svg_code = add_background(svg_code)
+
+        file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_background.dot.svg"
+        with open(file_path2, "w", encoding="utf-8") as ebd_svg:
+            ebd_svg.write(svg_code)
+
 
     def test_table_e0401_too_complex_for_plantuml(self):
         """

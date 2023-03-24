@@ -60,10 +60,11 @@ def _find_2nd(string: str, substring: str) -> int:
     return string.find(substring, string.find(substring) + 1)
 
 
-def add_background(svg: str, ebd_width_in_px: float, ebd_height_in_px: float) -> str:
+def add_background(svg: str) -> str:
     """
     Adds the background to the svg code. The background color is set to be the "white" of the HF corporate design
     """
+    ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode('utf-8')))
     index_2nd_line_break = _find_2nd(svg, "\n")
     background_color = "#f3f1f6"
     background_svg_str = (
@@ -76,11 +77,12 @@ def add_background(svg: str, ebd_width_in_px: float, ebd_height_in_px: float) ->
 
 
 # pylint: disable = c-extension-no-member
-def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
+def add_watermark(ebd_svg: str) -> str:
     """
     Scales our hochfrequenz logo and centers it in a given EBD diagram
     :param ebd_svg_as_bytes:
     """
+    ebd_svg_as_bytes = ebd_svg.encode('utf-8')
     ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(ebd_svg_as_bytes))
 
     directory_path = Path(__file__).parent
@@ -105,6 +107,5 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
         SVG(str(path_to_hf_logo)).scale(scale).move(move_x, move_y),
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
-    ebd_with_watermark = add_background(ebd_with_watermark.decode("utf-8"), ebd_width_in_px, ebd_height_in_px)
 
-    return ebd_with_watermark.encode("utf-8")
+    return ebd_with_watermark.decode('utf-8')

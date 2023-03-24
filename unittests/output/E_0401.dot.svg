@@ -1,6 +1,8 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2840.0px" viewBox="0 0 2840.0 2062.6666666666665" height="2062.6666666666665px">
   <g>
+    <svg version="1.1" width="2840.0px" viewBox="0 0 2840.0 2062.6666666666665" height="2062.6666666666665px">
+  <polygon fill="#f3f1f6" points="0,0 2840.0,0 2840.0,2062.6666666666665 0,2062.6666666666665"/><g>
     <g transform="translate(595.5453393482618, 206.2666666666666) scale(1 1) translate(0, 0) scale(9.328648958590438 9.328648958590438) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
   <defs id="defs2">
     <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
@@ -123,7 +125,7 @@
 <!-- A01 -->
 <g id="node5" class="node">
 <title>A01</title>
-<polygon fill="#cca9ab" stroke="black" points="1259,-887 954,-887 954,-801 1259,-801 1259,-887"/>
+<polygon fill="#cfb986" stroke="black" points="1259,-887 954,-887 954,-801 1259,-801 1259,-887"/>
 <text text-anchor="start" x="1091" y="-870.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="966" y="-858.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="966" y="-846.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -157,7 +159,7 @@
 <!-- A02 -->
 <g id="node7" class="node">
 <title>A02</title>
-<polygon fill="#cca9ab" stroke="black" points="2121.5,-1012 1799.5,-1012 1799.5,-938 2121.5,-938 2121.5,-1012"/>
+<polygon fill="#cfb986" stroke="black" points="2121.5,-1012 1799.5,-1012 1799.5,-938 2121.5,-938 2121.5,-1012"/>
 <text text-anchor="start" x="1945" y="-995.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="1811.5" y="-983.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1811.5" y="-971.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -252,7 +254,7 @@
 <!-- A03 -->
 <g id="node11" class="node">
 <title>A03</title>
-<polygon fill="#cca9ab" stroke="black" points="382,-701 79,-701 79,-627 382,-627 382,-701"/>
+<polygon fill="#cfb986" stroke="black" points="382,-701 79,-701 79,-627 382,-627 382,-701"/>
 <text text-anchor="start" x="215" y="-684.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
 <text text-anchor="start" x="91" y="-672.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="91" y="-660.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -276,7 +278,7 @@
 <!-- A04 -->
 <g id="node13" class="node">
 <title>A04</title>
-<polygon fill="#cca9ab" stroke="black" points="859.5,-701 555.5,-701 555.5,-627 859.5,-627 859.5,-701"/>
+<polygon fill="#cfb986" stroke="black" points="859.5,-701 555.5,-701 555.5,-627 859.5,-627 859.5,-701"/>
 <text text-anchor="start" x="692" y="-684.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A04</text>
 <text text-anchor="start" x="567.5" y="-672.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="567.5" y="-660.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -300,7 +302,7 @@
 <!-- A05 -->
 <g id="node15" class="node">
 <title>A05</title>
-<polygon fill="#cca9ab" stroke="black" points="1746.5,-707 1426.5,-707 1426.5,-621 1746.5,-621 1746.5,-707"/>
+<polygon fill="#cfb986" stroke="black" points="1746.5,-707 1426.5,-707 1426.5,-621 1746.5,-621 1746.5,-707"/>
 <text text-anchor="start" x="1571" y="-690.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A05</text>
 <text text-anchor="start" x="1438.5" y="-678.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1438.5" y="-666.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -325,7 +327,7 @@
 <!-- A06 -->
 <g id="node17" class="node">
 <title>A06</title>
-<polygon fill="#cca9ab" stroke="black" points="1156,-417 963,-417 963,-355 1156,-355 1156,-417"/>
+<polygon fill="#cfb986" stroke="black" points="1156,-417 963,-417 963,-355 1156,-355 1156,-417"/>
 <text text-anchor="start" x="1044" y="-400.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A06</text>
 <text text-anchor="start" x="975" y="-388.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="975" y="-376.4" font-family="Times,serif" font-size="12.00">Cluster: Zustimmung</text>
@@ -381,7 +383,7 @@
 <!-- A07 -->
 <g id="node20" class="node">
 <title>A07</title>
-<polygon fill="#cca9ab" stroke="black" points="1449,-263 1150,-263 1150,-189 1449,-189 1449,-263"/>
+<polygon fill="#cfb986" stroke="black" points="1449,-263 1150,-263 1150,-189 1449,-189 1449,-263"/>
 <text text-anchor="start" x="1284" y="-246.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A07</text>
 <text text-anchor="start" x="1162" y="-234.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1162" y="-222.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -419,7 +421,7 @@
 <!-- A08 -->
 <g id="node22" class="node">
 <title>A08</title>
-<polygon fill="#cca9ab" stroke="black" points="1674,-92 1395,-92 1395,-18 1674,-18 1674,-92"/>
+<polygon fill="#cfb986" stroke="black" points="1674,-92 1395,-92 1395,-18 1674,-18 1674,-92"/>
 <text text-anchor="start" x="1519" y="-75.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A08</text>
 <text text-anchor="start" x="1407" y="-63.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1407" y="-51.4" font-family="Times,serif" font-size="12.00">Cluster: Ablehnung</text>
@@ -436,7 +438,7 @@
 <!-- A09 -->
 <g id="node23" class="node">
 <title>A09</title>
-<polygon fill="#cca9ab" stroke="black" points="2020.5,-110 1692.5,-110 1692.5,0 2020.5,0 2020.5,-110"/>
+<polygon fill="#cfb986" stroke="black" points="2020.5,-110 1692.5,-110 1692.5,0 2020.5,0 2020.5,-110"/>
 <text text-anchor="start" x="1841" y="-93.8" font-family="Times,serif" font-weight="bold" font-size="14.00">A09</text>
 <text text-anchor="start" x="1704.5" y="-81.4" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1704.5" y="-69.4" font-family="Times,serif" font-size="12.00">Cluster: Zustimmung</text>
@@ -454,6 +456,8 @@
 <text text-anchor="middle" x="1792.5" y="-131.8" font-family="Times,serif" font-size="14.00">Ja</text>
 </g>
 </g>
+</svg>
+  </g>
 </svg>
   </g>
 </svg>

@@ -5,6 +5,7 @@ from typing import List
 
 import requests
 
+from ebdtable2graph.add_watermark import add_background as add_background_function
 from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
 from ebdtable2graph.models import (
@@ -65,7 +66,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cca9ab", label=<{formatted_label}>];'
+        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<{formatted_label}>];'
     )
 
 
@@ -176,10 +177,12 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     return dot_code + "}"
 
 
-def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True) -> str:
+def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True, add_background: bool = True) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
-    Then add the HF watermark to the svg code
+    Optionally add the HF watermark to the svg code, controlled by the argument 'add_watermark'
+    Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
+    If 'add_background' is False, the background is transparent.
     """
     url = "https://kroki.io"
     answer = requests.post(
@@ -192,9 +195,9 @@ def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True) -> str:
             f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
             f"{answer.text}"
         )
+    svg_out = answer.text
     if add_watermark:
-        svg_code_without_watermark = answer.text
-        svg_out = add_watermark_function(svg_code_without_watermark.encode()).decode("utf-8")
-    else:
-        svg_out = answer.text
+        svg_out = add_watermark_function(svg_out)
+    if add_background:
+        svg_out = add_background_function(svg_out)
     return svg_out

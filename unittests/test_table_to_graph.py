@@ -206,7 +206,7 @@ class TestEbdTableModels:
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_with_watermark)
 
-        svg_with_watermark_bg = add_background(svg_without_watermark)
+        svg_with_watermark_bg = add_background(svg_with_watermark)
         file_path3 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark_and_bg.dot.svg"
         with open(file_path3, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_with_watermark_bg)

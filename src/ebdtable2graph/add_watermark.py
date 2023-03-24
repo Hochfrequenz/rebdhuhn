@@ -53,6 +53,28 @@ def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, 
     return width_of_svg_in_px, height_of_svg_in_px
 
 
+def _find_2nd(string: str, substring: str) -> int:
+    """
+    finds the index of the 2nd occurrence of substring in string
+    """
+    return string.find(substring, string.find(substring) + 1)
+
+
+def add_background(svg: str, ebd_width_in_px: float, ebd_height_in_px: float) -> str:
+    """
+    Adds the background to the svg code. The background color is set to be the "white" of the HF corporate design
+    """
+    index_2nd_line_break = _find_2nd(svg, "\n")
+    background_color = "#f3f1f6"
+    background_svg_str = (
+        f'  <polygon fill="{background_color}" points="0,0 {ebd_width_in_px}'
+        f',0 {ebd_width_in_px},{ebd_height_in_px} 0,{ebd_height_in_px}"/>'
+    )
+    svg_with_background = svg[: index_2nd_line_break + 2] + background_svg_str + "\n" + svg[index_2nd_line_break + 2 :]
+
+    return svg_with_background
+
+
 # pylint: disable = c-extension-no-member
 def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
     """
@@ -83,5 +105,6 @@ def add_watermark(ebd_svg_as_bytes: bytes) -> bytes:
         SVG(str(path_to_hf_logo)).scale(scale).move(move_x, move_y),
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
+    ebd_with_watermark = add_background(ebd_with_watermark.decode("utf-8"), ebd_width_in_px, ebd_height_in_px)
 
-    return ebd_with_watermark
+    return ebd_with_watermark.encode("utf-8")

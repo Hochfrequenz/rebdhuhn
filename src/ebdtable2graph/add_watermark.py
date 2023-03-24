@@ -54,12 +54,13 @@ def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, 
 
 def add_background(svg: str) -> str:
     """
-    Adds the (non-transparent) background to the svg code. The background color is set to be the "white" of the HF corporate design
+    Adds the (non-transparent) background to the svg code.
+    The background color is set to be the "white" of the HF corporate design
     :param svg:
     """
     ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
     background_color = "#f3f1f6"
-    tree = etree.parse(BytesIO(svg.encode("utf-8")))
+    tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
     xml_element = etree.Element(
         "polygon",
@@ -67,7 +68,7 @@ def add_background(svg: str) -> str:
             "fill": background_color,
             "points": f"0,0 {ebd_width_in_px},0 {ebd_width_in_px},{ebd_height_in_px} 0,{ebd_height_in_px}",
         },
-    )
+    )  # pylint:disable=c-extension-no-member
     root.insert(0, xml_element)
 
     svg_with_background = Figure(ebd_width_in_px, ebd_height_in_px, root).tostr()

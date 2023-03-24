@@ -191,7 +191,7 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 False,
-            )
+            ),
         ],
     )
     def test_table_to_digraph_dot_with_watermark(self, add_background):
@@ -215,9 +215,14 @@ class TestEbdTableModels:
             dot_code, add_watermark=True, add_background=add_background
         )  # Raises an error if conversion fails
 
-        file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark_background_is_{add_background}.dot.svg"
+        file_path2 = (
+            Path(__file__).parent
+            / "output"
+            / f"{ebd_graph.metadata.ebd_code}_with_watermark_background_is_{add_background}.dot.svg"
+        )
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_with_watermark)
+
     def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)

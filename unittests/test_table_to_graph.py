@@ -11,7 +11,6 @@ from ebdtable2graph import (
     convert_table_to_digraph,
     convert_table_to_graph,
 )
-from ebdtable2graph.add_watermark import add_background, add_watermark
 from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
 from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
@@ -184,7 +183,18 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-    def test_table_to_digraph_dot_with_watermark(self):
+    @pytest.mark.parametrize(
+        "add_background",
+        [
+            pytest.param(
+                True,
+            ),
+            pytest.param(
+                False,
+            )
+        ],
+    )
+    def test_table_to_digraph_dot_with_watermark(self, add_background):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         svg_code = convert_dot_to_svg_kroki(
@@ -199,18 +209,15 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-        svg_without_watermark = svg_code
+        ebd_graph = convert_table_to_graph(table_e0003)
+        dot_code = convert_graph_to_dot(ebd_graph)
+        svg_code_with_watermark = convert_dot_to_svg_kroki(
+            dot_code, add_watermark=True, add_background=add_background
+        )  # Raises an error if conversion fails
 
-        svg_with_watermark = add_watermark(svg_without_watermark)
-        file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark_no_bg.dot.svg"
+        file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark_background_is_{add_background}.dot.svg"
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
-            ebd_svg.write(svg_with_watermark)
-
-        svg_with_watermark_bg = add_background(svg_with_watermark)
-        file_path3 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_watermark_and_bg.dot.svg"
-        with open(file_path3, "w", encoding="utf-8") as ebd_svg:
-            ebd_svg.write(svg_with_watermark_bg)
-
+            ebd_svg.write(svg_code_with_watermark)
     def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)

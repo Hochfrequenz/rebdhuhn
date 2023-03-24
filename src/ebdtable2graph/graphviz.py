@@ -180,7 +180,9 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
 def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True, add_background: bool = True) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
-    Then add the HF watermark to the svg code
+    Optionally add the HF watermark to the svg code, controlled by the argument 'add_watermark'
+    Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
+    If 'add_background' is False, the background is transparent.
     """
     url = "https://kroki.io"
     answer = requests.post(

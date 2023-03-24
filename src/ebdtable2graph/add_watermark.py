@@ -77,7 +77,7 @@ def add_background(svg: str) -> str:
 def add_watermark(ebd_svg: str) -> str:
     """
     Scales our hochfrequenz logo and centers it in a given EBD diagram
-    :param ebd_svg_as_bytes:
+    :param ebd_svg:
     """
     ebd_svg_as_bytes = ebd_svg.encode("utf-8")
     ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(ebd_svg_as_bytes))

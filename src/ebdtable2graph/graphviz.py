@@ -5,8 +5,8 @@ from typing import List
 
 import requests
 
-from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.add_watermark import add_background as add_background_function
+from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
 from ebdtable2graph.models import (
     DecisionNode,

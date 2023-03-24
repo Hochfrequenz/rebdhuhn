@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2840.0px" viewBox="0 0 2840.0 2062.6666666666665" height="2062.6666666666665px">
-   <polygon fill="#f3f1f6" points="0,0 2840.0,0 2840.0,2062.6666666666665 0,2062.6666666666665"/>
- <g>
+  <g>
+    <svg version="1.1" width="2840.0px" viewBox="0 0 2840.0 2062.6666666666665" height="2062.6666666666665px">
+  <polygon fill="#f3f1f6" points="0,0 2840.0,0 2840.0,2062.6666666666665 0,2062.6666666666665"/><g>
     <g transform="translate(595.5453393482618, 206.2666666666666) scale(1 1) translate(0, 0) scale(9.328648958590438 9.328648958590438) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
   <defs id="defs2">
     <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
@@ -455,6 +456,8 @@
 <text text-anchor="middle" x="1792.5" y="-131.8" font-family="Times,serif" font-size="14.00">Ja</text>
 </g>
 </g>
+</svg>
+  </g>
 </svg>
   </g>
 </svg>

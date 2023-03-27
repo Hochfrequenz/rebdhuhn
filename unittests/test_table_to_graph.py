@@ -25,6 +25,7 @@ from ebdtable2graph.models.ebd_graph import (
     ToYesEdge,
 )
 from ebdtable2graph.models.ebd_table import EbdTable
+from ebdtable2graph.plantuml import GraphToComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 
@@ -249,9 +250,8 @@ class TestEbdTableModels:
         Test the conversion pipeline for E_0401. In this case the plantuml conversion should fail because the graph is
         too complex for this implementation.
         """
-        with pytest.raises(AssertionError) as exc:
+        with pytest.raises(GraphToComplexForPlantumlError) as exc:
             _ = convert_graph_to_plantuml(convert_table_to_graph(table_e0401))
-
         assert "graph is too complex" in str(exc.value)
 
     @pytest.mark.parametrize(

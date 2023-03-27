@@ -58,6 +58,19 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     return f"{result}{indent}kill;\n"
 
 
+class GraphToComplexForPlantumlError(Exception):
+    """
+    Exception raised when a Graph is to complex to convert with Plantuml
+    """
+
+    def __init__(
+        self,
+        message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
+    ):
+        self.message = message
+        super().__init__(self.message)
+
+
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
     """
     Converts a DecisionNode to plantuml code.
@@ -105,9 +118,8 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     elif cases.no_below_yes:
         result += _convert_decision_node_to_plantuml(graph, no_node, indent)
     elif cases.common_ancestor:
-        assert (
-            len(graph.nodes[node][COMMON_ANCESTOR_FIELD]) == 1
-        ), "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex."
+        if len(graph.nodes[node][COMMON_ANCESTOR_FIELD]) != 1:
+            raise GraphToComplexForPlantumlError
         result += _convert_node_to_plantuml(graph, graph.nodes[node][COMMON_ANCESTOR_FIELD][0], indent)
     return result
 

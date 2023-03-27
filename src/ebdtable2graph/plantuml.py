@@ -63,9 +63,13 @@ class GraphToComplexForPlantumlError(Exception):
     Exception raised when a Graph is to complex to convert with Plantuml
     """
 
-    def __init__(self, message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex."):
+    def __init__(
+        self,
+        message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
+    ):
         self.message = message
         super().__init__(self.message)
+
 
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
     """

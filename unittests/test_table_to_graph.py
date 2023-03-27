@@ -253,7 +253,6 @@ class TestEbdTableModels:
         with pytest.raises(GraphToComplexForPlantumlError) as exc:
             _ = convert_graph_to_plantuml(convert_table_to_graph(table_e0401))
 
-
     @pytest.mark.parametrize(
         "table,expected_result",
         [

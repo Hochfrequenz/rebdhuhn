@@ -184,6 +184,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
+
     @pytest.mark.parametrize(
         "add_background",
         [
@@ -195,9 +196,17 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark(self, add_background):
+    def test_table_to_digraph_dot_with_watermark(self, add_background: bool, requests_mock):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
+        with open(Path(__file__).parent / "test_files" / "E_0003.dot.svg", "r", encoding="utf-8") as infile:
+            response_string: str = infile.read()
+
+        requests_mock.post(
+            "https://kroki.io"
+            , text=response_string
+        )
+
         svg_code = convert_dot_to_svg_kroki(
             dot_code, add_watermark=False, add_background=False
         )  # Raises an error if conversion fails

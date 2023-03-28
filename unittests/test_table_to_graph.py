@@ -222,7 +222,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_without_mock(self, add_background: bool):
+    def test_table_to_digraph_dot_with_watermark_real_request(self, add_background: bool):
         enable_request_to_kroki = True
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
@@ -239,7 +239,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_with_mock(self, add_background: bool, requests_mock):
+    def test_table_to_digraph_dot_with_watermark_with_mock(self, add_background: bool, requests_mock):
         with open(
             Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
         ) as infile:

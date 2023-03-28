@@ -242,25 +242,24 @@ class TestEbdTableModels:
                 f"{answer.text}"
             )
         svg_code_from_kroki = answer.text
-        mock_doc_string = '<!-- this file has been generated using the following POST request:\n' \
-                          'double hyphen replaced with "- -" because https://stackoverflow.com/questions/10842131/xml-comments-and\n' \
-                          'curl - -request POST \\\n' \
-                          '  - -url https://kroki.io/ \\\n' \
-                          '  - -header \'Content-Type: application/json\' \\\n' \
-                          '  - -data \'{"diagram_source": '
-        mock_doc_string += dot_code + '' \
-                          ', "diagram_type": "graphviz", "output_format": "svg"}\n' \
-                          '-->'
+        mock_doc_string = (
+            "<!-- this file has been generated using the following POST request:\n"
+            'double hyphen replaced with "- -" because https://stackoverflow.com/questions/10842131/xml-comments-and\n'
+            "curl - -request POST \\\n"
+            "  - -url https://kroki.io/ \\\n"
+            "  - -header 'Content-Type: application/json' \\\n"
+            '  - -data \'{"diagram_source": '
+        )
+        mock_doc_string += dot_code + "" ', "diagram_type": "graphviz", "output_format": "svg"}\n' "-->"
 
-        index_second_line = svg_code_from_kroki.index('\n')
-        svg_code_for_mock = svg_code_from_kroki[:index_second_line] + mock_doc_string + svg_code_from_kroki[index_second_line:]
+        index_second_line = svg_code_from_kroki.index("\n")
+        svg_code_for_mock = (
+            svg_code_from_kroki[:index_second_line] + mock_doc_string + svg_code_from_kroki[index_second_line:]
+        )
 
         file_name_test_files = Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg"
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_for_mock)
-
-
-
 
     @pytest.mark.parametrize(
         "add_background",

@@ -1,10 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- this file has been generated using the following POST request:
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!-- this file has been generated using the following POST request:
 double hyphen replaced with "- -" because https://stackoverflow.com/questions/10842131/xml-comments-and
 curl - -request POST \
   - -url https://kroki.io/ \
   - -header 'Content-Type: application/json' \
-  - -data '{"diagram_source": "digraph D {\n    labelloc=\"t\";\n    label=<<B><FONT POINT-SIZE=\"18\">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE=\"16\">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr\u00fcfen</FONT></B><BR/><BR/><BR/><BR/>>;\n    \"Start\" [margin=\"0.2,0.12\", shape=box, style=filled, fillcolor=\"#7a8da1\", label=<<B>E_0003</B><BR align=\"center\"/><FONT point-size=\"12\"><B><U>Pr\u00fcfende Rolle:</U> \u00dcNB</B></FONT><BR align=\"center\"/>>];\n    \"1\" [margin=\"0.2,0.12\", shape=box, style=\"filled,rounded\", fillcolor=\"#7aab8a\", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align=\"left\"/>>];\n    \"A01\" [margin=\"0.17,0.08\", shape=box, style=filled, fillcolor=\"#cfb986\", label=<<B>A01</B><BR align=\"center\"/><FONT point-size=\"12\"><U>Hinweis:</U><BR align=\"left\"/>Frist\u00fcberschreitung<BR align=\"left\"/></FONT>>];\n    \"2\" [margin=\"0.2,0.12\", shape=box, style=\"filled,rounded\", fillcolor=\"#7aab8a\", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align=\"left\"/>>];\n    \"A02\" [margin=\"0.17,0.08\", shape=box, style=filled, fillcolor=\"#cfb986\", label=<<B>A02</B><BR align=\"center\"/><FONT point-size=\"12\"><U>Hinweis:</U><BR align=\"left\"/>Gew\u00e4hlter Zeitpunkt nicht zul\u00e4ssig<BR align=\"left\"/></FONT>>];\n    \"Ende\" [margin=\"0.2,0.12\", shape=box, style=filled, fillcolor=\"#7a8da1\", label=\"Ende\"];\n\n    \"Start\" -> \"1\";\n    \"1\" -> \"A01\" [label=\"Nein\"];\n    \"1\" -> \"2\" [label=\"Ja\"];\n    \"2\" -> \"A02\" [label=\"Nein\"];\n    \"2\" -> \"Ende\" [label=\"Ja\"];\n\n    bgcolor=\"transparent\";\n}", "diagram_type": "graphviz", "output_format": "svg"}'
+  - -data '{"diagram_source": digraph D {
+    labelloc="t";
+    label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ prüfen</FONT></B><BR/><BR/><BR/><BR/>>;
+    "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0003</B><BR align="center"/><FONT point-size="12"><B><U>Prüfende Rolle:</U> ÜNB</B></FONT><BR align="center"/>>];
+    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
+    "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Fristüberschreitung<BR align="left"/></FONT>>];
+    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
+    "A02" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gewählter Zeitpunkt nicht zulässig<BR align="left"/></FONT>>];
+    "Ende" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label="Ende"];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Nein"];
+    "1" -> "2" [label="Ja"];
+    "2" -> "A02" [label="Nein"];
+    "2" -> "Ende" [label="Ja"];
+
+    bgcolor="transparent";
+}, "diagram_type": "graphviz", "output_format": "svg"}
 -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">

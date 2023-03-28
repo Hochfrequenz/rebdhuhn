@@ -1,7 +1,19 @@
 """
 we use kroki.io to convert dot code to SVG
 """
+from typing import Protocol
+
 import requests
+
+
+# pylint:disable=too-few-public-methods
+class DotToSvgConverter(Protocol):
+    """
+    a class that can convert dot to svg
+    """
+
+    def convert_to_svg(self, dot_code: str) -> str:
+        ...
 
 
 # pylint:disable=too-few-public-methods

@@ -13,6 +13,9 @@ class DotToSvgConverter(Protocol):
     """
 
     def convert_to_svg(self, dot_code: str) -> str:
+        """
+        convert the given dot to svg
+        """
         ...
 
 

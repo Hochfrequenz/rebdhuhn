@@ -184,7 +184,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-    def watermark_background_test(self, add_background: bool):
+    def create_and_save_watermark_and_background_svg(self, add_background: bool):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         svg_code = convert_dot_to_svg_kroki(
@@ -226,7 +226,7 @@ class TestEbdTableModels:
         enable_request_to_kroki = True
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
-        self.watermark_background_test(add_background)
+        self.create_and_save_watermark_and_background_svg(add_background)
 
     @pytest.mark.parametrize(
         "add_background",
@@ -245,7 +245,7 @@ class TestEbdTableModels:
         ) as infile:
             kroki_response_string: str = infile.read()
         requests_mock.post("https://kroki.io", text=kroki_response_string)
-        self.watermark_background_test(add_background)
+        self.create_and_save_watermark_and_background_svg(add_background)
 
     def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)

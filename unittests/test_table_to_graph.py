@@ -239,7 +239,7 @@ class TestEbdTableModels:
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_with_watermark)
 
-    def test_table_to_digraph_dot_with_background(self, mocker):
+    def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         kroki_client = InterceptedKrokiClient()

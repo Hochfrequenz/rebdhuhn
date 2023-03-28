@@ -3,11 +3,10 @@ This module contains logic to convert EbdGraph data to dot code (Graphviz) and f
 """
 from typing import List
 
-import requests
-
 from ebdtable2graph.add_watermark import add_background as add_background_function
 from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
+from ebdtable2graph.kroki import Kroki
 from ebdtable2graph.models import (
     DecisionNode,
     EbdGraph,
@@ -184,18 +183,8 @@ def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True, add_back
     Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
     If 'add_background' is False, the background is transparent.
     """
-    url = "https://kroki.io"
-    answer = requests.post(
-        url,
-        json={"diagram_source": dot_code, "diagram_type": "graphviz", "output_format": "svg"},
-        timeout=5,
-    )
-    if answer.status_code != 200:
-        raise ValueError(
-            f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
-            f"{answer.text}"
-        )
-    svg_out = answer.text
+    kroki_client = Kroki()
+    svg_out = kroki_client.convert_to_svg(dot_code)
     if add_watermark:
         svg_out = add_watermark_function(svg_out)
     if add_background:

@@ -184,7 +184,6 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-
     def watermark_background_test(self, add_background: bool):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)

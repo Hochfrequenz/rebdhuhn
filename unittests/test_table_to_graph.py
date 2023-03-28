@@ -224,8 +224,8 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_with_watermark_without_mock(self, add_background: bool):
-        skip_mock_test = False
-        if skip_mock_test:
+        enable_request_to_kroki = True
+        if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
         self.watermark_background_test(add_background)
 

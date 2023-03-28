@@ -4,6 +4,7 @@ we use kroki.io to convert dot code to SVG
 import requests
 
 
+# pylint:disable=too-few-public-methods
 class Kroki:
     """
     A wrapper around any kroki request

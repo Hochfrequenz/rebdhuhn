@@ -16,7 +16,6 @@ class DotToSvgConverter(Protocol):
         """
         convert the given dot to svg
         """
-        ...
 
 
 # pylint:disable=too-few-public-methods

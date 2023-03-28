@@ -184,7 +184,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-    def watermark_background_test(self, add_background: bool):
+    def create_svg(self, add_background: bool):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         svg_code = convert_dot_to_svg_kroki(
@@ -212,40 +212,25 @@ class TestEbdTableModels:
             ebd_svg.write(svg_code_with_watermark)
 
     @pytest.mark.parametrize(
-        "add_background",
+        "add_background, enable_kroki_mock",
         [
-            pytest.param(
-                True,
-            ),
-            pytest.param(
-                False,
-            ),
+            pytest.param(True, True, id="with background and mocked kroki"),
+            pytest.param(False, True, id="without background but with mocked kroki"),
+            pytest.param(True, False, id="with background and real kroki"),
+            pytest.param(False, False, id="without background and real kroki"),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_without_mock(self, add_background: bool):
-        enable_request_to_kroki = True
-        if not enable_request_to_kroki:
-            pytest.skip("Disable automatic recreation on test runs")
-        self.watermark_background_test(add_background)
-
-    @pytest.mark.parametrize(
-        "add_background",
-        [
-            pytest.param(
-                True,
-            ),
-            pytest.param(
-                False,
-            ),
-        ],
-    )
-    def test_with_mock(self, add_background: bool, requests_mock):
-        with open(
-            Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
-        ) as infile:
-            kroki_response_string: str = infile.read()
-        requests_mock.post("https://kroki.io", text=kroki_response_string)
-        self.watermark_background_test(add_background)
+    def test_svg_creation(self, add_background: bool, enable_kroki_mock, requests_mock):
+        if enable_kroki_mock:
+            with open(
+                Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
+            ) as infile:
+                kroki_response_string: str = infile.read()
+            requests_mock.post("https://kroki.io", text=kroki_response_string)
+        else:
+            # comment the skip if you want to test the kroki-request in the unit test
+            pytest.skip("By default we only want those tests to run, that use the mocked response")
+        self.create_svg(add_background)
 
     def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)

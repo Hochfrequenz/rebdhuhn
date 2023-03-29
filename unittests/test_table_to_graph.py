@@ -143,7 +143,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph(self, table: EbdTable, expected_description: str, requests_mock):
+    def test_table_to_digraph(self, table: EbdTable, expected_description: str):
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.

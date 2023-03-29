@@ -212,8 +212,9 @@ class TestEbdTableModels:
     def create_and_save_watermark_and_background_svg(add_background: bool):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
+        kroki_client = InterceptedKrokiClient()
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=False, add_background=False
+            dot_code, add_watermark=False, add_background=False, dot_to_svg_converter=kroki_client
         )  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
@@ -235,7 +236,9 @@ class TestEbdTableModels:
         )
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_with_watermark)
-        return dot_code
+
+        svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        return svg_code_for_mock
 
     @pytest.mark.parametrize(
         "add_background",
@@ -252,34 +255,7 @@ class TestEbdTableModels:
         enable_request_to_kroki = True
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
-        dot_code = self.create_and_save_watermark_and_background_svg(add_background)
-
-        url = "https://kroki.io"
-        answer = requests.post(
-            url,
-            json={"diagram_source": dot_code, "diagram_type": "graphviz", "output_format": "svg"},
-            timeout=5,
-        )
-        if answer.status_code != 200:
-            raise ValueError(
-                f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
-                f"{answer.text}"
-            )
-        svg_code_from_kroki = answer.text
-        mock_doc_string = (
-            "<!-- this file has been generated using the following POST request:\n"
-            'double hyphen replaced with "- -" because https://stackoverflow.com/questions/10842131/xml-comments-and\n'
-            "curl - -request POST \\\n"
-            "  - -url https://kroki.io/ \\\n"
-            "  - -header 'Content-Type: application/json' \\\n"
-            '  - -data \'{"diagram_source": '
-        )
-        mock_doc_string += dot_code + "" ', "diagram_type": "graphviz", "output_format": "svg"}\n' "-->"
-
-        index_second_line = svg_code_from_kroki.index("\n")
-        svg_code_for_mock = (
-            svg_code_from_kroki[:index_second_line] + mock_doc_string + svg_code_from_kroki[index_second_line:]
-        )
+        svg_code_for_mock = self.create_and_save_watermark_and_background_svg(add_background)
 
         file_name_test_files = Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg"
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:

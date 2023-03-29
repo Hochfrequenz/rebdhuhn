@@ -4,6 +4,7 @@ from typing import List, Optional
 
 import pytest  # type:ignore[import]
 import requests
+from lxml import etree
 from networkx import DiGraph  # type:ignore[import]
 
 from ebdtable2graph import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
@@ -33,10 +34,22 @@ class InterceptedKrokiClient(Kroki):
 
     def __init__(self):
         self.intercepted_kroki_response: Optional[str] = None
+        self.intercepted_kroki_response_with_xml_comment: Optional[str] = None
 
     def convert_to_svg(self, *args, **kwargs):
         result = super().convert_to_svg(*args, **kwargs)
         self.intercepted_kroki_response = result
+        result_tree = etree.fromstring(result.encode("utf-8"))
+        my_comment = f"""
+                curl --request POST \
+                   --url https://kroki.io/ \
+                   --header 'Content-Type: application/json' \
+                   --data '{args[0]}'
+                """.replace(
+            "--", "- -"
+        )  # replace double hyphen for xml compatability
+        result_tree.insert(0, etree.Comment(my_comment))
+        self.intercepted_kroki_response_with_xml_comment = etree.tostring(result_tree).decode("utf-8")
         return result
 
 

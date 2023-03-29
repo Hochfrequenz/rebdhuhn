@@ -3,8 +3,7 @@ from pathlib import Path
 from typing import List, Optional
 
 import pytest  # type:ignore[import]
-import requests
-from lxml import etree
+from lxml import etree  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
 from ebdtable2graph import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph

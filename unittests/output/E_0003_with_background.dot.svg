@@ -2,7 +2,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1406.6666666666667px" viewBox="0 0 1406.6666666666667 566.6666666666666" height="566.6666666666666px">
   <g>
     <svg width="1055pt" height="425pt" viewBox="0.00 0.00 1055.00 425.00">
-<polygon fill="#f3f1f6" points="0,0 1406.6666666666667,0 1406.6666666666667,566.6666666666666 0,566.6666666666666"/><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 421)">
+<polygon fill="#f3f1f6" points="0,0 1406.6666666666667,0 1406.6666666666667,566.6666666666666 0,566.6666666666666"/><!--
+                curl - -request POST                    - -url https://kroki.io/                    - -header 'Content-Type: application/json'                    - -data 'digraph D {
+    labelloc="t";
+    label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0003</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> &#220;NB</B></FONT><BR align="center"/>>];
+    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
+    "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
+    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
+    "A02" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>];
+    "Ende" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label="Ende"];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Nein"];
+    "1" -> "2" [label="Ja"];
+    "2" -> "A02" [label="Nein"];
+    "2" -> "Ende" [label="Ja"];
+
+    bgcolor="transparent";
+}'
+                --><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 421)">
 <title>D</title>
 <text text-anchor="start" x="8" y="-399.6" font-family="Times,serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
 <text text-anchor="start" x="250.5" y="-369.2" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>

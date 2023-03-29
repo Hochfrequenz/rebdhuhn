@@ -251,7 +251,7 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_with_watermark_real_request(self, add_background: bool):
-        enable_request_to_kroki = False
+        enable_request_to_kroki = False  # Set to True to enable the request to kroki and to also update the mock file
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
         svg_code_for_mock = self.create_and_save_watermark_and_background_svg(add_background)
@@ -279,7 +279,12 @@ class TestEbdTableModels:
         requests_mock.post("https://kroki.io", text=kroki_response_string)
         self.create_and_save_watermark_and_background_svg(add_background)
 
-    def test_table_to_digraph_dot_with_background(self):
+    def test_table_to_digraph_dot_with_background(self, requests_mock):
+        with open(
+            Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
+        ) as infile:
+            kroki_response_string: str = infile.read()
+        requests_mock.post("https://kroki.io", text=kroki_response_string)
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         kroki_client = InterceptedKrokiClient()

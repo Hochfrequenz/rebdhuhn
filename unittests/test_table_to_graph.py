@@ -171,13 +171,15 @@ class TestEbdTableModels:
         """
         dot_code = convert_graph_to_dot(ebd_graph)
         kroki_client = InterceptedKrokiClient()
-        svg_code = convert_dot_to_svg_kroki(dot_code,dot_to_svg_converter=kroki_client)  # Raises an error if conversion fails
+        svg_code = convert_dot_to_svg_kroki(
+            dot_code, dot_to_svg_converter=kroki_client
+        )  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(
-                Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.dot.svg",
-                "w+",
-                encoding="utf-8",
+            Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.dot.svg",
+            "w+",
+            encoding="utf-8",
         ) as svg_file:
             svg_file.write(svg_code)
 
@@ -222,12 +224,11 @@ class TestEbdTableModels:
         assert str(ebd_graph.graph) == expected_description
 
         svg_code_for_mock = self.create_and_save_svg_test(ebd_graph)
-        file_name_test_files = Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg"
+        file_name_test_files = (
+            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg"
+        )
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_for_mock)
-
-
-
 
     @pytest.mark.parametrize(
         "table,expected_description",
@@ -262,12 +263,13 @@ class TestEbdTableModels:
         ebd_graph = convert_table_to_graph(table)
         assert str(ebd_graph.graph) == expected_description
         with open(
-            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg", "r", encoding="utf-8"
+            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg",
+            "r",
+            encoding="utf-8",
         ) as infile:
             kroki_response_string: str = infile.read()
         requests_mock.post("https://kroki.io", text=kroki_response_string)
         self.create_and_save_svg_test(ebd_graph)
-
 
     @staticmethod
     def create_and_save_watermark_and_background_svg(add_background: bool):

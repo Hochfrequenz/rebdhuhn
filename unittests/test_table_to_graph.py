@@ -251,7 +251,7 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_with_watermark_real_request(self, add_background: bool):
-        enable_request_to_kroki = True
+        enable_request_to_kroki = False
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
         svg_code_for_mock = self.create_and_save_watermark_and_background_svg(add_background)

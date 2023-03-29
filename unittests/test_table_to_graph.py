@@ -1,19 +1,15 @@
 import os
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 
 import pytest  # type:ignore[import]
 import requests
 from networkx import DiGraph  # type:ignore[import]
 
-from ebdtable2graph import (
-    convert_graph_to_plantuml,
-    convert_plantuml_to_svg_kroki,
-    convert_table_to_digraph,
-    convert_table_to_graph,
-)
+from ebdtable2graph import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
 from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
 from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
+from ebdtable2graph.kroki import Kroki
 from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
 from ebdtable2graph.models.ebd_graph import (
     DecisionNode,
@@ -28,6 +24,20 @@ from ebdtable2graph.models.ebd_graph import (
 from ebdtable2graph.models.ebd_table import EbdTable
 from ebdtable2graph.plantuml import GraphToComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
+
+
+class InterceptedKrokiClient(Kroki):
+    """
+    a wrapper around the kroki client for testing purposes
+    """
+
+    def __init__(self):
+        self.intercepted_kroki_response: Optional[str] = None
+
+    def convert_to_svg(self, *args, **kwargs):
+        result = super().convert_to_svg(*args, **kwargs)
+        self.intercepted_kroki_response = result
+        return result
 
 
 class TestEbdTableModels:
@@ -283,9 +293,11 @@ class TestEbdTableModels:
     def test_table_to_digraph_dot_with_background(self):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
+        kroki_client = InterceptedKrokiClient()
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=False, add_background=False
+            dot_code, add_watermark=False, add_background=False, dot_to_svg_converter=kroki_client
         )  # Raises an error if conversion fails
+        assert kroki_client.intercepted_kroki_response is not None
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
         with open(

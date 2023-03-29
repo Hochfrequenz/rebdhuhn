@@ -251,6 +251,12 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_with_watermark_real_request(self, add_background: bool):
+        """
+        Test the combination of background and watermark addition to the svg. The results are stored in
+        `unittests/output` for you to inspect the result manually.
+        This test is disabled by default. To enable it, set `enable_request_to_kroki` to True.
+        This will also update the mock file in `test_files` with the new response from kroki.
+        """
         enable_request_to_kroki = False  # Set to True to enable the request to kroki and to also update the mock file
         if not enable_request_to_kroki:
             pytest.skip("Disable automatic recreation on test runs")
@@ -272,6 +278,11 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_with_watermark_with_mock(self, add_background: bool, requests_mock):
+        """
+        Test the combination of background and watermark addition to the svg. The results are stored in
+        `unittests/output` for you to inspect the result manually.
+        This test uses a mock to avoid the request to kroki. The mock is stored in `test_files`.
+        """
         with open(
             Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
         ) as infile:
@@ -280,6 +291,11 @@ class TestEbdTableModels:
         self.create_and_save_watermark_and_background_svg(add_background)
 
     def test_table_to_digraph_dot_with_background(self, requests_mock):
+        """
+        Test the addition of a background in 'HF white' to the svg. The results are stored in
+        `unittests/output` for you to inspect the result manually.
+        This test uses a mock to avoid the request to kroki. The mock is stored in `test_files`.
+        """
         with open(
             Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
         ) as infile:

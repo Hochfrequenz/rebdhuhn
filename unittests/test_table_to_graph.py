@@ -209,6 +209,10 @@ class TestEbdTableModels:
 
     @staticmethod
     def create_and_save_watermark_and_background_svg(add_background: bool):
+        """
+        Creates the test svgs and saves them to the output folder.
+        Also returns the kroki answer svg code as string to be stored for the mock request.
+        """
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         kroki_client = InterceptedKrokiClient()

@@ -143,7 +143,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph(self, table: EbdTable, expected_description: str):
+    def test_table_to_digraph(self, table: EbdTable, expected_description: str, requests_mock):
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -162,6 +162,108 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"
         ) as svg_file:
             svg_file.write(svg_code)
+
+    @staticmethod
+    def create_and_save_svg_test(ebd_graph: EbdGraph):
+        """
+        Creates the test svgs and saves them to the output folder.
+        Also returns the kroki answer svg code as string to be stored for the mock request.
+        """
+        dot_code = convert_graph_to_dot(ebd_graph)
+        kroki_client = InterceptedKrokiClient()
+        svg_code = convert_dot_to_svg_kroki(dot_code,dot_to_svg_converter=kroki_client)  # Raises an error if conversion fails
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+
+        with open(
+                Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.dot.svg",
+                "w+",
+                encoding="utf-8",
+        ) as svg_file:
+            svg_file.write(svg_code)
+
+        svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        return svg_code_for_mock
+
+    @pytest.mark.parametrize(
+        "table,expected_description",
+        [
+            pytest.param(
+                table_e0003,
+                "DiGraph with 6 nodes and 5 edges",
+            ),
+            pytest.param(
+                table_e0015,
+                "DiGraph with 22 nodes and 21 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0025,
+                "DiGraph with 10 nodes and 11 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0401,
+                "DiGraph with 23 nodes and 27 edges",
+                # todo: check if result is ok
+            ),
+        ],
+    )
+    def test_table_to_digraph_dot_real_kroki_request(self, table: EbdTable, expected_description: str):
+        """
+        Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
+        manually. The test only checks if the svg can be built.
+        """
+        enable_request_to_kroki = False  # Set to True to enable the request to kroki and to also update the mock file
+        if not enable_request_to_kroki:
+            pytest.skip("Disable automatic recreation on test runs")
+        ebd_graph = convert_table_to_graph(table)
+        assert str(ebd_graph.graph) == expected_description
+
+        svg_code_for_mock = self.create_and_save_svg_test(ebd_graph)
+        file_name_test_files = Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg"
+        with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
+            ebd_svg.write(svg_code_for_mock)
+
+
+
+
+    @pytest.mark.parametrize(
+        "table,expected_description",
+        [
+            pytest.param(
+                table_e0003,
+                "DiGraph with 6 nodes and 5 edges",
+            ),
+            pytest.param(
+                table_e0015,
+                "DiGraph with 22 nodes and 21 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0025,
+                "DiGraph with 10 nodes and 11 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0401,
+                "DiGraph with 23 nodes and 27 edges",
+                # todo: check if result is ok
+            ),
+        ],
+    )
+    def test_table_to_digraph_dot_with_mock(self, table: EbdTable, expected_description: str, requests_mock):
+        """
+        Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
+        manually. The test only checks if the svg can be built.
+        """
+        ebd_graph = convert_table_to_graph(table)
+        assert str(ebd_graph.graph) == expected_description
+        with open(
+            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg", "r", encoding="utf-8"
+        ) as infile:
+            kroki_response_string: str = infile.read()
+        requests_mock.post("https://kroki.io", text=kroki_response_string)
+        self.create_and_save_svg_test(ebd_graph)
 
     @pytest.mark.parametrize(
         "table,expected_description",
@@ -254,7 +356,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_real_request(self, add_background: bool):
+    def test_table_to_digraph_dot_with_watermark_real_kroki_request(self, add_background: bool):
         """
         Test the combination of background and watermark addition to the svg. The results are stored in
         `unittests/output` for you to inspect the result manually.

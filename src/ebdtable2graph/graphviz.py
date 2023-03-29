@@ -1,13 +1,12 @@
 """
 This module contains logic to convert EbdGraph data to dot code (Graphviz) and further to parse this code to SVG images.
 """
-from typing import List
-
-import requests
+from typing import List, Optional
 
 from ebdtable2graph.add_watermark import add_background as add_background_function
 from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
 from ebdtable2graph.graph_utils import _mark_last_common_ancestors
+from ebdtable2graph.kroki import DotToSvgConverter, Kroki
 from ebdtable2graph.models import (
     DecisionNode,
     EbdGraph,
@@ -177,25 +176,21 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     return dot_code + "}"
 
 
-def convert_dot_to_svg_kroki(dot_code: str, add_watermark: bool = True, add_background: bool = True) -> str:
+def convert_dot_to_svg_kroki(
+    dot_code: str,
+    add_watermark: bool = True,
+    add_background: bool = True,
+    dot_to_svg_converter: Optional[DotToSvgConverter] = None,
+) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
     Optionally add the HF watermark to the svg code, controlled by the argument 'add_watermark'
     Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
     If 'add_background' is False, the background is transparent.
     """
-    url = "https://kroki.io"
-    answer = requests.post(
-        url,
-        json={"diagram_source": dot_code, "diagram_type": "graphviz", "output_format": "svg"},
-        timeout=5,
-    )
-    if answer.status_code != 200:
-        raise ValueError(
-            f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
-            f"{answer.text}"
-        )
-    svg_out = answer.text
+    if dot_to_svg_converter is None:
+        dot_to_svg_converter = Kroki()
+    svg_out = dot_to_svg_converter.convert_to_svg(dot_code)
     if add_watermark:
         svg_out = add_watermark_function(svg_out)
     if add_background:

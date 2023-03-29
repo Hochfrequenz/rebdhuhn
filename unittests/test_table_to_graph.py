@@ -208,7 +208,8 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-    def create_and_save_watermark_and_background_svg(self, add_background: bool):
+    @staticmethod
+    def create_and_save_watermark_and_background_svg(add_background: bool):
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         svg_code = convert_dot_to_svg_kroki(

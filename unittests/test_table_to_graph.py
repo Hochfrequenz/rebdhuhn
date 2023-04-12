@@ -28,7 +28,9 @@ from unittests.examples import table_e0003, table_e0015, table_e0025, table_e040
 
 class InterceptedKrokiClient(Kroki):
     """
-    a wrapper around the kroki client for testing purposes
+    a wrapper around the kroki client for testing purposes. This function makes it possible to access the kroki
+    response. It also provides an alternative version of the kroki response that has a comment for documentation
+    purposes.
     """
 
     def __init__(self):
@@ -44,7 +46,9 @@ class InterceptedKrokiClient(Kroki):
             "--url https://kroki.io/ "
             "--header 'Content-Type: application/json' "
             f"--data '{args[0]}'"
-        ).replace("--", "- -")  # replace double hyphen for xml compatability
+        ).replace(
+            "--", "- -"
+        )  # replace double hyphen for xml compatability
         result_tree.insert(0, etree.Comment(my_comment))
         self.intercepted_kroki_response_with_xml_comment = etree.tostring(result_tree).decode("utf-8")
         return result

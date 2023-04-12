@@ -39,14 +39,12 @@ class InterceptedKrokiClient(Kroki):
         result = super().convert_to_svg(*args, **kwargs)
         self.intercepted_kroki_response = result
         result_tree = etree.fromstring(result.encode("utf-8"))
-        my_comment = f"""
-                curl --request POST \
-                   --url https://kroki.io/ \
-                   --header 'Content-Type: application/json' \
-                   --data '{args[0]}'
-                """.replace(
-            "--", "- -"
-        )  # replace double hyphen for xml compatability
+        my_comment = (
+            "curl --request POST "
+            "--url https://kroki.io/ "
+            "--header 'Content-Type: application/json' "
+            f"--data '{args[0]}'"
+        ).replace("--", "- -")  # replace double hyphen for xml compatability
         result_tree.insert(0, etree.Comment(my_comment))
         self.intercepted_kroki_response_with_xml_comment = etree.tostring(result_tree).decode("utf-8")
         return result

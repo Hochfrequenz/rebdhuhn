@@ -28,7 +28,7 @@ from unittests.examples import table_e0003, table_e0015, table_e0025, table_e040
 
 class InterceptedKrokiClient(Kroki):
     """
-    a wrapper around the kroki client for testing purposes. This function makes it possible to access the kroki
+    a wrapper around the kroki client for testing purposes. This class makes it possible to access the kroki
     response. It also provides an alternative version of the kroki response that has a comment for documentation
     purposes.
     """

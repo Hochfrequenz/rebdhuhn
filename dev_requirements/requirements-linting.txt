@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements-linting.in
 #
-astroid==2.15.2
+astroid==2.15.4
     # via pylint
 dill==0.3.6
     # via pylint
@@ -16,12 +16,12 @@ mccabe==0.7.0
     # via pylint
 platformdirs==3.1.0
     # via pylint
-pylint==2.17.2
+pylint==2.17.3
     # via
-    #   -r requirements-linting.in
+    #   -r dev_requirements/requirements-linting.in
     #   pylint-requests
 pylint-requests==0.1.1
-    # via -r requirements-linting.in
+    # via -r dev_requirements/requirements-linting.in
 tomlkit==0.11.6
     # via pylint
 wrapt==1.15.0

@@ -8,7 +8,7 @@ import attrs
 from networkx import DiGraph  # type:ignore[import]
 
 # pylint:disable=too-few-public-methods
-from ebdtable2graph.models.ebd_table import MultiStepInstruction
+from ebdtable2graph.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
 
 
 @attrs.define(auto_attribs=True, kw_only=True)
@@ -85,7 +85,7 @@ class OutcomeNode(EbdGraphNode):
     An outcome node is a leaf of the Entscheidungsbaum tree. It has no subsequent steps.
     """
 
-    result_code: str = attrs.field(validator=attrs.validators.matches_re(r"^[A-Z]\d+$"))
+    result_code: str = attrs.field(validator=attrs.validators.matches_re(RESULT_CODE_REGEX))
     """
     The outcome of the decision tree check; e.g. 'A55'
     """

@@ -59,6 +59,9 @@ class EbdCheckResult:
     """
 
 
+RESULT_CODE_REGEX = r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableSubRow:
     """
@@ -72,7 +75,7 @@ class EbdTableSubRow:
     The column 'Prüfergebnis'
     """
     result_code: Optional[str] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.matches_re(r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"))
+        validator=attrs.validators.optional(attrs.validators.matches_re(RESULT_CODE_REGEX))
     )
     """
     The outcome if no subsequent step was defined in the CheckResult.

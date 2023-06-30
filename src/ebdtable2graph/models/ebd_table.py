@@ -72,7 +72,7 @@ class EbdTableSubRow:
     The column 'Prüfergebnis'
     """
     result_code: Optional[str] = attrs.field(
-        validator=attrs.validators.optional(attrs.validators.matches_re(r"^((?:[A-Z]\d+)|(?:A\*{2}))$"))
+        validator=attrs.validators.optional(attrs.validators.matches_re(r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"))
     )
     """
     The outcome if no subsequent step was defined in the CheckResult.

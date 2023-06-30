@@ -157,6 +157,19 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         assert isinstance(sub_row, EbdTableSubRow)
         assert sub_row.result_code == "A**"
 
+    def test_2023_answer_code_regex(self):
+        """
+        This is an example from E_0406.
+        The test asserts that the validator of the result code allows the result code 'AC7'.
+        """
+        sub_row = EbdTableSubRow(
+            result_code="AC7",
+            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+            note="Cluster: Ablehnung auf Kopfebene\nDie Frist für die Abschlagsrechnung wurde nicht eingehalten.",
+        )
+        assert isinstance(sub_row, EbdTableSubRow)
+        assert sub_row.result_code == "AC7"
+
     def test_collect_answer_codes_instruction(self):
         snippet_from_e0453 = EbdTable(
             metadata=EbdTableMetaData(

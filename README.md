@@ -6,11 +6,14 @@
 ![Black status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Black/badge.svg)
 ![PyPi Status Badge](https://img.shields.io/pypi/v/ebdtable2graph)
 
-This repository contains the source code of the Python package [`ebdtable2graph`](https://pypi.org/project/ebdtable2graph).
+🇩🇪 Dieses Repository enthält ein Python-Paket namens [`ebdtable2graph`](https://pypi.org/project/ebdtable2graph), das genutzt werden kann, um aus .docx-Dateien extrahierte maschinenlesbare Tabellen, die einen Entscheidungsbaum (EBD) modellieren, in echte Graphen zu konvertieren. Diese Entscheidungsbäume sind Teil eines regulatorischen Regelwerks für die deutsche Energiewirtschaft und kommen in der Eingangsprüfung der Marktkommunikation zum Einsatz.
+
+🇬🇧 This repository contains the source code of the Python package [`ebdtable2graph`](https://pypi.org/project/ebdtable2graph).
 
 ## Rationale
 
 Assume, that you scraped the Entscheidungsbaumdiagramm tables by EDI@Energy from their somewhat "digitized" PDF/DOCX files.
+(To do so, you can use the package [`ebddocx2table`](https://github.com/Hochfrequenz/ebddocx2table).)
 Also assume, that the result of your scraping is a [`ebdtable2graph.models.EbdTable`](src/ebdtable2graph/models/ebd_table.py).
 
 The package `ebdtable2graph` contains logic to convert your scraped data into a graph.

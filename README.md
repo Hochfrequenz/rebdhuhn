@@ -13,6 +13,7 @@
 ## Rationale
 
 Assume, that you scraped the Entscheidungsbaumdiagramm tables by EDI@Energy from their somewhat "digitized" PDF/DOCX files.
+(To do so, you can use the package [`ebddocx2table`](https://github.com/Hochfrequenz/ebddocx2table).)
 Also assume, that the result of your scraping is a [`ebdtable2graph.models.EbdTable`](src/ebdtable2graph/models/ebd_table.py).
 
 The package `ebdtable2graph` contains logic to convert your scraped data into a graph.

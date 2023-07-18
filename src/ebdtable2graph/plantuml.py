@@ -8,6 +8,7 @@ from networkx import DiGraph  # type:ignore[import]
 
 from ebdtable2graph.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
 from ebdtable2graph.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
+from ebdtable2graph.models.errors import NotExactlyTwoOutgoingEdgesError
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -84,8 +85,12 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     """
     decision_node: DecisionNode = graph.nodes[node]["node"]
     assert isinstance(decision_node, DecisionNode), f"{node} is not a decision node."
-    assert graph.out_degree(node) == 2, "A decision node must have exactly two outgoing edges (yes / no)."
-
+    if graph.out_degree(node) != 2:
+        raise NotExactlyTwoOutgoingEdgesError(
+            f"A decision node must have exactly two outgoing edges (yes / no) but has {graph.out_degree(node)}",
+            str(decision_node),
+            [str(x) for x in graph[node].values()],
+        )
     yes_edge, no_edge = _get_yes_no_edges(graph, node)
     yes_node = str(yes_edge.target)
     no_node = str(no_edge.target)

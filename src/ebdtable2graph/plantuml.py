@@ -61,7 +61,21 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
 
 class GraphToComplexForPlantumlError(Exception):
     """
-    Exception raised when a Graph is to complex to convert with Plantuml
+    Exception raised when a Graph is to complex to convert with Plantuml.
+
+    To understand what this means exactly, we first define the term "last common ancestor" (LCA in the following).
+    Let V be an arbitrary node with indegree > 1.
+    Define K_arr as the set of all possible paths K_i from the root node ("Start") to V.
+    The LCA of V is the node in K_i which is the last common node (orientation is "Start" -> V)
+    of all paths in K_arr. I.e. the node where the paths of K_arr split.
+
+    The definition of the LCA is pictured in `src/last_common_ancestor.svg`.
+
+    The graph is too complex for plantuml if there are multiple different nodes V with the same LCA.
+    This is also pictured in `src/plantuml_not_convertable.svg`.
+
+    Btw, the reason is the structure of the used Plantuml script language - as of now, maybe they change it in the
+    future.
     """
 
     def __init__(
@@ -124,6 +138,9 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
         result += _convert_decision_node_to_plantuml(graph, no_node, indent)
     elif cases.common_ancestor:
         if len(graph.nodes[node][COMMON_ANCESTOR_FIELD]) != 1:
+            # This is not supported by the plantuml converter. However, if you remove this raise statement, the
+            # converter may work even may produce valid puml. The last time I tried this resulted in copied regions
+            # inside the graph. So, really complex graphs would get insanely big.
             raise GraphToComplexForPlantumlError
         result += _convert_node_to_plantuml(graph, graph.nodes[node][COMMON_ANCESTOR_FIELD][0], indent)
     return result

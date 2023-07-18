@@ -138,6 +138,9 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
         result += _convert_decision_node_to_plantuml(graph, no_node, indent)
     elif cases.common_ancestor:
         if len(graph.nodes[node][COMMON_ANCESTOR_FIELD]) != 1:
+            # This is not supported by the plantuml converter. However, if you remove this raise statement, the
+            # converter may work even may produce valid puml. The last time I tried this resulted in copied regions
+            # inside the graph. So, really complex graphs would get insanely big.
             raise GraphToComplexForPlantumlError
         result += _convert_node_to_plantuml(graph, graph.nodes[node][COMMON_ANCESTOR_FIELD][0], indent)
     return result

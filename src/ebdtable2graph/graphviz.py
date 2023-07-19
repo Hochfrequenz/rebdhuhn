@@ -169,7 +169,6 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     )
     dot_code = "digraph D {\n" f'{ADD_INDENT}labelloc="t";\n{ADD_INDENT}label=<{header}>;\n'
     assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
-    assert "1" in nx_graph["Start"], "Start node must be connected to decision node '1'."
     dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
     dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
     dot_code += '\n    bgcolor="transparent";\n'

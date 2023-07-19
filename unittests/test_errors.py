@@ -45,5 +45,6 @@ class TestErrors:
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0462)])
     def test_cross_reference_not_supported_error(self, table: EbdTable):
-        with pytest.raises(EbdCrossReferenceNotSupportedError):
+        with pytest.raises(EbdCrossReferenceNotSupportedError) as exc_info:
             _ = convert_table_to_graph(table)
+        assert exc_info.value.cross_reference == "E_0402_Prüfen,"

@@ -21,3 +21,18 @@ class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
 
     def __str__(self):
         return f"The node {self.decision_node_key} has more than 2 outgoing edges: {', '.join(self.outgoing_edges)}"
+
+
+class PathsNotGreaterThanOneError(ValueError):
+    """
+    If indegree > 1, the number of paths should always be greater than 1 too.
+    Typically, this is a symptom for loops in the graph (which makes them not a Directed Graph / tree anymore).
+    """
+
+    def __init__(self, node_key: str, indegree: int, number_of_paths: int):
+        super().__init__(
+            f"The indegree of node '{node_key}' is {indegree} > 1, but the number of paths is {number_of_paths} <= 1."
+        )
+        self.node_key = node_key
+        self.indegree = indegree
+        self.number_of_paths = number_of_paths

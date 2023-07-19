@@ -8,6 +8,7 @@ from typing import List, Tuple
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
 
 from ebdtable2graph.models import ToNoEdge, ToYesEdge
+from ebdtable2graph.models.errors import PathsNotGreaterThanOneError
 
 COMMON_ANCESTOR_FIELD = "common_ancestor_for_node"
 # Defines the label to annotate the last common ancestor node with the information to which node
@@ -43,7 +44,11 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
         if in_degree <= 1:
             continue
         paths = list(all_simple_paths(graph, source="Start", target=node))
-        assert len(paths) > 1, "If indegree > 1, the number of paths should always be greater than 1 too."
+        if len(paths) <= 1:
+            raise PathsNotGreaterThanOneError(
+                indegree=in_degree,
+                number_of_paths=len(paths),
+            )
         common_ancestor = _find_last_common_ancestor(paths)
         assert common_ancestor != "Start", "Last common ancestor should always be at least the first decision node '1'."
         # Annotate the common ancestor for later conversion

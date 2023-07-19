@@ -21,3 +21,16 @@ class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
 
     def __str__(self):
         return f"The node {self.decision_node_key} has more than 2 outgoing edges: {', '.join(self.outgoing_edges)}"
+
+
+class PathsNotGreaterThanOneError(ValueError):
+    """
+    If indegree > 1, the number of paths should always be greater than 1 too.
+    """
+
+    def __init__(self, indegree: int, number_of_paths: int):
+        super().__init__(
+            f"If indegree > 1 ({indegree}), the number of paths should be greater than 1 (but was {number_of_paths}."
+        )
+        self.indegree = indegree
+        self.number_of_paths = number_of_paths

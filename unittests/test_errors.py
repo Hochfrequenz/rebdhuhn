@@ -16,6 +16,7 @@ from .e0404 import e_0404
 from .e0454 import table_e0454
 from .e0459 import table_e0459
 from .e0462 import table_e0462
+from .e0529 import e_0529
 
 
 class TestErrors:
@@ -44,6 +45,11 @@ class TestErrors:
     @pytest.mark.parametrize("table", [pytest.param(e_0401)])
     def test_key_error_because_first_node_has_key_other_than_1(self, table: EbdTable):
         _ = convert_table_to_graph(table)  # must _not_ raise a key error anymore
+
+    @pytest.mark.parametrize("table", [pytest.param(e_0529)])
+    def test_backreference_to_missing_node_with_key_1(self, table: EbdTable):
+        graph = convert_table_to_graph(table)
+        _ = convert_graph_to_plantuml(graph)  # must _not_ raise an assertion error anymore
 
     @pytest.mark.parametrize("table", [pytest.param(e_0404)])
     def test_ende_in_wrong_column_error(self, table: EbdTable):

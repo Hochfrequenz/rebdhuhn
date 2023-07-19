@@ -69,19 +69,24 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
     return result
 
 
+def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str, EbdGraphNode]:
+    nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(ebd_table)}
+    first_node_after_start: EbdGraphNode
+    if "1" in nodes:
+        first_node_after_start = nodes["1"]
+        return "1", first_node_after_start
+    # not all tables have a "1" node, so we need to find the first numeric node; e.g. "10" for E_0401
+    lowest_numeric_key = min(int(key) for key in nodes.keys() if key.isnumeric())
+    return str(lowest_numeric_key), nodes[str(lowest_numeric_key)]
+
+
 def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     """
     Returns a list with all edges from the given table.
     Edges connect decisions with outcomes or subsequent steps.
     """
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
-    first_node_after_start: EbdGraphNode
-    if "1" in nodes:
-        first_node_after_start = nodes["1"]
-    else:
-        # not all tables have a "1" node, so we need to find the first numeric node; e.g. "10" for E_0401
-        lowest_numeric_key = min(int(key) for key in nodes.keys() if key.isnumeric())
-        first_node_after_start = nodes[str(lowest_numeric_key)]
+    first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
     result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
     for row in table.rows:

@@ -178,8 +178,12 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
         "\n"
     )
     assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
-    assert "1" in nx_graph["Start"], "Start node must be connected to decision node '1'."
-    plantuml_code += _convert_node_to_plantuml(nx_graph, "1", "")
+    key_of_first_node: str
+    if "1" in nx_graph["Start"]:
+        key_of_first_node = "1"
+    else:
+        key_of_first_node = list(nx_graph["Start"].keys())[0]
+    plantuml_code += _convert_node_to_plantuml(nx_graph, key_of_first_node, "")
 
     return plantuml_code + "\n@enduml\n"
 

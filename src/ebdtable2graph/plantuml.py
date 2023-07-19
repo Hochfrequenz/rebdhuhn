@@ -8,7 +8,7 @@ from networkx import DiGraph  # type:ignore[import]
 
 from ebdtable2graph.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
 from ebdtable2graph.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
-from ebdtable2graph.models.errors import NotExactlyTwoOutgoingEdgesError
+from ebdtable2graph.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -57,33 +57,6 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
         note = outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
         result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
     return f"{result}{indent}kill;\n"
-
-
-class GraphToComplexForPlantumlError(Exception):
-    """
-    Exception raised when a Graph is to complex to convert with Plantuml.
-
-    To understand what this means exactly, we first define the term "last common ancestor" (LCA in the following).
-    Let V be an arbitrary node with indegree > 1.
-    Define K_arr as the set of all possible paths K_i from the root node ("Start") to V.
-    The LCA of V is the node in K_i which is the last common node (orientation is "Start" -> V)
-    of all paths in K_arr. I.e. the node where the paths of K_arr split.
-
-    The definition of the LCA is pictured in `src/last_common_ancestor.svg`.
-
-    The graph is too complex for plantuml if there are multiple different nodes V with the same LCA.
-    This is also pictured in `src/plantuml_not_convertable.svg`.
-
-    Btw, the reason is the structure of the used Plantuml script language - as of now, maybe they change it in the
-    future.
-    """
-
-    def __init__(
-        self,
-        message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
-    ):
-        self.message = message
-        super().__init__(self.message)
 
 
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
@@ -141,7 +114,7 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
             # This is not supported by the plantuml converter. However, if you remove this raise statement, the
             # converter may work even may produce valid puml. The last time I tried this resulted in copied regions
             # inside the graph. So, really complex graphs would get insanely big.
-            raise GraphToComplexForPlantumlError
+            raise GraphTooComplexForPlantumlError
         result += _convert_node_to_plantuml(graph, graph.nodes[node][COMMON_ANCESTOR_FIELD][0], indent)
     return result
 

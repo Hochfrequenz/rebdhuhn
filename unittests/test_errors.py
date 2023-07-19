@@ -20,7 +20,7 @@ class TestErrors:
             _ = convert_graph_to_plantuml(ebd_graph)
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0266)])
-    def test_not_exactly_two_outgoing_edges_error(self, table: EbdTable):
+    def test_loops_in_the_tree_error(self, table: EbdTable):
         ebd_graph = convert_table_to_graph(table)
         with pytest.raises(PathsNotGreaterThanOneError):
             _ = convert_graph_to_plantuml(ebd_graph)

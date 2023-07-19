@@ -4,6 +4,7 @@ from ebdtable2graph import convert_graph_to_plantuml, convert_table_to_graph
 from ebdtable2graph.models import EbdTable
 from ebdtable2graph.models.errors import (
     EbdCrossReferenceNotSupportedError,
+    EndeInWrongColumnError,
     GraphTooComplexForPlantumlError,
     NotExactlyTwoOutgoingEdgesError,
     PathsNotGreaterThanOneError,
@@ -11,6 +12,7 @@ from ebdtable2graph.models.errors import (
 
 from .e0266 import table_e0266
 from .e0401 import e_0401
+from .e0404 import e_0404
 from .e0454 import table_e0454
 from .e0459 import table_e0459
 from .e0462 import table_e0462
@@ -42,6 +44,11 @@ class TestErrors:
     @pytest.mark.parametrize("table", [pytest.param(e_0401)])
     def test_key_error_because_first_node_has_key_other_than_1(self, table: EbdTable):
         _ = convert_table_to_graph(table)  # must _not_ raise a key error anymore
+
+    @pytest.mark.parametrize("table", [pytest.param(e_0404)])
+    def test_ende_in_wrong_column_error(self, table: EbdTable):
+        with pytest.raises(EndeInWrongColumnError):
+            _ = convert_table_to_graph(table)
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0462)])
     def test_cross_reference_not_supported_error(self, table: EbdTable):

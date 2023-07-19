@@ -20,7 +20,11 @@ from ebdtable2graph.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebdtable2graph.models.errors import EbdCrossReferenceNotSupportedError, OutcomeNodeCreationError
+from ebdtable2graph.models.errors import (
+    EbdCrossReferenceNotSupportedError,
+    EndeInWrongColumnError,
+    OutcomeNodeCreationError,
+)
 
 
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
@@ -92,8 +96,14 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
             else:
                 outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
                 if outcome_node is None:
-                    if all(sr.result_code is None for sr in row.sub_rows):
+                    if all(sr.result_code is None for sr in row.sub_rows) and any(
+                        sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
+                    ):
                         raise EbdCrossReferenceNotSupportedError(row=row, decision_node=decision_node)
+                    if all(sr.result_code is None for sr in row.sub_rows) and any(
+                        sr.note is not None and sr.note.lower().startswith("ende") for sr in row.sub_rows
+                    ):
+                        raise EndeInWrongColumnError(row=row)
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
                 edge = _yes_no_edge(
                     sub_row.check_result.result,

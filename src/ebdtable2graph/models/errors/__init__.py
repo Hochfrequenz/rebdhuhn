@@ -36,3 +36,30 @@ class PathsNotGreaterThanOneError(ValueError):
         self.node_key = node_key
         self.indegree = indegree
         self.number_of_paths = number_of_paths
+
+
+class GraphTooComplexForPlantumlError(Exception):
+    """
+    Exception raised when a Graph is too complex to convert with Plantuml.
+
+    To understand what this means exactly, we first define the term "last common ancestor" (LCA in the following).
+    Let V be an arbitrary node with indegree > 1.
+    Define K_arr as the set of all possible paths K_i from the root node ("Start") to V.
+    The LCA of V is the node in K_i which is the last common node (orientation is "Start" -> V)
+    of all paths in K_arr. I.e. the node where the paths of K_arr split.
+
+    The definition of the LCA is pictured in `src/last_common_ancestor.svg`.
+
+    The graph is too complex for plantuml if there are multiple different nodes V with the same LCA.
+    This is also pictured in `src/plantuml_not_convertable.svg`.
+
+    Btw, the reason is the structure of the used Plantuml script language - as of now, maybe they change it in the
+    future.
+    """
+
+    def __init__(
+        self,
+        message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
+    ):
+        self.message = message
+        super().__init__(self.message)

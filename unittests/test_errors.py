@@ -1,4 +1,4 @@
-import pytest
+import pytest  # type:ignore[import]
 
 from ebdtable2graph import convert_graph_to_plantuml, convert_table_to_graph
 from ebdtable2graph.models import EbdTable

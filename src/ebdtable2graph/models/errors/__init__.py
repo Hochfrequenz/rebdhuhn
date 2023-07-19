@@ -40,7 +40,7 @@ class PathsNotGreaterThanOneError(ValueError):
 
 class GraphTooComplexForPlantumlError(Exception):
     """
-    Exception raised when a Graph is to complex to convert with Plantuml.
+    Exception raised when a Graph is too complex to convert with Plantuml.
 
     To understand what this means exactly, we first define the term "last common ancestor" (LCA in the following).
     Let V be an arbitrary node with indegree > 1.

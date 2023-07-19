@@ -4,9 +4,11 @@ Using these exceptions allows to catch/filter more fine-grained.
 """
 
 
-class NotExactlyTwoOutgoingEdgesError(ValueError):
+class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
     """
-    Raised if a decision node has more or less than 2 outgoing edges
+    Raised if a decision node has more or less than 2 outgoing edges. This is not implemented in our logic yet.
+    (Because it would be a multi-di-graph, not a di-graph.)
+    See issue https://github.com/Hochfrequenz/ebdtable2graph/issues/99 for a discussion on this topic.
     """
 
     def __init__(self, msg: str, decision_node_key, outgoing_edges: list[str]):

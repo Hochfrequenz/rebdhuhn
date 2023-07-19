@@ -70,7 +70,14 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     Edges connect decisions with outcomes or subsequent steps.
     """
     nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
-    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=nodes["1"], note=None)]
+    first_node_after_start: EbdGraphNode
+    if "1" in nodes:
+        first_node_after_start = nodes["1"]
+    else:
+        # not all tables have a "1" node, so we need to find the first numeric node; e.g. "10" for E_0401
+        lowest_numeric_key = min(int(key) for key in nodes.keys() if key.isnumeric())
+        first_node_after_start = nodes[str(lowest_numeric_key)]
+    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)

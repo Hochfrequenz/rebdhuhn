@@ -46,6 +46,7 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
         paths = list(all_simple_paths(graph, source="Start", target=node))
         if len(paths) <= 1:
             raise PathsNotGreaterThanOneError(
+                node_key=node,
                 indegree=in_degree,
                 number_of_paths=len(paths),
             )

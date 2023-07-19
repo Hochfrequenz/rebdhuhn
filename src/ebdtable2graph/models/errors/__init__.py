@@ -88,6 +88,18 @@ class EbdCrossReferenceNotSupportedError(NotImplementedError):
         self.decision_node = decision_node
 
 
+class EndeInWrongColumnError(ValueError):
+    """
+    Raised when the subsequent step should be "Ende" but is not referenced in the respective column but as a note.
+    This could be easily fixed but still, it needs to be done.
+    I think this is more of a value error (because the raw source data are a mess) than a NotImplementedError.
+    """
+
+    def __init__(self, row: EbdTableRow):
+        super().__init__(f"'Ende' in wrong column for row {row}")
+        self.row = row
+
+
 class OutcomeNodeCreationError(ValueError):
     """
     raised when the outcome node cannot be created from a sub row

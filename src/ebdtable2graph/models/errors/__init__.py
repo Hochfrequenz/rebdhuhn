@@ -2,6 +2,9 @@
 Specific error classes for errors that may occur in the data.
 Using these exceptions allows to catch/filter more fine-grained.
 """
+from typing import Optional
+
+from ebdtable2graph.models import DecisionNode, EbdTableRow, EbdTableSubRow
 
 
 class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
@@ -63,3 +66,34 @@ class GraphTooComplexForPlantumlError(Exception):
     ):
         self.message = message
         super().__init__(self.message)
+
+
+class EbdCrossReferenceNotSupportedError(NotImplementedError):
+    """
+    Raised when there is no outcome for a given sub row but a reference to another EBD key instead.
+    See https://github.com/Hochfrequenz/ebdtable2graph/issues/105 for an example / a discussion.
+    """
+
+    def __init__(self, decision_node: DecisionNode, row: EbdTableRow):
+        cross_reference: Optional[str] = None
+        for sub_row in row.sub_rows:
+            if sub_row.note is not None and sub_row.note.startswith("EBD "):
+                cross_reference = sub_row.note.split(" ")[1]
+                break
+        super().__init__(
+            f"A cross reference from row {row} to {cross_reference} has been detected but is not supported"
+        )
+        self.row = row
+        self.cross_reference = cross_reference
+        self.decision_node = decision_node
+
+
+class OutcomeNodeCreationError(ValueError):
+    """
+    raised when the outcome node cannot be created from a sub row
+    """
+
+    def __init__(self, decision_node: DecisionNode, sub_row: EbdTableSubRow):
+        super().__init__(f"Cannot create outcome node from sub row {sub_row} for DecisionNode {decision_node}.")
+        self.sub_row = sub_row
+        self.decision_node = decision_node

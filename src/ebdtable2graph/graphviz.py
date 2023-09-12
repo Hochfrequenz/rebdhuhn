@@ -26,8 +26,8 @@ def _format_label(label: str) -> str:
     Converts the given string e.g. a text for a node to a suitable output for dot. It replaces newlines (`\n`) with
     the HTML-tag `<BR>`.
     """
-    label = label.replace(">", '&gt;')
-    label = label.replace("<", '&lt;')
+    label = label.replace(">", "&gt;")
+    label = label.replace("<", "&lt;")
     return label.replace("\n", '<BR align="left"/>')
     # escaped_str = re.sub(r"^(\d+): ", r"<B>\1: </B>", label)
     # escaped_str = label.replace("\n", '<BR align="left"/>')

@@ -2,6 +2,7 @@
 This module contains logic to convert EbdGraph data to dot code (Graphviz) and further to parse this code to SVG images.
 """
 from typing import List, Optional
+from xml.sax.saxutils import escape
 
 from ebdtable2graph.add_watermark import add_background as add_background_function
 from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
@@ -26,7 +27,7 @@ def _format_label(label: str) -> str:
     Converts the given string e.g. a text for a node to a suitable output for dot. It replaces newlines (`\n`) with
     the HTML-tag `<BR>`.
     """
-    return label.replace("\n", '<BR align="left"/>')
+    return escape(label).replace("\n", '<BR align="left"/>')
     # escaped_str = re.sub(r"^(\d+): ", r"<B>\1: </B>", label)
     # escaped_str = label.replace("\n", '<BR align="left"/>')
     # return f'<{escaped_str}<BR align="left"/>>'

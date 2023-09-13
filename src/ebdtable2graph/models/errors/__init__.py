@@ -4,7 +4,7 @@ Using these exceptions allows to catch/filter more fine-grained.
 """
 from typing import Optional
 
-from ebdtable2graph.models import DecisionNode, EbdTableRow, EbdTableSubRow
+from ebdtable2graph.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode
 
 
 class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
@@ -109,3 +109,13 @@ class OutcomeNodeCreationError(ValueError):
         super().__init__(f"Cannot create outcome node from sub row {sub_row} for DecisionNode {decision_node}.")
         self.sub_row = sub_row
         self.decision_node = decision_node
+
+
+class OutcomeCodeAmbiguousError(ValueError):
+    """
+    Raised when the result nodes are ambiguous. This can be the case for "A**" results.
+    """
+
+    def __init__(self, outcome_node1: OutcomeNode, outcome_node2: OutcomeNode):
+        super().__init__(f"Ambiguous result codes:  for [{outcome_node1, outcome_node2}].")
+        self.outcome_nodes = [outcome_node1, outcome_node2]

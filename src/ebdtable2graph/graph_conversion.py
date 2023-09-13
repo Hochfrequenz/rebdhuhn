@@ -23,6 +23,7 @@ from ebdtable2graph.models import (
 from ebdtable2graph.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
+    OutcomeCodeAmbiguousError,
     OutcomeNodeCreationError,
 )
 
@@ -89,6 +90,8 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
     result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
+    outcome_nodes_duplicates: Dict[str, OutcomeNode] = {}  # map to check for duplicate outcome nodes
+
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
         for sub_row in row.sub_rows:
@@ -100,6 +103,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 )
             else:
                 outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
+
                 if outcome_node is None:
                     if all(sr.result_code is None for sr in row.sub_rows) and any(
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
@@ -110,6 +114,20 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                     ):
                         raise EndeInWrongColumnError(row=row)
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
+
+                # check for ambiguous outcome nodes, i.e. A** with different notes
+                ambiguous_outcome_node = (
+                    outcome_node.result_code in outcome_nodes_duplicates
+                    and outcome_nodes_duplicates[outcome_node.result_code].note != outcome_node.note
+                )
+
+                if not ambiguous_outcome_node:
+                    outcome_nodes_duplicates[outcome_node.result_code] = outcome_node
+                else:
+                    raise OutcomeCodeAmbiguousError(
+                        outcome_node1=outcome_nodes_duplicates[outcome_node.result_code], outcome_node2=outcome_node
+                    )
+
                 edge = _yes_no_edge(
                     sub_row.check_result.result,
                     source=decision_node,

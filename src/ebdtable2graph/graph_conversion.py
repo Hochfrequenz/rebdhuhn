@@ -90,7 +90,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
     result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
-    outcome_nodes_duplicates: Dict[str, OutcomeNode] = {}  # map to check for duplicate outcome nodes
+    outcome_nodes_duplicates: dict[str, OutcomeNode] = {}  # map to check for duplicate outcome nodes
 
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)

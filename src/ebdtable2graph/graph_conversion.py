@@ -116,12 +116,12 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes
-                ambiguous_outcome_node = (
+                is_ambiguous_outcome_node = (
                     outcome_node.result_code in outcome_nodes_duplicates
                     and outcome_nodes_duplicates[outcome_node.result_code].note != outcome_node.note
                 )
 
-                if not ambiguous_outcome_node:
+                if not is_ambiguous_outcome_node:
                     outcome_nodes_duplicates[outcome_node.result_code] = outcome_node
                 else:
                     raise OutcomeCodeAmbiguousError(

@@ -8,7 +8,7 @@ attrs==23.1.0
     # via
     #   -r requirements.in
     #   cattrs
-cattrs==23.1.2
+cattrs==23.2.1
     # via -r requirements.in
 certifi==2023.7.22
     # via requests

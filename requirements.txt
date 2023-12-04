@@ -8,7 +8,7 @@ attrs==23.1.0
     # via
     #   -r requirements.in
     #   cattrs
-cattrs==23.1.2
+cattrs==23.2.2
     # via -r requirements.in
 certifi==2023.7.22
     # via requests
@@ -20,11 +20,11 @@ lxml==4.9.3
     # via
     #   -r requirements.in
     #   svgutils
-networkx==3.1
+networkx==3.2.1
     # via -r requirements.in
 requests==2.31.0
     # via -r requirements.in
 svgutils==0.3.4
     # via -r requirements.in
-urllib3==1.26.17
+urllib3==1.26.18
     # via requests

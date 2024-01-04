@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-attrs==23.1.0
+attrs==23.2.0
     # via
     #   -r requirements.in
     #   cattrs
@@ -16,7 +16,7 @@ charset-normalizer==2.1.1
     # via requests
 idna==3.4
     # via requests
-lxml==4.9.4
+lxml==5.0.0
     # via
     #   -r requirements.in
     #   svgutils

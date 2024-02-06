@@ -3,6 +3,7 @@ This module contains utility function for interaction with EbdGraphs and its DiG
 Some of these functions may store some information in the "attribute dictionaries" of the DiGraph nodes
 (for later use in the conversion logic).
 """
+
 from typing import List, Tuple
 
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]

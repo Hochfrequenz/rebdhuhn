@@ -2,6 +2,7 @@
 Specific error classes for errors that may occur in the data.
 Using these exceptions allows to catch/filter more fine-grained.
 """
+
 from typing import Optional
 
 from ebdtable2graph.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode

@@ -1,6 +1,7 @@
 """
 This module contains logic to convert EbdTable data to EbdGraph data.
 """
+
 from typing import Dict, List, Optional
 
 from networkx import DiGraph  # type:ignore[import]

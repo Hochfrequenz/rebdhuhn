@@ -1,6 +1,7 @@
 """
 contains the graph side of things
 """
+
 from abc import ABC, abstractmethod
 from typing import List, Optional
 

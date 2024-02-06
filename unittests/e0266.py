@@ -1,6 +1,7 @@
 """
 Contains the raw data for E_0266 in the form of an EbdTable.
 """
+
 from ebdtable2graph.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 from ebdtable2graph.models.ebd_table import MultiStepInstruction
 

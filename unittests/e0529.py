@@ -1,6 +1,7 @@
 """
 Contains the raw data for E_0529 in the form of an EbdTable.
 """
+
 from ebdtable2graph.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 e_0529 = EbdTable(

@@ -3,6 +3,7 @@ This module contains models that represent the data from the edi@energy document
 The central class in this module is the EbdTable.
 An EbdTable is the EDI@Energy raw representation of an "Entscheidungsbaum".
 """
+
 from typing import List, Optional
 
 import attrs

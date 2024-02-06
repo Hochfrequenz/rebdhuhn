@@ -1,6 +1,7 @@
 """
 This module contains logic to convert EbdGraph data to plantuml code and further to parse this code to SVG images.
 """
+
 from collections import namedtuple
 
 import requests  # pylint: disable=import-error

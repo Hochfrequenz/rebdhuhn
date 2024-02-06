@@ -1,6 +1,7 @@
 """
 we use kroki.io to convert dot code to SVG
 """
+
 from typing import Protocol
 
 import requests

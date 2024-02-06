@@ -1,6 +1,7 @@
 """
 This module contains logic to convert EbdGraph data to dot code (Graphviz) and further to parse this code to SVG images.
 """
+
 from typing import List, Optional
 from xml.sax.saxutils import escape
 

@@ -2,7 +2,7 @@
 Contains the raw data for E_0454 in the form of an EbdTable.
 """
 
-from ebdtable2graph.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 table_e0454 = EbdTable(
     metadata=EbdTableMetaData(

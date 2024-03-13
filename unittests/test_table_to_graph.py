@@ -6,12 +6,12 @@ import pytest  # type:ignore[import]
 from lxml import etree  # type:ignore[import]
 from networkx import DiGraph  # type:ignore[import]
 
-from ebdtable2graph import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
-from ebdtable2graph.graph_conversion import get_all_edges, get_all_nodes
-from ebdtable2graph.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
-from ebdtable2graph.kroki import Kroki
-from ebdtable2graph.models import EbdGraph, EbdGraphMetaData
-from ebdtable2graph.models.ebd_graph import (
+from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
+from rebdhuhn.graph_conversion import get_all_edges, get_all_nodes
+from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
+from rebdhuhn.kroki import Kroki
+from rebdhuhn.models import EbdGraph, EbdGraphMetaData
+from rebdhuhn.models.ebd_graph import (
     DecisionNode,
     EbdGraphEdge,
     EbdGraphNode,
@@ -21,8 +21,8 @@ from ebdtable2graph.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebdtable2graph.models.ebd_table import EbdTable
-from ebdtable2graph.models.errors import GraphTooComplexForPlantumlError
+from rebdhuhn.models.ebd_table import EbdTable
+from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 

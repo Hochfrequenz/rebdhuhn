@@ -2,7 +2,7 @@
 Contains the raw data for E_0404 in the form of an EbdTable.
 """
 
-from ebdtable2graph.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 e_0404 = EbdTable(
     metadata=EbdTableMetaData(ebd_code="E_0404", chapter="GPKE", sub_chapter="6.4.4: AD: Lieferbeginn", role="NB"),

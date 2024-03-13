@@ -1,7 +1,7 @@
 import cattrs
 import pytest  # type:ignore[import]
 
-from ebdtable2graph.models.ebd_table import (
+from rebdhuhn.models.ebd_table import (
     EbdCheckResult,
     EbdTable,
     EbdTableMetaData,

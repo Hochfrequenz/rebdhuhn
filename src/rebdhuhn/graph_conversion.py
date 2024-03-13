@@ -4,7 +4,9 @@ This module contains logic to convert EbdTable data to EbdGraph data.
 
 from typing import Dict, List, Optional
 
-from ebdtable2graph.models import (
+from networkx import DiGraph  # type:ignore[import]
+
+from rebdhuhn.models import (
     DecisionNode,
     EbdGraph,
     EbdGraphEdge,
@@ -19,13 +21,12 @@ from ebdtable2graph.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebdtable2graph.models.errors import (
+from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
     OutcomeNodeCreationError,
 )
-from networkx import DiGraph  # type:ignore[import]
 
 
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:

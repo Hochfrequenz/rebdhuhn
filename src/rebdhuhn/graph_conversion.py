@@ -6,7 +6,7 @@ from typing import Dict, List, Optional
 
 from networkx import DiGraph  # type:ignore[import]
 
-from ebdtable2graph.models import (
+from rebdhuhn.models import (
     DecisionNode,
     EbdGraph,
     EbdGraphEdge,
@@ -21,7 +21,7 @@ from ebdtable2graph.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebdtable2graph.models.errors import (
+from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,

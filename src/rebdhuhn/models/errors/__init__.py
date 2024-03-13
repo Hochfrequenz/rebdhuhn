@@ -5,14 +5,14 @@ Using these exceptions allows to catch/filter more fine-grained.
 
 from typing import Optional
 
-from ebdtable2graph.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode
+from rebdhuhn.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode
 
 
 class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
     """
     Raised if a decision node has more or less than 2 outgoing edges. This is not implemented in our logic yet.
     (Because it would be a multi-di-graph, not a di-graph.)
-    See issue https://github.com/Hochfrequenz/ebdtable2graph/issues/99 for a discussion on this topic.
+    See issue https://github.com/Hochfrequenz/rebdhuhn/issues/99 for a discussion on this topic.
     """
 
     def __init__(self, msg: str, decision_node_key, outgoing_edges: list[str]):
@@ -72,7 +72,7 @@ class GraphTooComplexForPlantumlError(Exception):
 class EbdCrossReferenceNotSupportedError(NotImplementedError):
     """
     Raised when there is no outcome for a given sub row but a reference to another EBD key instead.
-    See https://github.com/Hochfrequenz/ebdtable2graph/issues/105 for an example / a discussion.
+    See https://github.com/Hochfrequenz/rebdhuhn/issues/105 for an example / a discussion.
     """
 
     def __init__(self, decision_node: DecisionNode, row: EbdTableRow):

@@ -1,8 +1,8 @@
 import pytest  # type:ignore[import]
 
-from ebdtable2graph import convert_graph_to_plantuml, convert_table_to_graph
-from ebdtable2graph.models import EbdTable
-from ebdtable2graph.models.errors import (
+from rebdhuhn import convert_graph_to_plantuml, convert_table_to_graph
+from rebdhuhn.models import EbdTable
+from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     GraphTooComplexForPlantumlError,

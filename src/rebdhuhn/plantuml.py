@@ -7,9 +7,9 @@ from collections import namedtuple
 import requests  # pylint: disable=import-error
 from networkx import DiGraph  # type:ignore[import]
 
-from ebdtable2graph.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
-from ebdtable2graph.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
-from ebdtable2graph.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
+from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
+from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
+from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 

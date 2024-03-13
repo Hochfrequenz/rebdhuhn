@@ -5,20 +5,11 @@ This module contains logic to convert EbdGraph data to dot code (Graphviz) and f
 from typing import List, Optional
 from xml.sax.saxutils import escape
 
-from ebdtable2graph.add_watermark import add_background as add_background_function
-from ebdtable2graph.add_watermark import add_watermark as add_watermark_function
-from ebdtable2graph.graph_utils import _mark_last_common_ancestors
-from ebdtable2graph.kroki import DotToSvgConverter, Kroki
-from ebdtable2graph.models import (
-    DecisionNode,
-    EbdGraph,
-    EbdGraphEdge,
-    EndNode,
-    OutcomeNode,
-    StartNode,
-    ToNoEdge,
-    ToYesEdge,
-)
+from rebdhuhn.add_watermark import add_background as add_background_function
+from rebdhuhn.add_watermark import add_watermark as add_watermark_function
+from rebdhuhn.graph_utils import _mark_last_common_ancestors
+from rebdhuhn.kroki import DotToSvgConverter, Kroki
+from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 

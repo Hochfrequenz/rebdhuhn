@@ -9,7 +9,7 @@ import attrs
 from networkx import DiGraph  # type:ignore[import]
 
 # pylint:disable=too-few-public-methods
-from ebdtable2graph.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
+from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

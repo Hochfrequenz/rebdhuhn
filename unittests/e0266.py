@@ -2,8 +2,8 @@
 Contains the raw data for E_0266 in the form of an EbdTable.
 """
 
-from ebdtable2graph.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
-from ebdtable2graph.models.ebd_table import MultiStepInstruction
+from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.models.ebd_table import MultiStepInstruction
 
 table_e0266 = EbdTable(
     metadata=EbdTableMetaData(

@@ -8,8 +8,8 @@ from typing import List, Tuple
 
 from networkx import DiGraph, all_simple_paths  # type:ignore[import]
 
-from ebdtable2graph.models import ToNoEdge, ToYesEdge
-from ebdtable2graph.models.errors import PathsNotGreaterThanOneError
+from rebdhuhn.models import ToNoEdge, ToYesEdge
+from rebdhuhn.models.errors import PathsNotGreaterThanOneError
 
 COMMON_ANCESTOR_FIELD = "common_ancestor_for_node"
 # Defines the label to annotate the last common ancestor node with the information to which node

@@ -4,7 +4,7 @@ The models sub-package contains the data models used:
 2. the data model for the result of the conversion
 """
 
-from ebdtable2graph.models.ebd_graph import (
+from rebdhuhn.models.ebd_graph import (
     DecisionNode,
     EbdGraph,
     EbdGraphEdge,
@@ -16,4 +16,4 @@ from ebdtable2graph.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from ebdtable2graph.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow

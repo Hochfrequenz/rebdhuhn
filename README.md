@@ -1,17 +1,14 @@
 # rebdhuhn
 
-> [!IMPORTANT]
-⚠ This is the last version using the name `rebdhuhn`. Both the repository and the Python package will be renamed to `rebdhuhn`.
-
-![Unittests status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Unittests/badge.svg)
-![Coverage status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Coverage/badge.svg)
-![Linting status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Linting/badge.svg)
-![Black status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Black/badge.svg)
+![Unittests status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Unittests/badge.svg)
+![Coverage status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Coverage/badge.svg)
+![Linting status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Linting/badge.svg)
+![Black status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Black/badge.svg)
 ![PyPi Status Badge](https://img.shields.io/pypi/v/rebdhuhn)
 
-🇩🇪 Dieses Repository enthält ein Python-Paket namens [`rebdhuhn`](https://pypi.org/project/rebdhuhn), das genutzt werden kann, um aus .docx-Dateien extrahierte maschinenlesbare Tabellen, die einen Entscheidungsbaum (EBD) modellieren, in echte Graphen zu konvertieren. Diese Entscheidungsbäume sind Teil eines regulatorischen Regelwerks für die deutsche Energiewirtschaft und kommen in der Eingangsprüfung der Marktkommunikation zum Einsatz.
+🇩🇪 Dieses Repository enthält ein Python-Paket namens [`rebdhuhn`](https://pypi.org/project/rebdhuhn) (früher: `ebdtable2graph`), das genutzt werden kann, um aus .docx-Dateien extrahierte maschinenlesbare Tabellen, die einen Entscheidungsbaum (EBD) modellieren, in echte Graphen zu konvertieren. Diese Entscheidungsbäume sind Teil eines regulatorischen Regelwerks für die deutsche Energiewirtschaft und kommen in der Eingangsprüfung der Marktkommunikation zum Einsatz.
 
-🇬🇧 This repository contains the source code of the Python package [`rebdhuhn`](https://pypi.org/project/rebdhuhn).
+🇬🇧 This repository contains the source code of the Python package [`rebdhuhn`](https://pypi.org/project/rebdhuhn) (formerly known as `ebdtable2graph`).
 
 ## Rationale
 

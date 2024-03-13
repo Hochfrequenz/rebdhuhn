@@ -1,5 +1,8 @@
 # ebdtable2graph
 
+> [!IMPORTANT]
+⚠ This is the last version using the name `ebdtable2graph`. Both the repository and the Python package will be renamed to `rebdhuhn`.
+
 ![Unittests status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Coverage/badge.svg)
 ![Linting status badge](https://github.com/Hochfrequenz/ebd_table_to_graph/workflows/Linting/badge.svg)

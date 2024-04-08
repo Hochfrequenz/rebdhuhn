@@ -20,7 +20,7 @@ lxml==5.2.1
     # via
     #   -r requirements.in
     #   svgutils
-networkx==3.2.1
+networkx==3.3
     # via -r requirements.in
 requests==2.31.0
     # via -r requirements.in

@@ -191,9 +191,9 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
 
 def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
     """
-    Converts plantuml code to svg (code) and returns the result as string. It uses kroki.io.
+    Converts plantuml code to svg (code) and returns the result as string. It uses kroki.io hosted via docker container.
     """
-    url = "https://kroki.io"
+    url = "http://localhost:8125/"
     answer = requests.post(
         url,
         json={"diagram_source": plantuml_code, "diagram_type": "plantuml", "output_format": "svg"},

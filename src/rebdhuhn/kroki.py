@@ -1,5 +1,5 @@
 """
-we use kroki.io to convert dot code to SVG
+we use kroki.io (hosted via docker at http://localhost:8125/) to convert dot code to SVG
 """
 
 from typing import Protocol
@@ -29,7 +29,7 @@ class Kroki:
         """
         returns the svg code as str
         """
-        url = "https://kroki.io"
+        url = "http://localhost:8125/"
         answer = requests.post(
             url,
             json={"diagram_source": dot_code, "diagram_type": "graphviz", "output_format": "svg"},

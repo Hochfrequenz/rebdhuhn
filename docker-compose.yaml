@@ -1,0 +1,15 @@
+version: "3.8"
+
+services:
+  kroki: # see https://docs.kroki.io/kroki/setup/use-docker-or-podman/#_run_multiple_kroki_containers_together
+    image: yuzutech/kroki:0.24.1
+    depends_on:
+      - mermaid
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+    ports:
+      - "8125:8000"
+  mermaid:
+    image: yuzutech/kroki-mermaid
+    expose:
+      - "8126" # this port is consumed by kroki only (and not by cutover-tool directly)

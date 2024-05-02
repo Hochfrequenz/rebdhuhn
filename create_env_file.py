@@ -23,16 +23,16 @@ def create_env_file(directory_path: Path):
         print("✅ Great, you have already an environment file.")
     else:
         print(
-            f"🤔 Uh I see you have no {destination_file_name} file in {directory_path}\n"
-            f"😊 But do not worry, I have you covered, I try to copy for you the {source_file_name} file to"
+            f"Uh I see you have no {destination_file_name} file in {directory_path}\n"
+            f"But do not worry, I have you covered, I try to copy for you the {source_file_name} file to"
             f"{destination_file_name}"
         )
         try:
             copyfile(directory_path / source_file_name, path_to_env_file)
-            print("🤗 And we are done.\nℹ Please update some credentials for your need, e.g. database credentials.")
+            print("And we are done.\nℹ Please update some credentials for your need, e.g. database credentials.")
         except FileNotFoundError:
             print(
-                f"😞 I am so sorry, but the {source_file_name} file is gone. Please ask someone of you colleagues "
+                f"I am so sorry, but the {source_file_name} file is gone. Please ask someone of you colleagues "
                 f"to help you."
             )
 

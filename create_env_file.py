@@ -20,7 +20,7 @@ def create_env_file(directory_path: Path):
     path_to_env_file: Path = directory_path / destination_file_name
 
     if path_to_env_file.exists():
-        print("✅ Great, you have already an environment file.")
+        print("Great, you have already an environment file.")
     else:
         print(
             f"Uh I see you have no {destination_file_name} file in {directory_path}\n"

@@ -29,7 +29,7 @@ def create_env_file(directory_path: Path):
         )
         try:
             copyfile(directory_path / source_file_name, path_to_env_file)
-            print("And we are done.\nℹ Please update some credentials for your need, e.g. database credentials.")
+            print("And we are done.\n Please update some credentials for your need, e.g. database credentials.")
         except FileNotFoundError:
             print(
                 f"I am so sorry, but the {source_file_name} file is gone. Please ask someone of you colleagues "

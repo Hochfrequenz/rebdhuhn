@@ -43,7 +43,7 @@ class InterceptedKrokiClient(Kroki):
         result_tree = etree.fromstring(result.encode("utf-8"))
         my_comment = (
             "curl --request POST "
-            "--url https://kroki.io/ "
+            "--url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/"
             "--header 'Content-Type: application/json' "
             f"--data '{args[0]}'"
         ).replace(
@@ -270,7 +270,7 @@ class TestEbdTableModels:
             encoding="utf-8",
         ) as infile:
             kroki_response_string: str = infile.read()
-        requests_mock.post("https://kroki.io", text=kroki_response_string)
+        requests_mock.post("http://localhost:8125/", text=kroki_response_string)
         self.create_and_save_svg_test(ebd_graph)
 
     @staticmethod
@@ -357,7 +357,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
         ) as infile:
             kroki_response_string: str = infile.read()
-        requests_mock.post("https://kroki.io", text=kroki_response_string)
+        requests_mock.post("http://localhost:8125/", text=kroki_response_string)
         self.create_and_save_watermark_and_background_svg(add_background)
 
     def test_table_to_digraph_dot_with_background(self, requests_mock):
@@ -370,7 +370,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg", "r", encoding="utf-8"
         ) as infile:
             kroki_response_string: str = infile.read()
-        requests_mock.post("https://kroki.io", text=kroki_response_string)
+        requests_mock.post("http://localhost:8125/", text=kroki_response_string)
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
         kroki_client = InterceptedKrokiClient()

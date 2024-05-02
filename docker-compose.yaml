@@ -12,4 +12,4 @@ services:
   mermaid:
     image: yuzutech/kroki-mermaid
     expose:
-      - "8126" # this port is consumed by kroki only (and not by cutover-tool directly)
+      - "8126" # this port is consumed by kroki only (and not by rebdhuhn directly)

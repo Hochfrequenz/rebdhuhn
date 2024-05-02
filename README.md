@@ -122,10 +122,24 @@ endif
 @enduml
 ```
 
-#### Export as SVG
+#### Export the graph as SVG
 
-You can also export the graph as SVG
+First, make sure to have a local instance of [kroki](https://kroki.io) up and running via docker (localhost:8125):
 
+Add the required `.env` file to the repository root by opening a new terminal session, changing the directory to
+```bash
+cd path\to\rebdhuhn\repository\root
+```
+and executing the `create_env_file.py` script via
+```bash
+python create_env_file.py
+```
+Run the `docker-desktop` app on your local maschine and host the local kroki instance on PORT `8125` via
+```bash
+docker-compose up -d
+```
+
+To export the graph as SVG, use
 ```python
 from rebdhuhn import convert_plantuml_to_svg_kroki
 

@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.11", "3.12"]
-        os: [ubuntu-latest]
+        os: [ubuntu-latest] # we dropped windows-latest because the kroki container somehow wasn't available for windows10/amd64
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}

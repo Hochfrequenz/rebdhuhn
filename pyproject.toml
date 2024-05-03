@@ -8,7 +8,6 @@ build-backend = "hatchling.build"
 dependencies = [
     "attrs",
     "networkx",
-    "maus>=0.3.43",
     "requests",
     "cattrs",
     "lxml>=4.9.3",

@@ -7,7 +7,6 @@
 attrs==23.2.0
     # via
     #   cattrs
-    #   maus
     #   rebdhuhn (pyproject.toml)
 cattrs==23.2.3
     # via rebdhuhn (pyproject.toml)
@@ -21,16 +20,8 @@ lxml==5.2.1
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils
-marshmallow==3.21.2
-    # via maus
-maus==0.4.2
-    # via rebdhuhn (pyproject.toml)
-more-itertools==10.2.0
-    # via maus
 networkx==3.3
     # via rebdhuhn (pyproject.toml)
-packaging==24.0
-    # via marshmallow
 requests==2.31.0
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4

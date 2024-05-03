@@ -34,11 +34,12 @@ class InterceptedKrokiClient(Kroki):
     """
 
     def __init__(self):
+        super().__init__()
         self.intercepted_kroki_response: Optional[str] = None
         self.intercepted_kroki_response_with_xml_comment: Optional[str] = None
 
-    def convert_to_svg(self, *args, **kwargs):
-        result = super().convert_to_svg(*args, **kwargs)
+    def convert_dot_to_svg(self, *args, **kwargs):
+        result = super().convert_dot_to_svg(*args, **kwargs)
         self.intercepted_kroki_response = result
         result_tree = etree.fromstring(result.encode("utf-8"))
         my_comment = (

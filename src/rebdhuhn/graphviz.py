@@ -182,7 +182,7 @@ def convert_dot_to_svg_kroki(
     """
     if dot_to_svg_converter is None:
         dot_to_svg_converter = Kroki()
-    svg_out = dot_to_svg_converter.convert_to_svg(dot_code)
+    svg_out = dot_to_svg_converter.convert_dot_to_svg(dot_code)
     if add_watermark:
         svg_out = add_watermark_function(svg_out)
     if add_background:

@@ -4,7 +4,6 @@ This module contains logic to convert EbdGraph data to plantuml code and further
 
 from collections import namedtuple
 
-import requests  # pylint: disable=import-error
 from networkx import DiGraph  # type:ignore[import]
 
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors

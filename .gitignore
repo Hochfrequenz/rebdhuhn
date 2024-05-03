@@ -133,3 +133,6 @@ dmypy.json
 # vscode settings
 .vscode/
 
+# version number for rebdhuhn; gets auto-generated during the command
+# python -m build
+src/rebdhuhn/version.py

@@ -1,7 +1,0 @@
-attrs
-networkx
-requests
-cattrs
-lxml>=4.9.3
-svgutils
-# add all the dependencies from there to setup.cfg also

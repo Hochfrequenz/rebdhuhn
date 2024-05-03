@@ -8,6 +8,7 @@ import requests  # pylint: disable=import-error
 from networkx import DiGraph  # type:ignore[import]
 
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
+from rebdhuhn.kroki import Kroki, PlantUmlToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
 
@@ -16,7 +17,7 @@ ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml fil
 
 def _escape_for_plantuml(input_str: str) -> str:
     """
-    Plantuml has sometimes problems with the character ')'. Therefore, we escape it with the respective HTML code since
+    Plantuml sometimes has problems with the character ')'. Therefore, we escape it with the respective HTML code since
     Plantuml supports HTML.
     """
     return input_str.replace(")", "&#41;")
@@ -189,19 +190,10 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     return plantuml_code + "\n@enduml\n"
 
 
-def convert_plantuml_to_svg_kroki(plantuml_code: str) -> str:
+def convert_plantuml_to_svg_kroki(plantuml_code: str, converter: PlantUmlToSvgConverter | None = None) -> str:
     """
-    Converts plantuml code to svg (code) and returns the result as string. It uses kroki.io hosted via docker container.
+    Converts plantuml code to svg code using kroki
     """
-    url = "http://localhost:8125/"
-    answer = requests.post(
-        url,
-        json={"diagram_source": plantuml_code, "diagram_type": "plantuml", "output_format": "svg"},
-        timeout=5,
-    )
-    if answer.status_code != 200:
-        raise ValueError(
-            f"Error while converting plantuml to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
-            f"{answer.text}"
-        )
-    return answer.text
+    if converter is None:
+        converter = Kroki()  # with its default address (e.g. localhost:8125)
+    return converter.convert_plantuml_to_svg(plantuml_code)

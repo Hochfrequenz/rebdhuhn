@@ -1,3 +1,63 @@
+# Build system information and other project-specific configuration below.
+
+[build-system]
+requires = ["hatchling>=1.8.0", "hatch-vcs", "hatch-fancy-pypi-readme"]
+build-backend = "hatchling.build"
+
+[project]
+dependencies = [
+    "attrs",
+    "networkx",
+    "maus>=0.3.43",
+    "requests",
+    "cattrs",
+    "lxml>=4.9.3",
+    "svgutils",
+    # write here line by line the dependencies for your package
+]
+name = "rebdhuhn"
+description = "Converts (already scraped) Entscheidungsbaumdiagramm tables to real graphs"
+license = { text = "GPL" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Hochfrequenz Unternehmensberatung GmbH", email = "info@hochfrequenz.de" },
+]
+keywords = ["automation", "ahb", "bdew", "edi@energy"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+dynamic = ["readme", "version"]
+
+[project.urls]
+Homepage = "https://github.com/Hochfrequenz/rebdhuhn"
+Changelog = "https://github.com/Hochfrequenz/rebdhuhn/releases"
+Repository = "https://github.com/Hochfrequenz/rebdhuhn"
+"Issue Tracker" = "https://github.com/Hochfrequenz/rebdhuhn/issues"
+
+[tool.hatch.metadata.hooks.fancy-pypi-readme]
+content-type = "text/markdown"
+fragments = [{ path = "README.md" }]
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/rebdhuhn/version.py"
+
+[tool.hatch.build.targets.sdist]
+exclude = ["/unittests"]
+
+[tool.hatch.build.targets.wheel]
+only-include = ["src"]
+sources = ["src"]
+
 [tool.black]
 line-length = 120
 

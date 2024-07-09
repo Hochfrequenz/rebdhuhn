@@ -10,8 +10,8 @@ from io import BytesIO
 from pathlib import Path
 from typing import TextIO, Tuple, Union
 
-from lxml import etree  # type:ignore[import]
-from svgutils.compose import SVG, Figure  # type:ignore[import]
+from lxml import etree  # type:ignore[import-untyped]
+from svgutils.compose import SVG, Figure  # type:ignore[import-untyped]
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
@@ -62,17 +62,17 @@ def add_background(svg: str) -> str:
     background_color = "#f3f1f6"
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
-    xml_element = etree.Element(
+    xml_element = etree.Element(  # pylint:disable=c-extension-no-member
         "polygon",
         attrib={
             "fill": background_color,
             "points": f"0,0 {ebd_width_in_px},0 {ebd_width_in_px},{ebd_height_in_px} 0,{ebd_height_in_px}",
         },
-    )  # pylint:disable=c-extension-no-member
+    )
     root.insert(0, xml_element)
 
     svg_with_background = Figure(ebd_width_in_px, ebd_height_in_px, root).tostr()
-    return svg_with_background.decode("utf-8")
+    return svg_with_background.decode("utf-8")  # type:ignore[no-any-return]
 
 
 # pylint: disable = c-extension-no-member
@@ -107,4 +107,4 @@ def add_watermark(ebd_svg: str) -> str:
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
 
-    return ebd_with_watermark.decode("utf-8")
+    return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]

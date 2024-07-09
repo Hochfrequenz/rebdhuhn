@@ -92,7 +92,9 @@ class EbdTableSubRow:
 
 
 # pylint: disable=unused-argument
-def _check_that_both_true_and_false_occur(instance, attribute, value: List[EbdTableSubRow]):
+def _check_that_both_true_and_false_occur(  # type:ignore[no-untyped-def]
+    instance: EbdTableSubRow, attribute, value: List[EbdTableSubRow]
+) -> None:
     """
     Check that the subrows cover both a True and a False outcome
     """

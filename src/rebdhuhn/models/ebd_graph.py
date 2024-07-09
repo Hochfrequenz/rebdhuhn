@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 from typing import List, Optional
 
 import attrs
-from networkx import DiGraph  # type:ignore[import]
+from networkx import DiGraph  # type:ignore[import-untyped]
 
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
@@ -55,7 +55,7 @@ class EbdGraphNode(ABC):
         """
         raise NotImplementedError("The child class has to implement this method")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.get_key()
 
 

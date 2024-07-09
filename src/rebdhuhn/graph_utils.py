@@ -6,7 +6,7 @@ Some of these functions may store some information in the "attribute dictionarie
 
 from typing import List, Tuple
 
-from networkx import DiGraph, all_simple_paths  # type:ignore[import]
+from networkx import DiGraph, all_simple_paths  # type:ignore[import-untyped]
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
 from rebdhuhn.models.errors import PathsNotGreaterThanOneError

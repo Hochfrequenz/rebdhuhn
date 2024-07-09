@@ -10,19 +10,19 @@ attrs==23.2.0
     #   rebdhuhn (pyproject.toml)
 cattrs==23.2.3
     # via rebdhuhn (pyproject.toml)
-certifi==2024.2.2
+certifi==2024.7.4
     # via requests
 charset-normalizer==3.3.2
     # via requests
 idna==3.7
     # via requests
-lxml==5.2.1
+lxml==5.2.2
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils
 networkx==3.3
     # via rebdhuhn (pyproject.toml)
-requests==2.31.0
+requests==2.32.3
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)

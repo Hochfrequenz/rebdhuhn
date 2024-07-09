@@ -63,6 +63,7 @@ class GraphTooComplexForPlantumlError(Exception):
 
     def __init__(
         self,
+        # pylint:disable=line-too-long
         message: str = "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
     ) -> None:
         self.message = message

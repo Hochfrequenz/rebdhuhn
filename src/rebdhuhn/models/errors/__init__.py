@@ -15,7 +15,7 @@ class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
     See issue https://github.com/Hochfrequenz/rebdhuhn/issues/99 for a discussion on this topic.
     """
 
-    def __init__(self, msg: str, decision_node_key, outgoing_edges: list[str]):
+    def __init__(self, msg: str, decision_node_key: str, outgoing_edges: list[str]) -> None:
         """
         providing the keys allows to easily track down the exact cause of the error
         """
@@ -23,7 +23,7 @@ class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
         self.decision_node_key = decision_node_key
         self.outgoing_edges = outgoing_edges
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"The node {self.decision_node_key} has more than 2 outgoing edges: {', '.join(self.outgoing_edges)}"
 
 
@@ -33,7 +33,7 @@ class PathsNotGreaterThanOneError(ValueError):
     Typically, this is a symptom for loops in the graph (which makes them not a Directed Graph / tree anymore).
     """
 
-    def __init__(self, node_key: str, indegree: int, number_of_paths: int):
+    def __init__(self, node_key: str, indegree: int, number_of_paths: int) -> None:
         super().__init__(
             f"The indegree of node '{node_key}' is {indegree} > 1, but the number of paths is {number_of_paths} <= 1."
         )
@@ -63,8 +63,9 @@ class GraphTooComplexForPlantumlError(Exception):
 
     def __init__(
         self,
-        message="Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
-    ):
+        # pylint:disable=line-too-long
+        message: str = "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
+    ) -> None:
         self.message = message
         super().__init__(self.message)
 

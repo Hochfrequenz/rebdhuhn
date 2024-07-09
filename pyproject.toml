@@ -21,7 +21,7 @@ requires-python = ">=3.11"
 authors = [
     { name = "Hochfrequenz Unternehmensberatung GmbH", email = "info@hochfrequenz.de" },
 ]
-keywords = ["automation", "ahb", "bdew", "edi@energy"]
+keywords = ["automation", "ahb", "bdew", "ebd", "edi@energy"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
@@ -66,6 +66,12 @@ profile = "black"
 
 [tool.pylint."MESSAGES CONTROL"]
 max-line-length = 120
+
+[mypy]
+truethy-bool = true
+
+[tool.mypy]
+disable_error_code = []
 
 # the following lines are needed if you would like to build a python package
 # and you want to use semantic versioning

@@ -3,7 +3,7 @@
 ![Unittests status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Coverage/badge.svg)
 ![Linting status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Linting/badge.svg)
-![Black status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Black/badge.svg)
+![Formatting status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Formatting/badge.svg)
 ![PyPi Status Badge](https://img.shields.io/pypi/v/rebdhuhn)
 
 🇩🇪 Dieses Repository enthält ein Python-Paket namens [`rebdhuhn`](https://pypi.org/project/rebdhuhn) (früher: `ebdtable2graph`), das genutzt werden kann, um aus .docx-Dateien extrahierte maschinenlesbare Tabellen, die einen Entscheidungsbaum (EBD) modellieren, in echte Graphen zu konvertieren. Diese Entscheidungsbäume sind Teil eines regulatorischen Regelwerks für die deutsche Energiewirtschaft und kommen in der Eingangsprüfung der Marktkommunikation zum Einsatz.

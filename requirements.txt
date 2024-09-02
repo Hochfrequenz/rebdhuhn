@@ -8,7 +8,7 @@ attrs==24.2.0
     # via
     #   cattrs
     #   rebdhuhn (pyproject.toml)
-cattrs==23.2.3
+cattrs==24.1.0
     # via rebdhuhn (pyproject.toml)
 certifi==2024.7.4
     # via requests

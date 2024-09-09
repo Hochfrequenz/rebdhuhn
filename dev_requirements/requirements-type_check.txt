@@ -9,7 +9,7 @@ mypy==1.11.2
     # via -r dev_requirements/requirements-type_check.in
 mypy-extensions==1.0.0
     # via mypy
-types-requests==2.32.0.20240712
+types-requests==2.32.0.20240907
     # via -r dev_requirements/requirements-type_check.in
 typing-extensions==4.11.0
     # via mypy

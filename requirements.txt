@@ -4,19 +4,19 @@
 #
 #    pip-compile pyproject.toml
 #
-attrs==23.2.0
+attrs==24.2.0
     # via
     #   cattrs
     #   rebdhuhn (pyproject.toml)
-cattrs==23.2.3
+cattrs==24.1.2
     # via rebdhuhn (pyproject.toml)
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 charset-normalizer==3.3.2
     # via requests
-idna==3.7
+idna==3.10
     # via requests
-lxml==5.2.2
+lxml==5.3.0
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils
@@ -26,5 +26,5 @@ requests==2.32.3
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)
-urllib3==2.2.2
+urllib3==2.2.3
     # via requests

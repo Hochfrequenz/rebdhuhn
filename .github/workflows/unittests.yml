@@ -6,7 +6,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        python-version: ["3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13"]
         os: [ubuntu-latest] # we dropped windows-latest because the kroki container somehow wasn't available for windows10/amd64
     steps:
       - uses: actions/checkout@v4

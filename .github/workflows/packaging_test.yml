@@ -2,7 +2,7 @@ name: "Packaging Test"
 
 on: [ pull_request ]
 jobs:
-  coverage:
+  packaging_test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:

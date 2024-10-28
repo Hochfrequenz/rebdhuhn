@@ -1,6 +1,6 @@
 # rebdhuhn
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: GPL](https://img.shields.io/badge/License-GPL-yellow.svg)](LICENSE)
 ![Python Versions (officially) supported](https://img.shields.io/pypi/pyversions/rebdhuhn.svg)
 ![Unittests status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Unittests/badge.svg)
 ![Coverage status badge](https://github.com/Hochfrequenz/rebdhuhn/workflows/Coverage/badge.svg)

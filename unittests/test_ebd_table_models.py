@@ -1,5 +1,5 @@
 import cattrs
-import pytest  # type:ignore[import]
+import pytest
 
 from rebdhuhn.models.ebd_table import (
     EbdCheckResult,
@@ -46,7 +46,7 @@ class TestEbdTableModels:
             )
         ],
     )
-    def test_instantiation(self, table: EbdTable):
+    def test_instantiation(self, table: EbdTable) -> None:
         """
         The test is successful already if the instantiation in the parametrization worked
         """
@@ -118,11 +118,11 @@ dem Wert „Marktlokations-ID“ angegeben?""",
             ),
         ],
     )
-    def test_has_subsequent_steps(self, row: EbdTableRow, expected_result: bool):
+    def test_has_subsequent_steps(self, row: EbdTableRow, expected_result: bool) -> None:
         actual = row.has_subsequent_steps()
         assert actual == expected_result
 
-    def test_ebd_table_row_use_cases(self):
+    def test_ebd_table_row_use_cases(self) -> None:
         row_17_in_e0462 = EbdTableRow(
             step_number="17",
             description="Liegt das Eingangsdatum der Anmeldung mehr als sechs Wochen nach dem Lieferbeginndatum der Anmeldung?",
@@ -144,7 +144,7 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         assert row_17_in_e0462.use_cases is not None
         # if it can be instantiated with use cases that's a good enough test for the model
 
-    def test_answer_code_aastersik(self):
+    def test_answer_code_astersik(self) -> None:
         """
         This is an example from 6.27.1 E_0455_Information prüfen.
         The tests asserts that the validator of the result code allow the result code 'A**' which is used in E_0455.
@@ -157,7 +157,7 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         assert isinstance(sub_row, EbdTableSubRow)
         assert sub_row.result_code == "A**"
 
-    def test_2023_answer_code_regex(self):
+    def test_2023_answer_code_regex(self) -> None:
         """
         This is an example from E_0406.
         The test asserts that the validator of the result code allows the result code 'AC7'.
@@ -170,7 +170,7 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         assert isinstance(sub_row, EbdTableSubRow)
         assert sub_row.result_code == "AC7"
 
-    def test_collect_answer_codes_instruction(self):
+    def test_collect_answer_codes_instruction(self) -> None:
         snippet_from_e0453 = EbdTable(
             metadata=EbdTableMetaData(
                 ebd_code="E_0453",

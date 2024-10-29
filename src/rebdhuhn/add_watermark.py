@@ -10,7 +10,7 @@ from io import BytesIO
 from pathlib import Path
 from typing import TextIO, Tuple, Union
 
-from lxml import etree  # type:ignore[import-untyped]
+from lxml import etree
 from svgutils.compose import SVG, Figure  # type:ignore[import-untyped]
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
@@ -46,8 +46,8 @@ def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, 
     root = tree.getroot()
     # root.attrib["height"] gives a string like "123px"
     # for further usage, we have to remove the unit and convert it to integer
-    width_of_svg_in_px = convert_dimension_to_float(root.attrib["width"])
-    height_of_svg_in_px = convert_dimension_to_float(root.attrib["height"])
+    width_of_svg_in_px = convert_dimension_to_float(str(root.attrib["width"]))
+    height_of_svg_in_px = convert_dimension_to_float(str(root.attrib["height"]))
 
     return width_of_svg_in_px, height_of_svg_in_px
 

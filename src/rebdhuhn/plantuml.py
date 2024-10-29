@@ -189,10 +189,8 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     return plantuml_code + "\n@enduml\n"
 
 
-def convert_plantuml_to_svg_kroki(plantuml_code: str, converter: PlantUmlToSvgConverter | None = None) -> str:
+def convert_plantuml_to_svg_kroki(plantuml_code: str, converter: PlantUmlToSvgConverter) -> str:
     """
     Converts plantuml code to svg code using kroki
     """
-    if converter is None:
-        converter = Kroki()  # with its default address (e.g. localhost:8125)
     return converter.convert_plantuml_to_svg(plantuml_code)

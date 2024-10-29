@@ -159,7 +159,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
-        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code, Kroki())  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"

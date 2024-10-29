@@ -160,7 +160,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
-        svg_code = convert_plantuml_to_svg_kroki(plantuml_code)  # Raises an error if conversion fails
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code, Kroki())  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"
@@ -298,7 +298,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code_with_watermark = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=True, add_background=add_background
+            dot_code, add_watermark=True, add_background=add_background, dot_to_svg_converter=kroki_client
         )  # Raises an error if conversion fails
 
         file_path2 = (
@@ -392,7 +392,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=False, add_background=True
+            dot_code, add_watermark=False, add_background=True, dot_to_svg_converter=Kroki()
         )  # Raises an error if conversion fails
 
         file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_background.dot.svg"

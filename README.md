@@ -144,8 +144,10 @@ docker-compose up -d
 To export the graph as SVG, use
 ```python
 from rebdhuhn import convert_plantuml_to_svg_kroki
+from rebdhuhn.kroki import Kroki
 
-svg_code = convert_plantuml_to_svg_kroki(plantuml_code)
+kroki_client = Kroki()
+svg_code = convert_plantuml_to_svg_kroki(plantuml_code, kroki_client)
 with open("e_0003.svg", "w+", encoding="utf-8") as svg_file:
     svg_file.write(svg_code)
 ```

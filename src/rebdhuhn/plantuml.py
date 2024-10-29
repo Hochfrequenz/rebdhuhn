@@ -7,7 +7,7 @@ from collections import namedtuple
 from networkx import DiGraph  # type:ignore[import-untyped]
 
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
-from rebdhuhn.kroki import Kroki, PlantUmlToSvgConverter
+from rebdhuhn.kroki import PlantUmlToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
 
@@ -189,10 +189,8 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     return plantuml_code + "\n@enduml\n"
 
 
-def convert_plantuml_to_svg_kroki(plantuml_code: str, converter: PlantUmlToSvgConverter | None = None) -> str:
+def convert_plantuml_to_svg_kroki(plantuml_code: str, converter: PlantUmlToSvgConverter) -> str:
     """
     Converts plantuml code to svg code using kroki
     """
-    if converter is None:
-        converter = Kroki()  # with its default address (e.g. localhost:8125)
     return converter.convert_plantuml_to_svg(plantuml_code)

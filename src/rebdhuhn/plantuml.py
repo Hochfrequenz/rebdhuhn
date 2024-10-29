@@ -7,7 +7,7 @@ from collections import namedtuple
 from networkx import DiGraph  # type:ignore[import-untyped]
 
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
-from rebdhuhn.kroki import Kroki, PlantUmlToSvgConverter
+from rebdhuhn.kroki import PlantUmlToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
 

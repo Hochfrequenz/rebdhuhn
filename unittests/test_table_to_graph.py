@@ -296,7 +296,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code_with_watermark = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=True, add_background=add_background
+            dot_code, add_watermark=True, add_background=add_background, dot_to_svg_converter=kroki_client
         )  # Raises an error if conversion fails
 
         file_path2 = (
@@ -389,7 +389,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=False, add_background=True
+            dot_code, add_watermark=False, add_background=True, dot_to_svg_converter=Kroki()
         )  # Raises an error if conversion fails
 
         file_path2 = Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}_with_background.dot.svg"

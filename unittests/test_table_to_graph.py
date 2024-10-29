@@ -1,10 +1,11 @@
+# mypy: disable-error-code="no-untyped-def"
 import os
 from pathlib import Path
 from typing import List, Optional
 
-import pytest  # type:ignore[import]
-from lxml import etree  # type:ignore[import]
-from networkx import DiGraph  # type:ignore[import]
+import pytest
+from lxml import etree
+from networkx import DiGraph  # type:ignore[import-untyped]
 
 from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
 from rebdhuhn.graph_conversion import get_all_edges, get_all_nodes
@@ -33,12 +34,12 @@ class InterceptedKrokiClient(Kroki):
     purposes.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.intercepted_kroki_response: Optional[str] = None
         self.intercepted_kroki_response_with_xml_comment: Optional[str] = None
 
-    def convert_dot_to_svg(self, *args, **kwargs):
+    def convert_dot_to_svg(self, *args, **kwargs) -> str:
         result = super().convert_dot_to_svg(*args, **kwargs)
         self.intercepted_kroki_response = result
         result_tree = etree.fromstring(result.encode("utf-8"))
@@ -72,7 +73,7 @@ class TestEbdTableModels:
             )
         ],
     )
-    def test_get_all_nodes(self, table: EbdTable, expected_result: List[EbdGraphNode]):
+    def test_get_all_nodes(self, table: EbdTable, expected_result: List[EbdGraphNode]) -> None:
         actual = get_all_nodes(table)
         assert actual == expected_result
 
@@ -123,7 +124,7 @@ class TestEbdTableModels:
             )
         ],
     )
-    def test_get_all_edges(self, table: EbdTable, expected_result: List[EbdGraphEdge]):
+    def test_get_all_edges(self, table: EbdTable, expected_result: List[EbdGraphEdge]) -> None:
         actual = get_all_edges(table)
         assert actual == expected_result
 
@@ -167,7 +168,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
     @staticmethod
-    def create_and_save_svg_test(ebd_graph: EbdGraph):
+    def create_and_save_svg_test(ebd_graph: EbdGraph) -> str:
         """
         Creates the test svgs and saves them to the output folder.
         Also returns the kroki answer svg code as string to be stored for the mock request.
@@ -187,6 +188,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        assert svg_code_for_mock is not None
         return svg_code_for_mock
 
     @pytest.mark.parametrize(
@@ -213,7 +215,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_real_kroki_request(self, table: EbdTable, expected_description: str):
+    def test_table_to_digraph_dot_real_kroki_request(self, table: EbdTable, expected_description: str) -> None:
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -257,7 +259,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_mock(self, table: EbdTable, expected_description: str, requests_mock):
+    def test_table_to_digraph_dot_with_mock(self, table: EbdTable, expected_description: str, requests_mock) -> None:
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -275,7 +277,7 @@ class TestEbdTableModels:
         self.create_and_save_svg_test(ebd_graph)
 
     @staticmethod
-    def create_and_save_watermark_and_background_svg(add_background: bool):
+    def create_and_save_watermark_and_background_svg(add_background: bool) -> str:
         """
         Creates the test svgs and saves them to the output folder.
         Also returns the kroki answer svg code as string to be stored for the mock request.
@@ -308,6 +310,7 @@ class TestEbdTableModels:
             ebd_svg.write(svg_code_with_watermark)
 
         svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        assert svg_code_for_mock is not None
         return svg_code_for_mock
 
     @pytest.mark.parametrize(
@@ -348,7 +351,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_with_mock(self, add_background: bool, requests_mock):
+    def test_table_to_digraph_dot_with_watermark_with_mock(self, add_background: bool, requests_mock) -> None:
         """
         Test the combination of background and watermark addition to the svg. The results are stored in
         `unittests/output` for you to inspect the result manually.
@@ -361,7 +364,7 @@ class TestEbdTableModels:
         requests_mock.post("http://localhost:8125/", text=kroki_response_string)
         self.create_and_save_watermark_and_background_svg(add_background)
 
-    def test_table_to_digraph_dot_with_background(self, requests_mock):
+    def test_table_to_digraph_dot_with_background(self, requests_mock) -> None:
         """
         Test the addition of a background in 'HF white' to the svg. The results are stored in
         `unittests/output` for you to inspect the result manually.
@@ -396,7 +399,7 @@ class TestEbdTableModels:
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code)
 
-    def test_table_e0401_too_complex_for_plantuml(self):
+    def test_table_e0401_too_complex_for_plantuml(self) -> None:
         """
         Test the conversion pipeline for E_0401. In this case the plantuml conversion should fail because the graph is
         too complex for this implementation.
@@ -463,7 +466,7 @@ class TestEbdTableModels:
             # todo: add E_0462
         ],
     )
-    def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph):
+    def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph) -> None:
         actual = convert_table_to_graph(table)
         pytest.skip("todo @leon - wird später in den examples.py ergänzt")
         assert actual == expected_result

@@ -23,7 +23,7 @@ class EbdTableMetaData:
     chapter: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     Chapter from the EDI@Energy Document
-    e.g. '7.24 AD:  Übermittlung Datenstatus für die Bilanzierungsgebietssummenzeitreihe vom BIKO an ÜNB und NB'
+    e.g. MaBiS
     """
     sub_chapter: str = attrs.field(validator=attrs.validators.instance_of(str))
     """

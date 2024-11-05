@@ -34,6 +34,11 @@ class EbdTableMetaData:
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"
     """
+    ebd_name: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    EBD name from the EDI@Energy Document
+    e.g. 'E_0003_Bestellung der Aggregationsebene RZ prüfen'
+    """
     remark: Optional[str] = attrs.field(
         default=None, validator=attrs.validators.optional(attrs.validators.instance_of(str))
     )

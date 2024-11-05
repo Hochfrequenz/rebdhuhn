@@ -35,6 +35,11 @@ class EbdGraphMetaData:
     Section from the EDI@Energy Document
     e.g. '7.24 AD:  Übermittlung Datenstatus für die Bilanzierungsgebietssummenzeitreihe vom BIKO an ÜNB und NB'
     """
+    ebd_name: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    EBD name from the EDI@Energy Document
+    e.g. 'E_0003_Bestellung der Aggregationsebene RZ prüfen'
+    """
     role: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"

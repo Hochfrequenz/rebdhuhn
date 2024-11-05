@@ -9,6 +9,7 @@ e_0529 = EbdTable(
         ebd_code="E_0529",
         chapter="GPKE",
         section="6.36.6: AD Bestellung einer Konfiguration vom NB an MSB",
+        ebd_name="E_0529_Some",
         role="MSB",
     ),
     rows=[

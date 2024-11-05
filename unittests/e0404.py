@@ -5,7 +5,13 @@ Contains the raw data for E_0404 in the form of an EbdTable.
 from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 e_0404 = EbdTable(
-    metadata=EbdTableMetaData(ebd_code="E_0404", chapter="GPKE", section="6.4.4: AD: Lieferbeginn", role="NB"),
+    metadata=EbdTableMetaData(
+        ebd_code="E_0404",
+        chapter="GPKE",
+        section="6.4.4: AD: Lieferbeginn",
+        ebd_name="E_0404_Lieferbeginn prüfen",
+        role="NB",
+    ),
     rows=[
         EbdTableRow(
             step_number="1",

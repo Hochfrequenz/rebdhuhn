@@ -6,7 +6,11 @@ from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTable
 
 table_e0459 = EbdTable(
     metadata=EbdTableMetaData(
-        ebd_code="E_0459", chapter="GPKE", section="6.7.4: AD: Netznutzungsabrechnung", role="LF"
+        ebd_code="E_0459",
+        chapter="GPKE",
+        section="6.7.4: AD: Netznutzungsabrechnung",
+        ebd_name="E_0459_Prüfen, ob Antwort auf Stornierung erforderlich",
+        role="LF",
     ),
     rows=[
         EbdTableRow(

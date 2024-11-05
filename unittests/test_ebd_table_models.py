@@ -21,6 +21,7 @@ class TestEbdTableModels:
                         ebd_code="E_0015",
                         chapter="7.17 AD: AD: Aktivierung eines MaBiS-ZP für Bilanzierungsgebietssummenzeitreihen vom ÜNB an BIKO und NB",
                         section="7.17.1 E_0015_MaBiS-ZP Aktivierung prüfen",
+                        ebd_name="E_0404_Lieferbeginn prüfen",
                         role="BIKO",
                     ),
                     rows=[
@@ -176,6 +177,7 @@ dem Wert „Marktlokations-ID“ angegeben?""",
                 ebd_code="E_0453",
                 chapter="6.18 AD: Stammdatensynchronisation",
                 section="6.18.1 E_0453_Änderung prüfen",
+                ebd_name="E_0404_Lieferbeginn prüfen",
                 role="ÜNB",
             ),
             multi_step_instructions=[

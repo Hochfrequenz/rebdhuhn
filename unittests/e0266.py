@@ -10,6 +10,7 @@ table_e0266 = EbdTable(
         ebd_code="E_0266",
         chapter="WiM Strom",
         section="9.26.3: AD Abrechnung einer für den ESA erbrachten Leistung",
+        ebd_name="E_0266 Some Name",
         role="ESA",
     ),
     rows=[

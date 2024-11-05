@@ -44,8 +44,9 @@ ebd_table: EbdTable  # this is the result of scraping the docx file
 ebd_table = EbdTable(  # this data shouldn't be handwritten
     metadata=EbdTableMetaData(
         ebd_code="E_0003",
-        chapter="7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone",
-        sub_chapter="7.39.1 E_0003_Bestellung der Aggregationsebene RZ prüfen",
+        chapter="MaBiS",
+        section="7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone",
+        ebd_name="Bestellung der Aggregationsebene RZ prüfen",
         role="ÜNB",
     ),
     rows=[

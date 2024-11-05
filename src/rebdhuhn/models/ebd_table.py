@@ -23,16 +23,21 @@ class EbdTableMetaData:
     chapter: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     Chapter from the EDI@Energy Document
-    e.g. '7.24 AD:  Übermittlung Datenstatus für die Bilanzierungsgebietssummenzeitreihe vom BIKO an ÜNB und NB'
+    e.g. MaBiS
     """
-    sub_chapter: str = attrs.field(validator=attrs.validators.instance_of(str))
+    section: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
-    Sub Chapter from the EDI@Energy Document
+    Section from the EDI@Energy Document
     e.g. '7.24.1 Datenstatus nach erfolgter Bilanzkreisabrechnung vergeben'
     """
     role: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"
+    """
+    ebd_name: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    EBD name from the EDI@Energy Document
+    e.g. 'E_0003_Bestellung der Aggregationsebene RZ prüfen'
     """
     remark: Optional[str] = attrs.field(
         default=None, validator=attrs.validators.optional(attrs.validators.instance_of(str))

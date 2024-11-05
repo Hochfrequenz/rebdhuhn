@@ -6,7 +6,11 @@ from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTable
 
 e_0401 = EbdTable(
     metadata=EbdTableMetaData(
-        ebd_code="E_0401", chapter="GPKE", sub_chapter="6.2.1: AD: Lieferende LF an NB", role="NB"
+        ebd_code="E_0401",
+        chapter="GPKE",
+        section="6.2.1: AD: Lieferende LF an NB",
+        ebd_name="6.2.1	E_0401_Abmeldung prüfen",
+        role="NB",
     ),
     rows=[
         EbdTableRow(

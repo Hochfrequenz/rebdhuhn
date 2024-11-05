@@ -167,7 +167,7 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
         "title\n"
         f"{graph.metadata.chapter}\n"
         "\n"
-        f"{graph.metadata.sub_chapter}\n"
+        f"{graph.metadata.section}\n"
         "\n"
         "\n"
         "\n"

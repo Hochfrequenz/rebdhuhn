@@ -34,6 +34,13 @@ class EbdTableMetaData:
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"
     """
+    remark: Optional[str] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(str))
+    )
+    """
+    remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
+    da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
+    """
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

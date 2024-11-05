@@ -160,7 +160,7 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
         chapter=table.metadata.chapter,
-        sub_chapter=table.metadata.sub_chapter,
+        sub_chapter=table.metadata.section,
         role=table.metadata.role,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)

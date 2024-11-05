@@ -8,7 +8,7 @@ e_0529 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0529",
         chapter="GPKE",
-        sub_chapter="6.36.6: AD Bestellung einer Konfiguration vom NB an MSB",
+        section="6.36.6: AD Bestellung einer Konfiguration vom NB an MSB",
         role="MSB",
     ),
     rows=[

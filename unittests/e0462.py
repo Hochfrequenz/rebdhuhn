@@ -5,7 +5,7 @@ Contains the raw data for E_0401 in the form of an EbdTable.
 from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 
 table_e0462 = EbdTable(
-    metadata=EbdTableMetaData(ebd_code="E_0462", chapter="GPKE", sub_chapter="6.4.1: AD: Lieferbeginn", role="NB"),
+    metadata=EbdTableMetaData(ebd_code="E_0462", chapter="GPKE", section="6.4.1: AD: Lieferbeginn", role="NB"),
     rows=[
         EbdTableRow(
             step_number="1",

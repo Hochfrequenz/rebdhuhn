@@ -25,9 +25,9 @@ class EbdTableMetaData:
     Chapter from the EDI@Energy Document
     e.g. MaBiS
     """
-    sub_chapter: str = attrs.field(validator=attrs.validators.instance_of(str))
+    section: str = attrs.field(validator=attrs.validators.instance_of(str))
     """
-    Sub Chapter from the EDI@Energy Document
+    Section from the EDI@Energy Document
     e.g. '7.24.1 Datenstatus nach erfolgter Bilanzkreisabrechnung vergeben'
     """
     role: str = attrs.field(validator=attrs.validators.instance_of(str))

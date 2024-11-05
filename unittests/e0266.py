@@ -9,7 +9,7 @@ table_e0266 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0266",
         chapter="WiM Strom",
-        sub_chapter="9.26.3: AD Abrechnung einer für den ESA erbrachten Leistung",
+        section="9.26.3: AD Abrechnung einer für den ESA erbrachten Leistung",
         role="ESA",
     ),
     rows=[

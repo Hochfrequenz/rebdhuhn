@@ -15,7 +15,7 @@ table_e0003 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0003",
         chapter="7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone",
-        sub_chapter="7.39.1 E_0003_Bestellung der Aggregationsebene RZ prüfen",
+        section="7.39.1 E_0003_Bestellung der Aggregationsebene RZ prüfen",
         role="ÜNB",
     ),
     rows=[
@@ -60,7 +60,7 @@ table_e0025 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0025",
         chapter="7.41 AD: Übermittlung Prüfmitteilung für die Bilanzkreissummenzeitreihe vom BKV an BIKO und ÜNB",
-        sub_chapter="7.41.2 E_0025_Prüfmitteilung prüfen",
+        section="7.41.2 E_0025_Prüfmitteilung prüfen",
         role="BIKO",
     ),
     rows=[
@@ -158,7 +158,7 @@ table_e0015 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0015",
         chapter="7.17 AD: Aktivierung eines MaBiS-ZP für Bilanzierungsgebietssummenzeitreihen vom ÜNB an BIKO und NB",
-        sub_chapter="7.17.1 E_0015_MaBiS-ZP Aktivierung prüfen",
+        section="7.17.1 E_0015_MaBiS-ZP Aktivierung prüfen",
         role="BIKO",
     ),
     rows=[
@@ -332,7 +332,7 @@ table_e0401 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0401",
         chapter="6.2 AD: Lieferende LF an NB",
-        sub_chapter="6.2.1 E_0401_Abmeldung prüfen",
+        section="6.2.1 E_0401_Abmeldung prüfen",
         role="NB",  # NB=VNB
     ),
     rows=[

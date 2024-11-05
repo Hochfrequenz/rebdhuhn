@@ -20,7 +20,7 @@ class TestEbdTableModels:
                     metadata=EbdTableMetaData(
                         ebd_code="E_0015",
                         chapter="7.17 AD: AD: Aktivierung eines MaBiS-ZP für Bilanzierungsgebietssummenzeitreihen vom ÜNB an BIKO und NB",
-                        sub_chapter="7.17.1 E_0015_MaBiS-ZP Aktivierung prüfen",
+                        section="7.17.1 E_0015_MaBiS-ZP Aktivierung prüfen",
                         role="BIKO",
                     ),
                     rows=[
@@ -175,7 +175,7 @@ dem Wert „Marktlokations-ID“ angegeben?""",
             metadata=EbdTableMetaData(
                 ebd_code="E_0453",
                 chapter="6.18 AD: Stammdatensynchronisation",
-                sub_chapter="6.18.1 E_0453_Änderung prüfen",
+                section="6.18.1 E_0453_Änderung prüfen",
                 role="ÜNB",
             ),
             multi_step_instructions=[

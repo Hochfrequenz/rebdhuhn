@@ -8,7 +8,7 @@ table_e0454 = EbdTable(
     metadata=EbdTableMetaData(
         ebd_code="E_0454",
         chapter="GPKE",
-        sub_chapter="6.27.2: AD: Information über die Zuordnung einer Marktlokation zur Datenaggregation durch den ÜNB",
+        section="6.27.2: AD: Information über die Zuordnung einer Marktlokation zur Datenaggregation durch den ÜNB",
         role="ÜNB",
     ),
     rows=[

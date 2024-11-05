@@ -417,7 +417,7 @@ class TestEbdTableModels:
                     metadata=EbdGraphMetaData(
                         ebd_code=table_e0003.metadata.ebd_code,
                         chapter=table_e0003.metadata.chapter,
-                        sub_chapter=table_e0003.metadata.sub_chapter,
+                        sub_chapter=table_e0003.metadata.section,
                         role=table_e0003.metadata.role,
                     ),
                     graph=DiGraph(),
@@ -430,7 +430,7 @@ class TestEbdTableModels:
                     metadata=EbdGraphMetaData(
                         ebd_code=table_e0025.metadata.ebd_code,
                         chapter=table_e0025.metadata.chapter,
-                        sub_chapter=table_e0025.metadata.sub_chapter,
+                        sub_chapter=table_e0025.metadata.section,
                         role=table_e0025.metadata.role,
                     ),
                     graph=DiGraph(),
@@ -443,7 +443,7 @@ class TestEbdTableModels:
                     metadata=EbdGraphMetaData(
                         ebd_code=table_e0015.metadata.ebd_code,
                         chapter=table_e0015.metadata.chapter,
-                        sub_chapter=table_e0015.metadata.sub_chapter,
+                        sub_chapter=table_e0015.metadata.section,
                         role=table_e0015.metadata.role,
                     ),
                     graph=DiGraph(),
@@ -456,7 +456,7 @@ class TestEbdTableModels:
                     metadata=EbdGraphMetaData(
                         ebd_code=table_e0401.metadata.ebd_code,
                         chapter=table_e0401.metadata.chapter,
-                        sub_chapter=table_e0401.metadata.sub_chapter,
+                        sub_chapter=table_e0401.metadata.section,
                         role=table_e0401.metadata.role,
                     ),
                     graph=DiGraph(),

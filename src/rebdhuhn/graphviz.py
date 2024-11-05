@@ -158,7 +158,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     _mark_last_common_ancestors(nx_graph)
     header = (
         f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
-        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.sub_chapter}</FONT></B><BR/><BR/><BR/><BR/>'
+        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR/><BR/><BR/><BR/>'
     )
     dot_attributes: dict[str, str] = {f"'{ADD_INDENT}labelloc": '"t"', "label": f"<{header}>"}
     dot_code = "digraph D {\n"

@@ -1,10 +1,11 @@
 # serializer version: 1
 # name: TestEbdTableModels.test_table_to_digraph_dot_real_kroki_request[table0-DiGraph with 6 nodes and 5 edges][test_table_to_digraph_dot_real_kroki_request_E_0003_Bestellung der Aggregationsebene RZ prüfen]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1055pt" height="428pt" viewBox="0.00 0.00 1054.50 427.82">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="177pt" height="72pt" viewBox="0.00 0.00 177.47 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0003</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> &#220;NB</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
       "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -19,7 +20,7 @@
       "2" -> "Ende" [label="Ja"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 423.82)">
+  }'--><g id="graph0" class="graph" transform="scale(0.168295 0.168295) rotate(0) translate(4 423.82)">
   <title>D</title>
   <text text-anchor="start" x="8" y="-399.72" font-family="Times,serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
   <text text-anchor="start" x="250.62" y="-369.62" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
@@ -107,10 +108,11 @@
 # ---
 # name: TestEbdTableModels.test_table_to_digraph_dot_real_kroki_request[table1-DiGraph with 22 nodes and 21 edges][test_table_to_digraph_dot_real_kroki_request_E_0015_MaBiS-ZP Aktivierung prüfen]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="3190pt" height="1370pt" viewBox="0.00 0.00 3190.30 1369.98">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="168pt" height="72pt" viewBox="0.00 0.00 167.67 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0015</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
       "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -157,7 +159,7 @@
       "10" -> "A11" [label="Nein"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1365.98)">
+  }'--><g id="graph0" class="graph" transform="scale(0.0525555 0.0525555) rotate(0) translate(4 1365.98)">
   <title>D</title>
   <text text-anchor="start" x="1044.78" y="-1341.88" font-family="Times,serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
   <text text-anchor="start" x="1389.78" y="-1311.78" font-family="Times,serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>
@@ -490,10 +492,11 @@
 # ---
 # name: TestEbdTableModels.test_table_to_digraph_dot_real_kroki_request[table2-DiGraph with 10 nodes and 11 edges][test_table_to_digraph_dot_real_kroki_request_E_0025_Prüfmitteilung prüfen]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1086pt" height="653pt" viewBox="0.00 0.00 1085.55 652.88">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="120pt" height="72pt" viewBox="0.00 0.00 119.72 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0025</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Pr&#252;fmitteilung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
       "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -518,7 +521,7 @@
       "5" -> "Ende" [label="Nein"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 648.88)">
+  }'--><g id="graph0" class="graph" transform="scale(0.110281 0.110281) rotate(0) translate(4 648.88)">
   <title>D</title>
   <text text-anchor="start" x="20.15" y="-624.78" font-family="Times,serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
   <text text-anchor="start" x="371.15" y="-594.68" font-family="Times,serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
@@ -682,10 +685,11 @@
 # ---
 # name: TestEbdTableModels.test_table_to_digraph_dot_real_kroki_request[table3-DiGraph with 23 nodes and 27 edges][test_table_to_digraph_dot_real_kroki_request_E_0401_Abmeldung prüfen]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2128pt" height="1559pt" viewBox="0.00 0.00 2128.14 1558.52">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="98pt" height="72pt" viewBox="0.00 0.00 98.32 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Liegt ein Transaktionsgrund vor, der eine Abmeldung nur in<BR align="left"/>die Zukunft zul&#228;sst?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Wechsel<BR align="left"/>&#61599; Ende der ESV ohne Folgelieferung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>aufgehobenem Vertragsverh&#228;ltnis<BR align="left"/>>];
       "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Liegt ein Transaktionsgrund vor, welcher mitteilt, dass der<BR align="left"/>Kunde vor Lieferbeginn ausgezogen ist, bzw. die<BR align="left"/>Marktlokation vor Lieferbeginn stillgelegt wurde?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen Auszug<BR align="left"/>des Kunden<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>];
@@ -739,7 +743,7 @@
       "13" -> "A09" [label="Ja"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1554.52)">
+  }'--><g id="graph0" class="graph" transform="scale(0.0461977 0.0461977) rotate(0) translate(4 1554.52)">
   <title>D</title>
   <text text-anchor="start" x="916.44" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
   <text text-anchor="start" x="913.44" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>
@@ -1176,10 +1180,11 @@
 # ---
 # name: TestEbdTableModels.test_table_to_digraph_dot_with_watermark_real_kroki_request[False][test_table_to_digraph_dot_with_watermark_real_kroki_request_background_False]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1055pt" height="428pt" viewBox="0.00 0.00 1054.50 427.82">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="177pt" height="72pt" viewBox="0.00 0.00 177.47 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0003</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> &#220;NB</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
       "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -1194,7 +1199,7 @@
       "2" -> "Ende" [label="Ja"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 423.82)">
+  }'--><g id="graph0" class="graph" transform="scale(0.168295 0.168295) rotate(0) translate(4 423.82)">
   <title>D</title>
   <text text-anchor="start" x="8" y="-399.72" font-family="Times,serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
   <text text-anchor="start" x="250.62" y="-369.62" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
@@ -1282,10 +1287,11 @@
 # ---
 # name: TestEbdTableModels.test_table_to_digraph_dot_with_watermark_real_kroki_request[True][test_table_to_digraph_dot_with_watermark_real_kroki_request_background_True]
   '''
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1055pt" height="428pt" viewBox="0.00 0.00 1054.50 427.82">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="177pt" height="72pt" viewBox="0.00 0.00 177.47 72.00">
   <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
       labelloc="t";
       label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+      size="3,1";
       "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0003</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> &#220;NB</B></FONT><BR align="center"/>>];
       "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>];
       "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -1300,7 +1306,7 @@
       "2" -> "Ende" [label="Ja"];
   
       bgcolor="transparent";
-  }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 423.82)">
+  }'--><g id="graph0" class="graph" transform="scale(0.168295 0.168295) rotate(0) translate(4 423.82)">
   <title>D</title>
   <text text-anchor="start" x="8" y="-399.72" font-family="Times,serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
   <text text-anchor="start" x="250.62" y="-369.62" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>

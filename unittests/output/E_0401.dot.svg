@@ -24,10 +24,73 @@
   </g>
 </g>
     <svg width="1440pt" height="1226pt" viewBox="0.00 0.00 1440.00 1225.92">
-<g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(0) translate(4 1554.52)">
+<!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
+    labelloc="t";
+    label=<<B><FONT POINT-SIZE="18" FONT-NAME="Yanone Kaffeesatz">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16" FONT-NAME="Yanone Kaffeesatz">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    ratio="compress";
+    concentrate=true;
+    pack=true;
+    rankdir=TB;
+    packmode="array";
+    size="20,20";
+    fontname="Roboto Condensed";
+    "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>];
+    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Liegt ein Transaktionsgrund vor, der eine Abmeldung nur in<BR align="left"/>die Zukunft zul&#228;sst?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Wechsel<BR align="left"/>&#61599; Ende der ESV ohne Folgelieferung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>aufgehobenem Vertragsverh&#228;ltnis<BR align="left"/>>];
+    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Liegt ein Transaktionsgrund vor, welcher mitteilt, dass der<BR align="left"/>Kunde vor Lieferbeginn ausgezogen ist, bzw. die<BR align="left"/>Marktlokation vor Lieferbeginn stillgelegt wurde?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen Auszug<BR align="left"/>des Kunden<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>];
+    "3" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>3: </B>Liegt das Abmeldedatum mindestens einen Tag nach dem<BR align="left"/>Eingangsdatum der Abmeldung?<BR align="left"/>>];
+    "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Frist&#252;berschreitung bei Aufhebung einer zu-<BR align="left"/>k&#252;nftigen Zuordnung wegen Auszug oder Still-<BR align="left"/>legung.<BR align="left"/></FONT>>];
+    "4" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>4: </B>Liegt das Eingangsdatum mindestens 6 WT vor dem<BR align="left"/>Abmeldedatum?<BR align="left"/>>];
+    "A02" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Frist&#252;berschreitung bei Transaktionsgr&#252;nden f&#252;r<BR align="left"/>eine Abmeldung in der Zukunft.<BR align="left"/></FONT>>];
+    "5" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>5: </B>Liegt der Transaktionsgrund<BR align="left"/>&#8226; Aufhebung einer zuk&#252;nftigen Zuordnung wegen auf-<BR align="left"/>gehobenem Vertragsverh&#228;ltnis<BR align="left"/>vor?<BR align="left"/>>];
+    "6" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>6: </B>Handelt es sich um eine Marktlokation, deren Mess-<BR align="left"/>lokationen vollst&#228;ndig mit iMS ausgestattet sind oder/und<BR align="left"/>deren Prognosegrundlage auf Basis von Werten erfolgt?<BR align="left"/>>];
+    "7" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>7: </B>Liegt das Abmeldedatum mindestens einen Tag nach dem<BR align="left"/>Eingangsdatum der Abmeldung?<BR align="left"/>>];
+    "A03" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A03</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Eingangsfrist bei iMS/kME mit RLM nicht ein-<BR align="left"/>gehalten.<BR align="left"/></FONT>>];
+    "8" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>8: </B>Liegt das Eingangsdatum der Abmeldung mehr als sechs<BR align="left"/>Wochen nach dem Abmeldedatum der Abmeldung?<BR align="left"/>>];
+    "A04" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A04</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Frist&#252;berschreitung bei kME ohne RLM/mME/<BR align="left"/>Pauschalanlage.<BR align="left"/></FONT>>];
+    "9" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>9: </B>Erfolgt die Aufhebung einer zuk&#252;nftigen Zuordnung zu dem<BR align="left"/>gleichen Datum (Zeitpunkt), welcher dem Lieferanten im<BR align="left"/>Lieferbeginn best&#228;tigt wurde?<BR align="left"/>>];
+    "A05" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A05</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Die Aufhebung einer zuk&#252;nftigen Zuordnung<BR align="left"/>muss zum Datum (Zeitpunkt) angegeben werden,<BR align="left"/>wie im Lieferbeginn best&#228;tigt.<BR align="left"/></FONT>>];
+    "10" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>10: </B>Wurde die Zuordnung des anfragenden Lieferanten zur<BR align="left"/>Marktlokation zum identischen Abmeldedatum bereits durch<BR align="left"/>eine Best&#228;tigung in den folgenden Prozessschritten beendet?<BR align="left"/>Fall:<BR align="left"/>&#61599; SD: Lieferende von LF an NB, Prozessschritt 2 "Antwort<BR align="left"/>auf Abmeldung"<BR align="left"/>&#61599; SD: Lieferende von NB an LF, Prozessschritt 2 "Antwort<BR align="left"/>auf Abmeldung"<BR align="left"/>&#61599; SD: Lieferbeginn, Prozessschritt 4 "Beantwortung der<BR align="left"/>Abmeldeanfrage" oder die Best&#228;tigung erfolgt durch<BR align="left"/>die Fristverstreichung<BR align="left"/>>];
+    "A06" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A06</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Best&#228;tigung der Abmeldung<BR align="left"/></FONT>>];
+    "11" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>11: </B>Ist der anfragende LF am Folgetag des Abmeldungsdatum der<BR align="left"/>Marktlokation noch zugeordnet?<BR align="left"/>>];
+    "12" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>12: </B>Liegt ein Transaktionsgrund vor, aus welchem hervorgeht,<BR align="left"/>dass der Anschlussnutzer ausgezogen ist?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Ein-/Auszug (Umzug)<BR align="left"/>&#61599; Auszug wegen Stilllegung<BR align="left"/>>];
+    "A07" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A07</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Lieferende zum Abmeldedatum wurde bereits<BR align="left"/>best&#228;tigt<BR align="left"/></FONT>>];
+    "13" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>13: </B>Liegt in der bereits best&#228;tigten Abmeldung ein<BR align="left"/>Transaktionsgrund vor, aus welchem nicht hervorgeht, dass<BR align="left"/>der Anschlussnutzer ausgezogen ist?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Ein-/Auszug (Umzug)<BR align="left"/>&#61599; Auszug wegen Stilllegung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>];
+    "A08" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A08</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Lieferende zum Abmeldedatum wurde aus<BR align="left"/>gleichem Grund bereits best&#228;tigt.<BR align="left"/></FONT>>];
+    "A09" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A09</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Erneute Best&#228;tigung der Abmeldung aufgrund der<BR align="left"/>Information, dass der Anschlussnutzer nicht mehr<BR align="left"/>an der Marktlokation vorhanden ist.<BR align="left"/>Hinweis: Das bisher best&#228;tigte Bilanzierungsende<BR align="left"/>bleibt unver&#228;ndert bestehen.<BR align="left"/></FONT>>];
+
+    "Start" -> "1";
+    "1" -> "4" [label="Ja"];
+    "1" -> "2" [label="Nein"];
+    "2" -> "3" [label="Ja"];
+    "2" -> "6" [label="Nein"];
+    "3" -> "A01" [label="Nein"];
+    "3" -> "9" [label="Ja"];
+    "4" -> "A02" [label="Nein"];
+    "4" -> "5" [label="Ja"];
+    "5" -> "9" [label="Ja"];
+    "5" -> "10" [label="Nein"];
+    "6" -> "7" [label="Ja"];
+    "6" -> "8" [label="Nein"];
+    "7" -> "A03" [label="Nein"];
+    "7" -> "10" [label="Ja"];
+    "8" -> "A04" [label="Nein"];
+    "8" -> "10" [label="Ja"];
+    "9" -> "A05" [label="Nein"];
+    "9" -> "10" [label="Ja"];
+    "10" -> "11" [label="Ja"];
+    "10" -> "A06" [label="Nein"];
+    "11" -> "12" [label="Nein"];
+    "11" -> "A06" [label="Ja"];
+    "12" -> "A07" [label="Nein"];
+    "12" -> "13" [label="Ja"];
+    "13" -> "A08" [label="Nein"];
+    "13" -> "A09" [label="Ja"];
+
+    bgcolor="transparent";
+}'--><g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(0) translate(4 1554.52)">
 <title>D</title>
-<text text-anchor="start" x="767.71" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
-<text text-anchor="start" x="764.71" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>
+<text text-anchor="start" x="769.96" y="-1530.42" font-family="Roboto Condensed" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
+<text text-anchor="start" x="766.59" y="-1500.32" font-family="Roboto Condensed" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

@@ -1,13 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440pt" height="1300pt" viewBox="0.00 0.00 1440.00 1300.00">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    label=<<B><FONT POINT-SIZE="18" FONT-NAME="Yanone Kaffeesatz">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16" FONT-NAME="Yanone Kaffeesatz">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
     pack=true;
     rankdir=TB;
     packmode="array";
     size="20,20";
+    fontname="Roboto Condensed";
     "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0015</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
     "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
@@ -56,8 +57,8 @@
     bgcolor="transparent";
 }'--><g id="graph0" class="graph" transform="scale(0.94892 0.94892) rotate(0) translate(4 1365.98)">
 <title>D</title>
-<text text-anchor="start" x="208.38" y="-1341.88" font-family="Times,serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
-<text text-anchor="start" x="553.38" y="-1311.78" font-family="Times,serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>
+<text text-anchor="start" x="218.13" y="-1341.88" font-family="Roboto Condensed" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
+<text text-anchor="start" x="557.88" y="-1311.78" font-family="Roboto Condensed" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

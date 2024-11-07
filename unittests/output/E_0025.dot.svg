@@ -24,10 +24,44 @@
   </g>
 </g>
     <svg width="1082pt" height="653pt" viewBox="0.00 0.00 1081.55 652.88">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 648.88)">
+<!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
+    labelloc="t";
+    label=<<B><FONT POINT-SIZE="18" FONT-NAME="Yanone Kaffeesatz">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16" FONT-NAME="Yanone Kaffeesatz">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    ratio="compress";
+    concentrate=true;
+    pack=true;
+    rankdir=TB;
+    packmode="array";
+    size="20,20";
+    fontname="Roboto Condensed";
+    "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0025</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
+    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt der Eingang der Pr&#252;fmitteilung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
+    "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
+    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Befindet sich der MaBiS-ZP auf der Aggregationsebene RZ?<BR align="left"/>>];
+    "3" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>3: </B>Hat der BKV f&#252;r den BK dieses MaBiS-ZP in diesem Bilanzie-<BR align="left"/>rungsmonat die Aggregationsebene RZ abbestellt?<BR align="left"/>>];
+    "Ende" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label="Ende"];
+    "4" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>4: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>];
+    "A02" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Falsche Aggregationsebene BG<BR align="left"/></FONT>>];
+    "5" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>5: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>];
+    "A03" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A03</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Falsche Aggregationsebene RZ<BR align="left"/></FONT>>];
+
+    "Start" -> "1";
+    "1" -> "A01" [label="Ja"];
+    "1" -> "2" [label="Nein"];
+    "2" -> "3" [label="Nein"];
+    "2" -> "5" [label="Ja"];
+    "3" -> "4" [label="Nein"];
+    "3" -> "Ende" [label="Ja"];
+    "4" -> "A02" [label="Nein"];
+    "4" -> "Ende" [label="Ja"];
+    "5" -> "A03" [label="Ja"];
+    "5" -> "Ende" [label="Nein"];
+
+    bgcolor="transparent";
+}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 648.88)">
 <title>D</title>
-<text text-anchor="start" x="18.15" y="-624.78" font-family="Times,serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
-<text text-anchor="start" x="369.15" y="-594.68" font-family="Times,serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
+<text text-anchor="start" x="28.28" y="-624.78" font-family="Roboto Condensed" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
+<text text-anchor="start" x="372.15" y="-594.68" font-family="Roboto Condensed" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

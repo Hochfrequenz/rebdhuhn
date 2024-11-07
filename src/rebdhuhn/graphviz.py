@@ -160,7 +160,18 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
         f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
         f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR/><BR/><BR/><BR/>'
     )
-    dot_attributes: dict[str, str] = {"labelloc": '"t"', "label": f"<{header}>", "ratio": "\"compress\""}
+
+    dot_attributes: dict[str, str] = {
+        # https://graphviz.org/doc/info/attrs.html
+        "labelloc": '"t"',
+        "label": f"<{header}>",
+        "ratio": '"compress"',
+        "concentrate": "true",
+        "pack": "true",
+        "rankdir": "TB",
+        "packmode": '"array"',
+        "size": '"20,20"',  # in inches 🤮
+    }
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
         dot_code += f"{ADD_INDENT}{dot_attr_key}={dot_attr_value};\n"

@@ -30,6 +30,19 @@ class PlantUmlToSvgConverter(Protocol):
         """
 
 
+class KrokiBadRequestError(Exception):
+    """
+    is raised, when kroki rejects our request
+    """
+
+    def __init__(self, dot_code: str, response_body: str | None = None) -> None:
+        self.dot_code = dot_code
+        self.response_body = response_body
+
+    def __str__(self) -> str:
+        return f"BadRequest while creating svg: {self.response_body} / {self.dot_code}"
+
+
 # pylint:disable=too-few-public-methods
 class Kroki:
     """
@@ -55,6 +68,8 @@ class Kroki:
             timeout=5,
         )
         if answer.status_code != 200:
+            if answer.status_code == 400:
+                raise KrokiBadRequestError(dot_code, answer.text)
             raise ValueError(
                 f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
                 f"{answer.text}"
@@ -68,7 +83,11 @@ class Kroki:
         url = self._host
         answer = requests.post(
             url,
-            json={"diagram_source": plantuml_code, "diagram_type": "plantuml", "output_format": "svg"},
+            json={
+                "diagram_source": plantuml_code,
+                "diagram_type": "plantuml",
+                "output_format": "svg",
+            },
             timeout=5,
         )
         if answer.status_code != 200:

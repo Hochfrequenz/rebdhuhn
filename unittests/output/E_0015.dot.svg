@@ -24,56 +24,7 @@
   </g>
 </g>
     <svg width="3190pt" height="1370pt" viewBox="0.00 0.00 3190.30 1369.98">
-<!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
-    labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
-    "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0015</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
-    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
-    "A01" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
-    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
-    "A02" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>];
-    "3" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>3: </B>Ist die richtige Regelzone angegeben<BR align="left"/>>];
-    "A03" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A03</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Regelzone falsch<BR align="left"/></FONT>>];
-    "4" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>4: </B>Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO g&#252;ltig?<BR align="left"/>>];
-    "A04" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A04</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Bilanzierungsgebiet nicht g&#252;ltig<BR align="left"/></FONT>>];
-    "5" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>5: </B>Ist der &#220;NB zum Aktivierungsbeginn f&#252;r das Bilanzierungsgebiet zust&#228;ndig?<BR align="left"/>>];
-    "A05" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A05</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Keine Berechtigung<BR align="left"/></FONT>>];
-    "6" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>6: </B>Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?<BR align="left"/>>];
-    "A06" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A06</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichender MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
-    "7" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>7: </B>Existiert bereits f&#252;r das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?<BR align="left"/>>];
-    "A07" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A07</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichende ID zum MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
-    "8" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>8: </B>Ist der &#220;NB zur Aktivierung des ZRT berechtigt?<BR align="left"/>>];
-    "A08" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A08</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>ZRT Aktivierung nicht berechtigt<BR align="left"/></FONT>>];
-    "9" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>9: </B>Passt die OBIS-Kennzahl zum ZRT?<BR align="left"/>>];
-    "A09" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A09</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>OBIS nicht passend<BR align="left"/></FONT>>];
-    "10" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>10: </B>Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?<BR align="left"/>>];
-    "A10" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A10</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>];
-    "A11" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<B>A11</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>];
-
-    "Start" -> "1";
-    "1" -> "A01" [label="Ja"];
-    "1" -> "2" [label="Nein"];
-    "2" -> "A02" [label="Nein"];
-    "2" -> "3" [label="Ja"];
-    "3" -> "A03" [label="Nein"];
-    "3" -> "4" [label="Ja"];
-    "4" -> "A04" [label="Nein"];
-    "4" -> "5" [label="Ja"];
-    "5" -> "A05" [label="Nein"];
-    "5" -> "6" [label="Ja"];
-    "6" -> "A06" [label="Ja"];
-    "6" -> "7" [label="Nein"];
-    "7" -> "A07" [label="Ja"];
-    "7" -> "8" [label="Nein"];
-    "8" -> "A08" [label="Nein"];
-    "8" -> "9" [label="Ja"];
-    "9" -> "A09" [label="Nein"];
-    "9" -> "10" [label="Ja"];
-    "10" -> "A10" [label="Ja"];
-    "10" -> "A11" [label="Nein"];
-
-    bgcolor="transparent";
-}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1365.98)">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1365.98)">
 <title>D</title>
 <text text-anchor="start" x="1044.78" y="-1341.88" font-family="Times,serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
 <text text-anchor="start" x="1389.78" y="-1311.78" font-family="Times,serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>

@@ -217,7 +217,9 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_real_kroki_request(self, table: EbdTable, expected_description: str) -> None:
+    def test_table_to_digraph_dot_real_kroki_request(
+        self, table: EbdTable, expected_description: str, snapshot
+    ) -> None:
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -236,6 +238,9 @@ class TestEbdTableModels:
         )
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_for_mock)
+        assert svg_code_for_mock == snapshot(
+            name=f"test_table_to_digraph_dot_real_kroki_request_{table.metadata.ebd_name}"
+        )
 
     @pytest.mark.parametrize(
         "table,expected_description",
@@ -327,7 +332,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_real_kroki_request(self, add_background: bool):
+    def test_table_to_digraph_dot_with_watermark_real_kroki_request(self, add_background: bool, snapshot):
         """
         Test the combination of background and watermark addition to the svg. The results are stored in
         `unittests/output` for you to inspect the result manually.
@@ -342,6 +347,9 @@ class TestEbdTableModels:
         file_name_test_files = Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg"
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_for_mock)
+        assert svg_code_for_mock == snapshot(
+            name=f"test_table_to_digraph_dot_with_watermark_real_kroki_request_background_{add_background}"
+        )
 
     @pytest.mark.parametrize(
         "add_background",
@@ -475,4 +483,4 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph) -> None:
-        convert_table_to_graph(table)
+        _ = convert_table_to_graph(table)

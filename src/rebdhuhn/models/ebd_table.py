@@ -220,7 +220,6 @@ class EbdTable:
     metadata: EbdTableMetaData = attrs.field(validator=attrs.validators.instance_of(EbdTableMetaData))
     """
     meta data about the table.
-    might have 0 rows, if the EBD exists but is just a paragraph of text, no real table
     """
     rows: List[EbdTableRow] = attrs.field(
         validator=attrs.validators.deep_iterable(
@@ -228,7 +227,8 @@ class EbdTable:
         ),
     )
     """
-    rows are the body of the table
+    rows are the body of the table;
+    might have 0 rows, if the EBD exists but is just a paragraph of text, no real table
     """
     # pylint: disable=duplicate-code
     multi_step_instructions: Optional[List[MultiStepInstruction]] = attrs.field(

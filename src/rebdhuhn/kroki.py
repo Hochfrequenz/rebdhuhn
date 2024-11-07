@@ -30,9 +30,9 @@ class PlantUmlToSvgConverter(Protocol):
         """
 
 
-class KrokiBadRequestError(Exception):
+class KrokiDotBadRequestError(Exception):
     """
-    is raised, when kroki rejects our request
+    is raised, when kroki rejects our dot-to-svg request
     """
 
     def __init__(self, dot_code: str, response_body: str | None = None) -> None:
@@ -41,6 +41,19 @@ class KrokiBadRequestError(Exception):
 
     def __str__(self) -> str:
         return f"BadRequest while creating svg: {self.response_body} / {self.dot_code}"
+
+
+class KrokiPlantUmlBadRequestError(Exception):
+    """
+    is raised, when kroki rejects our puml-to-svg request
+    """
+
+    def __init__(self, plant_uml_code: str, response_body: str | None = None) -> None:
+        self.plant_uml_code = plant_uml_code
+        self.response_body = response_body
+
+    def __str__(self) -> str:
+        return f"BadRequest while creating svg: {self.response_body} / {self.plant_uml_code}"
 
 
 # pylint:disable=too-few-public-methods
@@ -69,7 +82,7 @@ class Kroki:
         )
         if answer.status_code != 200:
             if answer.status_code == 400:
-                raise KrokiBadRequestError(dot_code, answer.text)
+                raise KrokiDotBadRequestError(dot_code, answer.text)
             raise ValueError(
                 f"Error while converting dot to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
                 f"{answer.text}"
@@ -91,6 +104,8 @@ class Kroki:
             timeout=5,
         )
         if answer.status_code != 200:
+            if answer.status_code == 400:
+                raise KrokiPlantUmlBadRequestError(plantuml_code, answer.text)
             raise ValueError(
                 f"Error while converting plantuml to svg: {answer.status_code}: {requests.codes[answer.status_code]}. "
                 f"{answer.text}"

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1634.6666666666667px" viewBox="0 0 1634.6666666666667 1920.0" height="1920.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1634.6666666666667" height="1634.6666666666667px">
   <g>
-    <svg version="1.1" width="1634.6666666666667px" viewBox="0 0 1634.6666666666667 1920.0" height="1920.0px">
-  <polygon fill="#f3f1f6" points="0,0 1634.6666666666667,0 1634.6666666666667,1920.0 0,1920.0"/><g>
-    <g transform="translate(163.46666666666664, 305.64795754245006) scale(1 1) translate(0, 0) scale(7.398457295680935 7.398457295680935) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1634.6666666666667" height="1634.6666666666667px">
+  <polygon fill="#f3f1f6" points="0,0 1920.0,0 1920.0,1634.6666666666667 0,1634.6666666666667"/><g>
+    <g transform="translate(306.6183490891847, 163.46666666666664) scale(1 1) translate(0, 0) scale(7.3929693750690895 7.3929693750690895) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
   <defs id="defs2">
     <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
       <path d="M 0,568.156 H 579.236 V 0 H 0 Z" id="path21"/>
@@ -23,8 +23,8 @@
     </g>
   </g>
 </g>
-    <svg width="1226pt" height="1440pt" viewBox="0.00 0.00 1225.92 1440.00">
-<g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(-90) translate(-1826.68 1554.52)">
+    <svg width="1440pt" height="1226pt" viewBox="0.00 0.00 1440.00 1225.92">
+<g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(0) translate(4 1554.52)">
 <title>D</title>
 <text text-anchor="start" x="767.71" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
 <text text-anchor="start" x="764.71" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>

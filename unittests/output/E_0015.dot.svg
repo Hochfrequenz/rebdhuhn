@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1733.3333333333333px" viewBox="0 0 1733.3333333333333 1920.0" height="1920.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1733.3333333333333" height="1733.3333333333333px">
   <g>
-    <svg version="1.1" width="1733.3333333333333px" viewBox="0 0 1733.3333333333333 1920.0" height="1920.0px">
-  <polygon fill="#f3f1f6" points="0,0 1733.3333333333333,0 1733.3333333333333,1920.0 0,1920.0"/><g>
-    <g transform="translate(173.3333333333333, 266.1519941314724) scale(1 1) translate(0, 0) scale(7.84501997095042 7.84501997095042) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1733.3333333333333" height="1733.3333333333333px">
+  <polygon fill="#f3f1f6" points="0,0 1920.0,0 1920.0,1733.3333333333333 0,1733.3333333333333"/><g>
+    <g transform="translate(267.1809574355141, 173.3333333333333) scale(1 1) translate(0, 0) scale(7.8392008055381845 7.8392008055381845) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
   <defs id="defs2">
     <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
       <path d="M 0,568.156 H 579.236 V 0 H 0 Z" id="path21"/>
@@ -23,8 +23,8 @@
     </g>
   </g>
 </g>
-    <svg width="1300pt" height="1440pt" viewBox="0.00 0.00 1300.00 1440.00">
-<g id="graph0" class="graph" transform="scale(0.94892 0.94892) rotate(-90) translate(-1513.52 1365.98)">
+    <svg width="1440pt" height="1300pt" viewBox="0.00 0.00 1440.00 1300.00">
+<g id="graph0" class="graph" transform="scale(0.94892 0.94892) rotate(0) translate(4 1365.98)">
 <title>D</title>
 <text text-anchor="start" x="208.38" y="-1341.88" font-family="Times,serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
 <text text-anchor="start" x="553.38" y="-1311.78" font-family="Times,serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>

@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1226pt" height="1440pt" viewBox="0.00 0.00 1225.92 1440.00">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440pt" height="1226pt" viewBox="0.00 0.00 1440.00 1225.92">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
-    landscape=true;
     pack=true;
     rankdir=TB;
     packmode="array";
@@ -62,7 +61,7 @@
     "13" -> "A09" [label="Ja"];
 
     bgcolor="transparent";
-}'--><g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(-90) translate(-1826.68 1554.52)">
+}'--><g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(0) translate(4 1554.52)">
 <title>D</title>
 <text text-anchor="start" x="767.71" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
 <text text-anchor="start" x="764.71" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>

@@ -148,7 +148,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph(self, table: EbdTable, expected_description: str):
+    def test_table_to_digraph(self, table: EbdTable, expected_description: str, snapshot):
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -167,6 +167,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"
         ) as svg_file:
             svg_file.write(svg_code)
+        assert svg_code == snapshot(name=f"test_table_to_digraph_{table.metadata.ebd_code}")
 
     @staticmethod
     def create_and_save_svg_test(ebd_graph: EbdGraph) -> str:

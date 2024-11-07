@@ -1,10 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1300pt" height="1440pt" viewBox="0.00 0.00 1300.00 1440.00">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440pt" height="1300pt" viewBox="0.00 0.00 1440.00 1300.00">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
-    landscape=true;
     pack=true;
     rankdir=TB;
     packmode="array";
@@ -55,7 +54,7 @@
     "10" -> "A11" [label="Nein"];
 
     bgcolor="transparent";
-}'--><g id="graph0" class="graph" transform="scale(0.94892 0.94892) rotate(-90) translate(-1513.52 1365.98)">
+}'--><g id="graph0" class="graph" transform="scale(0.94892 0.94892) rotate(0) translate(4 1365.98)">
 <title>D</title>
 <text text-anchor="start" x="208.38" y="-1341.88" font-family="Times,serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
 <text text-anchor="start" x="553.38" y="-1311.78" font-family="Times,serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>

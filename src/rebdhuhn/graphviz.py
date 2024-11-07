@@ -160,7 +160,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
         f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
         f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR/><BR/><BR/><BR/>'
     )
-    dot_attributes: dict[str, str] = {"labelloc": '"t"', "label": f"<{header}>"}
+    dot_attributes: dict[str, str] = {"labelloc": '"t"', "label": f"<{header}>", "size": '"3,1"'}
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
         dot_code += f"{ADD_INDENT}{dot_attr_key}={dot_attr_value};\n"

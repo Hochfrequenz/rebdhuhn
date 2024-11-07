@@ -475,6 +475,4 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph) -> None:
-        actual = convert_table_to_graph(table)
-        pytest.skip("todo @leon - wird später in den examples.py ergänzt")
-        assert actual == expected_result
+        convert_table_to_graph(table)

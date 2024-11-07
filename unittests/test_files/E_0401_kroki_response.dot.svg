@@ -1,8 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="98pt" height="72pt" viewBox="0.00 0.00 98.32 72.00">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2128pt" height="1559pt" viewBox="0.00 0.00 2128.14 1558.52">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
-    size="3,1";
     "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Liegt ein Transaktionsgrund vor, der eine Abmeldung nur in<BR align="left"/>die Zukunft zul&#228;sst?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Wechsel<BR align="left"/>&#61599; Ende der ESV ohne Folgelieferung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>aufgehobenem Vertragsverh&#228;ltnis<BR align="left"/>>];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Liegt ein Transaktionsgrund vor, welcher mitteilt, dass der<BR align="left"/>Kunde vor Lieferbeginn ausgezogen ist, bzw. die<BR align="left"/>Marktlokation vor Lieferbeginn stillgelegt wurde?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen Auszug<BR align="left"/>des Kunden<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>];
@@ -56,7 +55,7 @@
     "13" -> "A09" [label="Ja"];
 
     bgcolor="transparent";
-}'--><g id="graph0" class="graph" transform="scale(0.0461977 0.0461977) rotate(0) translate(4 1554.52)">
+}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1554.52)">
 <title>D</title>
 <text text-anchor="start" x="916.44" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
 <text text-anchor="start" x="913.44" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>

@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="130.66666666666666px" viewBox="0 0 130.66666666666666 96.0" height="96.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="2837.3333333333335px" viewBox="0 0 2837.3333333333335 2078.6666666666665" height="2078.6666666666665px">
   <g>
-    <svg version="1.1" width="130.66666666666666px" viewBox="0 0 130.66666666666666 96.0" height="96.0px">
-  <polygon fill="#f3f1f6" points="0,0 130.66666666666666,0 130.66666666666666,96.0 0,96.0"/><g>
-    <g transform="translate(26.96181712976179, 9.599999999999998) scale(1 1) translate(0, 0) scale(0.43417112153749954 0.43417112153749954) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
+    <svg version="1.1" width="2837.3333333333335px" viewBox="0 0 2837.3333333333335 2078.6666666666665" height="2078.6666666666665px">
+  <polygon fill="#f3f1f6" points="0,0 2837.3333333333335,0 2837.3333333333335,2078.6666666666665 0,2078.6666666666665"/><g>
+    <g transform="translate(587.8167533143333, 207.86666666666662) scale(1 1) translate(0, 0) scale(9.401010812180022 9.401010812180022) "><sodipodi:namedview xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" id="namedview7" pagecolor="#ffffff" bordercolor="#999999" borderopacity="1" inkscape:pageshadow="0" inkscape:pageopacity="0" inkscape:pagecheckerboard="0" inkscape:document-units="mm" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" inkscape:zoom="0.64052329" inkscape:cx="130.36216" inkscape:cy="412.163" inkscape:window-width="1512" inkscape:window-height="916" inkscape:window-x="3840" inkscape:window-y="136" inkscape:window-maximized="0" inkscape:current-layer="layer1"/>
   <defs id="defs2">
     <clipPath clipPathUnits="userSpaceOnUse" id="clipPath23">
       <path d="M 0,568.156 H 579.236 V 0 H 0 Z" id="path21"/>
@@ -23,11 +23,10 @@
     </g>
   </g>
 </g>
-    <svg width="98pt" height="72pt" viewBox="0.00 0.00 98.32 72.00">
+    <svg width="2128pt" height="1559pt" viewBox="0.00 0.00 2128.14 1558.52">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
-    size="3,1";
     "Start" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>1: </B>Liegt ein Transaktionsgrund vor, der eine Abmeldung nur in<BR align="left"/>die Zukunft zul&#228;sst?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Wechsel<BR align="left"/>&#61599; Ende der ESV ohne Folgelieferung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>aufgehobenem Vertragsverh&#228;ltnis<BR align="left"/>>];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", label=<<B>2: </B>Liegt ein Transaktionsgrund vor, welcher mitteilt, dass der<BR align="left"/>Kunde vor Lieferbeginn ausgezogen ist, bzw. die<BR align="left"/>Marktlokation vor Lieferbeginn stillgelegt wurde?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen Auszug<BR align="left"/>des Kunden<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>];
@@ -81,7 +80,7 @@
     "13" -> "A09" [label="Ja"];
 
     bgcolor="transparent";
-}'--><g id="graph0" class="graph" transform="scale(0.0461977 0.0461977) rotate(0) translate(4 1554.52)">
+}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1554.52)">
 <title>D</title>
 <text text-anchor="start" x="916.44" y="-1530.42" font-family="Times,serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
 <text text-anchor="start" x="913.44" y="-1500.32" font-family="Times,serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>

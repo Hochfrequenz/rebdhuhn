@@ -219,11 +219,12 @@ class EbdTable:
 
     metadata: EbdTableMetaData = attrs.field(validator=attrs.validators.instance_of(EbdTableMetaData))
     """
-    meta data about the table
+    meta data about the table.
+    might have 0 rows, if the EBD exists but is just a paragraph of text, no real table
     """
     rows: List[EbdTableRow] = attrs.field(
         validator=attrs.validators.deep_iterable(
-            member_validator=attrs.validators.instance_of(EbdTableRow), iterable_validator=attrs.validators.min_len(1)
+            member_validator=attrs.validators.instance_of(EbdTableRow), iterable_validator=attrs.validators.min_len(0)
         ),
     )
     """

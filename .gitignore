@@ -136,3 +136,5 @@ dmypy.json
 # version number for rebdhuhn; gets auto-generated during the command
 # python -m build
 src/rebdhuhn/version.py
+
+src/rebdhuhn/_version.py

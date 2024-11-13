@@ -44,6 +44,13 @@ class EbdGraphMetaData:
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"
     """
+    remark: Optional[str] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(str))
+    )
+    """
+    remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
+    da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
+    """
 
 
 class EbdGraphNode(ABC):
@@ -125,6 +132,17 @@ class StartNode(EbdGraphNode):
 
     def get_key(self) -> str:
         return "Start"
+
+
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)
+class EmptyNode(EbdGraphNode):
+    """
+    This is a node which will contain the hints for the cases where a EBD key has no table.
+    E.g. E_0534 -> Es ist das EBD E_0527 zu nutzen.
+    """
+
+    def get_key(self) -> str:
+        return "Empty"
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

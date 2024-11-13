@@ -30,6 +30,12 @@ from rebdhuhn.utils import add_line_breaks
             "<br/>",
             "Der Mann aber ging über die Frage hinweg, als müsse man seine Erscheinung hinnehmen, und sagte bloß seinerseits:<br/>»Sie haben geläutet?« »Anna soll mir das Frühstück bringen«, sagte K. und<br/>versuchte, zunächst stillschweigend, durch Aufmerksamkeit und Überlegung<br/>festzustellen, wer der Mann eigentlich war.",
         ),
+        pytest.param(
+            'Folgendes:\n * Wenn ein "früher" line break kommt, dann soll der bevorzugt werden.\n Außerdem wollen wir nach wie vor, dass ansonsten immer das späte Leerzeichen gewinnt, denn sonst wäre das blöd und ich muss hier noch ein paar Zeichen füllen.',
+            80,
+            "<br/>",
+            'Folgendes:<br/>* Wenn ein "früher" line break kommt, dann soll der bevorzugt werden.<br/>Außerdem wollen wir nach wie vor, dass ansonsten immer das späte Leerzeichen<br/>gewinnt, denn sonst wäre das blöd und ich muss hier noch ein paar Zeichen<br/>füllen.',
+        ),
     ],
 )
 def test_add_line_breaks(original: str, length: int, line_break_char: str, expected: str) -> None:

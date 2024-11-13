@@ -14,8 +14,8 @@ def _split_string(input_string: str, max_length: int) -> list[str]:
 
     while len(input_string) > max_length:
         # Find the last space before the max length
-        split_index_line_break = input_string.rfind("\n", 0, int(1.5 * max_length))
-        split_index_whitespace: int = input_string.rfind(" ", 0, max_length)
+        split_index_line_break = input_string.find("\n", 0, int(1.5 * max_length))  # we prefer early line breaks
+        split_index_whitespace: int = input_string.rfind(" ", 0, max_length)  # but late white spaces
         split_index: int
         # If no space is found, split at the max length
         if split_index_line_break != -1:  # prefer this one

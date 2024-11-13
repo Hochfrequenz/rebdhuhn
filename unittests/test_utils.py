@@ -34,7 +34,13 @@ from rebdhuhn.utils import add_line_breaks
             'Folgendes:\n * Wenn ein "früher" line break kommt, dann soll der bevorzugt werden.\n Außerdem wollen wir nach wie vor, dass ansonsten immer das späte Leerzeichen gewinnt, denn sonst wäre das blöd und ich muss hier noch ein paar Zeichen füllen.',
             80,
             "<br/>",
-            'Folgendes:<br/>* Wenn ein "früher" line break kommt, dann soll der bevorzugt werden.<br/>Außerdem wollen wir nach wie vor, dass ansonsten immer das späte Leerzeichen<br/>gewinnt, denn sonst wäre das blöd und ich muss hier noch ein paar Zeichen<br/>füllen.',
+            'Folgendes:<br/>* Wenn ein "früher" line break kommt, dann soll der bevorzugt werden.<br/>Außerdem wollen wir nach wie vor, dass ansonsten immer das späte Leerzeichen<br/>gewinnt, denn sonst wäre das blöd und ich muss hier noch ein paar Zeichen füllen.',
+        ),
+        pytest.param(
+            "In jedem Fall wollen wir vermeiden, neue Hurenkinder einzuführen, denn die wären blöd",
+            80,
+            "<br/>",
+            "In jedem Fall wollen wir vermeiden, neue Hurenkinder einzuführen, denn die wären blöd",  # no <br/> before "blöd"
         ),
     ],
 )

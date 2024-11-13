@@ -11,10 +11,11 @@ def _split_string(input_string: str, max_length: int) -> list[str]:
     :return: A list of strings, each of length up to `max_length`.
     """
     parts: list[str] = []
-
+    hurenkinder_length = int(0.125 * max_length)
+    grace_length = int(1.5 * max_length)
     while len(input_string) > max_length:
         # Find the last space before the max length
-        split_index_line_break = input_string.find("\n", 0, int(1.5 * max_length))  # we prefer early line breaks
+        split_index_line_break = input_string.find("\n", 0, grace_length)  # we prefer early line breaks
         split_index_whitespace: int = input_string.rfind(" ", 0, max_length)  # but late white spaces
         split_index: int
         # If no space is found, split at the max length
@@ -32,7 +33,12 @@ def _split_string(input_string: str, max_length: int) -> list[str]:
 
         # Update the input_string to the remaining part
         input_string = input_string[split_index:].lstrip()
-
+        remaining_text_is_shorter_than_hurenkinder_threshold = len(input_string) <= hurenkinder_length
+        line_without_hurenkinder_within_grace_length = len(input_string) + len(part) <= grace_length
+        if remaining_text_is_shorter_than_hurenkinder_threshold and line_without_hurenkinder_within_grace_length:
+            parts[-1] += " " + input_string
+            input_string = ""
+            break
     # Add the remaining string if any
     if input_string:
         parts.append(input_string)

@@ -14,7 +14,7 @@ from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
-_LABEL_MAX_LINE_LENGTH = 100
+_LABEL_MAX_LINE_LENGTH = 80
 
 
 def _format_label(label: str) -> str:

@@ -196,7 +196,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
         dot_code += f"{ADD_INDENT}{dot_attr_key}={dot_attr_value};\n"
-        dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
+    dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
     if "Start" in nx_graph:
         assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
         dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"

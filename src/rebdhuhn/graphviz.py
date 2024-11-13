@@ -10,8 +10,11 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
+from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
+
+_LABEL_MAX_LINE_LENGTH = 80
 
 
 def _format_label(label: str) -> str:
@@ -19,7 +22,8 @@ def _format_label(label: str) -> str:
     Converts the given string e.g. a text for a node to a suitable output for dot. It replaces newlines (`\n`) with
     the HTML-tag `<BR>`.
     """
-    return escape(label).replace("\n", '<BR align="left"/>')
+    label_with_linebreaks = add_line_breaks(label, max_line_length=_LABEL_MAX_LINE_LENGTH, line_sep="\n")
+    return escape(label_with_linebreaks).replace("\n", '<BR align="left"/>')
     # escaped_str = re.sub(r"^(\d+): ", r"<B>\1: </B>", label)
     # escaped_str = label.replace("\n", '<BR align="left"/>')
     # return f'<{escaped_str}<BR align="left"/>>'

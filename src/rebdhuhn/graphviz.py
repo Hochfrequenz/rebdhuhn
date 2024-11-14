@@ -10,6 +10,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
+from rebdhuhn.models.ebd_graph import EmptyNode
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -36,6 +37,20 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     formatted_label = (
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
         f'<FONT point-size="12"><B><U>Prüfende Rolle:</U> {ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
+    )
+    return (
+        f'{indent}"{node}" '
+        f'[margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<{formatted_label}>];'
+    )
+
+
+def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
+    """
+    Convert a StartNode to dot code
+    """
+    formatted_label = (
+        f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
+        f'<FONT point-size="12">{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '
@@ -95,6 +110,8 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
             return _convert_end_node_to_dot(node, indent)
         case StartNode():
             return _convert_start_node_to_dot(ebd_graph, node, indent)
+        case EmptyNode():
+            return _convert_empty_node_to_dot(ebd_graph, node, indent)
         case _:
             raise ValueError(f"Unknown node type: {ebd_graph.graph.nodes[node]['node']}")
 
@@ -179,9 +196,10 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
         dot_code += f"{ADD_INDENT}{dot_attr_key}={dot_attr_value};\n"
-    assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
     dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
-    dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
+    if "Start" in nx_graph:
+        assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
+        dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
     dot_code += '\n    bgcolor="transparent";\n'
     return dot_code + "}"
 

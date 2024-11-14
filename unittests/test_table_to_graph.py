@@ -6,9 +6,10 @@ from typing import List, Optional
 import pytest
 from lxml import etree
 from networkx import DiGraph  # type:ignore[import-untyped]
+from syrupy import snapshot
 
 from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
-from rebdhuhn.graph_conversion import get_all_edges, get_all_nodes
+from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes
 from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from rebdhuhn.kroki import Kroki
 from rebdhuhn.models import EbdGraph, EbdGraphMetaData
@@ -22,7 +23,7 @@ from rebdhuhn.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_table import EbdTable
+from rebdhuhn.models.ebd_table import EbdTable, EbdTableMetaData
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
@@ -485,3 +486,30 @@ class TestEbdTableModels:
     )
     def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph) -> None:
         _ = convert_table_to_graph(table)
+
+    @pytest.mark.snapshot
+    @pytest.mark.parametrize(
+        "metadata_only",
+        [
+            pytest.param(
+                EbdTableMetaData(
+                    chapter="GPKE",
+                    ebd_code="E_0590",
+                    ebd_name="E_0590_Bestellung zur Stammdatenänderung prüfen",
+                    remark="Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig, da keine Antwort gegeben wird.",
+                    role="N/A",
+                    section="6.24.3: AD: Bestellung zur Stammdatenänderung an LF (verantwortlich)",
+                )
+            )
+        ],
+    )
+    def test_empty_table_to_graph(self, metadata_only: EbdTableMetaData, snapshot) -> None:
+        empty_graph = convert_table_to_graph(EbdTable(metadata=metadata_only, rows=[]))
+        dot_code = convert_graph_to_dot(empty_graph)
+        svg_code = Kroki().convert_dot_to_svg(dot_code)
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+        with open(
+            Path(__file__).parent / "output" / f"empty_{empty_graph.metadata.ebd_code}.dot.svg", "w+", encoding="utf-8"
+        ) as svg_file:
+            svg_file.write(svg_code)
+        assert svg_code == snapshot(name=f"empty_{empty_graph.metadata.ebd_code}")

@@ -13,6 +13,7 @@ from rebdhuhn.models import (
     EbdGraphMetaData,
     EbdGraphNode,
     EbdTable,
+    EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
     EndNode,
@@ -21,6 +22,7 @@ from rebdhuhn.models import (
     ToNoEdge,
     ToYesEdge,
 )
+from rebdhuhn.models.ebd_graph import EmptyNode
 from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
@@ -156,6 +158,8 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     if table is None:
         raise ValueError("table must not be None")
+    if not any(table.rows):
+        return convert_empty_table_to_graph(table.metadata)
     graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
@@ -165,3 +169,22 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         role=table.metadata.role,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)
+
+
+def convert_empty_table_to_graph(metadata: EbdTableMetaData) -> EbdGraph:
+    """
+    Converts an ebd section with no table to a graph to capture hints.
+    E.g. E_0534 -> Es ist das EBD E_0527 zu nutzen.
+    """
+    empty_digraph: DiGraph = DiGraph()
+    empty_digraph.add_nodes_from([(EmptyNode().get_key(), {"node": EmptyNode()})])
+
+    graph_metadata = EbdGraphMetaData(
+        ebd_code=metadata.ebd_code,
+        chapter=metadata.chapter,
+        section=metadata.section,
+        ebd_name=metadata.ebd_name,
+        role=metadata.role,
+        remark=metadata.remark,
+    )
+    return EbdGraph(metadata=graph_metadata, graph=empty_digraph, multi_step_instructions=None)

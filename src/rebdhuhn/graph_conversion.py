@@ -158,6 +158,8 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     """
     if table is None:
         raise ValueError("table must not be None")
+    if not any(table.rows):
+        return convert_empty_table_to_graph(table.metadata)
     graph = convert_table_to_digraph(table)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,

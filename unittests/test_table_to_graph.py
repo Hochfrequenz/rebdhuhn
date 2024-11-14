@@ -504,7 +504,7 @@ class TestEbdTableModels:
         ],
     )
     def test_empty_table_to_graph(self, metadata_only: EbdTableMetaData, snapshot) -> None:
-        empty_graph = convert_empty_table_to_graph(metadata_only)
+        empty_graph = convert_table_to_graph(EbdTable(metadata=metadata_only, rows=[]))
         dot_code = convert_graph_to_dot(empty_graph)
         svg_code = Kroki().convert_dot_to_svg(dot_code)
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)

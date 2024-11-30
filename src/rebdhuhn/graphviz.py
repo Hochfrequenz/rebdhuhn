@@ -76,8 +76,8 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     if ebd_graph.graph.nodes[node]["node"].note:
         formatted_label = (
             f'<FONT point-size="12">'
-            f'<U>Hinweis:</U><BR align="left"/>{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>'
-            f"</FONT>"
+            f'<U>Hinweis:</U><BR align="left"/>{_format_label(ebd_graph.graph.nodes[node]["node"].note)}'
+            f'<BR align="left"/></FONT>'
         )
 
     return (

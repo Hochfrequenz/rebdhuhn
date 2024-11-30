@@ -126,10 +126,10 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 )
 
                 if not is_ambiguous_outcome_node:
-                    outcome_nodes_duplicates[outcome_node.result_code] = outcome_node
+                    outcome_nodes_duplicates[outcome_node.get_key()] = outcome_node
                 else:
                     raise OutcomeCodeAmbiguousError(
-                        outcome_node1=outcome_nodes_duplicates[outcome_node.result_code], outcome_node2=outcome_node
+                        outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
                     )
 
                 edge = _yes_no_edge(

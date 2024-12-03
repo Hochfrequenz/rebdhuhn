@@ -98,7 +98,9 @@ class OutcomeNode(EbdGraphNode):
     An outcome node is a leaf of the Entscheidungsbaum tree. It has no subsequent steps.
     """
 
-    result_code: str = attrs.field(validator=attrs.validators.matches_re(RESULT_CODE_REGEX))
+    result_code: Optional[str] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.matches_re(RESULT_CODE_REGEX))
+    )
     """
     The outcome of the decision tree check; e.g. 'A55'
     """
@@ -109,7 +111,10 @@ class OutcomeNode(EbdGraphNode):
     """
 
     def get_key(self) -> str:
-        return self.result_code
+        if self.result_code is not None:
+            return self.result_code
+        assert self.note is not None
+        return self.note
 
 
 @attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)

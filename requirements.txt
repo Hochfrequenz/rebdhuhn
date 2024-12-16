@@ -10,7 +10,7 @@ attrs==24.3.0
     #   rebdhuhn (pyproject.toml)
 cattrs==24.1.2
     # via rebdhuhn (pyproject.toml)
-certifi==2024.8.30
+certifi==2024.12.14
     # via requests
 charset-normalizer==3.4.0
     # via requests

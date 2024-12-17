@@ -121,3 +121,15 @@ class OutcomeCodeAmbiguousError(ValueError):
     def __init__(self, outcome_node1: OutcomeNode, outcome_node2: OutcomeNode):
         super().__init__(f"Ambiguous result codes:  for [{outcome_node1, outcome_node2}].")
         self.outcome_nodes = [outcome_node1, outcome_node2]
+
+
+class OutcomeCodeAndFurtherStep(NotImplementedError):
+    """
+    Catches outcome nodes with further steps. This is not implemented yet.
+    """
+
+    def __init__(self, sub_row: EbdTableSubRow):
+        super().__init__(
+            f"Found a sub_row with both a result code {sub_row.result_code} and a reference to another decision node "
+            f"{sub_row.check_result}. This is not implemented yet."
+        )

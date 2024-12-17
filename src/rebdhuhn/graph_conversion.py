@@ -27,6 +27,7 @@ from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
+    OutcomeCodeAndFurtherStep,
     OutcomeNodeCreationError,
 )
 
@@ -35,7 +36,9 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
-    if sub_row.result_code is not None:
+    if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
+        raise OutcomeCodeAndFurtherStep(sub_row=sub_row)
+    if sub_row.result_code is not None or sub_row.note is not None:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
 
@@ -125,16 +128,16 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 )
 
                 if not is_ambiguous_outcome_node:
-                    outcome_nodes_duplicates[outcome_node.result_code] = outcome_node
+                    outcome_nodes_duplicates[outcome_node.get_key()] = outcome_node
                 else:
                     raise OutcomeCodeAmbiguousError(
-                        outcome_node1=outcome_nodes_duplicates[outcome_node.result_code], outcome_node2=outcome_node
+                        outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
                     )
 
                 edge = _yes_no_edge(
                     sub_row.check_result.result,
                     source=decision_node,
-                    target=nodes[outcome_node.result_code],
+                    target=nodes[outcome_node.get_key()],
                 )
             result.append(edge)
     return result

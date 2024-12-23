@@ -26,5 +26,5 @@ requests==2.32.3
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)
-urllib3==2.2.3
+urllib3==2.3.0
     # via requests

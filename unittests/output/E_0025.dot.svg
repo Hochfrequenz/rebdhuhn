@@ -31,7 +31,7 @@
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<polygon fill="#7a8da1" stroke="black" points="409.8,-546.88 235.5,-546.88 235.5,-503.6 409.8,-503.6 409.8,-546.88"/>
+<path fill="#7a8da1" stroke="black" d="M397.8,-546.88C397.8,-546.88 247.5,-546.88 247.5,-546.88 241.5,-546.88 235.5,-540.88 235.5,-534.88 235.5,-534.88 235.5,-515.6 235.5,-515.6 235.5,-509.6 241.5,-503.6 247.5,-503.6 247.5,-503.6 397.8,-503.6 397.8,-503.6 403.8,-503.6 409.8,-509.6 409.8,-515.6 409.8,-515.6 409.8,-534.88 409.8,-534.88 409.8,-540.88 403.8,-546.88 397.8,-546.88"/>
 <text text-anchor="start" x="294.52" y="-525.94" font-family="Times,serif" font-weight="bold" font-size="14.00">E_0025</text>
 <text text-anchor="start" x="249.9" y="-513.84" font-family="Times,serif" font-weight="bold" text-decoration="underline" font-size="12.00">Pr&#252;fende Rolle:</text>
 <text text-anchor="start" x="354.9" y="-513.84" font-family="Times,serif" font-weight="bold" font-size="12.00"> BIKO</text>
@@ -52,7 +52,7 @@
 <!-- A01 -->
 <g id="node3" class="node">
 <title>A01</title>
-<polygon fill="#cfb986" stroke="black" points="231.89,-377.35 87.41,-377.35 87.41,-327.83 231.89,-327.83 231.89,-377.35"/>
+<path fill="#cfb986" stroke="black" d="M219.89,-377.35C219.89,-377.35 99.41,-377.35 99.41,-377.35 93.41,-377.35 87.41,-371.35 87.41,-365.35 87.41,-365.35 87.41,-339.83 87.41,-339.83 87.41,-333.83 93.41,-327.83 99.41,-327.83 99.41,-327.83 219.89,-327.83 219.89,-327.83 225.89,-327.83 231.89,-333.83 231.89,-339.83 231.89,-339.83 231.89,-365.35 231.89,-365.35 231.89,-371.35 225.89,-377.35 219.89,-377.35"/>
 <text text-anchor="start" x="144.65" y="-359.29" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="99.65" y="-347.19" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="99.65" y="-335.19" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
@@ -112,7 +112,7 @@
 <!-- Ende -->
 <g id="node6" class="node">
 <title>Ende</title>
-<polygon fill="#7a8da1" stroke="black" points="585.42,-42.76 519.88,-42.76 519.88,-6.76 585.42,-6.76 585.42,-42.76"/>
+<path fill="#7a8da1" stroke="black" d="M573.42,-42.76C573.42,-42.76 531.88,-42.76 531.88,-42.76 525.88,-42.76 519.88,-36.76 519.88,-30.76 519.88,-30.76 519.88,-18.76 519.88,-18.76 519.88,-12.76 525.88,-6.76 531.88,-6.76 531.88,-6.76 573.42,-6.76 573.42,-6.76 579.42,-6.76 585.42,-12.76 585.42,-18.76 585.42,-18.76 585.42,-30.76 585.42,-30.76 585.42,-36.76 579.42,-42.76 573.42,-42.76"/>
 <text text-anchor="middle" x="552.65" y="-20.08" font-family="Times,serif" font-size="14.00">Ende</text>
 </g>
 <!-- 3&#45;&gt;Ende -->
@@ -149,7 +149,7 @@
 <!-- A02 -->
 <g id="node8" class="node">
 <title>A02</title>
-<polygon fill="#cfb986" stroke="black" points="426.01,-49.52 213.28,-49.52 213.28,0 426.01,0 426.01,-49.52"/>
+<path fill="#cfb986" stroke="black" d="M414.01,-49.52C414.01,-49.52 225.28,-49.52 225.28,-49.52 219.28,-49.52 213.28,-43.52 213.28,-37.52 213.28,-37.52 213.28,-12 213.28,-12 213.28,-6 219.28,0 225.28,0 225.28,0 414.01,0 414.01,0 420.01,0 426.01,-6 426.01,-12 426.01,-12 426.01,-37.52 426.01,-37.52 426.01,-43.52 420.01,-49.52 414.01,-49.52"/>
 <text text-anchor="start" x="304.65" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="225.52" y="-19.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="225.52" y="-7.36" font-family="Times,serif" font-size="12.00">Falsche Aggregationsebene BG</text>
@@ -170,7 +170,7 @@
 <!-- A03 -->
 <g id="node10" class="node">
 <title>A03</title>
-<polygon fill="#cfb986" stroke="black" points="932.26,-157.17 721.03,-157.17 721.03,-107.65 932.26,-107.65 932.26,-157.17"/>
+<path fill="#cfb986" stroke="black" d="M920.26,-157.17C920.26,-157.17 733.03,-157.17 733.03,-157.17 727.03,-157.17 721.03,-151.17 721.03,-145.17 721.03,-145.17 721.03,-119.65 721.03,-119.65 721.03,-113.65 727.03,-107.65 733.03,-107.65 733.03,-107.65 920.26,-107.65 920.26,-107.65 926.26,-107.65 932.26,-113.65 932.26,-119.65 932.26,-119.65 932.26,-145.17 932.26,-145.17 932.26,-151.17 926.26,-157.17 920.26,-157.17"/>
 <text text-anchor="start" x="811.65" y="-139.11" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
 <text text-anchor="start" x="733.27" y="-127.01" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="733.27" y="-115.01" font-family="Times,serif" font-size="12.00">Falsche Aggregationsebene RZ</text>

@@ -40,7 +40,7 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<{formatted_label}>];'
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7a8da1", label=<{formatted_label}>];'
     )
 
 
@@ -54,7 +54,7 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<{formatted_label}>];'
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7a8da1", label=<{formatted_label}>];'
     )
 
 
@@ -62,7 +62,7 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     """
     Convert an EndNode to dot code
     """
-    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label="Ende"];'
+    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded" fillcolor="#7a8da1", label="Ende"];'
 
 
 def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -77,7 +77,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<{formatted_label}>];'
+        f'[margin="0.17,0.08", shape=box, style="filled,rounded" fillcolor="#cfb986", label=<{formatted_label}>];'
     )
 
 

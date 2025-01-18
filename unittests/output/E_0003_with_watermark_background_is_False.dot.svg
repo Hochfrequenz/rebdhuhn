@@ -29,7 +29,7 @@
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<polygon fill="#7a8da1" stroke="black" points="522.01,-321.82 351.46,-321.82 351.46,-278.54 522.01,-278.54 522.01,-321.82"/>
+<path fill="#7a8da1" stroke="black" d="M510.01,-321.82C510.01,-321.82 363.46,-321.82 363.46,-321.82 357.46,-321.82 351.46,-315.82 351.46,-309.82 351.46,-309.82 351.46,-290.54 351.46,-290.54 351.46,-284.54 357.46,-278.54 363.46,-278.54 363.46,-278.54 510.01,-278.54 510.01,-278.54 516.01,-278.54 522.01,-284.54 522.01,-290.54 522.01,-290.54 522.01,-309.82 522.01,-309.82 522.01,-315.82 516.01,-321.82 510.01,-321.82"/>
 <text text-anchor="start" x="408.61" y="-300.88" font-family="Times,serif" font-weight="bold" font-size="14.00">E_0003</text>
 <text text-anchor="start" x="365.86" y="-288.78" font-family="Times,serif" font-weight="bold" text-decoration="underline" font-size="12.00">Pr&#252;fende Rolle:</text>
 <text text-anchor="start" x="470.86" y="-288.78" font-family="Times,serif" font-weight="bold" font-size="12.00"> &#220;NB</text>
@@ -50,7 +50,7 @@
 <!-- A01 -->
 <g id="node3" class="node">
 <title>A01</title>
-<polygon fill="#cfb986" stroke="black" points="371.97,-152.29 227.49,-152.29 227.49,-102.77 371.97,-102.77 371.97,-152.29"/>
+<path fill="#cfb986" stroke="black" d="M359.97,-152.29C359.97,-152.29 239.49,-152.29 239.49,-152.29 233.49,-152.29 227.49,-146.29 227.49,-140.29 227.49,-140.29 227.49,-114.77 227.49,-114.77 227.49,-108.77 233.49,-102.77 239.49,-102.77 239.49,-102.77 359.97,-102.77 359.97,-102.77 365.97,-102.77 371.97,-108.77 371.97,-114.77 371.97,-114.77 371.97,-140.29 371.97,-140.29 371.97,-146.29 365.97,-152.29 359.97,-152.29"/>
 <text text-anchor="start" x="284.73" y="-134.23" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="239.73" y="-122.13" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="239.73" y="-110.13" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
@@ -79,7 +79,7 @@
 <!-- A02 -->
 <g id="node5" class="node">
 <title>A02</title>
-<polygon fill="#cfb986" stroke="black" points="637.97,-49.52 403.49,-49.52 403.49,0 637.97,0 637.97,-49.52"/>
+<path fill="#cfb986" stroke="black" d="M625.97,-49.52C625.97,-49.52 415.49,-49.52 415.49,-49.52 409.49,-49.52 403.49,-43.52 403.49,-37.52 403.49,-37.52 403.49,-12 403.49,-12 403.49,-6 409.49,0 415.49,0 415.49,0 625.97,0 625.97,0 631.97,0 637.97,-6 637.97,-12 637.97,-12 637.97,-37.52 637.97,-37.52 637.97,-43.52 631.97,-49.52 625.97,-49.52"/>
 <text text-anchor="start" x="505.73" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="415.73" y="-19.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="415.73" y="-7.36" font-family="Times,serif" font-size="12.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
@@ -94,7 +94,7 @@
 <!-- Ende -->
 <g id="node6" class="node">
 <title>Ende</title>
-<polygon fill="#7a8da1" stroke="black" points="721.51,-42.76 655.96,-42.76 655.96,-6.76 721.51,-6.76 721.51,-42.76"/>
+<path fill="#7a8da1" stroke="black" d="M709.51,-42.76C709.51,-42.76 667.96,-42.76 667.96,-42.76 661.96,-42.76 655.96,-36.76 655.96,-30.76 655.96,-30.76 655.96,-18.76 655.96,-18.76 655.96,-12.76 661.96,-6.76 667.96,-6.76 667.96,-6.76 709.51,-6.76 709.51,-6.76 715.51,-6.76 721.51,-12.76 721.51,-18.76 721.51,-18.76 721.51,-30.76 721.51,-30.76 721.51,-36.76 715.51,-42.76 709.51,-42.76"/>
 <text text-anchor="middle" x="688.73" y="-20.08" font-family="Times,serif" font-size="14.00">Ende</text>
 </g>
 <!-- 2&#45;&gt;Ende -->

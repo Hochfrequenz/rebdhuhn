@@ -182,8 +182,8 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     nx_graph = ebd_graph.graph
     _mark_last_common_ancestors(nx_graph)
     header = (
-        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
-        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR/><BR/><BR/><BR/>'
+        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
+        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
     )
 
     dot_attributes: dict[str, str] = {

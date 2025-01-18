@@ -53,7 +53,7 @@
 <g id="node3" class="node">
 <title>A01</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M359.97,-152.29C359.97,-152.29 239.49,-152.29 239.49,-152.29 233.49,-152.29 227.49,-146.29 227.49,-140.29 227.49,-140.29 227.49,-114.77 227.49,-114.77 227.49,-108.77 233.49,-102.77 239.49,-102.77 239.49,-102.77 359.97,-102.77 359.97,-102.77 365.97,-102.77 371.97,-108.77 371.97,-114.77 371.97,-114.77 371.97,-140.29 371.97,-140.29 371.97,-146.29 365.97,-152.29 359.97,-152.29"/>
-<text text-anchor="start" x="284.73" y="-134.23" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
+<text text-anchor="start" x="239.73" y="-134.23" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="239.73" y="-122.13" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="239.73" y="-110.13" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
 </g>
@@ -82,7 +82,7 @@
 <g id="node5" class="node">
 <title>A02</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M625.97,-49.52C625.97,-49.52 415.49,-49.52 415.49,-49.52 409.49,-49.52 403.49,-43.52 403.49,-37.52 403.49,-37.52 403.49,-12 403.49,-12 403.49,-6 409.49,0 415.49,0 415.49,0 625.97,0 625.97,0 631.97,0 637.97,-6 637.97,-12 637.97,-12 637.97,-37.52 637.97,-37.52 637.97,-43.52 631.97,-49.52 625.97,-49.52"/>
-<text text-anchor="start" x="505.73" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
+<text text-anchor="start" x="415.73" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="415.73" y="-19.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="415.73" y="-7.36" font-family="Times,serif" font-size="12.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
 </g>

@@ -53,7 +53,7 @@
 <g id="node3" class="node">
 <title>A01</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M217.89,-377.35C217.89,-377.35 97.41,-377.35 97.41,-377.35 91.41,-377.35 85.41,-371.35 85.41,-365.35 85.41,-365.35 85.41,-339.83 85.41,-339.83 85.41,-333.83 91.41,-327.83 97.41,-327.83 97.41,-327.83 217.89,-327.83 217.89,-327.83 223.89,-327.83 229.89,-333.83 229.89,-339.83 229.89,-339.83 229.89,-365.35 229.89,-365.35 229.89,-371.35 223.89,-377.35 217.89,-377.35"/>
-<text text-anchor="start" x="142.65" y="-359.29" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
+<text text-anchor="start" x="97.65" y="-359.29" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="97.65" y="-347.19" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="97.65" y="-335.19" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
 </g>
@@ -150,7 +150,7 @@
 <g id="node8" class="node">
 <title>A02</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M408.01,-49.52C408.01,-49.52 219.28,-49.52 219.28,-49.52 213.28,-49.52 207.28,-43.52 207.28,-37.52 207.28,-37.52 207.28,-12 207.28,-12 207.28,-6 213.28,0 219.28,0 219.28,0 408.01,0 408.01,0 414.01,0 420.01,-6 420.01,-12 420.01,-12 420.01,-37.52 420.01,-37.52 420.01,-43.52 414.01,-49.52 408.01,-49.52"/>
-<text text-anchor="start" x="298.65" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
+<text text-anchor="start" x="219.52" y="-31.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="219.52" y="-19.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="219.52" y="-7.36" font-family="Times,serif" font-size="12.00">Falsche Aggregationsebene BG</text>
 </g>
@@ -171,7 +171,7 @@
 <g id="node10" class="node">
 <title>A03</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M914.26,-157.17C914.26,-157.17 727.03,-157.17 727.03,-157.17 721.03,-157.17 715.03,-151.17 715.03,-145.17 715.03,-145.17 715.03,-119.65 715.03,-119.65 715.03,-113.65 721.03,-107.65 727.03,-107.65 727.03,-107.65 914.26,-107.65 914.26,-107.65 920.26,-107.65 926.26,-113.65 926.26,-119.65 926.26,-119.65 926.26,-145.17 926.26,-145.17 926.26,-151.17 920.26,-157.17 914.26,-157.17"/>
-<text text-anchor="start" x="805.65" y="-139.11" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
+<text text-anchor="start" x="727.27" y="-139.11" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
 <text text-anchor="start" x="727.27" y="-127.01" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="727.27" y="-115.01" font-family="Times,serif" font-size="12.00">Falsche Aggregationsebene RZ</text>
 </g>

@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1055pt" height="428pt" viewBox="0.00 0.00 1054.50 427.82">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
     pack=true;
@@ -25,7 +25,7 @@
 }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 423.82)">
 <title>D</title>
 <text text-anchor="start" x="8" y="-399.72" font-family="Times,serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
-<text text-anchor="start" x="250.62" y="-369.62" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
+<text text-anchor="start" x="8" y="-369.62" font-family="Times,serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

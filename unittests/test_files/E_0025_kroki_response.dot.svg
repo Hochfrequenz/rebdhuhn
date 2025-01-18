@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1076pt" height="653pt" viewBox="0.00 0.00 1075.55 652.88">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    label=<<B><FONT POINT-SIZE="18">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
     pack=true;
@@ -35,7 +35,7 @@
 }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 648.88)">
 <title>D</title>
 <text text-anchor="start" x="15.15" y="-624.78" font-family="Times,serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
-<text text-anchor="start" x="366.15" y="-594.68" font-family="Times,serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
+<text text-anchor="start" x="15.15" y="-594.68" font-family="Times,serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>

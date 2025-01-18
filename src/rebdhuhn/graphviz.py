@@ -135,14 +135,14 @@ def _convert_yes_edge_to_dot(node_src: str, node_target: str, indent: str) -> st
     """
     Converts a YesEdge to dot code
     """
-    return f'{indent}"{node_src}" -> "{node_target}" [label=<<B>JA</B>>];'
+    return f'{indent}"{node_src}" -> "{node_target}" [label=<<B>JA</B>>, color="#7aab8a"];'
 
 
 def _convert_no_edge_to_dot(node_src: str, node_target: str, indent: str) -> str:
     """
     Converts a NoEdge to dot code
     """
-    return f'{indent}"{node_src}" -> "{node_target}" [label=<<B>NEIN</B>>];'
+    return f'{indent}"{node_src}" -> "{node_target}" [label=<<B>NEIN</B>>, color="#7aab8a"];'
 
 
 def _convert_ebd_graph_edge_to_dot(node_src: str, node_target: str, indent: str) -> str:

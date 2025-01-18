@@ -10,26 +10,26 @@
     size="20,20";
     "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label=<<B>E_0015</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> BIKO</B></FONT><BR align="center"/>>];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>];
-    "A01" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A01</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
+    "A01" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A01</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>2: </B>Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?<BR align="left"/>>];
-    "A02" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A02</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>];
+    "A02" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>];
     "3" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>3: </B>Ist die richtige Regelzone angegeben<BR align="left"/>>];
-    "A03" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A03</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Regelzone falsch<BR align="left"/></FONT>>];
+    "A03" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A03</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Regelzone falsch<BR align="left"/></FONT>>];
     "4" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>4: </B>Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO g&#252;ltig?<BR align="left"/>>];
-    "A04" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A04</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Bilanzierungsgebiet nicht g&#252;ltig<BR align="left"/></FONT>>];
+    "A04" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A04</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Bilanzierungsgebiet nicht g&#252;ltig<BR align="left"/></FONT>>];
     "5" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>5: </B>Ist der &#220;NB zum Aktivierungsbeginn f&#252;r das Bilanzierungsgebiet zust&#228;ndig?<BR align="left"/>>];
-    "A05" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A05</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Keine Berechtigung<BR align="left"/></FONT>>];
+    "A05" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A05</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Keine Berechtigung<BR align="left"/></FONT>>];
     "6" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>6: </B>Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?<BR align="left"/>>];
-    "A06" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A06</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichender MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
+    "A06" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A06</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichender MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
     "7" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>7: </B>Existiert bereits f&#252;r das genannte Tupel aus Aggregations-verantwortlicher,<BR align="left"/>Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?<BR align="left"/>>];
-    "A07" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A07</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichende ID zum MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
+    "A07" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A07</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichende ID zum MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>];
     "8" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>8: </B>Ist der &#220;NB zur Aktivierung des ZRT berechtigt?<BR align="left"/>>];
-    "A08" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A08</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>ZRT Aktivierung nicht berechtigt<BR align="left"/></FONT>>];
+    "A08" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A08</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>ZRT Aktivierung nicht berechtigt<BR align="left"/></FONT>>];
     "9" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>9: </B>Passt die OBIS-Kennzahl zum ZRT?<BR align="left"/>>];
-    "A09" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A09</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>OBIS nicht passend<BR align="left"/></FONT>>];
+    "A09" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A09</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>OBIS nicht passend<BR align="left"/></FONT>>];
     "10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>10: </B>Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?<BR align="left"/>>];
-    "A10" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A10</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>];
-    "A11" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A11</B><BR align="center"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>];
+    "A10" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A10</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>];
+    "A11" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<<B>A11</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>];
 
     "Start" -> "1";
     "1" -> "A01" [label=<<B>JA</B>>];
@@ -83,7 +83,7 @@
 <g id="node3" class="node">
 <title>A01</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M132.48,-1094.45C132.48,-1094.45 12,-1094.45 12,-1094.45 6,-1094.45 0,-1088.45 0,-1082.45 0,-1082.45 0,-1044.93 0,-1044.93 0,-1038.93 6,-1032.93 12,-1032.93 12,-1032.93 132.48,-1032.93 132.48,-1032.93 138.48,-1032.93 144.48,-1038.93 144.48,-1044.93 144.48,-1044.93 144.48,-1082.45 144.48,-1082.45 144.48,-1088.45 138.48,-1094.45 132.48,-1094.45"/>
-<text text-anchor="start" x="57.24" y="-1076.39" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
+<text text-anchor="start" x="12.24" y="-1076.39" font-family="Times,serif" font-weight="bold" font-size="14.00">A01</text>
 <text text-anchor="start" x="12.24" y="-1064.29" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="12.24" y="-1052.29" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="12.24" y="-1040.29" font-family="Times,serif" font-size="12.00">Frist&#252;berschreitung</text>
@@ -113,7 +113,7 @@
 <g id="node5" class="node">
 <title>A02</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M248.48,-979.68C248.48,-979.68 38,-979.68 38,-979.68 32,-979.68 26,-973.68 26,-967.68 26,-967.68 26,-930.16 26,-930.16 26,-924.16 32,-918.16 38,-918.16 38,-918.16 248.48,-918.16 248.48,-918.16 254.48,-918.16 260.48,-924.16 260.48,-930.16 260.48,-930.16 260.48,-967.68 260.48,-967.68 260.48,-973.68 254.48,-979.68 248.48,-979.68"/>
-<text text-anchor="start" x="128.24" y="-961.62" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
+<text text-anchor="start" x="38.24" y="-961.62" font-family="Times,serif" font-weight="bold" font-size="14.00">A02</text>
 <text text-anchor="start" x="38.24" y="-949.52" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="38.24" y="-937.52" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="38.24" y="-925.52" font-family="Times,serif" font-size="12.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
@@ -143,7 +143,7 @@
 <g id="node7" class="node">
 <title>A03</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M131.35,-864.91C131.35,-864.91 19.12,-864.91 19.12,-864.91 13.12,-864.91 7.12,-858.91 7.12,-852.91 7.12,-852.91 7.12,-815.39 7.12,-815.39 7.12,-809.39 13.12,-803.39 19.12,-803.39 19.12,-803.39 131.35,-803.39 131.35,-803.39 137.35,-803.39 143.35,-809.39 143.35,-815.39 143.35,-815.39 143.35,-852.91 143.35,-852.91 143.35,-858.91 137.35,-864.91 131.35,-864.91"/>
-<text text-anchor="start" x="60.24" y="-846.85" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
+<text text-anchor="start" x="19.36" y="-846.85" font-family="Times,serif" font-weight="bold" font-size="14.00">A03</text>
 <text text-anchor="start" x="19.36" y="-834.75" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="19.36" y="-822.75" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="19.36" y="-810.75" font-family="Times,serif" font-size="12.00">Regelzone falsch</text>
@@ -173,7 +173,7 @@
 <g id="node9" class="node">
 <title>A04</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M236.11,-750.14C236.11,-750.14 44.38,-750.14 44.38,-750.14 38.38,-750.14 32.38,-744.14 32.38,-738.14 32.38,-738.14 32.38,-700.62 32.38,-700.62 32.38,-694.62 38.38,-688.62 44.38,-688.62 44.38,-688.62 236.11,-688.62 236.11,-688.62 242.11,-688.62 248.11,-694.62 248.11,-700.62 248.11,-700.62 248.11,-738.14 248.11,-738.14 248.11,-744.14 242.11,-750.14 236.11,-750.14"/>
-<text text-anchor="start" x="125.24" y="-732.08" font-family="Times,serif" font-weight="bold" font-size="14.00">A04</text>
+<text text-anchor="start" x="44.62" y="-732.08" font-family="Times,serif" font-weight="bold" font-size="14.00">A04</text>
 <text text-anchor="start" x="44.62" y="-719.98" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="44.62" y="-707.98" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="44.62" y="-695.98" font-family="Times,serif" font-size="12.00">Bilanzierungsgebiet nicht g&#252;ltig</text>
@@ -203,7 +203,7 @@
 <g id="node11" class="node">
 <title>A05</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M399.73,-635.37C399.73,-635.37 280.75,-635.37 280.75,-635.37 274.75,-635.37 268.75,-629.37 268.75,-623.37 268.75,-623.37 268.75,-585.85 268.75,-585.85 268.75,-579.85 274.75,-573.85 280.75,-573.85 280.75,-573.85 399.73,-573.85 399.73,-573.85 405.73,-573.85 411.73,-579.85 411.73,-585.85 411.73,-585.85 411.73,-623.37 411.73,-623.37 411.73,-629.37 405.73,-635.37 399.73,-635.37"/>
-<text text-anchor="start" x="325.24" y="-617.31" font-family="Times,serif" font-weight="bold" font-size="14.00">A05</text>
+<text text-anchor="start" x="280.99" y="-617.31" font-family="Times,serif" font-weight="bold" font-size="14.00">A05</text>
 <text text-anchor="start" x="280.99" y="-605.21" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="280.99" y="-593.21" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="280.99" y="-581.21" font-family="Times,serif" font-size="12.00">Keine Berechtigung</text>
@@ -233,7 +233,7 @@
 <g id="node13" class="node">
 <title>A06</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M471.86,-520.6C471.86,-520.6 206.62,-520.6 206.62,-520.6 200.62,-520.6 194.62,-514.6 194.62,-508.6 194.62,-508.6 194.62,-471.08 194.62,-471.08 194.62,-465.08 200.62,-459.08 206.62,-459.08 206.62,-459.08 471.86,-459.08 471.86,-459.08 477.86,-459.08 483.86,-465.08 483.86,-471.08 483.86,-471.08 483.86,-508.6 483.86,-508.6 483.86,-514.6 477.86,-520.6 471.86,-520.6"/>
-<text text-anchor="start" x="324.24" y="-502.54" font-family="Times,serif" font-weight="bold" font-size="14.00">A06</text>
+<text text-anchor="start" x="206.87" y="-502.54" font-family="Times,serif" font-weight="bold" font-size="14.00">A06</text>
 <text text-anchor="start" x="206.87" y="-490.44" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="206.87" y="-478.44" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="206.87" y="-466.44" font-family="Times,serif" font-size="12.00">Abweichender MaBiS-ZP bereits vorhanden</text>
@@ -264,7 +264,7 @@
 <g id="node15" class="node">
 <title>A07</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M771.11,-405.83C771.11,-405.83 465.38,-405.83 465.38,-405.83 459.38,-405.83 453.38,-399.83 453.38,-393.83 453.38,-393.83 453.38,-356.31 453.38,-356.31 453.38,-350.31 459.38,-344.31 465.38,-344.31 465.38,-344.31 771.11,-344.31 771.11,-344.31 777.11,-344.31 783.11,-350.31 783.11,-356.31 783.11,-356.31 783.11,-393.83 783.11,-393.83 783.11,-399.83 777.11,-405.83 771.11,-405.83"/>
-<text text-anchor="start" x="603.24" y="-387.77" font-family="Times,serif" font-weight="bold" font-size="14.00">A07</text>
+<text text-anchor="start" x="465.62" y="-387.77" font-family="Times,serif" font-weight="bold" font-size="14.00">A07</text>
 <text text-anchor="start" x="465.62" y="-375.67" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="465.62" y="-363.67" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="465.62" y="-351.67" font-family="Times,serif" font-size="12.00">Abweichende ID zum MaBiS-ZP bereits vorhanden</text>
@@ -294,7 +294,7 @@
 <g id="node17" class="node">
 <title>A08</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M912.86,-291.06C912.86,-291.06 713.62,-291.06 713.62,-291.06 707.62,-291.06 701.62,-285.06 701.62,-279.06 701.62,-279.06 701.62,-241.54 701.62,-241.54 701.62,-235.54 707.62,-229.54 713.62,-229.54 713.62,-229.54 912.86,-229.54 912.86,-229.54 918.86,-229.54 924.86,-235.54 924.86,-241.54 924.86,-241.54 924.86,-279.06 924.86,-279.06 924.86,-285.06 918.86,-291.06 912.86,-291.06"/>
-<text text-anchor="start" x="798.24" y="-273" font-family="Times,serif" font-weight="bold" font-size="14.00">A08</text>
+<text text-anchor="start" x="713.87" y="-273" font-family="Times,serif" font-weight="bold" font-size="14.00">A08</text>
 <text text-anchor="start" x="713.87" y="-260.9" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="713.87" y="-248.9" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="713.87" y="-236.9" font-family="Times,serif" font-size="12.00">ZRT Aktivierung nicht berechtigt</text>
@@ -324,7 +324,7 @@
 <g id="node19" class="node">
 <title>A09</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M840.36,-176.29C840.36,-176.29 722.12,-176.29 722.12,-176.29 716.12,-176.29 710.12,-170.29 710.12,-164.29 710.12,-164.29 710.12,-126.77 710.12,-126.77 710.12,-120.77 716.12,-114.77 722.12,-114.77 722.12,-114.77 840.36,-114.77 840.36,-114.77 846.36,-114.77 852.36,-120.77 852.36,-126.77 852.36,-126.77 852.36,-164.29 852.36,-164.29 852.36,-170.29 846.36,-176.29 840.36,-176.29"/>
-<text text-anchor="start" x="766.24" y="-158.23" font-family="Times,serif" font-weight="bold" font-size="14.00">A09</text>
+<text text-anchor="start" x="722.37" y="-158.23" font-family="Times,serif" font-weight="bold" font-size="14.00">A09</text>
 <text text-anchor="start" x="722.37" y="-146.13" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="722.37" y="-134.13" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="722.37" y="-122.13" font-family="Times,serif" font-size="12.00">OBIS nicht passend</text>
@@ -354,7 +354,7 @@
 <g id="node21" class="node">
 <title>A10</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M1110.11,-61.52C1110.11,-61.52 948.38,-61.52 948.38,-61.52 942.38,-61.52 936.38,-55.52 936.38,-49.52 936.38,-49.52 936.38,-12 936.38,-12 936.38,-6 942.38,0 948.38,0 948.38,0 1110.11,0 1110.11,0 1116.11,0 1122.11,-6 1122.11,-12 1122.11,-12 1122.11,-49.52 1122.11,-49.52 1122.11,-55.52 1116.11,-61.52 1110.11,-61.52"/>
-<text text-anchor="start" x="1014.24" y="-43.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A10</text>
+<text text-anchor="start" x="948.62" y="-43.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A10</text>
 <text text-anchor="start" x="948.62" y="-31.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="948.62" y="-19.36" font-family="Times,serif" font-size="12.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="948.62" y="-7.36" font-family="Times,serif" font-size="12.00">MaBiS-ZP bereits aktiviert</text>
@@ -370,7 +370,7 @@
 <g id="node22" class="node">
 <title>A11</title>
 <path fill="#cfb986" stroke="black" stroke-width="0" d="M1306.36,-61.52C1306.36,-61.52 1152.12,-61.52 1152.12,-61.52 1146.12,-61.52 1140.12,-55.52 1140.12,-49.52 1140.12,-49.52 1140.12,-12 1140.12,-12 1140.12,-6 1146.12,0 1152.12,0 1152.12,0 1306.36,0 1306.36,0 1312.36,0 1318.36,-6 1318.36,-12 1318.36,-12 1318.36,-49.52 1318.36,-49.52 1318.36,-55.52 1312.36,-61.52 1306.36,-61.52"/>
-<text text-anchor="start" x="1214.24" y="-43.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A11</text>
+<text text-anchor="start" x="1152.37" y="-43.46" font-family="Times,serif" font-weight="bold" font-size="14.00">A11</text>
 <text text-anchor="start" x="1152.37" y="-31.36" font-family="Times,serif" text-decoration="underline" font-size="12.00">Hinweis:</text>
 <text text-anchor="start" x="1152.37" y="-19.36" font-family="Times,serif" font-size="12.00">Cluster: Zustimmung</text>
 <text text-anchor="start" x="1152.37" y="-7.36" font-family="Times,serif" font-size="12.00">Aktivierung durchgef&#252;hrt</text>

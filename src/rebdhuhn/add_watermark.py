@@ -59,7 +59,7 @@ def add_background(svg: str) -> str:
     :param svg:
     """
     ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-    background_color = "#f3f1f6"
+    background_color = "#c2cee9"
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
     xml_element = etree.Element(  # pylint:disable=c-extension-no-member

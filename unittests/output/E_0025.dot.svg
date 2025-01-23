@@ -22,7 +22,7 @@
 <g id="node1" class="node">
 <title>Start</title>
 <path fill="#7a8da1" stroke="black" stroke-width="0" d="M383.9,-546.88C383.9,-546.88 238.1,-546.88 238.1,-546.88 232.1,-546.88 226.1,-540.88 226.1,-534.88 226.1,-534.88 226.1,-515.6 226.1,-515.6 226.1,-509.6 232.1,-503.6 238.1,-503.6 238.1,-503.6 383.9,-503.6 383.9,-503.6 389.9,-503.6 395.9,-509.6 395.9,-515.6 395.9,-515.6 395.9,-534.88 395.9,-534.88 395.9,-540.88 389.9,-546.88 383.9,-546.88"/>
-<text text-anchor="start" x="283.25" y="-525.94" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0025</text>
+<text text-anchor="start" x="240.5" y="-525.94" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0025</text>
 <text text-anchor="start" x="240.5" y="-513.84" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="12.00">Pr&#252;fende Rolle:</text>
 <text text-anchor="start" x="344" y="-513.84" font-family="Roboto, sans-serif" font-weight="bold" font-size="12.00"> BIKO</text>
 </g>

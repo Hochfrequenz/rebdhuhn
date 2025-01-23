@@ -14,7 +14,7 @@
 <g id="node1" class="node">
 <title>Start</title>
 <path fill="#7a8da1" stroke="black" stroke-width="0" d="M511.13,-321.82C511.13,-321.82 369.83,-321.82 369.83,-321.82 363.83,-321.82 357.83,-315.82 357.83,-309.82 357.83,-309.82 357.83,-290.54 357.83,-290.54 357.83,-284.54 363.83,-278.54 369.83,-278.54 369.83,-278.54 511.13,-278.54 511.13,-278.54 517.13,-278.54 523.13,-284.54 523.13,-290.54 523.13,-290.54 523.13,-309.82 523.13,-309.82 523.13,-315.82 517.13,-321.82 511.13,-321.82"/>
-<text text-anchor="start" x="412.73" y="-300.88" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
+<text text-anchor="start" x="372.23" y="-300.88" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
 <text text-anchor="start" x="372.23" y="-288.78" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="12.00">Prüfende Rolle:</text>
 <text text-anchor="start" x="475.73" y="-288.78" font-family="Roboto, sans-serif" font-weight="bold" font-size="12.00"> ÜNB</text>
 </g>

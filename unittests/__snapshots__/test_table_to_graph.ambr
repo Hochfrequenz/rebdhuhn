@@ -53,11 +53,11 @@
       "A02" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "A01" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "Ende" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -83,8 +83,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
-  <polygon fill="black" stroke="black" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
+  <path fill="none" stroke="#88a0d6" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
   </g>
   <!-- A01 -->
   <g id="node3" class="node">
@@ -97,8 +97,8 @@
   <!-- 1&#45;&gt;A01 -->
   <g id="edge2" class="edge">
   <title>1-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
+  <path fill="none" stroke="#88a0d6" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
   <text text-anchor="start" x="388.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 2 -->
@@ -111,8 +111,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
+  <path fill="none" stroke="#88a0d6" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
   <text text-anchor="start" x="524.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A02 -->
@@ -126,8 +126,8 @@
   <!-- 2&#45;&gt;A02 -->
   <g id="edge4" class="edge">
   <title>2-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
+  <path fill="none" stroke="#88a0d6" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
   <text text-anchor="start" x="563.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- Ende -->
@@ -139,8 +139,8 @@
   <!-- 2&#45;&gt;Ende -->
   <g id="edge5" class="edge">
   <title>2-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
+  <path fill="none" stroke="#88a0d6" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
   <text text-anchor="start" x="645.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   </g>
@@ -182,27 +182,27 @@
       "A10" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A10</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "A11" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A11</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "A01" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "3" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "A03" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "4" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "A04" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "5" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "A05" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "6" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "6" -> "A06" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "6" -> "7" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "7" -> "A07" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "7" -> "8" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "8" -> "A08" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "8" -> "9" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "9" -> "A09" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "9" -> "10" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "10" -> "A10" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "10" -> "A11" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "3" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "A03" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "4" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "A04" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "5" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "A05" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "6" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "6" -> "A06" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "6" -> "7" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "7" -> "A07" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "7" -> "8" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "8" -> "A08" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "8" -> "9" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "9" -> "A09" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "9" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "10" -> "A10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "10" -> "A11" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -228,8 +228,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M294.62,-1220.94C294.62,-1212.87 294.62,-1203.46 294.62,-1194.77"/>
-  <polygon fill="black" stroke="black" points="298.12,-1195.06 294.62,-1185.06 291.12,-1195.06 298.12,-1195.06"/>
+  <path fill="none" stroke="#88a0d6" d="M294.62,-1220.94C294.62,-1212.87 294.62,-1203.46 294.62,-1194.77"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="298.12,-1195.06 294.62,-1185.06 291.12,-1195.06 298.12,-1195.06"/>
   </g>
   <!-- A01 -->
   <g id="node3" class="node">
@@ -243,8 +243,8 @@
   <!-- 1&#45;&gt;A01 -->
   <g id="edge2" class="edge">
   <title>1-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M256.45,-1147.73C226.42,-1134.39 183.61,-1115.36 146.54,-1098.88"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="148.19,-1095.79 137.63,-1094.92 145.35,-1102.18 148.19,-1095.79"/>
+  <path fill="none" stroke="#88a0d6" d="M256.45,-1147.73C226.42,-1134.39 183.61,-1115.36 146.54,-1098.88"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="148.19,-1095.79 137.63,-1094.92 145.35,-1102.18 148.19,-1095.79"/>
   <text text-anchor="start" x="214.62" y="-1117.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 2 -->
@@ -257,8 +257,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M307,-1147.73C318.5,-1131.98 335.78,-1108.3 348.95,-1090.26"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="351.45,-1092.77 354.52,-1082.63 345.8,-1088.64 351.45,-1092.77"/>
+  <path fill="none" stroke="#88a0d6" d="M307,-1147.73C318.5,-1131.98 335.78,-1108.3 348.95,-1090.26"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="351.45,-1092.77 354.52,-1082.63 345.8,-1088.64 351.45,-1092.77"/>
   <text text-anchor="start" x="330.62" y="-1117.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A02 -->
@@ -273,8 +273,8 @@
   <!-- 2&#45;&gt;A02 -->
   <g id="edge4" class="edge">
   <title>2-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M333.03,-1045.81C300.01,-1029.69 249.25,-1004.91 207.61,-984.58"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="209.39,-981.55 198.87,-980.31 206.32,-987.84 209.39,-981.55"/>
+  <path fill="none" stroke="#88a0d6" d="M333.03,-1045.81C300.01,-1029.69 249.25,-1004.91 207.61,-984.58"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="209.39,-981.55 198.87,-980.31 206.32,-987.84 209.39,-981.55"/>
   <text text-anchor="start" x="265.62" y="-1002.63" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 3 -->
@@ -287,8 +287,8 @@
   <!-- 2&#45;&gt;3 -->
   <g id="edge5" class="edge">
   <title>2-&gt;3</title>
-  <path fill="none" stroke="#7aab8a" d="M375.73,-1046.05C384.63,-1027.81 399.03,-998.28 409.53,-976.76"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="412.56,-978.51 413.8,-967.99 406.27,-975.44 412.56,-978.51"/>
+  <path fill="none" stroke="#88a0d6" d="M375.73,-1046.05C384.63,-1027.81 399.03,-998.28 409.53,-976.76"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="412.56,-978.51 413.8,-967.99 406.27,-975.44 412.56,-978.51"/>
   <text text-anchor="start" x="397.62" y="-1002.63" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A03 -->
@@ -303,8 +303,8 @@
   <!-- 3&#45;&gt;A03 -->
   <g id="edge6" class="edge">
   <title>3-&gt;A03</title>
-  <path fill="none" stroke="#7aab8a" d="M361.27,-930.93C307.65,-915.73 227.56,-892.2 148.82,-865.24"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="150.26,-862.03 139.66,-862.08 147.98,-868.64 150.26,-862.03"/>
+  <path fill="none" stroke="#88a0d6" d="M361.27,-930.93C307.65,-915.73 227.56,-892.2 148.82,-865.24"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="150.26,-862.03 139.66,-862.08 147.98,-868.64 150.26,-862.03"/>
   <text text-anchor="start" x="252.62" y="-887.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 4 -->
@@ -317,8 +317,8 @@
   <!-- 3&#45;&gt;4 -->
   <g id="edge7" class="edge">
   <title>3-&gt;4</title>
-  <path fill="none" stroke="#7aab8a" d="M431.47,-931.28C441.17,-913.04 456.88,-883.51 468.34,-861.99"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="471.41,-863.67 473.01,-853.19 465.23,-860.38 471.41,-863.67"/>
+  <path fill="none" stroke="#88a0d6" d="M431.47,-931.28C441.17,-913.04 456.88,-883.51 468.34,-861.99"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="471.41,-863.67 473.01,-853.19 465.23,-860.38 471.41,-863.67"/>
   <text text-anchor="start" x="455.62" y="-887.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A04 -->
@@ -333,8 +333,8 @@
   <!-- 4&#45;&gt;A04 -->
   <g id="edge8" class="edge">
   <title>4-&gt;A04</title>
-  <path fill="none" stroke="#7aab8a" d="M430.37,-816.27C379.32,-799.77 300.21,-774.21 236.51,-753.63"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="237.65,-750.32 227.06,-750.57 235.5,-756.98 237.65,-750.32"/>
+  <path fill="none" stroke="#88a0d6" d="M430.37,-816.27C379.32,-799.77 300.21,-774.21 236.51,-753.63"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="237.65,-750.32 227.06,-750.57 235.5,-756.98 237.65,-750.32"/>
   <text text-anchor="start" x="328.62" y="-773.09" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 5 -->
@@ -347,8 +347,8 @@
   <!-- 4&#45;&gt;5 -->
   <g id="edge9" class="edge">
   <title>4-&gt;5</title>
-  <path fill="none" stroke="#7aab8a" d="M492.21,-816.51C502.77,-798.19 519.9,-768.47 532.32,-746.92"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="535.27,-748.81 537.23,-738.4 529.2,-745.32 535.27,-748.81"/>
+  <path fill="none" stroke="#88a0d6" d="M492.21,-816.51C502.77,-798.19 519.9,-768.47 532.32,-746.92"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="535.27,-748.81 537.23,-738.4 529.2,-745.32 535.27,-748.81"/>
   <text text-anchor="start" x="518.62" y="-773.09" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A05 -->
@@ -363,8 +363,8 @@
   <!-- 5&#45;&gt;A05 -->
   <g id="edge10" class="edge">
   <title>5-&gt;A05</title>
-  <path fill="none" stroke="#7aab8a" d="M515.43,-701.5C484.89,-685.48 438.05,-660.91 399.43,-640.66"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="401.11,-637.59 390.63,-636.04 397.86,-643.79 401.11,-637.59"/>
+  <path fill="none" stroke="#88a0d6" d="M515.43,-701.5C484.89,-685.48 438.05,-660.91 399.43,-640.66"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="401.11,-637.59 390.63,-636.04 397.86,-643.79 401.11,-637.59"/>
   <text text-anchor="start" x="452.62" y="-658.32" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 6 -->
@@ -377,8 +377,8 @@
   <!-- 5&#45;&gt;6 -->
   <g id="edge11" class="edge">
   <title>5-&gt;6</title>
-  <path fill="none" stroke="#7aab8a" d="M567.83,-701.5C590.59,-682.48 627.78,-651.41 653.64,-629.82"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="655.67,-632.68 661.1,-623.58 651.19,-627.3 655.67,-632.68"/>
+  <path fill="none" stroke="#88a0d6" d="M567.83,-701.5C590.59,-682.48 627.78,-651.41 653.64,-629.82"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="655.67,-632.68 661.1,-623.58 651.19,-627.3 655.67,-632.68"/>
   <text text-anchor="start" x="622.62" y="-658.32" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A06 -->
@@ -393,8 +393,8 @@
   <!-- 6&#45;&gt;A06 -->
   <g id="edge12" class="edge">
   <title>6-&gt;A06</title>
-  <path fill="none" stroke="#7aab8a" d="M629.47,-586.73C577.43,-570.2 496.74,-544.57 431.88,-523.96"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="433.23,-520.72 422.64,-521.03 431.11,-527.39 433.23,-520.72"/>
+  <path fill="none" stroke="#88a0d6" d="M629.47,-586.73C577.43,-570.2 496.74,-544.57 431.88,-523.96"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="433.23,-520.72 422.64,-521.03 431.11,-527.39 433.23,-520.72"/>
   <text text-anchor="start" x="525.62" y="-543.55" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 7 -->
@@ -408,8 +408,8 @@
   <!-- 6&#45;&gt;7 -->
   <g id="edge13" class="edge">
   <title>6-&gt;7</title>
-  <path fill="none" stroke="#7aab8a" d="M699.29,-586.97C716.85,-569.45 744.85,-541.5 766.15,-520.25"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="768.56,-522.79 773.16,-513.24 763.61,-517.83 768.56,-522.79"/>
+  <path fill="none" stroke="#88a0d6" d="M699.29,-586.97C716.85,-569.45 744.85,-541.5 766.15,-520.25"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="768.56,-522.79 773.16,-513.24 763.61,-517.83 768.56,-522.79"/>
   <text text-anchor="start" x="745.62" y="-543.55" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A07 -->
@@ -424,8 +424,8 @@
   <!-- 7&#45;&gt;A07 -->
   <g id="edge14" class="edge">
   <title>7-&gt;A07</title>
-  <path fill="none" stroke="#7aab8a" d="M761.14,-467.36C735.99,-451.69 701.31,-430.08 672,-411.82"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="673.91,-408.89 663.57,-406.57 670.21,-414.83 673.91,-408.89"/>
+  <path fill="none" stroke="#88a0d6" d="M761.14,-467.36C735.99,-451.69 701.31,-430.08 672,-411.82"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="673.91,-408.89 663.57,-406.57 670.21,-414.83 673.91,-408.89"/>
   <text text-anchor="start" x="715.62" y="-428.78" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 8 -->
@@ -438,8 +438,8 @@
   <!-- 7&#45;&gt;8 -->
   <g id="edge15" class="edge">
   <title>7-&gt;8</title>
-  <path fill="none" stroke="#7aab8a" d="M831.8,-467.36C864.92,-447.7 913.77,-418.71 947.49,-398.7"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="948.89,-401.94 955.7,-393.82 945.32,-395.92 948.89,-401.94"/>
+  <path fill="none" stroke="#88a0d6" d="M831.8,-467.36C864.92,-447.7 913.77,-418.71 947.49,-398.7"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="948.89,-401.94 955.7,-393.82 945.32,-395.92 948.89,-401.94"/>
   <text text-anchor="start" x="901.62" y="-428.78" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A08 -->
@@ -454,8 +454,8 @@
   <!-- 8&#45;&gt;A08 -->
   <g id="edge16" class="edge">
   <title>8-&gt;A08</title>
-  <path fill="none" stroke="#7aab8a" d="M960.76,-357.19C937.58,-341.44 902.25,-317.44 872.73,-297.38"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="874.87,-294.6 864.63,-291.88 870.93,-300.39 874.87,-294.6"/>
+  <path fill="none" stroke="#88a0d6" d="M960.76,-357.19C937.58,-341.44 902.25,-317.44 872.73,-297.38"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="874.87,-294.6 864.63,-291.88 870.93,-300.39 874.87,-294.6"/>
   <text text-anchor="start" x="911.62" y="-314.01" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 9 -->
@@ -468,8 +468,8 @@
   <!-- 8&#45;&gt;9 -->
   <g id="edge17" class="edge">
   <title>8-&gt;9</title>
-  <path fill="none" stroke="#7aab8a" d="M1001.26,-357.43C1018.87,-338.69 1047.69,-308.04 1068.03,-286.39"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1070.57,-288.79 1074.87,-279.11 1065.47,-284 1070.57,-288.79"/>
+  <path fill="none" stroke="#88a0d6" d="M1001.26,-357.43C1018.87,-338.69 1047.69,-308.04 1068.03,-286.39"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1070.57,-288.79 1074.87,-279.11 1065.47,-284 1070.57,-288.79"/>
   <text text-anchor="start" x="1044.62" y="-314.01" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A09 -->
@@ -484,8 +484,8 @@
   <!-- 9&#45;&gt;A09 -->
   <g id="edge18" class="edge">
   <title>9-&gt;A09</title>
-  <path fill="none" stroke="#7aab8a" d="M1047.9,-242.42C1003.68,-225.34 934.29,-198.54 880.1,-177.61"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="881.47,-174.39 870.88,-174.05 878.95,-180.92 881.47,-174.39"/>
+  <path fill="none" stroke="#88a0d6" d="M1047.9,-242.42C1003.68,-225.34 934.29,-198.54 880.1,-177.61"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="881.47,-174.39 870.88,-174.05 878.95,-180.92 881.47,-174.39"/>
   <text text-anchor="start" x="962.62" y="-199.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 10 -->
@@ -498,8 +498,8 @@
   <!-- 9&#45;&gt;10 -->
   <g id="edge19" class="edge">
   <title>9-&gt;10</title>
-  <path fill="none" stroke="#7aab8a" d="M1099.44,-242.66C1108.01,-224.42 1121.89,-194.89 1132,-173.37"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1135.03,-175.15 1136.12,-164.61 1128.7,-172.17 1135.03,-175.15"/>
+  <path fill="none" stroke="#88a0d6" d="M1099.44,-242.66C1108.01,-224.42 1121.89,-194.89 1132,-173.37"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1135.03,-175.15 1136.12,-164.61 1128.7,-172.17 1135.03,-175.15"/>
   <text text-anchor="start" x="1120.62" y="-199.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A10 -->
@@ -514,8 +514,8 @@
   <!-- 10&#45;&gt;A10 -->
   <g id="edge20" class="edge">
   <title>10-&gt;A10</title>
-  <path fill="none" stroke="#7aab8a" d="M1128.97,-127.89C1114.56,-112.56 1092.65,-89.25 1074.02,-69.42"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1076.7,-67.16 1067.3,-62.28 1071.6,-71.96 1076.7,-67.16"/>
+  <path fill="none" stroke="#88a0d6" d="M1128.97,-127.89C1114.56,-112.56 1092.65,-89.25 1074.02,-69.42"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1076.7,-67.16 1067.3,-62.28 1071.6,-71.96 1076.7,-67.16"/>
   <text text-anchor="start" x="1097.62" y="-84.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A11 -->
@@ -530,8 +530,8 @@
   <!-- 10&#45;&gt;A11 -->
   <g id="edge21" class="edge">
   <title>10-&gt;A11</title>
-  <path fill="none" stroke="#7aab8a" d="M1157.6,-127.89C1169.4,-112.76 1187.27,-89.87 1202.6,-70.22"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1205.34,-72.4 1208.73,-62.37 1199.82,-68.1 1205.34,-72.4"/>
+  <path fill="none" stroke="#88a0d6" d="M1157.6,-127.89C1169.4,-112.76 1187.27,-89.87 1202.6,-70.22"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1205.34,-72.4 1208.73,-62.37 1199.82,-68.1 1205.34,-72.4"/>
   <text text-anchor="start" x="1193.62" y="-84.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   </g>
@@ -561,17 +561,17 @@
       "5" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>5: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A03" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Falsche Aggregationsebene RZ<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "A01" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "3" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "5" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "4" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "Ende" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "Ende" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "A03" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "Ende" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "3" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "5" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "4" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "A03" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "Ende" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -597,8 +597,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M311,-503.84C311,-495.77 311,-486.36 311,-477.67"/>
-  <polygon fill="black" stroke="black" points="314.5,-477.96 311,-467.96 307.5,-477.96 314.5,-477.96"/>
+  <path fill="none" stroke="#88a0d6" d="M311,-503.84C311,-495.77 311,-486.36 311,-477.67"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="314.5,-477.96 311,-467.96 307.5,-477.96 314.5,-477.96"/>
   </g>
   <!-- A01 -->
   <g id="node3" class="node">
@@ -611,8 +611,8 @@
   <!-- 1&#45;&gt;A01 -->
   <g id="edge2" class="edge">
   <title>1-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M282.57,-430.79C260.24,-417.59 228.57,-398.87 202.02,-383.17"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="203.82,-380.16 193.43,-378.08 200.26,-386.19 203.82,-380.16"/>
+  <path fill="none" stroke="#88a0d6" d="M282.57,-430.79C260.24,-417.59 228.57,-398.87 202.02,-383.17"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="203.82,-380.16 193.43,-378.08 200.26,-386.19 203.82,-380.16"/>
   <text text-anchor="start" x="250" y="-400.3" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 2 -->
@@ -625,8 +625,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M339.6,-430.79C365.5,-415.58 403.84,-393.05 432.43,-376.25"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="433.95,-379.42 440.8,-371.34 430.4,-373.38 433.95,-379.42"/>
+  <path fill="none" stroke="#88a0d6" d="M339.6,-430.79C365.5,-415.58 403.84,-393.05 432.43,-376.25"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="433.95,-379.42 440.8,-371.34 430.4,-373.38 433.95,-379.42"/>
   <text text-anchor="start" x="395" y="-400.3" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 3 -->
@@ -640,8 +640,8 @@
   <!-- 2&#45;&gt;3 -->
   <g id="edge4" class="edge">
   <title>2-&gt;3</title>
-  <path fill="none" stroke="#7aab8a" d="M444.17,-334.62C418.13,-318.14 378.16,-292.86 347.56,-273.5"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="349.59,-270.64 339.26,-268.25 345.84,-276.55 349.59,-270.64"/>
+  <path fill="none" stroke="#88a0d6" d="M444.17,-334.62C418.13,-318.14 378.16,-292.86 347.56,-273.5"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="349.59,-270.64 339.26,-268.25 345.84,-276.55 349.59,-270.64"/>
   <text text-anchor="start" x="402" y="-297.53" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 5 -->
@@ -656,8 +656,8 @@
   <!-- 2&#45;&gt;5 -->
   <g id="edge5" class="edge">
   <title>2-&gt;5</title>
-  <path fill="none" stroke="#7aab8a" d="M522.9,-334.62C569.39,-319.41 638.82,-296.7 695.78,-278.07"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="696.77,-281.42 705.19,-274.99 694.6,-274.77 696.77,-281.42"/>
+  <path fill="none" stroke="#88a0d6" d="M522.9,-334.62C569.39,-319.41 638.82,-296.7 695.78,-278.07"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="696.77,-281.42 705.19,-274.99 694.6,-274.77 696.77,-281.42"/>
   <text text-anchor="start" x="642" y="-297.53" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- Ende -->
@@ -669,9 +669,9 @@
   <!-- 3&#45;&gt;Ende -->
   <g id="edge7" class="edge">
   <title>3-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M422.77,-222.33C466.38,-210.06 514.07,-191.1 551,-162.05 555.37,-158.61 606.55,-82.09 604,-77.14"/>
-  <path fill="none" stroke="#7aab8a" d="M604,-75.14C596.89,-62.98 585.45,-53.13 573.76,-45.53"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="575.65,-42.58 565.27,-40.45 572.06,-48.59 575.65,-42.58"/>
+  <path fill="none" stroke="#88a0d6" d="M422.77,-222.33C466.38,-210.06 514.07,-191.1 551,-162.05 555.37,-158.61 606.55,-82.09 604,-77.14"/>
+  <path fill="none" stroke="#88a0d6" d="M604,-75.14C596.89,-62.98 585.45,-53.13 573.76,-45.53"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="575.65,-42.58 565.27,-40.45 572.06,-48.59 575.65,-42.58"/>
   <text text-anchor="start" x="590" y="-128.74" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 4 -->
@@ -686,15 +686,15 @@
   <!-- 3&#45;&gt;4 -->
   <g id="edge6" class="edge">
   <title>3-&gt;4</title>
-  <path fill="none" stroke="#7aab8a" d="M304,-222.37C304,-208.38 304,-189.74 304,-173.13"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="307.5,-173.56 304,-163.56 300.5,-173.56 307.5,-173.56"/>
+  <path fill="none" stroke="#88a0d6" d="M304,-222.37C304,-208.38 304,-189.74 304,-173.13"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="307.5,-173.56 304,-163.56 300.5,-173.56 307.5,-173.56"/>
   <text text-anchor="start" x="304" y="-185" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 4&#45;&gt;Ende -->
   <g id="edge9" class="edge">
   <title>4-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M365.7,-102.82C405.02,-84.6 454.94,-61.47 489.78,-45.32"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="491.11,-48.57 498.71,-41.19 488.16,-42.22 491.11,-48.57"/>
+  <path fill="none" stroke="#88a0d6" d="M365.7,-102.82C405.02,-84.6 454.94,-61.47 489.78,-45.32"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="491.11,-48.57 498.71,-41.19 488.16,-42.22 491.11,-48.57"/>
   <text text-anchor="start" x="438" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A02 -->
@@ -708,14 +708,14 @@
   <!-- 4&#45;&gt;A02 -->
   <g id="edge8" class="edge">
   <title>4-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M304,-102.82C304,-89.87 304,-74.44 304,-60.8"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="307.5,-60.89 304,-50.89 300.5,-60.89 307.5,-60.89"/>
+  <path fill="none" stroke="#88a0d6" d="M304,-102.82C304,-89.87 304,-74.44 304,-60.8"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="307.5,-60.89 304,-50.89 300.5,-60.89 307.5,-60.89"/>
   <text text-anchor="start" x="304" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 5&#45;&gt;Ende -->
   <g id="edge11" class="edge">
   <title>5-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M718.54,-215.39C691.73,-202.34 663.02,-184.67 642,-162.05 613.86,-131.76 624.85,-112.85 604,-77.14"/>
+  <path fill="none" stroke="#88a0d6" d="M718.54,-215.39C691.73,-202.34 663.02,-184.67 642,-162.05 613.86,-131.76 624.85,-112.85 604,-77.14"/>
   <text text-anchor="start" x="642" y="-128.74" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A03 -->
@@ -729,8 +729,8 @@
   <!-- 5&#45;&gt;A03 -->
   <g id="edge10" class="edge">
   <title>5-&gt;A03</title>
-  <path fill="none" stroke="#7aab8a" d="M794,-215.48C794,-201 794,-183.29 794,-168.03"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="797.5,-168.44 794,-158.44 790.5,-168.44 797.5,-168.44"/>
+  <path fill="none" stroke="#88a0d6" d="M794,-215.48C794,-201 794,-183.29 794,-168.03"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="797.5,-168.44 794,-158.44 790.5,-168.44 797.5,-168.44"/>
   <text text-anchor="start" x="794" y="-185" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   </g>
@@ -773,33 +773,33 @@
       "A08" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A08</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Lieferende zum Abmeldedatum wurde aus<BR align="left"/>gleichem Grund bereits best&#228;tigt.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "A09" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A09</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Erneute Best&#228;tigung der Abmeldung aufgrund der<BR align="left"/>Information, dass der Anschlussnutzer nicht mehr<BR align="left"/>an der Marktlokation vorhanden ist.<BR align="left"/>Hinweis: Das bisher best&#228;tigte Bilanzierungsende<BR align="left"/>bleibt unver&#228;ndert bestehen.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "4" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "3" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "6" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "A01" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "3" -> "9" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "4" -> "5" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "9" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "5" -> "10" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "6" -> "7" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "6" -> "8" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "7" -> "A03" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "7" -> "10" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "8" -> "A04" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "8" -> "10" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "9" -> "A05" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "9" -> "10" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "10" -> "11" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "10" -> "A06" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "11" -> "12" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "11" -> "A06" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "12" -> "A07" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "12" -> "13" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "13" -> "A08" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "13" -> "A09" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "4" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "3" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "6" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "3" -> "9" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "4" -> "5" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "9" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "5" -> "10" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "6" -> "7" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "6" -> "8" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "7" -> "A03" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "7" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "8" -> "A04" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "8" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "9" -> "A05" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "9" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "10" -> "11" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "10" -> "A06" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "11" -> "12" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "11" -> "A06" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "12" -> "A07" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "12" -> "13" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "13" -> "A08" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "13" -> "A09" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -831,8 +831,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M1037.9,-1409.45C1037.9,-1401.88 1037.9,-1392.82 1037.9,-1383.36"/>
-  <polygon fill="black" stroke="black" points="1041.4,-1383.65 1037.9,-1373.65 1034.4,-1383.65 1041.4,-1383.65"/>
+  <path fill="none" stroke="#88a0d6" d="M1037.9,-1409.45C1037.9,-1401.88 1037.9,-1392.82 1037.9,-1383.36"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1041.4,-1383.65 1037.9,-1373.65 1034.4,-1383.65 1041.4,-1383.65"/>
   </g>
   <!-- 2 -->
   <g id="node3" class="node">
@@ -851,8 +851,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M964.54,-1257.02C945.21,-1242.11 924.13,-1225.85 903.99,-1210.32"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="906.38,-1207.74 896.32,-1204.41 902.1,-1213.29 906.38,-1207.74"/>
+  <path fill="none" stroke="#88a0d6" d="M964.54,-1257.02C945.21,-1242.11 924.13,-1225.85 903.99,-1210.32"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="906.38,-1207.74 896.32,-1204.41 902.1,-1213.29 906.38,-1207.74"/>
   <text text-anchor="start" x="937.9" y="-1226.66" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 4 -->
@@ -866,8 +866,8 @@
   <!-- 1&#45;&gt;4 -->
   <g id="edge2" class="edge">
   <title>1-&gt;4</title>
-  <path fill="none" stroke="#7aab8a" d="M1111.59,-1257.02C1150.28,-1227.31 1195.99,-1192.21 1227.17,-1168.27"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1228.96,-1171.31 1234.76,-1162.45 1224.69,-1165.76 1228.96,-1171.31"/>
+  <path fill="none" stroke="#88a0d6" d="M1111.59,-1257.02C1150.28,-1227.31 1195.99,-1192.21 1227.17,-1168.27"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1228.96,-1171.31 1234.76,-1162.45 1224.69,-1165.76 1228.96,-1171.31"/>
   <text text-anchor="start" x="1150.9" y="-1226.66" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 3 -->
@@ -881,8 +881,8 @@
   <!-- 2&#45;&gt;3 -->
   <g id="edge4" class="edge">
   <title>2-&gt;3</title>
-  <path fill="none" stroke="#7aab8a" d="M813.73,-1074.66C813.99,-1055.15 814.26,-1034.48 814.47,-1017.95"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="817.97,-1018.28 814.6,-1008.23 810.97,-1018.19 817.97,-1018.28"/>
+  <path fill="none" stroke="#88a0d6" d="M813.73,-1074.66C813.99,-1055.15 814.26,-1034.48 814.47,-1017.95"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="817.97,-1018.28 814.6,-1008.23 810.97,-1018.19 817.97,-1018.28"/>
   <text text-anchor="start" x="813.9" y="-1044.13" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 6 -->
@@ -897,8 +897,8 @@
   <!-- 2&#45;&gt;6 -->
   <g id="edge5" class="edge">
   <title>2-&gt;6</title>
-  <path fill="none" stroke="#7aab8a" d="M622.4,-1074.44C563.76,-1054.85 501.68,-1034.12 452.21,-1017.59"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="453.56,-1014.35 442.97,-1014.5 451.34,-1020.99 453.56,-1014.35"/>
+  <path fill="none" stroke="#88a0d6" d="M622.4,-1074.44C563.76,-1054.85 501.68,-1034.12 452.21,-1017.59"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="453.56,-1014.35 442.97,-1014.5 451.34,-1020.99 453.56,-1014.35"/>
   <text text-anchor="start" x="556.9" y="-1044.13" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A01 -->
@@ -915,8 +915,8 @@
   <!-- 3&#45;&gt;A01 -->
   <g id="edge6" class="edge">
   <title>3-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M859.65,-961.83C894.8,-944.87 945.02,-920.63 989.22,-899.3"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="990.58,-902.53 998.07,-895.03 987.54,-896.23 990.58,-902.53"/>
+  <path fill="none" stroke="#88a0d6" d="M859.65,-961.83C894.8,-944.87 945.02,-920.63 989.22,-899.3"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="990.58,-902.53 998.07,-895.03 987.54,-896.23 990.58,-902.53"/>
   <text text-anchor="start" x="957.9" y="-917.36" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 9 -->
@@ -931,8 +931,8 @@
   <!-- 3&#45;&gt;9 -->
   <g id="edge7" class="edge">
   <title>3-&gt;9</title>
-  <path fill="none" stroke="#7aab8a" d="M938.25,-961.83C1060.7,-940.39 1249.55,-907.33 1387.36,-883.21"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1387.7,-886.7 1396.95,-881.53 1386.49,-879.8 1387.7,-886.7"/>
+  <path fill="none" stroke="#88a0d6" d="M938.25,-961.83C1060.7,-940.39 1249.55,-907.33 1387.36,-883.21"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1387.7,-886.7 1396.95,-881.53 1386.49,-879.8 1387.7,-886.7"/>
   <text text-anchor="start" x="1209.9" y="-917.36" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A02 -->
@@ -948,8 +948,8 @@
   <!-- 4&#45;&gt;A02 -->
   <g id="edge8" class="edge">
   <title>4-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M1316.97,-1116.52C1375.15,-1092.91 1469.75,-1054.5 1541.56,-1025.35"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1542.63,-1028.69 1550.58,-1021.68 1539.99,-1022.2 1542.63,-1028.69"/>
+  <path fill="none" stroke="#88a0d6" d="M1316.97,-1116.52C1375.15,-1092.91 1469.75,-1054.5 1541.56,-1025.35"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1542.63,-1028.69 1550.58,-1021.68 1539.99,-1022.2 1542.63,-1028.69"/>
   <text text-anchor="start" x="1495.9" y="-1044.13" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 5 -->
@@ -965,15 +965,15 @@
   <!-- 4&#45;&gt;5 -->
   <g id="edge9" class="edge">
   <title>4-&gt;5</title>
-  <path fill="none" stroke="#7aab8a" d="M1263.76,-1116.52C1263.62,-1094.71 1263.39,-1060.28 1263.21,-1032.17"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1266.71,-1032.46 1263.14,-1022.48 1259.71,-1032.5 1266.71,-1032.46"/>
+  <path fill="none" stroke="#88a0d6" d="M1263.76,-1116.52C1263.62,-1094.71 1263.39,-1060.28 1263.21,-1032.17"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1266.71,-1032.46 1263.14,-1022.48 1259.71,-1032.5 1266.71,-1032.46"/>
   <text text-anchor="start" x="1262.9" y="-1044.13" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 5&#45;&gt;9 -->
   <g id="edge10" class="edge">
   <title>5-&gt;9</title>
-  <path fill="none" stroke="#7aab8a" d="M1387.95,-947.91C1403.63,-942.35 1419.29,-936.24 1433.9,-929.66 1460.28,-917.78 1487.98,-901.63 1510.83,-887.19"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1512.5,-890.27 1519.04,-881.93 1508.73,-884.38 1512.5,-890.27"/>
+  <path fill="none" stroke="#88a0d6" d="M1387.95,-947.91C1403.63,-942.35 1419.29,-936.24 1433.9,-929.66 1460.28,-917.78 1487.98,-901.63 1510.83,-887.19"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1512.5,-890.27 1519.04,-881.93 1508.73,-884.38 1512.5,-890.27"/>
   <text text-anchor="start" x="1465.9" y="-917.36" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 10 -->
@@ -996,8 +996,8 @@
   <!-- 5&#45;&gt;10 -->
   <g id="edge11" class="edge">
   <title>5-&gt;10</title>
-  <path fill="none" stroke="#7aab8a" d="M1265.55,-948C1266.86,-911.52 1264.94,-853.82 1244.9,-808.89 1237.99,-793.4 1228.66,-778.46 1218.18,-764.5"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1220.99,-762.41 1212.08,-756.67 1215.47,-766.71 1220.99,-762.41"/>
+  <path fill="none" stroke="#88a0d6" d="M1265.55,-948C1266.86,-911.52 1264.94,-853.82 1244.9,-808.89 1237.99,-793.4 1228.66,-778.46 1218.18,-764.5"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1220.99,-762.41 1212.08,-756.67 1215.47,-766.71 1220.99,-762.41"/>
   <text text-anchor="start" x="1263.9" y="-847.97" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 7 -->
@@ -1011,8 +1011,8 @@
   <!-- 6&#45;&gt;7 -->
   <g id="edge12" class="edge">
   <title>6-&gt;7</title>
-  <path fill="none" stroke="#7aab8a" d="M327.69,-955.04C306.24,-933.46 276.81,-903.86 255.11,-882.04"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="257.81,-879.78 248.27,-875.16 252.84,-884.72 257.81,-879.78"/>
+  <path fill="none" stroke="#88a0d6" d="M327.69,-955.04C306.24,-933.46 276.81,-903.86 255.11,-882.04"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="257.81,-879.78 248.27,-875.16 252.84,-884.72 257.81,-879.78"/>
   <text text-anchor="start" x="297.9" y="-917.36" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 8 -->
@@ -1026,8 +1026,8 @@
   <!-- 6&#45;&gt;8 -->
   <g id="edge13" class="edge">
   <title>6-&gt;8</title>
-  <path fill="none" stroke="#7aab8a" d="M429.66,-954.88C488.6,-932.08 570.49,-900.4 627.43,-878.37"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="628.64,-881.65 636.7,-874.78 626.11,-875.12 628.64,-881.65"/>
+  <path fill="none" stroke="#88a0d6" d="M429.66,-954.88C488.6,-932.08 570.49,-900.4 627.43,-878.37"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="628.64,-881.65 636.7,-874.78 626.11,-875.12 628.64,-881.65"/>
   <text text-anchor="start" x="534.9" y="-917.36" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A03 -->
@@ -1043,15 +1043,15 @@
   <!-- 7&#45;&gt;A03 -->
   <g id="edge14" class="edge">
   <title>7-&gt;A03</title>
-  <path fill="none" stroke="#7aab8a" d="M225.9,-829.34C225.9,-802 225.9,-753.81 225.9,-717.75"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="229.4,-718.02 225.9,-708.02 222.4,-718.02 229.4,-718.02"/>
+  <path fill="none" stroke="#88a0d6" d="M225.9,-829.34C225.9,-802 225.9,-753.81 225.9,-717.75"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="229.4,-718.02 225.9,-708.02 222.4,-718.02 229.4,-718.02"/>
   <text text-anchor="start" x="225.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 7&#45;&gt;10 -->
   <g id="edge15" class="edge">
   <title>7-&gt;10</title>
-  <path fill="none" stroke="#7aab8a" d="M333.16,-829.01C373.11,-821.63 418.94,-813.97 460.9,-808.89 582.94,-794.11 616.05,-813.41 736.9,-790.89 784.08,-782.1 833.6,-769.36 880.79,-755.43"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="881.74,-758.8 890.32,-752.58 879.74,-752.09 881.74,-758.8"/>
+  <path fill="none" stroke="#88a0d6" d="M333.16,-829.01C373.11,-821.63 418.94,-813.97 460.9,-808.89 582.94,-794.11 616.05,-813.41 736.9,-790.89 784.08,-782.1 833.6,-769.36 880.79,-755.43"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="881.74,-758.8 890.32,-752.58 879.74,-752.09 881.74,-758.8"/>
   <text text-anchor="start" x="810.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A04 -->
@@ -1067,15 +1067,15 @@
   <!-- 8&#45;&gt;A04 -->
   <g id="edge16" class="edge">
   <title>8-&gt;A04</title>
-  <path fill="none" stroke="#7aab8a" d="M693.9,-829.34C693.9,-802 693.9,-753.81 693.9,-717.75"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="697.4,-718.02 693.9,-708.02 690.4,-718.02 697.4,-718.02"/>
+  <path fill="none" stroke="#88a0d6" d="M693.9,-829.34C693.9,-802 693.9,-753.81 693.9,-717.75"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="697.4,-718.02 693.9,-708.02 690.4,-718.02 697.4,-718.02"/>
   <text text-anchor="start" x="693.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 8&#45;&gt;10 -->
   <g id="edge17" class="edge">
   <title>8-&gt;10</title>
-  <path fill="none" stroke="#7aab8a" d="M761.5,-829.02C793.45,-818.32 831.95,-804.75 865.9,-790.89 889,-781.46 913.02,-771 936.66,-760.31"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="938.1,-763.51 945.75,-756.18 935.2,-757.13 938.1,-763.51"/>
+  <path fill="none" stroke="#88a0d6" d="M761.5,-829.02C793.45,-818.32 831.95,-804.75 865.9,-790.89 889,-781.46 913.02,-771 936.66,-760.31"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="938.1,-763.51 945.75,-756.18 935.2,-757.13 938.1,-763.51"/>
   <text text-anchor="start" x="900.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A05 -->
@@ -1092,15 +1092,15 @@
   <!-- 9&#45;&gt;A05 -->
   <g id="edge18" class="edge">
   <title>9-&gt;A05</title>
-  <path fill="none" stroke="#7aab8a" d="M1561.9,-822.18C1561.9,-795.93 1561.9,-756.27 1561.9,-724.15"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1565.4,-724.22 1561.9,-714.22 1558.4,-724.22 1565.4,-724.22"/>
+  <path fill="none" stroke="#88a0d6" d="M1561.9,-822.18C1561.9,-795.93 1561.9,-756.27 1561.9,-724.15"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1565.4,-724.22 1561.9,-714.22 1558.4,-724.22 1565.4,-724.22"/>
   <text text-anchor="start" x="1561.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 9&#45;&gt;10 -->
   <g id="edge19" class="edge">
   <title>9-&gt;10</title>
-  <path fill="none" stroke="#7aab8a" d="M1491.86,-822.18C1449.93,-805.14 1394.1,-782.45 1338.48,-759.84"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1340.08,-756.71 1329.5,-756.19 1337.44,-763.2 1340.08,-756.71"/>
+  <path fill="none" stroke="#88a0d6" d="M1491.86,-822.18C1449.93,-805.14 1394.1,-782.45 1338.48,-759.84"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1340.08,-756.71 1329.5,-756.19 1337.44,-763.2 1340.08,-756.71"/>
   <text text-anchor="start" x="1405.9" y="-778.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A06 -->
@@ -1115,8 +1115,8 @@
   <!-- 10&#45;&gt;A06 -->
   <g id="edge21" class="edge">
   <title>10-&gt;A06</title>
-  <path fill="none" stroke="#7aab8a" d="M1054.55,-584.67C1044.29,-567.73 1035.05,-549.47 1028.9,-531.11 1017.99,-498.57 1016.31,-459.49 1017.03,-430.71"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1020.52,-431.07 1017.39,-420.95 1013.53,-430.81 1020.52,-431.07"/>
+  <path fill="none" stroke="#88a0d6" d="M1054.55,-584.67C1044.29,-567.73 1035.05,-549.47 1028.9,-531.11 1017.99,-498.57 1016.31,-459.49 1017.03,-430.71"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1020.52,-431.07 1017.39,-420.95 1013.53,-430.81 1020.52,-431.07"/>
   <text text-anchor="start" x="1028.9" y="-504.79" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 11 -->
@@ -1130,15 +1130,15 @@
   <!-- 10&#45;&gt;11 -->
   <g id="edge20" class="edge">
   <title>10-&gt;11</title>
-  <path fill="none" stroke="#7aab8a" d="M1227.34,-584.56C1248.69,-567.79 1269.68,-551.29 1286.53,-538.05"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1288.55,-540.92 1294.25,-531.98 1284.22,-535.41 1288.55,-540.92"/>
+  <path fill="none" stroke="#88a0d6" d="M1227.34,-584.56C1248.69,-567.79 1269.68,-551.29 1286.53,-538.05"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1288.55,-540.92 1294.25,-531.98 1284.22,-535.41 1288.55,-540.92"/>
   <text text-anchor="start" x="1267.9" y="-554.06" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 11&#45;&gt;A06 -->
   <g id="edge23" class="edge">
   <title>11-&gt;A06</title>
-  <path fill="none" stroke="#7aab8a" d="M1264.71,-485.88C1225.18,-471.12 1171.78,-450.96 1124.9,-432.58 1117.74,-429.77 1110.32,-426.83 1102.89,-423.86"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1104.38,-420.68 1093.8,-420.21 1101.77,-427.18 1104.38,-420.68"/>
+  <path fill="none" stroke="#88a0d6" d="M1264.71,-485.88C1225.18,-471.12 1171.78,-450.96 1124.9,-432.58 1117.74,-429.77 1110.32,-426.83 1102.89,-423.86"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1104.38,-420.68 1093.8,-420.21 1101.77,-427.18 1104.38,-420.68"/>
   <text text-anchor="start" x="1210.9" y="-455.53" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- 12 -->
@@ -1155,8 +1155,8 @@
   <!-- 11&#45;&gt;12 -->
   <g id="edge22" class="edge">
   <title>11-&gt;12</title>
-  <path fill="none" stroke="#7aab8a" d="M1330.79,-485.91C1335.24,-473.74 1341.01,-457.96 1346.59,-442.72"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1349.73,-444.32 1349.88,-433.72 1343.16,-441.91 1349.73,-444.32"/>
+  <path fill="none" stroke="#88a0d6" d="M1330.79,-485.91C1335.24,-473.74 1341.01,-457.96 1346.59,-442.72"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1349.73,-444.32 1349.88,-433.72 1343.16,-441.91 1349.73,-444.32"/>
   <text text-anchor="start" x="1342.9" y="-455.53" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A07 -->
@@ -1172,8 +1172,8 @@
   <!-- 12&#45;&gt;A07 -->
   <g id="edge24" class="edge">
   <title>12-&gt;A07</title>
-  <path fill="none" stroke="#7aab8a" d="M1307.5,-345.4C1275.79,-322.3 1236.7,-293.82 1205.03,-270.75"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1207.25,-268.04 1197.1,-264.98 1203.12,-273.7 1207.25,-268.04"/>
+  <path fill="none" stroke="#88a0d6" d="M1307.5,-345.4C1275.79,-322.3 1236.7,-293.82 1205.03,-270.75"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1207.25,-268.04 1197.1,-264.98 1203.12,-273.7 1207.25,-268.04"/>
   <text text-anchor="start" x="1281.9" y="-315" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 13 -->
@@ -1193,8 +1193,8 @@
   <!-- 12&#45;&gt;13 -->
   <g id="edge25" class="edge">
   <title>12-&gt;13</title>
-  <path fill="none" stroke="#7aab8a" d="M1411.28,-345.61C1426.41,-331.49 1443.72,-315.34 1460.54,-299.64"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1462.72,-302.4 1467.65,-293.02 1457.95,-297.28 1462.72,-302.4"/>
+  <path fill="none" stroke="#88a0d6" d="M1411.28,-345.61C1426.41,-331.49 1443.72,-315.34 1460.54,-299.64"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1462.72,-302.4 1467.65,-293.02 1457.95,-297.28 1462.72,-302.4"/>
   <text text-anchor="start" x="1445.9" y="-315" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A08 -->
@@ -1210,8 +1210,8 @@
   <!-- 13&#45;&gt;A08 -->
   <g id="edge26" class="edge">
   <title>13-&gt;A08</title>
-  <path fill="none" stroke="#7aab8a" d="M1435.62,-162.87C1400.71,-140.97 1362.54,-117.02 1331.16,-97.33"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1333.26,-94.52 1322.93,-92.17 1329.54,-100.45 1333.26,-94.52"/>
+  <path fill="none" stroke="#88a0d6" d="M1435.62,-162.87C1400.71,-140.97 1362.54,-117.02 1331.16,-97.33"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1333.26,-94.52 1322.93,-92.17 1329.54,-100.45 1333.26,-94.52"/>
   <text text-anchor="start" x="1400.9" y="-132.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- A09 -->
@@ -1230,8 +1230,8 @@
   <!-- 13&#45;&gt;A09 -->
   <g id="edge27" class="edge">
   <title>13-&gt;A09</title>
-  <path fill="none" stroke="#7aab8a" d="M1554.77,-162.87C1558.69,-148.96 1562.83,-134.22 1566.75,-120.28"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="1570.09,-121.32 1569.43,-110.75 1563.36,-119.43 1570.09,-121.32"/>
+  <path fill="none" stroke="#88a0d6" d="M1554.77,-162.87C1558.69,-148.96 1562.83,-134.22 1566.75,-120.28"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="1570.09,-121.32 1569.43,-110.75 1563.36,-119.43 1570.09,-121.32"/>
   <text text-anchor="start" x="1562.9" y="-132.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   </g>
@@ -1257,11 +1257,11 @@
       "A02" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "A01" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "Ende" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -1287,8 +1287,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
-  <polygon fill="black" stroke="black" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
+  <path fill="none" stroke="#88a0d6" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
   </g>
   <!-- A01 -->
   <g id="node3" class="node">
@@ -1301,8 +1301,8 @@
   <!-- 1&#45;&gt;A01 -->
   <g id="edge2" class="edge">
   <title>1-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
+  <path fill="none" stroke="#88a0d6" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
   <text text-anchor="start" x="388.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 2 -->
@@ -1315,8 +1315,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
+  <path fill="none" stroke="#88a0d6" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
   <text text-anchor="start" x="524.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A02 -->
@@ -1330,8 +1330,8 @@
   <!-- 2&#45;&gt;A02 -->
   <g id="edge4" class="edge">
   <title>2-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
+  <path fill="none" stroke="#88a0d6" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
   <text text-anchor="start" x="563.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- Ende -->
@@ -1343,8 +1343,8 @@
   <!-- 2&#45;&gt;Ende -->
   <g id="edge5" class="edge">
   <title>2-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
+  <path fill="none" stroke="#88a0d6" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
   <text text-anchor="start" x="645.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   </g>
@@ -1370,11 +1370,11 @@
       "A02" [margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
   
-      "Start" -> "1";
-      "1" -> "A01" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "1" -> "2" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "A02" [label=<<B>NEIN</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
-      "2" -> "Ende" [label=<<B>JA</B>>, color="#7aab8a", fontname="Roboto, sans-serif"];
+      "Start" -> "1" [color="#88a0d6"];
+      "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+      "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
@@ -1400,8 +1400,8 @@
   <!-- Start&#45;&gt;1 -->
   <g id="edge1" class="edge">
   <title>Start-&gt;1</title>
-  <path fill="none" stroke="black" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
-  <polygon fill="black" stroke="black" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
+  <path fill="none" stroke="#88a0d6" d="M440.48,-278.78C440.48,-270.71 440.48,-261.3 440.48,-252.61"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="443.98,-252.9 440.48,-242.9 436.98,-252.9 443.98,-252.9"/>
   </g>
   <!-- A01 -->
   <g id="node3" class="node">
@@ -1414,8 +1414,8 @@
   <!-- 1&#45;&gt;A01 -->
   <g id="edge2" class="edge">
   <title>1-&gt;A01</title>
-  <path fill="none" stroke="#7aab8a" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
+  <path fill="none" stroke="#88a0d6" d="M416.35,-205.73C397.63,-192.7 371.21,-174.3 348.85,-158.73"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="351,-155.96 340.79,-153.12 347,-161.71 351,-155.96"/>
   <text text-anchor="start" x="388.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- 2 -->
@@ -1428,8 +1428,8 @@
   <!-- 1&#45;&gt;2 -->
   <g id="edge3" class="edge">
   <title>1-&gt;2</title>
-  <path fill="none" stroke="#7aab8a" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
+  <path fill="none" stroke="#88a0d6" d="M469.09,-205.73C494.98,-190.52 533.32,-167.99 561.92,-151.19"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="563.43,-154.36 570.28,-146.28 559.89,-148.32 563.43,-154.36"/>
   <text text-anchor="start" x="524.48" y="-175.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   <!-- A02 -->
@@ -1443,8 +1443,8 @@
   <!-- 2&#45;&gt;A02 -->
   <g id="edge4" class="edge">
   <title>2-&gt;A02</title>
-  <path fill="none" stroke="#7aab8a" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
+  <path fill="none" stroke="#88a0d6" d="M586.78,-109.89C575.17,-95.8 558.2,-75.19 543.95,-57.9"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="546.82,-55.87 537.76,-50.38 541.42,-60.32 546.82,-55.87"/>
   <text text-anchor="start" x="563.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
   </g>
   <!-- Ende -->
@@ -1456,8 +1456,8 @@
   <!-- 2&#45;&gt;Ende -->
   <g id="edge5" class="edge">
   <title>2-&gt;Ende</title>
-  <path fill="none" stroke="#7aab8a" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
-  <polygon fill="#7aab8a" stroke="#7aab8a" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
+  <path fill="none" stroke="#88a0d6" d="M614.02,-109.89C627.02,-93.92 646.83,-69.57 661.8,-51.17"/>
+  <polygon fill="#88a0d6" stroke="#88a0d6" points="664.37,-53.56 667.97,-43.6 658.94,-49.15 664.37,-53.56"/>
   <text text-anchor="start" x="645.48" y="-72.47" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
   </g>
   </g>

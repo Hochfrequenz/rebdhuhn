@@ -2,7 +2,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1878.6666666666667px" viewBox="0 0 1878.6666666666667 1826.6666666666667" height="1826.6666666666667px">
   <g>
     <svg version="1.1" width="1878.6666666666667px" viewBox="0 0 1878.6666666666667 1826.6666666666667" height="1826.6666666666667px">
-  <polygon fill="#e7e6e5" points="0,0 1878.6666666666667,0 1878.6666666666667,1826.6666666666667 0,1826.6666666666667"/><g>
+  <rect fill="#e7e6e5" x="0" y="0" width="1878.6666666666667" height="1826.6666666666667" rx="20" ry="20"/><g>
     <g transform="translate(194.41753496667593, 182.66666666666663) scale(1 1) translate(0, 0) scale(2.5720454332113025 2.5720454332113025) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->

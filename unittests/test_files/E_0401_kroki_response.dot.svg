@@ -8,7 +8,7 @@
     rankdir=TB;
     packmode="array";
     size="20,20";
-    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="center"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
+    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label=<<B>E_0401</B><BR align="left"/><FONT point-size="12"><B><U>Pr&#252;fende Rolle:</U> NB</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>1: </B>Liegt ein Transaktionsgrund vor, der eine Abmeldung nur in<BR align="left"/>die Zukunft zul&#228;sst?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Wechsel<BR align="left"/>&#61599; Ende der ESV ohne Folgelieferung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>aufgehobenem Vertragsverh&#228;ltnis<BR align="left"/>>, fontname="Roboto, sans-serif"];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>2: </B>Liegt ein Transaktionsgrund vor, welcher mitteilt, dass der<BR align="left"/>Kunde vor Lieferbeginn ausgezogen ist, bzw. die<BR align="left"/>Marktlokation vor Lieferbeginn stillgelegt wurde?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen Auszug<BR align="left"/>des Kunden<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>, fontname="Roboto, sans-serif"];
     "3" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", label=<<B>3: </B>Liegt das Abmeldedatum mindestens einen Tag nach dem<BR align="left"/>Eingangsdatum der Abmeldung?<BR align="left"/>>, fontname="Roboto, sans-serif"];
@@ -70,7 +70,7 @@ fontname="Roboto, sans-serif";
 <g id="node1" class="node">
 <title>Start</title>
 <path fill="#7a8da1" stroke="black" stroke-width="0" d="M1103.68,-1452.52C1103.68,-1452.52 972.13,-1452.52 972.13,-1452.52 966.13,-1452.52 960.13,-1446.52 960.13,-1440.52 960.13,-1440.52 960.13,-1421.24 960.13,-1421.24 960.13,-1415.24 966.13,-1409.24 972.13,-1409.24 972.13,-1409.24 1103.68,-1409.24 1103.68,-1409.24 1109.68,-1409.24 1115.68,-1415.24 1115.68,-1421.24 1115.68,-1421.24 1115.68,-1440.52 1115.68,-1440.52 1115.68,-1446.52 1109.68,-1452.52 1103.68,-1452.52"/>
-<text text-anchor="start" x="1010.15" y="-1431.58" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
+<text text-anchor="start" x="974.53" y="-1431.58" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
 <text text-anchor="start" x="974.53" y="-1419.48" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="12.00">Pr&#252;fende Rolle:</text>
 <text text-anchor="start" x="1078.03" y="-1419.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="12.00"> NB</text>
 </g>

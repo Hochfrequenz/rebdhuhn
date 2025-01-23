@@ -22,7 +22,7 @@
 <g id="node1" class="node">
 <title>Start</title>
 <path fill="#7a8da1" stroke="black" stroke-width="0" d="M1103.68,-1452.52C1103.68,-1452.52 972.13,-1452.52 972.13,-1452.52 966.13,-1452.52 960.13,-1446.52 960.13,-1440.52 960.13,-1440.52 960.13,-1421.24 960.13,-1421.24 960.13,-1415.24 966.13,-1409.24 972.13,-1409.24 972.13,-1409.24 1103.68,-1409.24 1103.68,-1409.24 1109.68,-1409.24 1115.68,-1415.24 1115.68,-1421.24 1115.68,-1421.24 1115.68,-1440.52 1115.68,-1440.52 1115.68,-1446.52 1109.68,-1452.52 1103.68,-1452.52"/>
-<text text-anchor="start" x="1010.15" y="-1431.58" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
+<text text-anchor="start" x="974.53" y="-1431.58" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
 <text text-anchor="start" x="974.53" y="-1419.48" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="12.00">Pr&#252;fende Rolle:</text>
 <text text-anchor="start" x="1078.03" y="-1419.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="12.00"> NB</text>
 </g>

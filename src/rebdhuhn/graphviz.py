@@ -41,7 +41,7 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
-        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -65,7 +65,7 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     Convert an EndNode to dot code
     """
     # pylint:disable=line-too-long
-    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label="Ende", fontname="Roboto, sans-serif"];'
+    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];'
 
 
 def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -81,7 +81,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
-        f'[margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#cfb986", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
+        f'[margin="0.17,0.08", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -95,7 +95,7 @@ def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -
         f'<BR align="left"/>'
     )
     return (
-        f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7aab8a", '
+        f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", '
         f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 

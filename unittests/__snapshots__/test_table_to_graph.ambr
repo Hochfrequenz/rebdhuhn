@@ -22,7 +22,7 @@
   </g>
   </g>
   </svg>
-
+  
   '''
 # ---
 # name: TestEbdTableModels.test_table_to_digraph[table0-DiGraph with 6 nodes and 5 edges][test_table_to_digraph_E_0003]
@@ -52,13 +52,13 @@
       "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 435.34)">
@@ -181,7 +181,7 @@
       "10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>10: </B>Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A10</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "A11" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A11</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
@@ -203,7 +203,7 @@
       "9" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "10" -> "A10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "10" -> "A11" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 1423.58)">
@@ -560,7 +560,7 @@
       "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Falsche Aggregationsebene BG<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "5" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>5: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A03" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Falsche Aggregationsebene RZ<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
@@ -572,7 +572,7 @@
       "4" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "5" -> "A03" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "5" -> "Ende" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 660.4)">
@@ -772,7 +772,7 @@
       "13" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>13: </B>Liegt in der bereits best&#228;tigten Abmeldung ein<BR align="left"/>Transaktionsgrund vor, aus welchem nicht hervorgeht, dass<BR align="left"/>der Anschlussnutzer ausgezogen ist?<BR align="left"/>Das ist bei den folgenden Transaktionsgr&#252;nden der Fall:<BR align="left"/>&#61599; Ein-/Auszug (Umzug)<BR align="left"/>&#61599; Auszug wegen Stilllegung<BR align="left"/>&#61599; Aufhebung einer zuk&#252;nftigen Zuordnung wegen<BR align="left"/>Stilllegung<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A08" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A08</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Lieferende zum Abmeldedatum wurde aus<BR align="left"/>gleichem Grund bereits best&#228;tigt.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "A09" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A09</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Erneute Best&#228;tigung der Abmeldung aufgrund der<BR align="left"/>Information, dass der Anschlussnutzer nicht mehr<BR align="left"/>an der Marktlokation vorhanden ist.<BR align="left"/>Hinweis: Das bisher best&#228;tigte Bilanzierungsende<BR align="left"/>bleibt unver&#228;ndert bestehen.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "4" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
@@ -800,7 +800,7 @@
       "12" -> "13" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "13" -> "A08" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "13" -> "A09" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(0.796824 0.796824) rotate(0) translate(4 1571.8)">
@@ -1256,13 +1256,13 @@
       "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 435.34)">
@@ -1369,13 +1369,13 @@
       "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
       "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
-
+  
       "Start" -> "1" [color="#88a0d6"];
       "1" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "1" -> "2" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "2" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
+  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 435.34)">

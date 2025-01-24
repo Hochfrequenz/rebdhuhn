@@ -22,6 +22,8 @@ jobs:
         run: python create_env_file.py
       - name: Start containers
         run: docker compose up -d
+      - name: Update snapshots
+        run: tox -e snapshots
       - name: Run the Unit Tests via Tox
         run: |
           tox -e tests

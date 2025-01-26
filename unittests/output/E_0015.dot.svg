@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1806.6666666666667px" viewBox="0 0 1806.6666666666667 1920.0" height="1920.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1816.0px" viewBox="0 0 1816.0 1920.0" height="1920.0px">
   <g>
-    <svg version="1.1" width="1806.6666666666667px" viewBox="0 0 1806.6666666666667 1920.0" height="1920.0px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1806.6666666666667" height="1920.0" rx="20" ry="20"/><g>
-    <g transform="translate(180.66666666666663, 251.15687222337317) scale(1 1) translate(0, 0) scale(2.495223626360979 2.495223626360979) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1816.0px" viewBox="0 0 1816.0 1920.0" height="1920.0px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1816.0" height="1920.0" rx="20" ry="20"/><g>
+    <g transform="translate(181.59999999999997, 247.49495200607691) scale(1 1) translate(0, 0) scale(2.5081140805193014 2.5081140805193014) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,18 +13,18 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1355pt" height="1440pt" viewBox="0.00 0.00 1354.90 1440.00">
-<g id="graph0" class="graph" transform="scale(0.966715 0.966715) rotate(0) translate(4 1485.58)">
+    <svg width="1362pt" height="1440pt" viewBox="0.00 0.00 1362.22 1440.00">
+<g id="graph0" class="graph" transform="scale(0.971935 0.971935) rotate(0) translate(4 1477.58)">
 <title>D</title>
-<text text-anchor="start" x="160.15" y="-1461.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
-<text text-anchor="start" x="160.15" y="-1431.38" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>
+<text text-anchor="start" x="160.15" y="-1453.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.17 AD: Aktivierung eines MaBiS-ZP f&#252;r Bilanzierungsgebietssummenzeitreihen vom &#220;NB an BIKO und NB</text>
+<text text-anchor="start" x="160.15" y="-1425.38" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.17.1 E_0015_MaBiS-ZP Aktivierung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M382.05,-1383.58C382.05,-1383.58 213.75,-1383.58 213.75,-1383.58 207.75,-1383.58 201.75,-1377.58 201.75,-1371.58 201.75,-1371.58 201.75,-1350.3 201.75,-1350.3 201.75,-1344.3 207.75,-1338.3 213.75,-1338.3 213.75,-1338.3 382.05,-1338.3 382.05,-1338.3 388.05,-1338.3 394.05,-1344.3 394.05,-1350.3 394.05,-1350.3 394.05,-1371.58 394.05,-1371.58 394.05,-1377.58 388.05,-1383.58 382.05,-1383.58"/>
-<text text-anchor="start" x="216.15" y="-1362.64" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0015</text>
-<text text-anchor="start" x="216.15" y="-1348.64" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="14.00">Pr&#252;fende Rolle:</text>
-<text text-anchor="start" x="336.9" y="-1348.64" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00"> BIKO</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M374.17,-1383.58C374.17,-1383.58 221.62,-1383.58 221.62,-1383.58 215.62,-1383.58 209.62,-1377.58 209.62,-1371.58 209.62,-1371.58 209.62,-1350.3 209.62,-1350.3 209.62,-1344.3 215.62,-1338.3 221.62,-1338.3 221.62,-1338.3 374.17,-1338.3 374.17,-1338.3 380.17,-1338.3 386.17,-1344.3 386.17,-1350.3 386.17,-1350.3 386.17,-1371.58 386.17,-1371.58 386.17,-1377.58 380.17,-1383.58 374.17,-1383.58"/>
+<text text-anchor="start" x="224.02" y="-1362.64" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0015</text>
+<text text-anchor="start" x="224.02" y="-1348.64" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text text-anchor="start" x="333.52" y="-1348.64" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">BIKO</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">

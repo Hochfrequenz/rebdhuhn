@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1402.6666666666667px" viewBox="0 0 1402.6666666666667 598.6666666666666" height="598.6666666666666px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1402.6666666666667px" viewBox="0 0 1402.6666666666667 588.0" height="588.0px">
   <g>
-    <svg version="1.1" width="1402.6666666666667px" viewBox="0 0 1402.6666666666667 598.6666666666666" height="598.6666666666666px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1402.6666666666667" height="598.6666666666666" rx="20" ry="20"/><g>
-    <g transform="translate(457.1966957664508, 59.86666666666665) scale(1 1) translate(0, 0) scale(0.8429550361400545 0.8429550361400545) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1402.6666666666667px" viewBox="0 0 1402.6666666666667 588.0" height="588.0px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1402.6666666666667" height="588.0" rx="20" ry="20"/><g>
+    <g transform="translate(461.5465690415846, 58.79999999999999) scale(1 1) translate(0, 0) scale(0.8279357927344411 0.8279357927344411) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,18 +13,18 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1052pt" height="449pt" viewBox="0.00 0.00 1051.50 449.34">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 445.34)">
+    <svg width="1052pt" height="441pt" viewBox="0.00 0.00 1051.50 441.34">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 437.34)">
 <title>D</title>
-<text text-anchor="start" x="8" y="-421.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
-<text text-anchor="start" x="8" y="-391.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
+<text text-anchor="start" x="8" y="-413.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
+<text text-anchor="start" x="8" y="-385.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M522.52,-343.34C522.52,-343.34 358.73,-343.34 358.73,-343.34 352.73,-343.34 346.73,-337.34 346.73,-331.34 346.73,-331.34 346.73,-310.06 346.73,-310.06 346.73,-304.06 352.73,-298.06 358.73,-298.06 358.73,-298.06 522.52,-298.06 522.52,-298.06 528.52,-298.06 534.52,-304.06 534.52,-310.06 534.52,-310.06 534.52,-331.34 534.52,-331.34 534.52,-337.34 528.52,-343.34 522.52,-343.34"/>
-<text text-anchor="start" x="361.12" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
-<text text-anchor="start" x="361.12" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="14.00">Pr&#252;fende Rolle:</text>
-<text text-anchor="start" x="481.88" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00"> &#220;NB</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M514.65,-343.34C514.65,-343.34 366.6,-343.34 366.6,-343.34 360.6,-343.34 354.6,-337.34 354.6,-331.34 354.6,-331.34 354.6,-310.06 354.6,-310.06 354.6,-304.06 360.6,-298.06 366.6,-298.06 366.6,-298.06 514.65,-298.06 514.65,-298.06 520.65,-298.06 526.65,-304.06 526.65,-310.06 526.65,-310.06 526.65,-331.34 526.65,-331.34 526.65,-337.34 520.65,-343.34 514.65,-343.34"/>
+<text text-anchor="start" x="369" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
+<text text-anchor="start" x="369" y="-308.4" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text text-anchor="start" x="478.5" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">&#220;NB</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">

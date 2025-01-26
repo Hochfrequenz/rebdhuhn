@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1665.3333333333333" height="1665.3333333333333px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1657.3333333333333" height="1657.3333333333333px">
   <g>
-    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1665.3333333333333" height="1665.3333333333333px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1665.3333333333333" rx="20" ry="20"/><g>
-    <g transform="translate(280.87603491974096, 166.53333333333327) scale(1 1) translate(0, 0) scale(2.3448793767013987 2.3448793767013987) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1657.3333333333333" height="1657.3333333333333px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1657.3333333333333" rx="20" ry="20"/><g>
+    <g transform="translate(284.1384398760912, 165.7333333333333) scale(1 1) translate(0, 0) scale(2.3336149441471887 2.3336149441471887) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,18 +13,18 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1440pt" height="1249pt" viewBox="0.00 0.00 1440.00 1249.03">
-<g id="graph0" class="graph" transform="scale(0.775893 0.775893) rotate(0) translate(4 1605.8)">
+    <svg width="1440pt" height="1243pt" viewBox="0.00 0.00 1440.00 1242.83">
+<g id="graph0" class="graph" transform="scale(0.775893 0.775893) rotate(0) translate(4 1597.8)">
 <title>D</title>
-<text text-anchor="start" x="779.21" y="-1581.7" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
-<text text-anchor="start" x="779.21" y="-1551.6" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>
+<text text-anchor="start" x="779.21" y="-1573.7" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
+<text text-anchor="start" x="779.21" y="-1545.6" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M1111.18,-1503.8C1111.18,-1503.8 958.63,-1503.8 958.63,-1503.8 952.63,-1503.8 946.63,-1497.8 946.63,-1491.8 946.63,-1491.8 946.63,-1470.52 946.63,-1470.52 946.63,-1464.52 952.63,-1458.52 958.63,-1458.52 958.63,-1458.52 1111.18,-1458.52 1111.18,-1458.52 1117.18,-1458.52 1123.18,-1464.52 1123.18,-1470.52 1123.18,-1470.52 1123.18,-1491.8 1123.18,-1491.8 1123.18,-1497.8 1117.18,-1503.8 1111.18,-1503.8"/>
-<text text-anchor="start" x="961.03" y="-1482.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
-<text text-anchor="start" x="961.03" y="-1468.86" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="14.00">Pr&#252;fende Rolle:</text>
-<text text-anchor="start" x="1081.78" y="-1468.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00"> NB</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M1103.3,-1503.8C1103.3,-1503.8 966.5,-1503.8 966.5,-1503.8 960.5,-1503.8 954.5,-1497.8 954.5,-1491.8 954.5,-1491.8 954.5,-1470.52 954.5,-1470.52 954.5,-1464.52 960.5,-1458.52 966.5,-1458.52 966.5,-1458.52 1103.3,-1458.52 1103.3,-1458.52 1109.3,-1458.52 1115.3,-1464.52 1115.3,-1470.52 1115.3,-1470.52 1115.3,-1491.8 1115.3,-1491.8 1115.3,-1497.8 1109.3,-1503.8 1103.3,-1503.8"/>
+<text text-anchor="start" x="968.9" y="-1482.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0401</text>
+<text text-anchor="start" x="968.9" y="-1468.86" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text text-anchor="start" x="1078.4" y="-1468.86" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NB</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">

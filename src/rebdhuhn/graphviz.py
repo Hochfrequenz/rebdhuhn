@@ -36,7 +36,7 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     formatted_label = (
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
-        f'<FONT><B><U>Prüfende Rolle:</U> {ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
+        f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '

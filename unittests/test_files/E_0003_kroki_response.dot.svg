@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1052pt" height="449pt" viewBox="0.00 0.00 1051.50 449.34">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1052pt" height="441pt" viewBox="0.00 0.00 1051.50 441.34">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
@@ -8,8 +8,8 @@
     rankdir=TB;
     packmode="array";
     size="20,20";
-    fontsize=14;
-    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<<B>E_0003</B><BR align="left"/><FONT><B><U>Pr&#252;fende Rolle:</U> &#220;NB</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
+    fontsize=12;
+    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<<B>E_0003</B><BR align="left"/><FONT>Pr&#252;fende Rolle: <B>&#220;NB</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>1: </B>Erfolgt der Eingang der Bestellung fristgerecht?<BR align="left"/>>, fontname="Roboto, sans-serif"];
     "A01" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A01</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?<BR align="left"/>>, fontname="Roboto, sans-serif"];
@@ -24,17 +24,17 @@
 
     bgcolor="transparent";
 fontname="Roboto, sans-serif";
-}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 445.34)">
+}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 437.34)">
 <title>D</title>
-<text text-anchor="start" x="8" y="-421.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
-<text text-anchor="start" x="8" y="-391.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
+<text text-anchor="start" x="8" y="-413.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
+<text text-anchor="start" x="8" y="-385.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M522.52,-343.34C522.52,-343.34 358.73,-343.34 358.73,-343.34 352.73,-343.34 346.73,-337.34 346.73,-331.34 346.73,-331.34 346.73,-310.06 346.73,-310.06 346.73,-304.06 352.73,-298.06 358.73,-298.06 358.73,-298.06 522.52,-298.06 522.52,-298.06 528.52,-298.06 534.52,-304.06 534.52,-310.06 534.52,-310.06 534.52,-331.34 534.52,-331.34 534.52,-337.34 528.52,-343.34 522.52,-343.34"/>
-<text text-anchor="start" x="361.12" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
-<text text-anchor="start" x="361.12" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" text-decoration="underline" font-size="14.00">Pr&#252;fende Rolle:</text>
-<text text-anchor="start" x="481.88" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00"> &#220;NB</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M514.65,-343.34C514.65,-343.34 366.6,-343.34 366.6,-343.34 360.6,-343.34 354.6,-337.34 354.6,-331.34 354.6,-331.34 354.6,-310.06 354.6,-310.06 354.6,-304.06 360.6,-298.06 366.6,-298.06 366.6,-298.06 514.65,-298.06 514.65,-298.06 520.65,-298.06 526.65,-304.06 526.65,-310.06 526.65,-310.06 526.65,-331.34 526.65,-331.34 526.65,-337.34 520.65,-343.34 514.65,-343.34"/>
+<text text-anchor="start" x="369" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
+<text text-anchor="start" x="369" y="-308.4" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text text-anchor="start" x="478.5" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">&#220;NB</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">

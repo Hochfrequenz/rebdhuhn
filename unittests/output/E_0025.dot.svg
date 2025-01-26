@@ -14,7 +14,42 @@
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
     <svg width="1044pt" height="666pt" viewBox="0.00 0.00 1043.55 666.40">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 662.4)">
+<!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
+    labelloc="t";
+    label=<<B><FONT POINT-SIZE="18">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
+    ratio="compress";
+    concentrate=true;
+    pack=true;
+    rankdir=TB;
+    packmode="array";
+    size="20,20";
+    fontsize=12;
+    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<<B>E_0025</B><BR align="left"/><FONT>Pr&#252;fende Rolle: <B>BIKO</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
+    "1" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>1: </B>Erfolgt der Eingang der Pr&#252;fmitteilung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>, fontname="Roboto, sans-serif"];
+    "A01" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A01</B><BR align="left"/><BR align="left"/><FONT>Frist&#252;berschreitung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Befindet sich der MaBiS-ZP auf der Aggregationsebene RZ?<BR align="left"/>>, fontname="Roboto, sans-serif"];
+    "3" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>3: </B>Hat der BKV f&#252;r den BK dieses MaBiS-ZP in diesem Bilanzie-<BR align="left"/>rungsmonat die Aggregationsebene RZ abbestellt?<BR align="left"/>>, fontname="Roboto, sans-serif"];
+    "Ende" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];
+    "4" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>4: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>, fontname="Roboto, sans-serif"];
+    "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><BR align="left"/><FONT>Falsche Aggregationsebene BG<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "5" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>5: </B>Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits<BR align="left"/>mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG<BR align="left"/>stattfinden m&#252;ssen?<BR align="left"/>>, fontname="Roboto, sans-serif"];
+    "A03" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><BR align="left"/><FONT>Falsche Aggregationsebene RZ<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+
+    "Start" -> "1" [color="#88a0d6"];
+    "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "2" -> "3" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "2" -> "5" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "3" -> "4" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "3" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "4" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "4" -> "Ende" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "5" -> "A03" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "5" -> "Ende" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+
+    bgcolor="transparent";
+fontname="Roboto, sans-serif";
+}'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 662.4)">
 <title>D</title>
 <text text-anchor="start" x="9.27" y="-638.3" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
 <text text-anchor="start" x="9.27" y="-610.2" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
@@ -44,7 +79,6 @@
 <title>A01</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M221.17,-396.87C221.17,-396.87 81.37,-396.87 81.37,-396.87 75.37,-396.87 69.37,-390.87 69.37,-384.87 69.37,-384.87 69.37,-349.59 69.37,-349.59 69.37,-343.59 75.37,-337.59 81.37,-337.59 81.37,-337.59 221.17,-337.59 221.17,-337.59 227.17,-337.59 233.17,-343.59 233.17,-349.59 233.17,-349.59 233.17,-384.87 233.17,-384.87 233.17,-390.87 227.17,-396.87 221.17,-396.87"/>
 <text text-anchor="start" x="83.77" y="-375.93" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A01</text>
-<text text-anchor="start" x="83.77" y="-361.93" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="83.77" y="-347.93" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
 </g>
 <!-- 1&#45;&gt;A01 -->
@@ -141,7 +175,6 @@
 <title>A02</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M405.92,-59.28C405.92,-59.28 186.62,-59.28 186.62,-59.28 180.62,-59.28 174.62,-53.28 174.62,-47.28 174.62,-47.28 174.62,-12 174.62,-12 174.62,-6 180.62,0 186.62,0 186.62,0 405.92,0 405.92,0 411.92,0 417.92,-6 417.92,-12 417.92,-12 417.92,-47.28 417.92,-47.28 417.92,-53.28 411.92,-59.28 405.92,-59.28"/>
 <text text-anchor="start" x="189.02" y="-38.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A02</text>
-<text text-anchor="start" x="189.02" y="-24.34" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="189.02" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene BG</text>
 </g>
 <!-- 4&#45;&gt;A02 -->
@@ -162,7 +195,6 @@
 <title>A03</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M910.92,-171.81C910.92,-171.81 691.62,-171.81 691.62,-171.81 685.62,-171.81 679.62,-165.81 679.62,-159.81 679.62,-159.81 679.62,-124.53 679.62,-124.53 679.62,-118.53 685.62,-112.53 691.62,-112.53 691.62,-112.53 910.92,-112.53 910.92,-112.53 916.92,-112.53 922.92,-118.53 922.92,-124.53 922.92,-124.53 922.92,-159.81 922.92,-159.81 922.92,-165.81 916.92,-171.81 910.92,-171.81"/>
 <text text-anchor="start" x="694.02" y="-150.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A03</text>
-<text text-anchor="start" x="694.02" y="-136.87" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="694.02" y="-122.87" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene RZ</text>
 </g>
 <!-- 5&#45;&gt;A03 -->

@@ -11,26 +11,26 @@
     fontsize=12;
     "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<<B>E_0015</B><BR align="left"/><FONT>Pr&#252;fende Rolle: <B>BIKO</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
     "1" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>1: </B>Erfolgt die Aktivierung nach Ablauf der Clearingfrist f&#252;r die KBKA?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A01" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A01</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A01" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A01</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Frist&#252;berschreitung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "2" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>2: </B>Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "3" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>3: </B>Ist die richtige Regelzone angegeben<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A03" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Regelzone falsch<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A03" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Regelzone falsch<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "4" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>4: </B>Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO g&#252;ltig?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A04" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A04</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Bilanzierungsgebiet nicht g&#252;ltig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A04" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A04</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Bilanzierungsgebiet nicht g&#252;ltig<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "5" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>5: </B>Ist der &#220;NB zum Aktivierungsbeginn f&#252;r das Bilanzierungsgebiet zust&#228;ndig?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A05" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A05</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Keine Berechtigung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A05" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A05</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Keine Berechtigung<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "6" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>6: </B>Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A06" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A06</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichender MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A06" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A06</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Abweichender MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "7" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>7: </B>Existiert bereits f&#252;r das genannte Tupel aus Aggregations-verantwortlicher,<BR align="left"/>Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A07" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A07</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>Abweichende ID zum MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A07" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A07</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>Abweichende ID zum MaBiS-ZP bereits vorhanden<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "8" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>8: </B>Ist der &#220;NB zur Aktivierung des ZRT berechtigt?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A08" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A08</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>ZRT Aktivierung nicht berechtigt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A08" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A08</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>ZRT Aktivierung nicht berechtigt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "9" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>9: </B>Passt die OBIS-Kennzahl zum ZRT?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A09" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A09</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>OBIS nicht passend<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A09" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A09</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>OBIS nicht passend<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
     "10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>10: </B>Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A10</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "A11" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A11</B><BR align="left"/><FONT><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A10</B><BR align="left"/><BR align="left"/><FONT>Cluster Ablehnung<BR align="left"/>MaBiS-ZP bereits aktiviert<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
+    "A11" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A11</B><BR align="left"/><BR align="left"/><FONT>Cluster: Zustimmung<BR align="left"/>Aktivierung durchgef&#252;hrt<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
 
     "Start" -> "1" [color="#88a0d6"];
     "1" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
@@ -86,7 +86,6 @@ fontname="Roboto, sans-serif";
 <title>A01</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M151.8,-1212.05C151.8,-1212.05 12,-1212.05 12,-1212.05 6,-1212.05 0,-1206.05 0,-1200.05 0,-1200.05 0,-1150.77 0,-1150.77 0,-1144.77 6,-1138.77 12,-1138.77 12,-1138.77 151.8,-1138.77 151.8,-1138.77 157.8,-1138.77 163.8,-1144.77 163.8,-1150.77 163.8,-1150.77 163.8,-1200.05 163.8,-1200.05 163.8,-1206.05 157.8,-1212.05 151.8,-1212.05"/>
 <text text-anchor="start" x="14.4" y="-1191.11" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A01</text>
-<text text-anchor="start" x="14.4" y="-1177.11" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="14.4" y="-1163.11" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="14.4" y="-1149.11" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
 </g>
@@ -116,7 +115,6 @@ fontname="Roboto, sans-serif";
 <title>A02</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M263.43,-1085.52C263.43,-1085.52 16.37,-1085.52 16.37,-1085.52 10.38,-1085.52 4.38,-1079.52 4.38,-1073.52 4.38,-1073.52 4.38,-1024.24 4.38,-1024.24 4.38,-1018.24 10.38,-1012.24 16.38,-1012.24 16.38,-1012.24 263.43,-1012.24 263.43,-1012.24 269.43,-1012.24 275.43,-1018.24 275.43,-1024.24 275.43,-1024.24 275.43,-1073.52 275.43,-1073.52 275.43,-1079.52 269.43,-1085.52 263.43,-1085.52"/>
 <text text-anchor="start" x="18.78" y="-1064.58" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A02</text>
-<text text-anchor="start" x="18.78" y="-1050.58" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="18.78" y="-1036.58" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="18.78" y="-1022.58" font-family="Roboto, sans-serif" font-size="14.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
 </g>
@@ -146,7 +144,6 @@ fontname="Roboto, sans-serif";
 <title>A03</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M149.18,-958.99C149.18,-958.99 14.62,-958.99 14.62,-958.99 8.63,-958.99 2.62,-952.99 2.62,-946.99 2.62,-946.99 2.62,-897.71 2.62,-897.71 2.62,-891.71 8.62,-885.71 14.62,-885.71 14.62,-885.71 149.18,-885.71 149.18,-885.71 155.18,-885.71 161.18,-891.71 161.18,-897.71 161.18,-897.71 161.18,-946.99 161.18,-946.99 161.18,-952.99 155.18,-958.99 149.18,-958.99"/>
 <text text-anchor="start" x="17.03" y="-938.05" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A03</text>
-<text text-anchor="start" x="17.03" y="-924.05" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="17.03" y="-910.05" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="17.03" y="-896.05" font-family="Roboto, sans-serif" font-size="14.00">Regelzone falsch</text>
 </g>
@@ -176,7 +173,6 @@ fontname="Roboto, sans-serif";
 <title>A04</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M260.93,-832.46C260.93,-832.46 34.88,-832.46 34.88,-832.46 28.87,-832.46 22.88,-826.46 22.88,-820.46 22.88,-820.46 22.88,-771.18 22.88,-771.18 22.88,-765.18 28.88,-759.18 34.88,-759.18 34.88,-759.18 260.93,-759.18 260.93,-759.18 266.93,-759.18 272.93,-765.18 272.93,-771.18 272.93,-771.18 272.93,-820.46 272.93,-820.46 272.93,-826.46 266.93,-832.46 260.93,-832.46"/>
 <text text-anchor="start" x="37.28" y="-811.52" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A04</text>
-<text text-anchor="start" x="37.28" y="-797.52" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="37.28" y="-783.52" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="37.28" y="-769.52" font-family="Roboto, sans-serif" font-size="14.00">Bilanzierungsgebiet nicht g&#252;ltig</text>
 </g>
@@ -206,7 +202,6 @@ fontname="Roboto, sans-serif";
 <title>A05</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M431.8,-705.93C431.8,-705.93 292,-705.93 292,-705.93 286,-705.93 280,-699.93 280,-693.93 280,-693.93 280,-644.65 280,-644.65 280,-638.65 286,-632.65 292,-632.65 292,-632.65 431.8,-632.65 431.8,-632.65 437.8,-632.65 443.8,-638.65 443.8,-644.65 443.8,-644.65 443.8,-693.93 443.8,-693.93 443.8,-699.93 437.8,-705.93 431.8,-705.93"/>
 <text text-anchor="start" x="294.4" y="-684.99" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A05</text>
-<text text-anchor="start" x="294.4" y="-670.99" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="294.4" y="-656.99" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="294.4" y="-642.99" font-family="Roboto, sans-serif" font-size="14.00">Keine Berechtigung</text>
 </g>
@@ -236,7 +231,6 @@ fontname="Roboto, sans-serif";
 <title>A06</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M504.3,-579.4C504.3,-579.4 199.5,-579.4 199.5,-579.4 193.5,-579.4 187.5,-573.4 187.5,-567.4 187.5,-567.4 187.5,-518.12 187.5,-518.12 187.5,-512.12 193.5,-506.12 199.5,-506.12 199.5,-506.12 504.3,-506.12 504.3,-506.12 510.3,-506.12 516.3,-512.12 516.3,-518.12 516.3,-518.12 516.3,-567.4 516.3,-567.4 516.3,-573.4 510.3,-579.4 504.3,-579.4"/>
 <text text-anchor="start" x="201.9" y="-558.46" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A06</text>
-<text text-anchor="start" x="201.9" y="-544.46" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="201.9" y="-530.46" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="201.9" y="-516.46" font-family="Roboto, sans-serif" font-size="14.00">Abweichender MaBiS-ZP bereits vorhanden</text>
 </g>
@@ -267,7 +261,6 @@ fontname="Roboto, sans-serif";
 <title>A07</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M789.3,-452.87C789.3,-452.87 436.5,-452.87 436.5,-452.87 430.5,-452.87 424.5,-446.87 424.5,-440.87 424.5,-440.87 424.5,-391.59 424.5,-391.59 424.5,-385.59 430.5,-379.59 436.5,-379.59 436.5,-379.59 789.3,-379.59 789.3,-379.59 795.3,-379.59 801.3,-385.59 801.3,-391.59 801.3,-391.59 801.3,-440.87 801.3,-440.87 801.3,-446.87 795.3,-452.87 789.3,-452.87"/>
 <text text-anchor="start" x="438.9" y="-431.93" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A07</text>
-<text text-anchor="start" x="438.9" y="-417.93" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="438.9" y="-403.93" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="438.9" y="-389.93" font-family="Roboto, sans-serif" font-size="14.00">Abweichende ID zum MaBiS-ZP bereits vorhanden</text>
 </g>
@@ -297,7 +290,6 @@ fontname="Roboto, sans-serif";
 <title>A08</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M919.17,-326.34C919.17,-326.34 688.62,-326.34 688.62,-326.34 682.62,-326.34 676.62,-320.34 676.62,-314.34 676.62,-314.34 676.62,-265.06 676.62,-265.06 676.62,-259.06 682.62,-253.06 688.62,-253.06 688.62,-253.06 919.17,-253.06 919.17,-253.06 925.17,-253.06 931.17,-259.06 931.17,-265.06 931.17,-265.06 931.17,-314.34 931.17,-314.34 931.17,-320.34 925.17,-326.34 919.17,-326.34"/>
 <text text-anchor="start" x="691.02" y="-305.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A08</text>
-<text text-anchor="start" x="691.02" y="-291.4" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="691.02" y="-277.4" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="691.02" y="-263.4" font-family="Roboto, sans-serif" font-size="14.00">ZRT Aktivierung nicht berechtigt</text>
 </g>
@@ -327,7 +319,6 @@ fontname="Roboto, sans-serif";
 <title>A09</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M850.55,-199.81C850.55,-199.81 709.25,-199.81 709.25,-199.81 703.25,-199.81 697.25,-193.81 697.25,-187.81 697.25,-187.81 697.25,-138.53 697.25,-138.53 697.25,-132.53 703.25,-126.53 709.25,-126.53 709.25,-126.53 850.55,-126.53 850.55,-126.53 856.55,-126.53 862.55,-132.53 862.55,-138.53 862.55,-138.53 862.55,-187.81 862.55,-187.81 862.55,-193.81 856.55,-199.81 850.55,-199.81"/>
 <text text-anchor="start" x="711.65" y="-178.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A09</text>
-<text text-anchor="start" x="711.65" y="-164.87" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="711.65" y="-150.87" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="711.65" y="-136.87" font-family="Roboto, sans-serif" font-size="14.00">OBIS nicht passend</text>
 </g>
@@ -357,7 +348,6 @@ fontname="Roboto, sans-serif";
 <title>A10</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M1082.92,-73.28C1082.92,-73.28 898.88,-73.28 898.88,-73.28 892.88,-73.28 886.88,-67.28 886.88,-61.28 886.88,-61.28 886.88,-12 886.88,-12 886.88,-6 892.88,0 898.88,0 898.88,0 1082.92,0 1082.92,0 1088.92,0 1094.92,-6 1094.92,-12 1094.92,-12 1094.92,-61.28 1094.92,-61.28 1094.92,-67.28 1088.92,-73.28 1082.92,-73.28"/>
 <text text-anchor="start" x="901.27" y="-52.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A10</text>
-<text text-anchor="start" x="901.27" y="-38.34" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="901.27" y="-24.34" font-family="Roboto, sans-serif" font-size="14.00">Cluster Ablehnung</text>
 <text text-anchor="start" x="901.27" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">MaBiS-ZP bereits aktiviert</text>
 </g>
@@ -373,7 +363,6 @@ fontname="Roboto, sans-serif";
 <title>A11</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M1306.43,-73.28C1306.43,-73.28 1125.38,-73.28 1125.38,-73.28 1119.38,-73.28 1113.38,-67.28 1113.38,-61.28 1113.38,-61.28 1113.38,-12 1113.38,-12 1113.38,-6 1119.38,0 1125.38,0 1125.38,0 1306.43,0 1306.43,0 1312.43,0 1318.43,-6 1318.43,-12 1318.43,-12 1318.43,-61.28 1318.43,-61.28 1318.43,-67.28 1312.43,-73.28 1306.43,-73.28"/>
 <text text-anchor="start" x="1127.78" y="-52.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A11</text>
-<text text-anchor="start" x="1127.78" y="-38.34" font-family="Roboto, sans-serif" text-decoration="underline" font-size="14.00">Hinweis:</text>
 <text text-anchor="start" x="1127.78" y="-24.34" font-family="Roboto, sans-serif" font-size="14.00">Cluster: Zustimmung</text>
 <text text-anchor="start" x="1127.78" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">Aktivierung durchgef&#252;hrt</text>
 </g>

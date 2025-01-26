@@ -36,7 +36,7 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     formatted_label = (
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
-        f'<FONT point-size="12"><B><U>Prüfende Rolle:</U> {ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
+        f'<FONT><B><U>Prüfende Rolle:</U> {ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '
@@ -51,7 +51,7 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     formatted_label = (
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-        f'<FONT point-size="12">{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
+        f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '
@@ -74,7 +74,7 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
     """
     formatted_label = (
         f'<B>{ebd_graph.graph.nodes[node]["node"].result_code}</B><BR align="left"/>'
-        f'<FONT point-size="12">'
+        f"<FONT>"
         f'<U>Hinweis:</U><BR align="left"/>{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>'
         f"</FONT>"
     )
@@ -199,6 +199,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
         "rankdir": "TB",
         "packmode": '"array"',
         "size": '"20,20"',  # in inches 🤮
+        "fontsize": "12",
     }
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():

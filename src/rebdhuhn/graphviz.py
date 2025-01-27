@@ -35,12 +35,13 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     Convert a StartNode to dot code
     """
     formatted_label = (
-        f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-        f'<FONT point-size="12"><B><U>Prüfende Rolle:</U> {ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
+        f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
+        f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<{formatted_label}>];'
+        # pylint:disable=line-too-long
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -50,11 +51,12 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     formatted_label = (
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-        f'<FONT point-size="12">{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
+        f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     )
     return (
         f'{indent}"{node}" '
-        f'[margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label=<{formatted_label}>];'
+        # pylint:disable=line-too-long
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#7a8da1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -62,7 +64,8 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     """
     Convert an EndNode to dot code
     """
-    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style=filled, fillcolor="#7a8da1", label="Ende"];'
+    # pylint:disable=line-too-long
+    return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];'
 
 
 def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -82,7 +85,8 @@ def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) ->
 
     return (
         f'{indent}"{node}" '
-        f'[margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<{formatted_label}>];'
+        # pylint:disable=line-too-long
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -96,8 +100,8 @@ def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -
         f'<BR align="left"/>'
     )
     return (
-        f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", fillcolor="#7aab8a", '
-        f"label=<{formatted_label}>];"
+        f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", '
+        f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
     )
 
 
@@ -136,21 +140,24 @@ def _convert_yes_edge_to_dot(node_src: str, node_target: str, indent: str) -> st
     """
     Converts a YesEdge to dot code
     """
-    return f'{indent}"{node_src}" -> "{node_target}" [label="Ja"];'
+    return (
+        f'{indent}"{node_src}" -> "{node_target}" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];'
+    )
 
 
 def _convert_no_edge_to_dot(node_src: str, node_target: str, indent: str) -> str:
     """
     Converts a NoEdge to dot code
     """
-    return f'{indent}"{node_src}" -> "{node_target}" [label="Nein"];'
+    # pylint:disable=line-too-long
+    return f'{indent}"{node_src}" -> "{node_target}" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];'
 
 
 def _convert_ebd_graph_edge_to_dot(node_src: str, node_target: str, indent: str) -> str:
     """
     Converts a simple GraphEdge to dot code
     """
-    return f'{indent}"{node_src}" -> "{node_target}";'
+    return f'{indent}"{node_src}" -> "{node_target}" [color="#88a0d6"];'
 
 
 def _convert_edge_to_dot(ebd_graph: EbdGraph, node_src: str, node_target: str, indent: str) -> str:
@@ -183,8 +190,8 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     nx_graph = ebd_graph.graph
     _mark_last_common_ancestors(nx_graph)
     header = (
-        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR/><BR/>'
-        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR/><BR/><BR/><BR/>'
+        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
+        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
     )
 
     dot_attributes: dict[str, str] = {
@@ -197,6 +204,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
         "rankdir": "TB",
         "packmode": '"array"',
         "size": '"20,20"',  # in inches 🤮
+        "fontsize": "12",
     }
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
@@ -205,7 +213,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     if "Start" in nx_graph:
         assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
         dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
-    dot_code += '\n    bgcolor="transparent";\n'
+    dot_code += '\n    bgcolor="transparent";\nfontname="Roboto, sans-serif";\n'
     return dot_code + "}"
 
 

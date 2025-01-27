@@ -123,6 +123,15 @@ class OutcomeCodeAmbiguousError(ValueError):
         self.outcome_nodes = [outcome_node1, outcome_node2]
 
 
+class GraphTooComplexForEvaluation(ValueError):
+    """
+    Raised when there are too many result nodes to be processed.
+    """
+
+    def __init__(self, number_of_nodes: int):
+        super().__init__(f"For now, there are too many nodes ({number_of_nodes})for further processing.")
+
+
 class OutcomeCodeAndFurtherStep(NotImplementedError):
     """
     Catches outcome nodes with further steps. This is not implemented yet.

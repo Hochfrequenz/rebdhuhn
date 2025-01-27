@@ -6,10 +6,10 @@ Some of these functions may store some information in the "attribute dictionarie
 
 from typing import List, Tuple
 
-from networkx import DiGraph, all_simple_paths  # type:ignore[import-untyped]
+from networkx import DiGraph, NetworkXNoCycle, all_simple_paths, find_cycle  # type:ignore[import-untyped]
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
-from rebdhuhn.models.errors import PathsNotGreaterThanOneError
+from rebdhuhn.models.errors import GraphTooComplexForEvaluation, PathsNotGreaterThanOneError
 
 COMMON_ANCESTOR_FIELD = "common_ancestor_for_node"
 # Defines the label to annotate the last common ancestor node with the information to which node
@@ -44,13 +44,20 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
         in_degree: int = graph.in_degree(node)
         if in_degree <= 1:
             continue
+        try:
+            # look for cycles
+            if find_cycle(graph, source=node):
+                raise PathsNotGreaterThanOneError(
+                    node_key=node,
+                    indegree=in_degree,
+                    number_of_paths=2,
+                )
+        except NetworkXNoCycle:
+            pass
+        if len(graph.nodes) > 50:
+            raise GraphTooComplexForEvaluation(number_of_nodes=len(graph.nodes))
         paths = list(all_simple_paths(graph, source="Start", target=node))
-        if len(paths) <= 1:
-            raise PathsNotGreaterThanOneError(
-                node_key=node,
-                indegree=in_degree,
-                number_of_paths=len(paths),
-            )
+
         common_ancestor = _find_last_common_ancestor(paths)
         assert common_ancestor != "Start", "Last common ancestor should always be at least the first decision node '1'."
         # Annotate the common ancestor for later conversion

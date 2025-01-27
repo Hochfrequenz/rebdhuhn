@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440pt" height="1264pt" viewBox="0.00 0.00 1440.00 1263.68">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR/><BR/><BR/><BR/>>;
+    label=<<B><FONT POINT-SIZE="18">6.2 AD: Lieferende LF an NB</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">6.2.1 E_0401_Abmeldung pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
     ratio="compress";
     concentrate=true;
     pack=true;
@@ -48,33 +48,33 @@ Transaktionsgr&#252;nde vor:
     "A08" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Ablehnung<BR align="left"/>Lieferende zum Abmeldedatum wurde aus<BR align="left"/>gleichem Grund bereits best&#228;tigt.<BR align="left"/></FONT>>];
     "A09" [margin="0.17,0.08", shape=box, style=filled, fillcolor="#cfb986", label=<<FONT point-size="12"><U>Hinweis:</U><BR align="left"/>Cluster: Zustimmung<BR align="left"/>Erneute Best&#228;tigung der Abmeldung aufgrund der<BR align="left"/>Information, dass der Anschlussnutzer nicht mehr<BR align="left"/>an der Marktlokation vorhanden ist.<BR align="left"/>Hinweis: Das bisher best&#228;tigte Bilanzierungsende<BR align="left"/>bleibt unver&#228;ndert bestehen.<BR align="left"/></FONT>>];
 
-    "Start" -> "1";
-    "1" -> "4" [label="Ja"];
-    "1" -> "2" [label="Nein"];
-    "2" -> "3" [label="Ja"];
-    "2" -> "6" [label="Nein"];
-    "3" -> "A01" [label="Nein"];
-    "3" -> "9" [label="Ja"];
-    "4" -> "A02" [label="Nein"];
-    "4" -> "5" [label="Ja"];
-    "5" -> "9" [label="Ja"];
-    "5" -> "10" [label="Nein"];
-    "6" -> "7" [label="Ja"];
-    "6" -> "8" [label="Nein"];
-    "7" -> "A03" [label="Nein"];
-    "7" -> "10" [label="Ja"];
-    "8" -> "A04" [label="Nein"];
-    "8" -> "10" [label="Ja"];
-    "9" -> "A05" [label="Nein"];
-    "9" -> "10" [label="Ja"];
-    "10" -> "11" [label="Ja"];
-    "10" -> "A06" [label="Nein"];
-    "11" -> "12" [label="Nein"];
-    "11" -> "A06" [label="Ja"];
-    "12" -> "A07" [label="Nein"];
-    "12" -> "13" [label="Ja"];
-    "13" -> "A08" [label="Nein"];
-    "13" -> "A09" [label="Ja"];
+    "Start" -> "1" [color="#88a0d6"];
+    "1" -> "4" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "1" -> "2" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "2" -> "3" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "2" -> "6" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "3" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "3" -> "9" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "4" -> "A02" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "4" -> "5" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "5" -> "9" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "5" -> "10" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "6" -> "7" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "6" -> "8" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "7" -> "A03" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "7" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "8" -> "A04" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "8" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "9" -> "A05" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "9" -> "10" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "10" -> "11" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "10" -> "A06" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "11" -> "12" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "11" -> "A06" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "12" -> "A07" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "12" -> "13" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "13" -> "A08" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
+    "13" -> "A09" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
 
     bgcolor="transparent";
 }'--><g id="graph0" class="graph" transform="scale(0.786595 0.786595) rotate(0) translate(4 1602.52)">

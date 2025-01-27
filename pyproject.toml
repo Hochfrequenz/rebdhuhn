@@ -32,14 +32,14 @@ dynamic = ["readme", "version"]
 
 [project.optional-dependencies]
 coverage = [
-    "coverage==7.6.8"
+    "coverage==7.6.10"
 ]
 formatting = [
     "black==24.10.0",
     "isort==5.13.2"
 ]
 linting = [
-    "pylint==3.3.2"
+    "pylint==3.3.3"
 ]
 packaging = [
     "build==1.2.2.post1",
@@ -50,10 +50,10 @@ spellcheck = [
 ]
 tests = [
     "pytest==8.3.4",
-    "syrupy==4.8.0"
+    "syrupy==4.8.1"
 ]
 type_check = [
-    "mypy==1.13.0",
+    "mypy==1.14.1",
     "types-requests==2.32.0.20241016",
     "lxml-stubs==0.5.1"
 ]

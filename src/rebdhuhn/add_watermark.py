@@ -59,14 +59,19 @@ def add_background(svg: str) -> str:
     :param svg:
     """
     ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-    background_color = "#f3f1f6"
+    background_color = "#e7e6e5"  # off-white formerly known as "mauschelweiß"
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
     xml_element = etree.Element(  # pylint:disable=c-extension-no-member
-        "polygon",
+        "rect",
         attrib={
             "fill": background_color,
-            "points": f"0,0 {ebd_width_in_px},0 {ebd_width_in_px},{ebd_height_in_px} 0,{ebd_height_in_px}",
+            "x": "0",
+            "y": "0",
+            "width": f"{ebd_width_in_px}",
+            "height": f"{ebd_height_in_px}",
+            "rx": "20",
+            "ry": "20",
         },
     )
     root.insert(0, xml_element)

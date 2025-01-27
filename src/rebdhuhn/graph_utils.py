@@ -4,16 +4,9 @@ Some of these functions may store some information in the "attribute dictionarie
 (for later use in the conversion logic).
 """
 
-from itertools import combinations
 from typing import List, Tuple
 
-from networkx import (  # type:ignore[import-untyped]
-    DiGraph,
-    NetworkXNoCycle,
-    all_simple_paths,
-    find_cycle,
-    lowest_common_ancestor,
-)
+from networkx import DiGraph, NetworkXNoCycle, all_simple_paths, find_cycle  # type:ignore[import-untyped]
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
 from rebdhuhn.models.errors import GraphTooComplexForEvaluation, PathsNotGreaterThanOneError

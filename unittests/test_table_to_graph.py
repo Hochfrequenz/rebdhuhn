@@ -6,7 +6,6 @@ from typing import List, Optional
 import pytest
 from lxml import etree
 from networkx import DiGraph  # type:ignore[import-untyped]
-from syrupy import snapshot
 
 from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
 from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes

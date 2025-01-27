@@ -4,9 +4,16 @@ Some of these functions may store some information in the "attribute dictionarie
 (for later use in the conversion logic).
 """
 
+from itertools import combinations
 from typing import List, Tuple
 
-from networkx import DiGraph, all_simple_paths  # type:ignore[import-untyped]
+from networkx import (  # type:ignore[import-untyped]
+    DiGraph,
+    NetworkXNoCycle,
+    all_simple_paths,
+    find_cycle,
+    lowest_common_ancestor,
+)
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
 from rebdhuhn.models.errors import PathsNotGreaterThanOneError
@@ -31,6 +38,24 @@ def _find_last_common_ancestor(paths: List[List[str]]) -> str:
     raise ValueError("No common ancestor found.")
 
 
+def _find_last_common_ancestor_fast(graph: DiGraph, node: str) -> str:
+    """
+    This function calculates the last common ancestor node for the defined paths (these paths should be all paths
+    between two nodes in the graph).
+    For this, we assume that the graph contains no loops.
+    Returns the key of the (common ancestor) node.
+    """
+    parents = set(graph.predecessors(node))
+    while len(parents) > 1:
+        new_parents = set()
+        for node1, node2 in combinations(parents, 2):
+            new_parents.add(lowest_common_ancestor(graph, node1, node2))
+        parents = new_parents
+    if len(parents) == 1:
+        return next(iter(parents))
+    raise ValueError("No common ancestor found.")
+
+
 def _mark_last_common_ancestors(graph: DiGraph) -> None:
     """
     Marks the last common ancestor node for each node with an indegree > 1. An indegree is the number of edges pointing
@@ -44,14 +69,25 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
         in_degree: int = graph.in_degree(node)
         if in_degree <= 1:
             continue
+        try:
+            if find_cycle(graph, source=node):
+                raise PathsNotGreaterThanOneError(
+                    node_key=node,
+                    indegree=in_degree,
+                    number_of_paths=2,
+                )
+        except NetworkXNoCycle:
+            pass
         paths = list(all_simple_paths(graph, source="Start", target=node))
-        if len(paths) <= 1:
-            raise PathsNotGreaterThanOneError(
-                node_key=node,
-                indegree=in_degree,
-                number_of_paths=len(paths),
-            )
-        common_ancestor = _find_last_common_ancestor(paths)
+
+        # if len(paths) <= 1:
+        #    raise PathsNotGreaterThanOneError(
+        #        node_key=node,
+        #        indegree=in_degree,
+        #        number_of_paths=len(paths),
+        #   )
+        common_ancestor = _find_last_common_ancestor_fast(graph, node)
+        common_ancestor2 = _find_last_common_ancestor(paths)
         assert common_ancestor != "Start", "Last common ancestor should always be at least the first decision node '1'."
         # Annotate the common ancestor for later conversion
         if COMMON_ANCESTOR_FIELD not in graph.nodes[common_ancestor]:

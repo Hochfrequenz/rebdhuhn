@@ -46,7 +46,7 @@ packaging = [
     "twine==6.1.0"
 ]
 spellcheck = [
-    "codespell==2.3.0"
+    "codespell==2.4.0"
 ]
 tests = [
     "pytest==8.3.4",

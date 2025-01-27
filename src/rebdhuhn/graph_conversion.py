@@ -36,9 +36,15 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
+    is_cross_reference = sub_row.note is not None and sub_row.note.startswith("EBD ")
+    is_ende_in_wrong_column = (
+        sub_row.result_code is None and sub_row.note is not None and sub_row.note.lower().startswith("ende")
+    )
+    if is_ende_in_wrong_column:
+        raise EndeInWrongColumnError(sub_row=sub_row)
     if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
         raise OutcomeCodeAndFurtherStep(sub_row=sub_row)
-    if sub_row.result_code is not None or sub_row.note is not None:
+    if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
 
@@ -115,10 +121,6 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
                     ):
                         raise EbdCrossReferenceNotSupportedError(row=row, decision_node=decision_node)
-                    if all(sr.result_code is None for sr in row.sub_rows) and any(
-                        sr.note is not None and sr.note.lower().startswith("ende") for sr in row.sub_rows
-                    ):
-                        raise EndeInWrongColumnError(row=row)
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes

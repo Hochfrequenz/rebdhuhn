@@ -97,9 +97,9 @@ class EndeInWrongColumnError(ValueError):
     I think this is more of a value error (because the raw source data are a mess) than a NotImplementedError.
     """
 
-    def __init__(self, row: EbdTableRow):
-        super().__init__(f"'Ende' in wrong column for row {row}")
-        self.row = row
+    def __init__(self, sub_row: EbdTableSubRow):
+        super().__init__(f"'Ende' in wrong column for row {sub_row}")
+        self.sub_row = sub_row
 
 
 class OutcomeNodeCreationError(ValueError):

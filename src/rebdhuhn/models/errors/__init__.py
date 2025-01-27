@@ -121,3 +121,12 @@ class OutcomeCodeAmbiguousError(ValueError):
     def __init__(self, outcome_node1: OutcomeNode, outcome_node2: OutcomeNode):
         super().__init__(f"Ambiguous result codes:  for [{outcome_node1, outcome_node2}].")
         self.outcome_nodes = [outcome_node1, outcome_node2]
+
+
+class GraphTooComplexForEvaluation(ValueError):
+    """
+    Raised when there are too many result nodes to be processed.
+    """
+
+    def __init__(self, number_of_nodes: int):
+        super().__init__(f"For now, there are too many nodes ({number_of_nodes})for further processing.")

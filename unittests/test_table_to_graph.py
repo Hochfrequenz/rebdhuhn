@@ -7,6 +7,7 @@ import pytest
 from lxml import etree
 from networkx import DiGraph  # type:ignore[import-untyped]
 
+from .e0487 import table_e0487
 from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
 from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes
 from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
@@ -480,11 +481,26 @@ class TestEbdTableModels:
                 ),
                 id="E0401 (hard)",
             ),  # hard (because it's not a tree but only a directed graph)
+            pytest.param(
+                table_e0487,
+                EbdGraph(
+                    metadata=EbdGraphMetaData(
+                        ebd_code=table_e0487.metadata.ebd_code,
+                        chapter=table_e0487.metadata.chapter,
+                        section=table_e0487.metadata.section,
+                        ebd_name=table_e0487.metadata.ebd_name,
+                        role=table_e0487.metadata.role,
+                    ),
+                    graph=DiGraph(),
+                ),
+                id="E0487",
+            ),
             # todo: add E_0462
         ],
     )
     def test_table_to_graph(self, table: EbdTable, expected_result: EbdGraph) -> None:
         _ = convert_table_to_graph(table)
+
 
     @pytest.mark.snapshot
     @pytest.mark.parametrize(

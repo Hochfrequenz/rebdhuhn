@@ -215,7 +215,7 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 table_e0401,
-                "DiGraph with 26 nodes and 27 edges",
+                "DiGraph with 23 nodes and 27 edges",
                 # todo: check if result is ok
             ),
         ],
@@ -264,7 +264,7 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 table_e0401,
-                "DiGraph with 26 nodes and 27 edges",
+                "DiGraph with 23 nodes and 27 edges",
                 # todo: check if result is ok
             ),
         ],

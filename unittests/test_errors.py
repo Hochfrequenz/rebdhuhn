@@ -16,6 +16,7 @@ from .e0401 import e_0401
 from .e0404 import e_0404
 from .e0454 import table_e0454
 from .e0459 import table_e0459
+from .e0459a import table_e0459a
 from .e0462 import table_e0462
 from .e0529 import e_0529
 
@@ -25,9 +26,10 @@ class TestErrors:
     Test cases for various exceptions being raised. This can be the basis for future fixes/workarounds
     """
 
-    @pytest.mark.parametrize("table", [pytest.param(table_e0459)])
+    @pytest.mark.parametrize("table", [pytest.param(table_e0459a)])
     def test_not_exactly_two_outgoing_edges_error(self, table: EbdTable) -> None:
         ebd_graph = convert_table_to_graph(table)
+        ebd_graph.graph.add_edge("1", "3")
         with pytest.raises(NotExactlyTwoOutgoingEdgesError):
             _ = convert_graph_to_plantuml(ebd_graph)
 

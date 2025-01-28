@@ -27,7 +27,7 @@ from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
-    OutcomeCodeAndFurtherStep,
+    OutcomeCodeAndFurtherStepError,
     OutcomeNodeCreationError,
 )
 
@@ -43,7 +43,7 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     if is_ende_in_wrong_column:
         raise EndeInWrongColumnError(sub_row=sub_row)
     if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
-        raise OutcomeCodeAndFurtherStep(sub_row=sub_row)
+        raise OutcomeCodeAndFurtherStepError(sub_row=sub_row)
     if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None

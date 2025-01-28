@@ -52,7 +52,9 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     """
     outcome_node: OutcomeNode = graph.nodes[node]["node"]
     assert isinstance(outcome_node, OutcomeNode), f"{node} is not an outcome node."
-
+    is_outcome_without_code = outcome_node.result_code is None
+    if is_outcome_without_code:
+        return f"{indent}:{outcome_node.note};\n{indent}kill;\n"
     result = f"{indent}:{outcome_node.result_code};\n"
     if outcome_node.note is not None:
         note = outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")

@@ -27,6 +27,7 @@ from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
+    OutcomeCodeAndFurtherStepError,
     OutcomeNodeCreationError,
 )
 
@@ -35,7 +36,15 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
-    if sub_row.result_code is not None:
+    is_cross_reference = sub_row.note is not None and sub_row.note.startswith("EBD ")
+    is_ende_in_wrong_column = (
+        sub_row.result_code is None and sub_row.note is not None and sub_row.note.lower().startswith("ende")
+    )
+    if is_ende_in_wrong_column:
+        raise EndeInWrongColumnError(sub_row=sub_row)
+    if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
+        raise OutcomeCodeAndFurtherStepError(sub_row=sub_row)
+    if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
 
@@ -112,10 +121,6 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
                     ):
                         raise EbdCrossReferenceNotSupportedError(row=row, decision_node=decision_node)
-                    if all(sr.result_code is None for sr in row.sub_rows) and any(
-                        sr.note is not None and sr.note.lower().startswith("ende") for sr in row.sub_rows
-                    ):
-                        raise EndeInWrongColumnError(row=row)
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes
@@ -125,16 +130,16 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 )
 
                 if not is_ambiguous_outcome_node:
-                    outcome_nodes_duplicates[outcome_node.result_code] = outcome_node
+                    outcome_nodes_duplicates[outcome_node.get_key()] = outcome_node
                 else:
                     raise OutcomeCodeAmbiguousError(
-                        outcome_node1=outcome_nodes_duplicates[outcome_node.result_code], outcome_node2=outcome_node
+                        outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
                     )
 
                 edge = _yes_no_edge(
                     sub_row.check_result.result,
                     source=decision_node,
-                    target=nodes[outcome_node.result_code],
+                    target=nodes[outcome_node.get_key()],
                 )
             result.append(edge)
     return result

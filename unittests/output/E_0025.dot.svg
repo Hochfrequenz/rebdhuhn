@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1392.0px" viewBox="0 0 1392.0 888.0" height="888.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1392.0px" viewBox="0 0 1392.0 826.6666666666666" height="826.6666666666666px">
   <g>
-    <svg version="1.1" width="1392.0px" viewBox="0 0 1392.0 888.0" height="888.0px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1392.0" height="888.0" rx="20" ry="20"/><g>
-    <g transform="translate(333.87304984511394, 88.79999999999998) scale(1 1) translate(0, 0) scale(1.2503520135173194 1.2503520135173194) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1392.0px" viewBox="0 0 1392.0 826.6666666666666" height="826.6666666666666px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1392.0" height="826.6666666666666" rx="20" ry="20"/><g>
+    <g transform="translate(358.8848211771332, 82.66666666666664) scale(1 1) translate(0, 0) scale(1.1639913639350419 1.1639913639350419) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,161 +13,158 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1044pt" height="666pt" viewBox="0.00 0.00 1043.55 666.40">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 662.4)">
+    <svg width="1044pt" height="620pt" viewBox="0.00 0.00 1043.55 619.84">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 615.84)">
 <title>D</title>
-<text text-anchor="start" x="9.27" y="-638.3" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
-<text text-anchor="start" x="9.27" y="-610.2" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
+<text text-anchor="start" x="9.27" y="-591.74" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.41 AD: &#220;bermittlung Pr&#252;fmitteilung f&#252;r die Bilanzkreissummenzeitreihe vom BKV an BIKO und &#220;NB</text>
+<text text-anchor="start" x="9.27" y="-563.64" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.41.2 E_0025_Pr&#252;fmitteilung pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M386.55,-568.4C386.55,-568.4 234,-568.4 234,-568.4 228,-568.4 222,-562.4 222,-556.4 222,-556.4 222,-535.12 222,-535.12 222,-529.12 228,-523.12 234,-523.12 234,-523.12 386.55,-523.12 386.55,-523.12 392.55,-523.12 398.55,-529.12 398.55,-535.12 398.55,-535.12 398.55,-556.4 398.55,-556.4 398.55,-562.4 392.55,-568.4 386.55,-568.4"/>
-<text text-anchor="start" x="236.4" y="-547.46" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0025</text>
-<text text-anchor="start" x="236.4" y="-533.46" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
-<text text-anchor="start" x="345.9" y="-533.46" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">BIKO</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M386.55,-521.84C386.55,-521.84 234,-521.84 234,-521.84 228,-521.84 222,-515.84 222,-509.84 222,-509.84 222,-488.56 222,-488.56 222,-482.56 228,-476.56 234,-476.56 234,-476.56 386.55,-476.56 386.55,-476.56 392.55,-476.56 398.55,-482.56 398.55,-488.56 398.55,-488.56 398.55,-509.84 398.55,-509.84 398.55,-515.84 392.55,-521.84 386.55,-521.84"/>
+<text text-anchor="start" x="236.4" y="-500.9" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0025</text>
+<text text-anchor="start" x="236.4" y="-486.9" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text text-anchor="start" x="345.9" y="-486.9" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">BIKO</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">
 <title>1</title>
-<path fill="#c2cee9" stroke="black" stroke-width="0" d="M608.55,-486.12C608.55,-486.12 12,-486.12 12,-486.12 6,-486.12 0,-480.12 0,-474.12 0,-474.12 0,-462.12 0,-462.12 0,-456.12 6,-450.12 12,-450.12 12,-450.12 608.55,-450.12 608.55,-450.12 614.55,-450.12 620.55,-456.12 620.55,-462.12 620.55,-462.12 620.55,-474.12 620.55,-474.12 620.55,-480.12 614.55,-486.12 608.55,-486.12"/>
-<text text-anchor="start" x="14.4" y="-464.44" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">1: </text>
-<text text-anchor="start" x="33.9" y="-464.44" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt der Eingang der Pr&#252;fmitteilung nach Ablauf der Clearingfrist f&#252;r die KBKA?</text>
+<path fill="#c2cee9" stroke="black" stroke-width="0" d="M608.55,-439.56C608.55,-439.56 12,-439.56 12,-439.56 6,-439.56 0,-433.56 0,-427.56 0,-427.56 0,-415.56 0,-415.56 0,-409.56 6,-403.56 12,-403.56 12,-403.56 608.55,-403.56 608.55,-403.56 614.55,-403.56 620.55,-409.56 620.55,-415.56 620.55,-415.56 620.55,-427.56 620.55,-427.56 620.55,-433.56 614.55,-439.56 608.55,-439.56"/>
+<text text-anchor="start" x="14.4" y="-417.88" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">1: </text>
+<text text-anchor="start" x="33.9" y="-417.88" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt der Eingang der Pr&#252;fmitteilung nach Ablauf der Clearingfrist f&#252;r die KBKA?</text>
 </g>
 <!-- Start&#45;&gt;1 -->
 <g id="edge1" class="edge">
 <title>Start-&gt;1</title>
-<path fill="none" stroke="#88a0d6" d="M310.27,-523.29C310.27,-515.21 310.27,-505.91 310.27,-497.31"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="313.78,-497.35 310.28,-487.35 306.78,-497.35 313.78,-497.35"/>
+<path fill="none" stroke="#88a0d6" d="M310.27,-476.73C310.27,-468.65 310.27,-459.35 310.27,-450.75"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="313.78,-450.79 310.28,-440.79 306.78,-450.79 313.78,-450.79"/>
 </g>
 <!-- A01 -->
 <g id="node3" class="node">
 <title>A01</title>
-<path fill="#c4cac1" stroke="black" stroke-width="0" d="M221.17,-396.87C221.17,-396.87 81.37,-396.87 81.37,-396.87 75.37,-396.87 69.37,-390.87 69.37,-384.87 69.37,-384.87 69.37,-349.59 69.37,-349.59 69.37,-343.59 75.37,-337.59 81.37,-337.59 81.37,-337.59 221.17,-337.59 221.17,-337.59 227.17,-337.59 233.17,-343.59 233.17,-349.59 233.17,-349.59 233.17,-384.87 233.17,-384.87 233.17,-390.87 227.17,-396.87 221.17,-396.87"/>
-<text text-anchor="start" x="83.77" y="-375.93" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A01</text>
-<text text-anchor="start" x="83.77" y="-347.93" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
+<path fill="#c4cac1" stroke="black" stroke-width="0" d="M221.17,-350.31C221.17,-350.31 81.37,-350.31 81.37,-350.31 75.37,-350.31 69.37,-344.31 69.37,-338.31 69.37,-338.31 69.37,-326.31 69.37,-326.31 69.37,-320.31 75.37,-314.31 81.37,-314.31 81.37,-314.31 221.17,-314.31 221.17,-314.31 227.17,-314.31 233.17,-320.31 233.17,-326.31 233.17,-326.31 233.17,-338.31 233.17,-338.31 233.17,-344.31 227.17,-350.31 221.17,-350.31"/>
+<text text-anchor="start" x="83.77" y="-327.63" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
 </g>
 <!-- 1&#45;&gt;A01 -->
 <g id="edge2" class="edge">
 <title>1-&gt;A01</title>
-<path fill="none" stroke="#88a0d6" d="M282.94,-450.12C262.08,-437.14 232.63,-418.83 206.88,-402.81"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="208.84,-399.91 198.5,-397.6 205.14,-405.85 208.84,-399.91"/>
-<text text-anchor="start" x="249.27" y="-419.82" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<path fill="none" stroke="#88a0d6" d="M279.62,-403.74C254.73,-390.08 219.42,-370.7 192.13,-355.73"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="193.89,-352.7 183.44,-350.96 190.52,-358.84 193.89,-352.7"/>
+<text text-anchor="start" x="244.27" y="-373.26" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 <!-- 2 -->
 <g id="node4" class="node">
 <title>2</title>
-<path fill="#c2cee9" stroke="black" stroke-width="0" d="M701.8,-385.23C701.8,-385.23 262.75,-385.23 262.75,-385.23 256.75,-385.23 250.75,-379.23 250.75,-373.23 250.75,-373.23 250.75,-361.23 250.75,-361.23 250.75,-355.23 256.75,-349.23 262.75,-349.23 262.75,-349.23 701.8,-349.23 701.8,-349.23 707.8,-349.23 713.8,-355.23 713.8,-361.23 713.8,-361.23 713.8,-373.23 713.8,-373.23 713.8,-379.23 707.8,-385.23 701.8,-385.23"/>
-<text text-anchor="start" x="265.15" y="-363.55" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">2: </text>
-<text text-anchor="start" x="284.65" y="-363.55" font-family="Roboto, sans-serif" font-size="14.00">Befindet sich der MaBiS-ZP auf der Aggregationsebene RZ?</text>
+<path fill="#c2cee9" stroke="black" stroke-width="0" d="M701.8,-350.31C701.8,-350.31 262.75,-350.31 262.75,-350.31 256.75,-350.31 250.75,-344.31 250.75,-338.31 250.75,-338.31 250.75,-326.31 250.75,-326.31 250.75,-320.31 256.75,-314.31 262.75,-314.31 262.75,-314.31 701.8,-314.31 701.8,-314.31 707.8,-314.31 713.8,-320.31 713.8,-326.31 713.8,-326.31 713.8,-338.31 713.8,-338.31 713.8,-344.31 707.8,-350.31 701.8,-350.31"/>
+<text text-anchor="start" x="265.15" y="-328.63" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">2: </text>
+<text text-anchor="start" x="284.65" y="-328.63" font-family="Roboto, sans-serif" font-size="14.00">Befindet sich der MaBiS-ZP auf der Aggregationsebene RZ?</text>
 </g>
 <!-- 1&#45;&gt;2 -->
 <g id="edge3" class="edge">
 <title>1-&gt;2</title>
-<path fill="none" stroke="#88a0d6" d="M339.84,-450.12C368.36,-433.73 411.69,-408.81 443.07,-390.77"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="444.57,-393.95 451.49,-385.93 441.08,-387.88 444.57,-393.95"/>
-<text text-anchor="start" x="396.27" y="-419.82" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<path fill="none" stroke="#88a0d6" d="M343.44,-403.74C370.6,-389.96 409.23,-370.36 438.85,-355.34"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="440.24,-358.56 447.57,-350.91 437.07,-352.32 440.24,-358.56"/>
+<text text-anchor="start" x="411.27" y="-373.26" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- 3 -->
 <g id="node5" class="node">
 <title>3</title>
-<path fill="#c2cee9" stroke="black" stroke-width="0" d="M528.67,-277.34C528.67,-277.34 85.88,-277.34 85.88,-277.34 79.88,-277.34 73.88,-271.34 73.88,-265.34 73.88,-265.34 73.88,-244.06 73.88,-244.06 73.88,-238.06 79.88,-232.06 85.88,-232.06 85.88,-232.06 528.67,-232.06 528.67,-232.06 534.67,-232.06 540.67,-238.06 540.67,-244.06 540.67,-244.06 540.67,-265.34 540.67,-265.34 540.67,-271.34 534.67,-277.34 528.67,-277.34"/>
-<text text-anchor="start" x="88.27" y="-256.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">3: </text>
-<text text-anchor="start" x="107.77" y="-256.4" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV f&#252;r den BK dieses MaBiS-ZP in diesem Bilanzie-</text>
-<text text-anchor="start" x="88.27" y="-242.4" font-family="Roboto, sans-serif" font-size="14.00">rungsmonat die Aggregationsebene RZ abbestellt?</text>
+<path fill="#c2cee9" stroke="black" stroke-width="0" d="M528.67,-254.06C528.67,-254.06 85.88,-254.06 85.88,-254.06 79.88,-254.06 73.88,-248.06 73.88,-242.06 73.88,-242.06 73.88,-220.78 73.88,-220.78 73.88,-214.78 79.88,-208.78 85.88,-208.78 85.88,-208.78 528.67,-208.78 528.67,-208.78 534.67,-208.78 540.67,-214.78 540.67,-220.78 540.67,-220.78 540.67,-242.06 540.67,-242.06 540.67,-248.06 534.67,-254.06 528.67,-254.06"/>
+<text text-anchor="start" x="88.27" y="-233.12" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">3: </text>
+<text text-anchor="start" x="107.77" y="-233.12" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV f&#252;r den BK dieses MaBiS-ZP in diesem Bilanzie-</text>
+<text text-anchor="start" x="88.27" y="-219.12" font-family="Roboto, sans-serif" font-size="14.00">rungsmonat die Aggregationsebene RZ abbestellt?</text>
 </g>
 <!-- 2&#45;&gt;3 -->
 <g id="edge4" class="edge">
 <title>2-&gt;3</title>
-<path fill="none" stroke="#88a0d6" d="M455.7,-349.44C427.85,-331.85 383.66,-303.94 350.72,-283.14"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="352.93,-280.4 342.61,-278.02 349.19,-286.32 352.93,-280.4"/>
-<text text-anchor="start" x="404.27" y="-307.29" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<path fill="none" stroke="#88a0d6" d="M452.19,-314.31C425.56,-299.26 386.23,-277.03 355.25,-259.53"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="357.26,-256.65 346.84,-254.78 353.82,-262.74 357.26,-256.65"/>
+<text text-anchor="start" x="415.27" y="-284.01" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- 5 -->
 <g id="node9" class="node">
 <title>5</title>
-<path fill="#c2cee9" stroke="black" stroke-width="0" d="M1023.55,-284.34C1023.55,-284.34 571,-284.34 571,-284.34 565,-284.34 559,-278.34 559,-272.34 559,-272.34 559,-237.06 559,-237.06 559,-231.06 565,-225.06 571,-225.06 571,-225.06 1023.55,-225.06 1023.55,-225.06 1029.55,-225.06 1035.55,-231.06 1035.55,-237.06 1035.55,-237.06 1035.55,-272.34 1035.55,-272.34 1035.55,-278.34 1029.55,-284.34 1023.55,-284.34"/>
-<text text-anchor="start" x="573.4" y="-263.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">5: </text>
-<text text-anchor="start" x="592.9" y="-263.4" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits</text>
-<text text-anchor="start" x="573.4" y="-249.4" font-family="Roboto, sans-serif" font-size="14.00">mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG</text>
-<text text-anchor="start" x="573.4" y="-235.4" font-family="Roboto, sans-serif" font-size="14.00">stattfinden m&#252;ssen?</text>
+<path fill="#c2cee9" stroke="black" stroke-width="0" d="M1023.55,-261.06C1023.55,-261.06 571,-261.06 571,-261.06 565,-261.06 559,-255.06 559,-249.06 559,-249.06 559,-213.78 559,-213.78 559,-207.78 565,-201.78 571,-201.78 571,-201.78 1023.55,-201.78 1023.55,-201.78 1029.55,-201.78 1035.55,-207.78 1035.55,-213.78 1035.55,-213.78 1035.55,-249.06 1035.55,-249.06 1035.55,-255.06 1029.55,-261.06 1023.55,-261.06"/>
+<text text-anchor="start" x="573.4" y="-240.12" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">5: </text>
+<text text-anchor="start" x="592.9" y="-240.12" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits</text>
+<text text-anchor="start" x="573.4" y="-226.12" font-family="Roboto, sans-serif" font-size="14.00">mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG</text>
+<text text-anchor="start" x="573.4" y="-212.12" font-family="Roboto, sans-serif" font-size="14.00">stattfinden m&#252;ssen?</text>
 </g>
 <!-- 2&#45;&gt;5 -->
 <g id="edge5" class="edge">
 <title>2-&gt;5</title>
-<path fill="none" stroke="#88a0d6" d="M530.46,-349.32C576.78,-333.07 648,-308.08 705.2,-288.01"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="706.01,-291.43 714.29,-284.82 703.69,-284.83 706.01,-291.43"/>
-<text text-anchor="start" x="658.27" y="-307.29" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<path fill="none" stroke="#88a0d6" d="M536.43,-314.31C580.04,-300.62 642.57,-280.99 695.48,-264.38"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="696.33,-267.78 704.83,-261.44 694.24,-261.1 696.33,-267.78"/>
+<text text-anchor="start" x="639.27" y="-284.01" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 <!-- Ende -->
 <g id="node6" class="node">
 <title>Ende</title>
-<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M552.3,-47.64C552.3,-47.64 512.25,-47.64 512.25,-47.64 506.25,-47.64 500.25,-41.64 500.25,-35.64 500.25,-35.64 500.25,-23.64 500.25,-23.64 500.25,-17.64 506.25,-11.64 512.25,-11.64 512.25,-11.64 552.3,-11.64 552.3,-11.64 558.3,-11.64 564.3,-17.64 564.3,-23.64 564.3,-23.64 564.3,-35.64 564.3,-35.64 564.3,-41.64 558.3,-47.64 552.3,-47.64"/>
-<text text-anchor="middle" x="532.27" y="-24.96" font-family="Roboto, sans-serif" font-size="14.00">Ende</text>
+<path fill="#8ba2d7" stroke="black" stroke-width="0" d="M552.3,-36C552.3,-36 512.25,-36 512.25,-36 506.25,-36 500.25,-30 500.25,-24 500.25,-24 500.25,-12 500.25,-12 500.25,-6 506.25,0 512.25,0 512.25,0 552.3,0 552.3,0 558.3,0 564.3,-6 564.3,-12 564.3,-12 564.3,-24 564.3,-24 564.3,-30 558.3,-36 552.3,-36"/>
+<text text-anchor="middle" x="532.27" y="-13.32" font-family="Roboto, sans-serif" font-size="14.00">Ende</text>
 </g>
 <!-- 3&#45;&gt;Ende -->
 <g id="edge7" class="edge">
 <title>3-&gt;Ende</title>
-<path fill="none" stroke="#88a0d6" d="M417.49,-232.09C460.04,-219.71 507.08,-200.68 543.27,-171.81 547.62,-168.34 598.57,-91.97 596.27,-86.91"/>
-<path fill="none" stroke="#88a0d6" d="M596.27,-84.91C590.16,-73.1 580.27,-62.81 570.08,-54.47"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="572.4,-51.84 562.33,-48.56 568.16,-57.4 572.4,-51.84"/>
-<text text-anchor="start" x="582.27" y="-138.5" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<path fill="none" stroke="#88a0d6" d="M417.49,-208.81C460.04,-196.43 507.08,-177.4 543.27,-148.53 547.62,-145.06 598.85,-68.55 596.27,-63.62"/>
+<path fill="none" stroke="#88a0d6" d="M596.27,-61.62C590.84,-52.43 582.54,-44.81 573.71,-38.69"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="575.64,-35.77 565.3,-33.44 571.93,-41.71 575.64,-35.77"/>
+<text text-anchor="start" x="582.27" y="-115.22" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 <!-- 4 -->
 <g id="node7" class="node">
 <title>4</title>
-<path fill="#c2cee9" stroke="black" stroke-width="0" d="M522.55,-171.81C522.55,-171.81 70,-171.81 70,-171.81 64,-171.81 58,-165.81 58,-159.81 58,-159.81 58,-124.53 58,-124.53 58,-118.53 64,-112.53 70,-112.53 70,-112.53 522.55,-112.53 522.55,-112.53 528.55,-112.53 534.55,-118.53 534.55,-124.53 534.55,-124.53 534.55,-159.81 534.55,-159.81 534.55,-165.81 528.55,-171.81 522.55,-171.81"/>
-<text text-anchor="start" x="72.4" y="-150.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">4: </text>
-<text text-anchor="start" x="91.9" y="-150.87" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits</text>
-<text text-anchor="start" x="72.4" y="-136.87" font-family="Roboto, sans-serif" font-size="14.00">mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG</text>
-<text text-anchor="start" x="72.4" y="-122.87" font-family="Roboto, sans-serif" font-size="14.00">stattfinden m&#252;ssen?</text>
+<path fill="#c2cee9" stroke="black" stroke-width="0" d="M522.55,-148.53C522.55,-148.53 70,-148.53 70,-148.53 64,-148.53 58,-142.53 58,-136.53 58,-136.53 58,-101.25 58,-101.25 58,-95.25 64,-89.25 70,-89.25 70,-89.25 522.55,-89.25 522.55,-89.25 528.55,-89.25 534.55,-95.25 534.55,-101.25 534.55,-101.25 534.55,-136.53 534.55,-136.53 534.55,-142.53 528.55,-148.53 522.55,-148.53"/>
+<text text-anchor="start" x="72.4" y="-127.59" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">4: </text>
+<text text-anchor="start" x="91.9" y="-127.59" font-family="Roboto, sans-serif" font-size="14.00">Hat der BKV dem BIKO f&#252;r diesen Bilanzierungsmonat bereits</text>
+<text text-anchor="start" x="72.4" y="-113.59" font-family="Roboto, sans-serif" font-size="14.00">mitgeteilt, dass die weiteren Pr&#252;fungen auf Ebene des BG</text>
+<text text-anchor="start" x="72.4" y="-99.59" font-family="Roboto, sans-serif" font-size="14.00">stattfinden m&#252;ssen?</text>
 </g>
 <!-- 3&#45;&gt;4 -->
 <g id="edge6" class="edge">
 <title>3-&gt;4</title>
-<path fill="none" stroke="#88a0d6" d="M305.13,-232.13C303.74,-218.14 301.88,-199.5 300.23,-182.89"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="303.75,-182.92 299.27,-173.31 296.78,-183.61 303.75,-182.92"/>
-<text text-anchor="start" x="302.27" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<path fill="none" stroke="#88a0d6" d="M305.13,-208.85C303.74,-194.86 301.88,-176.22 300.23,-159.61"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="303.75,-159.64 299.27,-150.03 296.78,-160.33 303.75,-159.64"/>
+<text text-anchor="start" x="302.27" y="-171.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- 4&#45;&gt;Ende -->
 <g id="edge9" class="edge">
 <title>4-&gt;Ende</title>
-<path fill="none" stroke="#88a0d6" d="M357.36,-112.56C399,-93.06 453.08,-67.73 490.01,-50.43"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="491.48,-53.61 499.05,-46.2 488.51,-47.27 491.48,-53.61"/>
-<text text-anchor="start" x="428.27" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<path fill="none" stroke="#88a0d6" d="M364.54,-89.29C405.12,-72.28 455.32,-51.24 490.18,-36.64"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="491.21,-40 499.08,-32.91 488.5,-33.55 491.21,-40"/>
+<text text-anchor="start" x="442.27" y="-58.95" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 <!-- A02 -->
 <g id="node8" class="node">
 <title>A02</title>
-<path fill="#c4cac1" stroke="black" stroke-width="0" d="M405.92,-59.28C405.92,-59.28 186.62,-59.28 186.62,-59.28 180.62,-59.28 174.62,-53.28 174.62,-47.28 174.62,-47.28 174.62,-12 174.62,-12 174.62,-6 180.62,0 186.62,0 186.62,0 405.92,0 405.92,0 411.92,0 417.92,-6 417.92,-12 417.92,-12 417.92,-47.28 417.92,-47.28 417.92,-53.28 411.92,-59.28 405.92,-59.28"/>
-<text text-anchor="start" x="189.02" y="-38.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A02</text>
-<text text-anchor="start" x="189.02" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene BG</text>
+<path fill="#c4cac1" stroke="black" stroke-width="0" d="M405.92,-36C405.92,-36 186.62,-36 186.62,-36 180.62,-36 174.62,-30 174.62,-24 174.62,-24 174.62,-12 174.62,-12 174.62,-6 180.62,0 186.62,0 186.62,0 405.92,0 405.92,0 411.92,0 417.92,-6 417.92,-12 417.92,-12 417.92,-24 417.92,-24 417.92,-30 411.92,-36 405.92,-36"/>
+<text text-anchor="start" x="189.02" y="-13.32" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene BG</text>
 </g>
 <!-- 4&#45;&gt;A02 -->
 <g id="edge8" class="edge">
 <title>4-&gt;A02</title>
-<path fill="none" stroke="#88a0d6" d="M296.27,-112.71C296.27,-99.81 296.27,-84.35 296.27,-70.34"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="299.78,-70.52 296.28,-60.52 292.78,-70.52 299.78,-70.52"/>
-<text text-anchor="start" x="296.27" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<path fill="none" stroke="#88a0d6" d="M296.27,-89.29C296.27,-76.01 296.27,-60.28 296.27,-47.07"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="299.78,-47.3 296.28,-37.3 292.78,-47.3 299.78,-47.3"/>
+<text text-anchor="start" x="296.27" y="-58.95" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- 5&#45;&gt;Ende -->
 <g id="edge11" class="edge">
 <title>5-&gt;Ende</title>
-<path fill="none" stroke="#88a0d6" d="M710.64,-225.11C682.45,-212.38 652.89,-194.93 631.27,-171.81 603.4,-141.99 615.05,-123.15 596.27,-86.91"/>
-<text text-anchor="start" x="631.27" y="-138.5" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<path fill="none" stroke="#88a0d6" d="M710.64,-201.83C682.45,-189.1 652.89,-171.65 631.27,-148.53 603.4,-118.71 617.05,-98.76 596.27,-63.62"/>
+<text text-anchor="start" x="631.27" y="-115.22" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- A03 -->
 <g id="node10" class="node">
 <title>A03</title>
-<path fill="#c4cac1" stroke="black" stroke-width="0" d="M910.92,-171.81C910.92,-171.81 691.62,-171.81 691.62,-171.81 685.62,-171.81 679.62,-165.81 679.62,-159.81 679.62,-159.81 679.62,-124.53 679.62,-124.53 679.62,-118.53 685.62,-112.53 691.62,-112.53 691.62,-112.53 910.92,-112.53 910.92,-112.53 916.92,-112.53 922.92,-118.53 922.92,-124.53 922.92,-124.53 922.92,-159.81 922.92,-159.81 922.92,-165.81 916.92,-171.81 910.92,-171.81"/>
-<text text-anchor="start" x="694.02" y="-150.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A03</text>
-<text text-anchor="start" x="694.02" y="-122.87" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene RZ</text>
+<path fill="#c4cac1" stroke="black" stroke-width="0" d="M910.92,-136.89C910.92,-136.89 691.62,-136.89 691.62,-136.89 685.62,-136.89 679.62,-130.89 679.62,-124.89 679.62,-124.89 679.62,-112.89 679.62,-112.89 679.62,-106.89 685.62,-100.89 691.62,-100.89 691.62,-100.89 910.92,-100.89 910.92,-100.89 916.92,-100.89 922.92,-106.89 922.92,-112.89 922.92,-112.89 922.92,-124.89 922.92,-124.89 922.92,-130.89 916.92,-136.89 910.92,-136.89"/>
+<text text-anchor="start" x="694.02" y="-114.22" font-family="Roboto, sans-serif" font-size="14.00">Falsche Aggregationsebene RZ</text>
 </g>
 <!-- 5&#45;&gt;A03 -->
 <g id="edge10" class="edge">
 <title>5-&gt;A03</title>
-<path fill="none" stroke="#88a0d6" d="M798.31,-225.24C798.77,-212.34 799.33,-196.88 799.84,-182.87"/>
-<polygon fill="#88a0d6" stroke="#88a0d6" points="803.33,-183.17 800.19,-173.05 796.33,-182.92 803.33,-183.17"/>
-<text text-anchor="start" x="799.27" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<path fill="none" stroke="#88a0d6" d="M798.31,-201.96C798.91,-185.28 799.67,-164.31 800.27,-147.74"/>
+<polygon fill="#88a0d6" stroke="#88a0d6" points="803.75,-148.21 800.62,-138.09 796.76,-147.96 803.75,-148.21"/>
+<text text-anchor="start" x="799.27" y="-171.48" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 </g>
 </svg>

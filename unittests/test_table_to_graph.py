@@ -5,8 +5,7 @@ from typing import List, Optional
 
 import pytest
 from lxml import etree
-from networkx import DiGraph  # type:ignore[import-untyped]
-from syrupy import snapshot
+from networkx import DiGraph, empty_graph  # type:ignore[import-untyped]
 
 from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
 from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes
@@ -26,6 +25,8 @@ from rebdhuhn.models.ebd_graph import (
 from rebdhuhn.models.ebd_table import EbdTable, EbdTableMetaData
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
+
+from .e0487 import table_e0487
 
 
 class InterceptedKrokiClient(Kroki):
@@ -214,7 +215,7 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 table_e0401,
-                "DiGraph with 23 nodes and 27 edges",
+                "DiGraph with 26 nodes and 27 edges",
                 # todo: check if result is ok
             ),
         ],
@@ -263,7 +264,7 @@ class TestEbdTableModels:
             ),
             pytest.param(
                 table_e0401,
-                "DiGraph with 23 nodes and 27 edges",
+                "DiGraph with 26 nodes and 27 edges",
                 # todo: check if result is ok
             ),
         ],
@@ -481,6 +482,20 @@ class TestEbdTableModels:
                 ),
                 id="E0401 (hard)",
             ),  # hard (because it's not a tree but only a directed graph)
+            pytest.param(
+                table_e0487,
+                EbdGraph(
+                    metadata=EbdGraphMetaData(
+                        ebd_code=table_e0487.metadata.ebd_code,
+                        chapter=table_e0487.metadata.chapter,
+                        section=table_e0487.metadata.section,
+                        ebd_name=table_e0487.metadata.ebd_name,
+                        role=table_e0487.metadata.role,
+                    ),
+                    graph=DiGraph(),
+                ),
+                id="E0487",
+            ),
             # todo: add E_0462
         ],
     )
@@ -513,3 +528,16 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
         assert svg_code == snapshot(name=f"empty_{empty_graph.metadata.ebd_code}")
+
+    @pytest.mark.snapshot
+    @pytest.mark.parametrize("table", [pytest.param(table_e0487, id="E_0487")])
+    def test_table_to_dot_to_svg(self, table: EbdTable, snapshot) -> None:
+        graph = convert_table_to_graph(table)
+        dot_code = convert_graph_to_dot(graph)
+        svg_code = Kroki().convert_dot_to_svg(dot_code)
+        os.makedirs(Path(__file__).parent / "output", exist_ok=True)
+        with open(
+            Path(__file__).parent / "output" / f"table_dot_svg_{graph.metadata.ebd_code}.svg", "w+", encoding="utf-8"
+        ) as svg_file:
+            svg_file.write(svg_code)
+        assert dot_code == snapshot(name=f"table_dot_svg_{graph.metadata.ebd_code}")

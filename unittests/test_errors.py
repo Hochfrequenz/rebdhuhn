@@ -7,6 +7,7 @@ from rebdhuhn.models.errors import (
     EndeInWrongColumnError,
     GraphTooComplexForPlantumlError,
     NotExactlyTwoOutgoingEdgesError,
+    OutcomeCodeAndFurtherStepError,
     PathsNotGreaterThanOneError,
 )
 
@@ -32,9 +33,8 @@ class TestErrors:
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0266)])
     def test_loops_in_the_tree_error(self, table: EbdTable) -> None:
-        ebd_graph = convert_table_to_graph(table)
-        with pytest.raises(PathsNotGreaterThanOneError):
-            _ = convert_graph_to_plantuml(ebd_graph)
+        with pytest.raises(OutcomeCodeAndFurtherStepError):
+            _ = convert_table_to_graph(table)
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0454)])
     def test_too_complex_for_plantuml(self, table: EbdTable) -> None:

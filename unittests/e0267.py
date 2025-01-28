@@ -1,5 +1,5 @@
 """
-Contains the raw data for E_0529 in the form of an EbdTable.
+Contains the raw data for E_0267 in the form of an EbdTable.
 """
 
 from rebdhuhn.models import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow

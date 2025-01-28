@@ -129,7 +129,7 @@ class GraphTooComplexForEvaluation(ValueError):
     """
 
     def __init__(self, number_of_nodes: int):
-        super().__init__(f"For now, there are too many nodes ({number_of_nodes})for further processing.")
+        super().__init__(f"For now, there are too many nodes ({number_of_nodes}) for further processing.")
 
 
 class OutcomeCodeAndFurtherStep(NotImplementedError):

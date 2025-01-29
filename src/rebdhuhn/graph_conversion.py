@@ -32,6 +32,17 @@ from rebdhuhn.models.errors import (
 )
 
 
+def _is_ende_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
+    """
+    Returns True if the following step is "Ende" with no code but a note.
+    """
+    return (
+        sub_row.check_result.subsequent_step_number == "Ende"
+        and sub_row.result_code is None
+        and sub_row.note is not None
+    )
+
+
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
     """
     converts a sub_row into an outcome node (or None if not applicable)
@@ -42,9 +53,10 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     )
     is_hinweis = sub_row.note is not None and sub_row.note.lower().startswith("hinweis")
     following_step = sub_row.check_result.subsequent_step_number is not None
-
     if is_ende_in_wrong_column:
         raise EndeInWrongColumnError(sub_row=sub_row)
+    if _is_ende_with_no_code_but_note(sub_row):
+        return OutcomeNode(result_code=None, note=sub_row.note)
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.
         return None
@@ -84,7 +96,11 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
             outcome_node = _convert_sub_row_to_outcome_node(sub_row)
             if outcome_node is not None:
                 result.append(outcome_node)
-            if not contains_ende and sub_row.check_result.subsequent_step_number == "Ende":
+            if (
+                not contains_ende
+                and sub_row.check_result.subsequent_step_number == "Ende"
+                and not _is_ende_with_no_code_but_note(sub_row)
+            ):
                 contains_ende = True
                 result.append(EndNode())
     return result
@@ -115,7 +131,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     for row in table.rows:
         decision_node = _convert_row_to_decision_node(row)
         for sub_row in row.sub_rows:
-            if sub_row.check_result.subsequent_step_number is not None:
+            if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
                 edge = _yes_no_edge(
                     sub_row.check_result.result,
                     source=decision_node,

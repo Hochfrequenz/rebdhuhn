@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1658.6666666666667" height="1658.6666666666667px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1661.3333333333333" height="1661.3333333333333px">
   <g>
-    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1658.6666666666667" height="1658.6666666666667px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1658.6666666666667" rx="20" ry="20"/><g>
-    <g transform="translate(283.5947057166994, 165.86666666666665) scale(1 1) translate(0, 0) scale(2.3354923495728905 2.3354923495728905) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1661.3333333333333" height="1661.3333333333333px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1661.3333333333333" rx="20" ry="20"/><g>
+    <g transform="translate(282.507237397916, 166.1333333333333) scale(1 1) translate(0, 0) scale(2.3392471604242937 2.3392471604242937) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,8 +13,8 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1440pt" height="1244pt" viewBox="0.00 0.00 1440.00 1244.26">
-<g id="graph0" class="graph" transform="scale(0.770249 0.770249) rotate(0) translate(10.8 1604.6)">
+    <svg width="1440pt" height="1246pt" viewBox="0.00 0.00 1440.00 1245.76">
+<g id="graph0" class="graph" transform="scale(0.764362 0.764362) rotate(0) translate(18 1611.8)">
 <title>D</title>
 <text text-anchor="start" x="779.21" y="-1573.7" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">6.2 AD: Lieferende LF an NB</text>
 <text text-anchor="start" x="779.21" y="-1545.6" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">6.2.1 E_0401_Abmeldung pr&#252;fen</text>

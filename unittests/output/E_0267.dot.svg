@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='ASCII' standalone='yes'?>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1772.0" height="1772.0px">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1773.3333333333333" height="1773.3333333333333px">
   <g>
-    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1772.0" height="1772.0px">
-  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1772.0" rx="20" ry="20"/><g>
-    <g transform="translate(237.37730216840316, 177.19999999999996) scale(1 1) translate(0, 0) scale(2.4950718107575334 2.4950718107575334) "><!-- note that I manually added the width and height attribute to the root node
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1773.3333333333333" height="1773.3333333333333px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1773.3333333333333" rx="20" ry="20"/><g>
+    <g transform="translate(236.8335680090114, 177.3333333333333) scale(1 1) translate(0, 0) scale(2.496949216183235 2.496949216183235) "><!-- note that I manually added the width and height attribute to the root node
   https://chatgpt.com/share/678e3028-70cc-800b-a296-782714735772
   -->
   <defs>
@@ -13,8 +13,8 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1440pt" height="1329pt" viewBox="0.00 0.00 1440.00 1328.85">
-<g id="graph0" class="graph" transform="scale(0.998855 0.998855) rotate(0) translate(10.8 1319.57)">
+    <svg width="1440pt" height="1330pt" viewBox="0.00 0.00 1440.00 1329.95">
+<g id="graph0" class="graph" transform="scale(0.988977 0.988977) rotate(0) translate(18 1326.77)">
 <title>D</title>
 <text text-anchor="start" x="428.03" y="-1288.67" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">WiM Strom</text>
 <text text-anchor="start" x="428.03" y="-1260.57" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">8.27.4: AD: Abrechnung einer f&#252;r den ESA erbrachten Leistung</text>

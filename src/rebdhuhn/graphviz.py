@@ -204,7 +204,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
         "packmode": '"array"',
         "size": '"20,20"',  # in inches 🤮
         "fontsize": "12",
-        "pad": "0.25" # https://graphviz.org/docs/attrs/pad/
+        "pad": "0.25",  # https://graphviz.org/docs/attrs/pad/
     }
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():

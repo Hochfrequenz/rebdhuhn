@@ -53,7 +53,7 @@ tests = [
     "syrupy==4.8.1"
 ]
 type_check = [
-    "mypy==1.14.1",
+    "mypy==1.15.0",
     "types-requests==2.32.0.20241016",
     "lxml-stubs==0.5.1"
 ]

@@ -49,7 +49,7 @@ spellcheck = [
     "codespell==2.4.1"
 ]
 tests = [
-    "pytest==8.3.4",
+    "pytest==8.3.5",
     "syrupy==4.8.2"
 ]
 type_check = [

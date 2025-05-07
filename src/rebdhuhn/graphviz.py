@@ -106,7 +106,7 @@ def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -
 
 def _convert_transition_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     """
-    Convert a DecisionNode to dot code
+    Convert a TransitionNode to dot code
     """
     formatted_label = (
         f'<B>{ebd_graph.graph.nodes[node]["node"].step_number}: </B>'

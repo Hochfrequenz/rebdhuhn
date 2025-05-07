@@ -4,7 +4,7 @@ This module contains logic to convert EbdTable data to EbdGraph data.
 
 from typing import Dict, List, Literal, Optional, overload
 
-from networkx import DiGraph  # type:ignore[import-untyped]
+from networkx import DiGraph, isolates  # type:ignore[import-untyped]
 
 from rebdhuhn.models import (
     DecisionNode,
@@ -219,6 +219,7 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     if not any(table.rows):
         return convert_empty_table_to_graph(table.metadata)
     graph = convert_table_to_digraph(table)
+    _apply_workaround_to_issue_383(graph)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
         chapter=table.metadata.chapter,
@@ -228,6 +229,14 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)
 
+def _apply_workaround_to_issue_383(graph:DiGraph)->None:
+    """
+    removes isolated hinweis nodes which are not connected to the graph, e.g. 'Es gibt 1..n Treffer'...
+    Ideally we'd not create them at all, then we wouldn't have to remove them in a post processing step.
+    https://github.com/Hochfrequenz/rebdhuhn/issues/383
+    """
+    isolated = list(isolates(graph))
+    graph.remove_nodes_from(isolated)
 
 def convert_empty_table_to_graph(metadata: EbdTableMetaData) -> EbdGraph:
     """

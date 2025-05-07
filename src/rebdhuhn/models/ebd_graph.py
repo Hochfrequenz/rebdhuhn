@@ -150,6 +150,33 @@ class EmptyNode(EbdGraphNode):
         return "Empty"
 
 
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)
+class TransitionNode(EbdGraphNode):
+    """
+    A transition node is a leaf of the Entscheidungsbaum tree.
+    It has exactly one subsequent step and does neither contain a decision nor an outcome.
+    Its fields are the same as the DecisionNode, but they are functionally different.
+    It's related to an EbdCheckResult/SubRow which has a check_result.result None and only 1 subsequent step number.
+    """
+
+    step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+\*?"))
+    """
+    number of the Prüfschritt, e.g. '105', '2' or '6*'
+    """
+    question: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    the questions which is asked at this node in the tree
+    """
+    note: Optional[str] = attrs.field(validator=attrs.validators.optional(attrs.validators.instance_of(str)))
+    """
+    An optional note that explains the purpose, e.g.
+    'Aufnahme von 0..n Treffern in die neue Trefferliste auf Basis von drei Kriterien'
+    """
+
+    def get_key(self) -> str:
+        return self.step_number
+
+
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdGraphEdge:
     """
@@ -193,6 +220,18 @@ class ToNoEdge(EbdGraphEdge):
     source: DecisionNode = attrs.field(validator=attrs.validators.instance_of(DecisionNode))
     """
     ths source whose outcome is False ("Nein")
+    """
+
+
+@attrs.define(auto_attribs=True, kw_only=True)
+class TransitionEdge(EbdGraphEdge):
+    """
+    an edge that connects a TransitionNode to the respective next step
+    """
+
+    source: TransitionNode = attrs.field(validator=attrs.validators.instance_of(TransitionNode))
+    """
+    ths source which refers to the next step
     """
 
 

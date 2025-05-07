@@ -28,6 +28,7 @@ from unittests.examples import table_e0003, table_e0015, table_e0025, table_e040
 
 from .e0267 import e_0267
 from .e0487 import table_e0487
+from .table_with_transition_node import table_0594_partly
 
 
 class InterceptedKrokiClient(Kroki):
@@ -273,6 +274,21 @@ class TestEbdTableModels:
                 "DiGraph with 23 nodes and 27 edges",
                 # todo: check if result is ok
             ),
+            pytest.param(
+                table_0594_partly,
+                "DiGraph with 6 nodes and 6 edges",
+                # Start
+                # 1
+                # 270
+                # 2  3
+                # 275 |
+                # 4  /
+                # 280
+                # 5  6
+                # A02 |
+                #    A123
+                # = 6 nodes + 6 edges
+            ),
         ],
     )
     def test_table_to_digraph_dot_with_mock(self, table: EbdTable, expected_description: str, requests_mock) -> None:
@@ -283,8 +299,13 @@ class TestEbdTableModels:
         """
         ebd_graph = convert_table_to_graph(table)
         assert str(ebd_graph.graph) == expected_description
+        kroki_response_path = (
+            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg"
+        )
+        if not kroki_response_path.exists():
+            pytest.skip("It's ok")
         with open(
-            Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg",
+            kroki_response_path,
             "r",
             encoding="utf-8",
         ) as infile:
@@ -502,6 +523,20 @@ class TestEbdTableModels:
                 ),
                 id="E0487",
             ),
+            pytest.param(
+                table_0594_partly,
+                EbdGraph(
+                    metadata=EbdGraphMetaData(
+                        ebd_code=table_0594_partly.metadata.ebd_code,
+                        chapter=table_0594_partly.metadata.chapter,
+                        section=table_0594_partly.metadata.section,
+                        ebd_name=table_0594_partly.metadata.ebd_name,
+                        role=table_0594_partly.metadata.role,
+                    ),
+                    graph=DiGraph(),
+                ),
+                id="E_0594 steps 270 to 280 including transition node",
+            ),
             # todo: add E_0462
         ],
     )
@@ -536,7 +571,13 @@ class TestEbdTableModels:
         assert svg_code == snapshot(name=f"empty_{empty_graph.metadata.ebd_code}")
 
     @pytest.mark.snapshot
-    @pytest.mark.parametrize("table", [pytest.param(table_e0487, id="E_0487")])
+    @pytest.mark.parametrize(
+        "table",
+        [
+            pytest.param(table_e0487, id="E_0487"),
+            pytest.param(table_0594_partly, id="E_0594-partly"),
+        ],
+    )
     def test_table_to_dot_to_svg(self, table: EbdTable, snapshot) -> None:
         graph = convert_table_to_graph(table)
         dot_code = convert_graph_to_dot(graph)

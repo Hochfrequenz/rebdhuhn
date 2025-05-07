@@ -113,6 +113,10 @@ def _convert_transition_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str)
         f'{_format_label(ebd_graph.graph.nodes[node]["node"].question)}'
         f'<BR align="left"/>'
     )
+    if ebd_graph.graph.nodes[node]["node"].note:
+        formatted_label += (
+            f"<FONT>" f'{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>' f"</FONT>"
+        )
     return (
         f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", '
         f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'

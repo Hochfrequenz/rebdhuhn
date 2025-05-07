@@ -10,7 +10,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
-from rebdhuhn.models.ebd_graph import EmptyNode
+from rebdhuhn.models.ebd_graph import EmptyNode, TransitionNode
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -104,6 +104,21 @@ def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -
     )
 
 
+def _convert_transition_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
+    """
+    Convert a DecisionNode to dot code
+    """
+    formatted_label = (
+        f'<B>{ebd_graph.graph.nodes[node]["node"].step_number}: </B>'
+        f'{_format_label(ebd_graph.graph.nodes[node]["node"].question)}'
+        f'<BR align="left"/>'
+    )
+    return (
+        f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", '
+        f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
+    )
+
+
 def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     """
     A shorthand to convert an arbitrary node to dot code. It just determines the node type and calls the
@@ -120,6 +135,8 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
             return _convert_start_node_to_dot(ebd_graph, node, indent)
         case EmptyNode():
             return _convert_empty_node_to_dot(ebd_graph, node, indent)
+        case TransitionNode():
+            return _convert_transition_node_to_dot(ebd_graph, node, indent)
         case _:
             raise ValueError(f"Unknown node type: {ebd_graph.graph.nodes[node]['node']}")
 

@@ -29,6 +29,6 @@ def test_e0594_svg_creation(snapshot: SnapshotAssertion) -> None:
     svg_code = Kroki().convert_dot_to_svg(dot_code)
     target_dir = Path(__file__).parent / "output"
     os.makedirs(target_dir, exist_ok=True)
-    with open(target_dir / f"table_dot_svg_{graph.metadata.ebd_code}.svg", "w+", encoding="utf-8") as svg_file:
+    with open(target_dir / f"table_dot_svg_malo_ident_{graph.metadata.ebd_code}.svg", "w+", encoding="utf-8") as svg_file:
         svg_file.write(svg_code)
-    assert dot_code == snapshot(name=f"table_dot_svg_{graph.metadata.ebd_code}")
+    assert dot_code == snapshot(name=f"table_dot_svg_malo_ident_{graph.metadata.ebd_code}")

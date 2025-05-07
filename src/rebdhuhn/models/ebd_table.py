@@ -57,9 +57,10 @@ class EbdCheckResult:
 
     To model "ja": use result=True, subsequent_step_number=None
     To model "nein🠖2": use result=False, subsequent_step_number="2"
+    To model "🠖110": use result=None, subsequent_step_number="110", happens e.g. in E_0594 step_number 105
     """
 
-    result: bool = attrs.field(validator=attrs.validators.instance_of(bool))
+    result: Optional[bool] = attrs.field(validator=attrs.validators.optional(attrs.validators.instance_of(bool)))
     """
     Either "ja"=True or "nein"=False
     """
@@ -70,6 +71,18 @@ class EbdCheckResult:
     """
     Key of the following/subsequent step, e.g. '2', or '6*' or None, if there is no follow up step
     """
+
+    @result.validator
+    def _validate_result(self, attribute, value) -> None:  # type:ignore[no-untyped-def] #pylint:disable=unused-argument
+        # This just ensures it's a class-level validation
+        self._validate_only_one_none()
+
+    def _validate_only_one_none(self) -> None:
+        if self.result is None and self.subsequent_step_number is None:
+            raise ValueError(
+                # pylint:disable=line-too-long
+                "If the result is not boolean (meaning neither 'ja' nor 'nein' but null), the subsequent step has to be set"
+            )
 
 
 RESULT_CODE_REGEX = r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"
@@ -108,7 +121,7 @@ def _check_that_both_true_and_false_occur(  # type:ignore[no-untyped-def]
     instance: EbdTableSubRow, attribute, value: List[EbdTableSubRow]
 ) -> None:
     """
-    Check that the subrows cover both a True and a False outcome
+    Check that the subrows cover both a True and a False outcome. e.g. Ja -> 2 AND Nein -> 3
     """
     # We implicitly assume that the value (list) provided already has exactly two entries.
     # This is enforced by other validators
@@ -117,6 +130,22 @@ def _check_that_both_true_and_false_occur(  # type:ignore[no-untyped-def]
             raise ValueError(
                 f"Exactly one of the entries in {attribute.name} has to have check_result.result {boolean}"
             )
+
+
+def _check_that_neither_true_nor_false_occur(  # type:ignore[no-untyped-def]
+    instance: EbdTableSubRow, attribute, value: List[EbdTableSubRow]
+) -> None:
+    """
+    Check that the subrows contain neither true nor false but only a reference to a future steps.
+    E.g. MaLo Ident E_0594 step_number 105 directly refers to step 110, no ja/nein and only 1 subrow.
+    Screenshot here: https://github.com/Hochfrequenz/rebdhuhn/issues/379
+    """
+    # We implicitly assume that the value (list) provided already has exactly two entries.
+    # This is enforced by other validators
+    if len(value) != 1:
+        raise ValueError("There must be exactly one subrow when the subrows are not a 'ja' or 'nein' distinction")
+    if value[0].check_result.result is not None:
+        raise ValueError("The subrow must not have a 'ja' or 'nein' distinction")
 
 
 _STEP_NUMBER_REGEX = r"\d+\*?"  #: regex used to validate step numbers, e.g. '4' or '7*'
@@ -142,8 +171,13 @@ class EbdTableRow:
     sub_rows: List[EbdTableSubRow] = attrs.field(
         validator=attrs.validators.deep_iterable(
             member_validator=attrs.validators.instance_of(EbdTableSubRow),
-            iterable_validator=attrs.validators.and_(
-                attrs.validators.min_len(2), attrs.validators.max_len(2), _check_that_both_true_and_false_occur
+            iterable_validator=attrs.validators.or_(
+                attrs.validators.and_(
+                    attrs.validators.min_len(2), attrs.validators.max_len(2), _check_that_both_true_and_false_occur
+                ),
+                attrs.validators.and_(
+                    attrs.validators.min_len(1), attrs.validators.max_len(1), _check_that_neither_true_nor_false_occur
+                ),
             ),
         ),
     )

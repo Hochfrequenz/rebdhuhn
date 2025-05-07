@@ -76,10 +76,15 @@ def _convert_row_to_decision_node(row: EbdTableRow) -> DecisionNode:
     return DecisionNode(step_number=row.step_number, question=row.description)
 
 
-def _yes_no_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge:
-    if decision:
+def _yes_no_transition_edge(decision: Optional[bool], source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge:
+    if decision is None:
+        # happens in another PR
+        raise NotImplementedError("None not supported yet; https://github.com/Hochfrequenz/rebdhuhn/issues/380")
+    if decision is True:
         return ToYesEdge(source=source, target=target, note=None)
-    return ToNoEdge(source=source, target=target, note=None)
+    if decision is False:
+        return ToNoEdge(source=source, target=target, note=None)
+    raise ValueError(f"Decision must be either True or False or None, but was {decision}")
 
 
 def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
@@ -132,7 +137,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
         decision_node = _convert_row_to_decision_node(row)
         for sub_row in row.sub_rows:
             if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
-                edge = _yes_no_edge(
+                edge = _yes_no_transition_edge(
                     sub_row.check_result.result,
                     source=decision_node,
                     target=nodes[sub_row.check_result.subsequent_step_number],
@@ -160,7 +165,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                         outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
                     )
 
-                edge = _yes_no_edge(
+                edge = _yes_no_transition_edge(
                     sub_row.check_result.result,
                     source=decision_node,
                     target=nodes[outcome_node.get_key()],

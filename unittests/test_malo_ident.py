@@ -8,7 +8,7 @@ from pathlib import Path
 
 import cattrs
 import pytest
-from syrupy import SnapshotAssertion
+from syrupy.assertion import SnapshotAssertion
 
 from rebdhuhn import convert_graph_to_dot, convert_table_to_graph
 from rebdhuhn.kroki import Kroki

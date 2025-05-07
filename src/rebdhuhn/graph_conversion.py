@@ -150,6 +150,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     for row in table.rows:
         row_node = _convert_row_to_decision_or_transition_node(row)
         if isinstance(row_node, TransitionNode):
+            assert row.sub_rows[0].check_result.subsequent_step_number is not None
             result.append(
                 TransitionEdge(
                     source=row_node,
@@ -158,7 +159,9 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 )
             )
             continue
+        assert isinstance(row_node, DecisionNode)
         for sub_row in row.sub_rows:
+            assert isinstance(sub_row.check_result.result, bool)
             if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
                 # plain decision node
                 edge = _yes_no_transition_edge(

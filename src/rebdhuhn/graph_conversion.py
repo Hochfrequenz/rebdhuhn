@@ -229,7 +229,8 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)
 
-def _apply_workaround_to_issue_383(graph:DiGraph)->None:
+
+def _apply_workaround_to_issue_383(graph: DiGraph) -> None:
     """
     removes isolated hinweis nodes which are not connected to the graph, e.g. 'Es gibt 1..n Treffer'...
     Ideally we'd not create them at all, then we wouldn't have to remove them in a post processing step.
@@ -237,6 +238,7 @@ def _apply_workaround_to_issue_383(graph:DiGraph)->None:
     """
     isolated = list(isolates(graph))
     graph.remove_nodes_from(isolated)
+
 
 def convert_empty_table_to_graph(metadata: EbdTableMetaData) -> EbdGraph:
     """

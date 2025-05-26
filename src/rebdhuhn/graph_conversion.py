@@ -2,6 +2,7 @@
 This module contains logic to convert EbdTable data to EbdGraph data.
 """
 
+import re
 from typing import Dict, List, Literal, Optional, overload
 
 from networkx import DiGraph, isolates  # type:ignore[import-untyped]
@@ -143,6 +144,15 @@ def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str,
     return str(lowest_numeric_key), nodes[str(lowest_numeric_key)]
 
 
+def _notes_same_except_for_whitespace(note1: str | None, note2: str | None) -> bool:
+    """
+    Checks if two notes are the same except for whitespace characters.
+    """
+    if note1 is not None and note2 is not None:
+        return re.sub(r"\s+", "", note1) == re.sub(r"\s+", "", note2)
+    return note1 is None and note2 is None
+
+
 def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     """
     Returns a list with all edges from the given table.
@@ -188,7 +198,9 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                 # check for ambiguous outcome nodes, i.e. A** with different notes
                 is_ambiguous_outcome_node = (
                     outcome_node.result_code in outcome_nodes_duplicates
-                    and outcome_nodes_duplicates[outcome_node.result_code].note != outcome_node.note
+                    and not _notes_same_except_for_whitespace(
+                        outcome_nodes_duplicates[outcome_node.result_code].note, outcome_node.note
+                    )
                 )
 
                 if not is_ambiguous_outcome_node:

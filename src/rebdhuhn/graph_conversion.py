@@ -144,11 +144,13 @@ def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str,
     return str(lowest_numeric_key), nodes[str(lowest_numeric_key)]
 
 
-def _notes_same_except_for_whitespace(note1: str, note2: str) -> bool:
+def _notes_same_except_for_whitespace(note1: str | None, note2: str | None) -> bool:
     """
     Checks if two notes are the same except for whitespace characters.
     """
-    return re.sub(r"\s+", "", note1) == re.sub(r"\s+", "", note2)
+    if note1 is not None and note2 is not None:
+        return re.sub(r"\s+", "", note1) == re.sub(r"\s+", "", note2)
+    return note1 is None and note2 is None
 
 
 def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:

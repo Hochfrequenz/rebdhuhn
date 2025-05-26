@@ -43,6 +43,15 @@ def _is_ende_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     )
 
 
+def _is_last_step_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
+    """
+    Returns True if the following step is None with no code but a note.
+    """
+    return (
+        sub_row.result_code is None and sub_row.note is not None and sub_row.check_result.subsequent_step_number is None
+    )
+
+
 def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
     """
     converts a sub_row into an outcome node (or None if not applicable)
@@ -55,7 +64,7 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     following_step = sub_row.check_result.subsequent_step_number is not None
     if is_ende_in_wrong_column:
         raise EndeInWrongColumnError(sub_row=sub_row)
-    if _is_ende_with_no_code_but_note(sub_row):
+    if _is_ende_with_no_code_but_note(sub_row) or _is_last_step_with_no_code_but_note(sub_row):
         return OutcomeNode(result_code=None, note=sub_row.note)
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.

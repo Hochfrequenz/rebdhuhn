@@ -26,6 +26,7 @@ from rebdhuhn.models.ebd_table import EbdTable, EbdTableMetaData
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
+from .e0266 import table_e0266
 from .e0267 import e_0267
 from .e0487 import table_e0487
 from .table_with_transition_node import table_0594_partly
@@ -272,6 +273,11 @@ class TestEbdTableModels:
             pytest.param(
                 table_e0401,
                 "DiGraph with 23 nodes and 27 edges",
+                # todo: check if result is ok
+            ),
+            pytest.param(
+                table_e0266,
+                "DiGraph with 54 nodes and 68 edges",
                 # todo: check if result is ok
             ),
             pytest.param(

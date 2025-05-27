@@ -125,7 +125,7 @@ class OutcomeCodeAmbiguousError(ValueError):
 
 class OutcomeCodeAndFurtherStepError(NotImplementedError):
     """
-    Catches outcome nodes with further steps. This is not implemented yet.
+    Catches outcome nodes with further steps. This is not implemented yet. This error is not raised currently.
     """
 
     def __init__(self, sub_row: EbdTableSubRow):

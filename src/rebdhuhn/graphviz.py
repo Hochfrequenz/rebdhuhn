@@ -10,7 +10,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
-from rebdhuhn.models.ebd_graph import EmptyNode, TransitionNode
+from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -66,6 +66,24 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     """
     # pylint:disable=line-too-long
     return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];'
+
+
+def _convert_transitional_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
+    """
+    Convert an transitional OutcomeNode to dot code
+    """
+    formatted_label: str = (
+        f'<B>{ebd_graph.graph.nodes[node]["node"].result_code}</B><BR align="left"/><BR align="left"/>'
+    )
+    if ebd_graph.graph.nodes[node]["node"].note:
+        formatted_label += (
+            f"<FONT>" f'{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>' f"</FONT>"
+        )
+    return (
+        f'{indent}"{node}" '
+        # pylint:disable=line-too-long
+        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
+    )
 
 
 def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -131,6 +149,8 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     match ebd_graph.graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_dot(ebd_graph, node, indent)
+        case TransitionalOutcomeNode():
+            return _convert_transitional_outcome_node_to_dot(ebd_graph, node, indent)
         case OutcomeNode():
             return _convert_outcome_node_to_dot(ebd_graph, node, indent)
         case EndNode():
@@ -208,7 +228,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
     """
     nx_graph = ebd_graph.graph
-    _mark_last_common_ancestors(nx_graph)
+    # _mark_last_common_ancestors(nx_graph)
     header = (
         f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
         f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'

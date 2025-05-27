@@ -23,7 +23,13 @@ from rebdhuhn.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_graph import EmptyNode, TransitionEdge, TransitionNode
+from rebdhuhn.models.ebd_graph import (
+    EmptyNode,
+    TransitionalOutcomeEdge,
+    TransitionalOutcomeNode,
+    TransitionEdge,
+    TransitionNode,
+)
 from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
@@ -53,10 +59,22 @@ def _is_last_step_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     )
 
 
-def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
+def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode | TransitionalOutcomeNode]:
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
+    is_transitional_outcome = (
+        sub_row.check_result.subsequent_step_number is not None
+        and sub_row.check_result.subsequent_step_number not in ("Start", "Ende")
+        and sub_row.result_code is not None
+        and sub_row.note is not None
+    )
+    if is_transitional_outcome:
+        return TransitionalOutcomeNode(
+            result_code=sub_row.result_code,
+            note=sub_row.note,
+            subsequent_step_number=sub_row.check_result.subsequent_step_number,
+        )
     is_cross_reference = sub_row.note is not None and sub_row.note.startswith("EBD ")
     is_ende_in_wrong_column = (
         sub_row.result_code is None and sub_row.note is not None and sub_row.note.lower().startswith("ende")
@@ -70,7 +88,7 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.
         return None
-    if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
+    if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code in ("Start", "Ende"):
         raise OutcomeCodeAndFurtherStepError(sub_row=sub_row)
     if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
@@ -121,6 +139,9 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
             continue
         for sub_row in row.sub_rows:
             outcome_node = _convert_sub_row_to_outcome_node(sub_row)
+            if isinstance(outcome_node, TransitionalOutcomeNode):
+                result.append(outcome_node)
+                continue
             if outcome_node is not None:
                 result.append(outcome_node)
             if (
@@ -179,7 +200,11 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
         assert isinstance(row_node, DecisionNode)
         for sub_row in row.sub_rows:
             assert isinstance(sub_row.check_result.result, bool)
-            if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
+            if (
+                sub_row.check_result.subsequent_step_number is not None
+                and not _is_ende_with_no_code_but_note(sub_row)
+                and sub_row.result_code is None
+            ):
                 edge = _yes_no_transition_edge(
                     sub_row.check_result.result,
                     source=row_node,
@@ -188,6 +213,24 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
             else:
                 outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
 
+                if isinstance(outcome_node, TransitionalOutcomeNode):
+                    result.append(
+                        _yes_no_transition_edge(
+                            sub_row.check_result.result,
+                            source=row_node,
+                            target=outcome_node,
+                        )
+                    )
+                    result.append(
+                        TransitionalOutcomeEdge(
+                            source=outcome_node, target=nodes[outcome_node.subsequent_step_number], note=None
+                        )
+                    )
+
+                    # edge = TransitionalOutcomeEdge(
+                    #        source=outcome_node,
+                    #        target=nodes[outcome_node.subsequent_step_number], note = None)
+                    continue
                 if outcome_node is None:
                     if all(sr.result_code is None for sr in row.sub_rows) and any(
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows

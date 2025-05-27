@@ -1,5 +1,5 @@
 # serializer version: 1
-# name: test_e0594_svg_creation[table_dot_svg_transitional_outcome_E_0610]
+# name: test_e0610_svg_creation[table_dot_svg_transitional_outcome_E_0610]
   '''
   digraph D {
       labelloc="t";

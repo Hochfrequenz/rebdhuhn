@@ -19,7 +19,7 @@ assert path_to_raw_table_json.exists()
 
 
 @pytest.mark.snapshot
-def test_e0594_svg_creation(snapshot: SnapshotAssertion) -> None:
+def test_e0610_svg_creation(snapshot: SnapshotAssertion) -> None:
     with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
         table_json = json.load(f)
     e_0610_table = cattrs.structure(table_json, EbdTable)

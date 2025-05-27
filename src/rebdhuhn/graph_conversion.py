@@ -34,7 +34,6 @@ from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
-    OutcomeCodeAndFurtherStepError,
     OutcomeNodeCreationError,
 )
 from rebdhuhn.utils import assert_is_instance

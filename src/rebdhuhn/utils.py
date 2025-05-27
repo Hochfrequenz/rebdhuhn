@@ -1,5 +1,7 @@
 """utility functions"""
 
+from typing import Any, TypeVar, overload
+
 
 def _split_string(input_string: str, max_length: int) -> list[str]:
     """
@@ -56,3 +58,39 @@ def add_line_breaks(text: str, max_line_length: int = 80, line_sep: str = "\n") 
     way, whereas `...Bilanzierungs-\nverantwortung...` is just an artefact.
     """
     return line_sep.join(_split_string(text, max_line_length))
+
+
+### taken from wanna.bee
+
+T = TypeVar("T")
+U = TypeVar("U")
+V = TypeVar("V")
+
+
+@overload
+def assert_is_instance(obj: Any, cls1: type[T], /) -> T: ...
+
+
+@overload
+def assert_is_instance(obj: Any, cls1: type[T], cls2: type[U], /) -> T | U: ...
+
+
+@overload
+def assert_is_instance(obj: Any, cls1: type[T], cls2: type[U], cls3: type[V], /) -> T | U | V: ...
+
+
+def assert_is_instance(obj: Any, *cls: type[Any]) -> Any:
+    """
+    Assert that the object is an instance of at least one of the classes.
+
+    For up to 5 classes (overload variants), the return value will have an appropriate type hint.
+
+    :param obj: The object to check.
+    :param cls: The classes to check against.
+    :returns: The object if it is an instance of one of the classes.
+    :raises TypeError: If the object is not an instance of the classes.
+    """
+    if not isinstance(obj, cls):
+        raise TypeError(f"Expected {cls}, got {type(obj)}")
+
+    return obj

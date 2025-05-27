@@ -7,7 +7,6 @@ from xml.sax.saxutils import escape
 
 from rebdhuhn.add_watermark import add_background as add_background_function
 from rebdhuhn.add_watermark import add_watermark as add_watermark_function
-from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
@@ -66,24 +65,6 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     """
     # pylint:disable=line-too-long
     return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];'
-
-
-def _convert_transitional_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
-    """
-    Convert an transitional OutcomeNode to dot code
-    """
-    formatted_label: str = (
-        f'<B>{ebd_graph.graph.nodes[node]["node"].result_code}</B><BR align="left"/><BR align="left"/>'
-    )
-    if ebd_graph.graph.nodes[node]["node"].note:
-        formatted_label += (
-            f"<FONT>" f'{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>' f"</FONT>"
-        )
-    return (
-        f'{indent}"{node}" '
-        # pylint:disable=line-too-long
-        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
-    )
 
 
 def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -149,9 +130,7 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     match ebd_graph.graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_dot(ebd_graph, node, indent)
-        case TransitionalOutcomeNode():
-            return _convert_transitional_outcome_node_to_dot(ebd_graph, node, indent)
-        case OutcomeNode():
+        case OutcomeNode() | TransitionalOutcomeNode():
             return _convert_outcome_node_to_dot(ebd_graph, node, indent)
         case EndNode():
             return _convert_end_node_to_dot(node, indent)

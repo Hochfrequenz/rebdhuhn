@@ -266,7 +266,7 @@ class TransitionalOutcomeEdge(EbdGraphEdge):
     an edge that connects a transitional outcome node from the last or to the respective next step
     """
 
-    source: TransitionNode = attrs.field(
+    source: DecisionNode | TransitionalOutcomeNode = attrs.field(
         validator=attrs.validators.instance_of((DecisionNode, TransitionalOutcomeNode))
     )
     """

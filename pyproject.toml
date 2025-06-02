@@ -54,7 +54,7 @@ tests = [
 ]
 type_check = [
     "mypy==1.16.0",
-    "types-requests==2.32.0.20250515",
+    "types-requests==2.32.0.20250602",
     "lxml-stubs==0.5.1"
 ]
 

@@ -7,10 +7,9 @@ from xml.sax.saxutils import escape
 
 from rebdhuhn.add_watermark import add_background as add_background_function
 from rebdhuhn.add_watermark import add_watermark as add_watermark_function
-from rebdhuhn.graph_utils import _mark_last_common_ancestors
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
-from rebdhuhn.models.ebd_graph import EmptyNode, TransitionNode
+from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -131,7 +130,7 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     match ebd_graph.graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_dot(ebd_graph, node, indent)
-        case OutcomeNode():
+        case OutcomeNode() | TransitionalOutcomeNode():
             return _convert_outcome_node_to_dot(ebd_graph, node, indent)
         case EndNode():
             return _convert_end_node_to_dot(node, indent)
@@ -208,7 +207,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
     """
     nx_graph = ebd_graph.graph
-    _mark_last_common_ancestors(nx_graph)
+    # _mark_last_common_ancestors(nx_graph)
     header = (
         f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
         f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'

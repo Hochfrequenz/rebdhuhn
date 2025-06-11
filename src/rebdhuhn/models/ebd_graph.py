@@ -150,6 +150,31 @@ class EmptyNode(EbdGraphNode):
         return "Empty"
 
 
+@attrs.define(auto_attribs=True, kw_only=True, frozen=True)  # networkx requirement: nodes are hashable (frozen=True)
+class TransitionalOutcomeNode(EbdGraphNode):
+    """
+    An outcome node with subsequent steps.
+    """
+
+    result_code: str = attrs.field(default=None, validator=attrs.validators.matches_re(RESULT_CODE_REGEX))
+    """
+    The outcome of the decision tree check; e.g. 'A55'
+    """
+    subsequent_step_number: str = attrs.field(validator=attrs.validators.matches_re(r"\d+"))
+
+    """
+    The number of the subsequent step, e.g. '2' or 'Ende'. Needed for key generation.
+    """
+
+    note: Optional[str] = attrs.field(validator=attrs.validators.optional(attrs.validators.instance_of(str)))
+    """
+    An optional note for this outcome; e.g. 'Cluster:Ablehnung\nFristüberschreitung'
+    """
+
+    def get_key(self) -> str:
+        return self.result_code + "_" + self.subsequent_step_number
+
+
 @attrs.define(auto_attribs=True, kw_only=True, frozen=True)
 class TransitionNode(EbdGraphNode):
     """
@@ -230,6 +255,20 @@ class TransitionEdge(EbdGraphEdge):
     """
 
     source: TransitionNode = attrs.field(validator=attrs.validators.instance_of(TransitionNode))
+    """
+    ths source which refers to the next step
+    """
+
+
+@attrs.define(auto_attribs=True, kw_only=True)
+class TransitionalOutcomeEdge(EbdGraphEdge):
+    """
+    an edge that connects a transitional outcome node from the last or to the respective next step
+    """
+
+    source: DecisionNode | TransitionalOutcomeNode = attrs.field(
+        validator=attrs.validators.instance_of((DecisionNode, TransitionalOutcomeNode))
+    )
     """
     ths source which refers to the next step
     """

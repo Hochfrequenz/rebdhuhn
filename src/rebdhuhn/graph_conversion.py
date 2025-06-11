@@ -23,14 +23,20 @@ from rebdhuhn.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_graph import EmptyNode, TransitionEdge, TransitionNode
+from rebdhuhn.models.ebd_graph import (
+    EmptyNode,
+    TransitionalOutcomeEdge,
+    TransitionalOutcomeNode,
+    TransitionEdge,
+    TransitionNode,
+)
 from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
-    OutcomeCodeAndFurtherStepError,
     OutcomeNodeCreationError,
 )
+from rebdhuhn.utils import assert_is_instance
 
 
 def _is_ende_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
@@ -53,10 +59,22 @@ def _is_last_step_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     )
 
 
-def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
+def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode | TransitionalOutcomeNode]:
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
+    is_transitional_outcome = (
+        sub_row.check_result.subsequent_step_number is not None
+        and sub_row.check_result.subsequent_step_number not in ("Start", "Ende")
+        and sub_row.result_code is not None
+        and sub_row.note is not None
+    )
+    if is_transitional_outcome:
+        return TransitionalOutcomeNode(
+            result_code=assert_is_instance(sub_row.result_code, str),
+            note=sub_row.note,
+            subsequent_step_number=assert_is_instance(sub_row.check_result.subsequent_step_number, str),
+        )
     is_cross_reference = sub_row.note is not None and sub_row.note.startswith("EBD ")
     is_ende_in_wrong_column = (
         sub_row.result_code is None and sub_row.note is not None and sub_row.note.lower().startswith("ende")
@@ -70,8 +88,6 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.
         return None
-    if sub_row.check_result.subsequent_step_number is not None and sub_row.result_code is not None:
-        raise OutcomeCodeAndFurtherStepError(sub_row=sub_row)
     if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
@@ -121,6 +137,9 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
             continue
         for sub_row in row.sub_rows:
             outcome_node = _convert_sub_row_to_outcome_node(sub_row)
+            if isinstance(outcome_node, TransitionalOutcomeNode):
+                result.append(outcome_node)
+                continue
             if outcome_node is not None:
                 result.append(outcome_node)
             if (
@@ -162,8 +181,6 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
     result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
-    outcome_nodes_duplicates: dict[str, OutcomeNode] = {}  # map to check for duplicate outcome nodes
-
     for row in table.rows:
         row_node = _convert_row_to_decision_or_transition_node(row)
         if isinstance(row_node, TransitionNode):
@@ -179,15 +196,37 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
         assert isinstance(row_node, DecisionNode)
         for sub_row in row.sub_rows:
             assert isinstance(sub_row.check_result.result, bool)
-            if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
-                edge = _yes_no_transition_edge(
-                    sub_row.check_result.result,
-                    source=row_node,
-                    target=nodes[sub_row.check_result.subsequent_step_number],
+            if (
+                sub_row.check_result.subsequent_step_number is not None
+                and not _is_ende_with_no_code_but_note(sub_row)
+                and sub_row.result_code is None
+            ):
+                result.append(
+                    _yes_no_transition_edge(
+                        sub_row.check_result.result,
+                        source=row_node,
+                        target=nodes[sub_row.check_result.subsequent_step_number],
+                    )
                 )
             else:
-                outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
+                outcome_node: Optional[OutcomeNode | TransitionalOutcomeNode] = _convert_sub_row_to_outcome_node(
+                    sub_row
+                )
 
+                if isinstance(outcome_node, TransitionalOutcomeNode):
+                    result.append(
+                        _yes_no_transition_edge(
+                            sub_row.check_result.result,
+                            source=row_node,
+                            target=outcome_node,
+                        )
+                    )
+                    result.append(
+                        TransitionalOutcomeEdge(
+                            source=outcome_node, target=nodes[outcome_node.subsequent_step_number], note=None
+                        )
+                    )
+                    continue
                 if outcome_node is None:
                     if all(sr.result_code is None for sr in row.sub_rows) and any(
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
@@ -196,26 +235,23 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                     raise OutcomeNodeCreationError(decision_node=row_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes
-                is_ambiguous_outcome_node = (
-                    outcome_node.result_code in outcome_nodes_duplicates
-                    and not _notes_same_except_for_whitespace(
-                        outcome_nodes_duplicates[outcome_node.result_code].note, outcome_node.note
-                    )
+                is_ambiguous_outcome_node = outcome_node.get_key() in nodes and not _notes_same_except_for_whitespace(
+                    assert_is_instance(nodes[outcome_node.get_key()], OutcomeNode).note, outcome_node.note
                 )
 
-                if not is_ambiguous_outcome_node:
-                    outcome_nodes_duplicates[outcome_node.get_key()] = outcome_node
-                else:
+                if is_ambiguous_outcome_node:
                     raise OutcomeCodeAmbiguousError(
-                        outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
+                        outcome_node1=assert_is_instance(nodes[outcome_node.get_key()], OutcomeNode),
+                        outcome_node2=outcome_node,
                     )
 
-                edge = _yes_no_transition_edge(
-                    sub_row.check_result.result,
-                    source=row_node,
-                    target=nodes[outcome_node.get_key()],
+                result.append(
+                    _yes_no_transition_edge(
+                        sub_row.check_result.result,
+                        source=row_node,
+                        target=nodes[outcome_node.get_key()],
+                    )
                 )
-            result.append(edge)
     return result
 
 

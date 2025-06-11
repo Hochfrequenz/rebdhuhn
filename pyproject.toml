@@ -49,12 +49,12 @@ spellcheck = [
     "codespell==2.4.1"
 ]
 tests = [
-    "pytest==8.3.5",
+    "pytest==8.4.0",
     "syrupy==4.9.1"
 ]
 type_check = [
-    "mypy==1.15.0",
-    "types-requests==2.32.0.20250515",
+    "mypy==1.16.0",
+    "types-requests==2.32.0.20250602",
     "lxml-stubs==0.5.1"
 ]
 

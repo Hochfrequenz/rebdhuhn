@@ -20,7 +20,7 @@ lxml==5.4.0
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils
-networkx==3.4.2
+networkx==3.5
     # via rebdhuhn (pyproject.toml)
 requests==2.32.4
     # via rebdhuhn (pyproject.toml)

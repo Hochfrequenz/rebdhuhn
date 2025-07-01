@@ -16,7 +16,7 @@ charset-normalizer==3.4.2
     # via requests
 idna==3.10
     # via requests
-lxml==5.4.0
+lxml==6.0.0
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils

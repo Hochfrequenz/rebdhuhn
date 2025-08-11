@@ -10,6 +10,39 @@ from typing import List, Optional
 import attrs
 
 
+@attrs.define(auto_attribs=True, kw_only=True)
+class EbdDocumentReleaseInformation:
+    """
+    Contains information from the title (first) page of the EDI@Energy document which contains all EBDs.
+    """
+
+    version: str = attrs.field(validator=attrs.validators.instance_of(str))
+    """
+    the version of the .docx document/file on which this EBD table is based.
+    E.g. '4.0b', because (proper) semantic versioning is for loosers ;)
+    """
+    release_date: Optional[date] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(date))
+    )
+    """
+    date on which the .docx document/file was released.
+    This corresponds to the 'Stand' field in the EDI@Energy document title page, e.g. '2025-06-23'.
+    It might be updated even if the version and original_release_date stay the same to indicate there was a 
+    'Fehlerkorrektur' in the document.
+    """
+    # https://imgflip.com/i/a2saev
+
+    original_release_date: Optional[date] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(date))
+    )
+    """
+    date on which the EBD was originally released; It's called 'Ursprüngliches Publikationsdatum' on the EBD document
+    title page. E.g. '2024-10-01'.
+    """
+    # I think that one could validate that if a `release_date` is set, then the `original_release_date` must be set and
+    # before it. But we don't add this validation yet, because we all know the data integrity is... to be improved.
+
+
 # pylint:disable=too-few-public-methods, too-many-instance-attributes
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableMetaData:
@@ -47,34 +80,13 @@ class EbdTableMetaData:
     remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
     da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
     """
-    version: Optional[str] = attrs.field(
-        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(str))
-    )
-    """
-    the version of the .docx document/file on which this EBD table is based.
-    E.g. '4.0b', because (proper) semantic versioning is for loosers ;)
-    """
-    release_date: Optional[date] = attrs.field(
-        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(date))
-    )
-    """
-    date on which the .docx document/file was released.
-    This corresponds to the 'Stand' field in the EDI@Energy document title page, e.g. '2025-06-23'.
-    It might be updated even if the version and original_release_date stay the same to indicate there was a 
-    'Fehlerkorrektur' in the document.
-    """
-    # https://imgflip.com/i/a2saev
 
-    original_release_date: Optional[date] = attrs.field(
-        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(date))
+    release_information: Optional[EbdDocumentReleaseInformation] = attrs.field(
+        default=None, validator=attrs.validators.optional(attrs.validators.instance_of(EbdDocumentReleaseInformation))
     )
     """
-    date on which the EBD was originally released; It's called 'Ursprüngliches Publikationsdatum' on the EBD document
-    title page. E.g. '2024-10-01'.
+    metadata of the entire EBD document (not the single EBD table)
     """
-
-    # I think that one could validate that if a `release_date` is set, then the `original_release_date` must be set and
-    # before it. But we don't add this validation yet, because we all know the data integrity is... to be improved.
 
 
 @attrs.define(auto_attribs=True, kw_only=True)

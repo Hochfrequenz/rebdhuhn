@@ -16,10 +16,18 @@ from rebdhuhn.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.models.ebd_table import (
+    EbdCheckResult,
+    EbdDocumentReleaseInformation,
+    EbdTable,
+    EbdTableMetaData,
+    EbdTableRow,
+    EbdTableSubRow,
+)
 
 __all__ = [
     "DecisionNode",
+    "EbdDocumentReleaseInformation",
     "EbdGraph",
     "EbdGraphEdge",
     "EbdGraphMetaData",

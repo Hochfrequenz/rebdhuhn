@@ -10,7 +10,7 @@ from typing import List, Optional
 import attrs
 
 
-# pylint:disable=too-few-public-methods
+# pylint:disable=too-few-public-methods, too-many-instance-attributes
 @attrs.define(auto_attribs=True, kw_only=True)
 class EbdTableMetaData:
     """

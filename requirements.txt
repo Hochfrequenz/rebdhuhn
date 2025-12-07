@@ -20,7 +20,7 @@ lxml==6.0.2
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils
-networkx==3.5
+networkx==3.6
     # via rebdhuhn (pyproject.toml)
 requests==2.32.5
     # via rebdhuhn (pyproject.toml)
@@ -28,5 +28,5 @@ svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)
 typing-extensions==4.15.0
     # via cattrs
-urllib3==2.5.0
+urllib3==2.6.0
     # via requests

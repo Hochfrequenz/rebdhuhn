@@ -28,5 +28,5 @@ svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)
 typing-extensions==4.15.0
     # via cattrs
-urllib3==2.6.0
+urllib3==2.6.1
     # via requests

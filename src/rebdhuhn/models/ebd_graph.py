@@ -11,6 +11,12 @@ from pydantic import BaseModel, ConfigDict, Field
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
 
+#: Wildcard result code "A**" used in EBDs when the actual code is determined dynamically at runtime.
+#: This code can appear multiple times in an EBD with different notes explaining which codes it represents.
+#: Example: In E_0055, "A**" appears in steps 1 and 2 with different possible replacement codes.
+#: To handle this, OutcomeNode.get_key() generates unique keys for A** nodes by combining code and note.
+_WILDCARD_RESULT_CODE = "A**"
+
 #: regex used to validate step numbers, e.g. '4' or '7*'
 _STEP_NUMBER_REGEX = r"^\d+\*?$"
 
@@ -125,6 +131,9 @@ class OutcomeNode(EbdGraphNode):  # networkx requirement: nodes are hashable (fr
 
     def get_key(self) -> str:
         if self.result_code is not None:
+            if self.result_code == _WILDCARD_RESULT_CODE and self.note is not None:
+                # Use both code and note to create a unique key
+                return f"{_WILDCARD_RESULT_CODE}: {self.note}"
             return self.result_code
         assert self.note is not None
         return self.note

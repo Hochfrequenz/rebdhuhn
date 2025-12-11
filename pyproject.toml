@@ -21,10 +21,9 @@ classifiers = [
 ]
 # Build system information and other project-specific configuration below.
 dependencies = [
-    "attrs",
+    "pydantic>=2.0",
     "networkx",
     "requests",
-    "cattrs",
     "lxml>=4.9.3",
     "svgutils",
     # write here line by line the dependencies for your package

@@ -10,7 +10,6 @@ import json
 import os
 from pathlib import Path
 
-import cattrs
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
@@ -28,7 +27,7 @@ class TestE0055:
         """Test that the JSON can be loaded and structured into an EbdTable."""
         with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
             table_json = json.load(f)
-        e_0055_table = cattrs.structure(table_json, EbdTable)
+        e_0055_table = EbdTable.model_validate(table_json)
 
         assert e_0055_table.metadata.ebd_code == "E_0055"
         assert e_0055_table.metadata.chapter == "MaBiS"
@@ -44,7 +43,7 @@ class TestE0055:
         """
         with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
             table_json = json.load(f)
-        e_0055_table = cattrs.structure(table_json, EbdTable)
+        e_0055_table = EbdTable.model_validate(table_json)
 
         graph = convert_table_to_graph(e_0055_table)
 
@@ -94,7 +93,7 @@ class TestE0055:
         """
         with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
             table_json = json.load(f)
-        e_0055_table = cattrs.structure(table_json, EbdTable)
+        e_0055_table = EbdTable.model_validate(table_json)
 
         graph = convert_table_to_graph(e_0055_table)
         dot_code = convert_graph_to_dot(graph)

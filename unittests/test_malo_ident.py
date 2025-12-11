@@ -6,7 +6,6 @@ import json
 import os
 from pathlib import Path
 
-import cattrs
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
@@ -22,7 +21,7 @@ assert path_to_raw_table_json.exists()
 def test_e0594_svg_creation(snapshot: SnapshotAssertion) -> None:
     with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
         table_json = json.load(f)
-    e_0594_table = cattrs.structure(table_json, EbdTable)
+    e_0594_table = EbdTable.model_validate(table_json)
     assert e_0594_table.metadata.ebd_code == "E_0594"
     graph = convert_table_to_graph(e_0594_table)
     dot_code = convert_graph_to_dot(graph)

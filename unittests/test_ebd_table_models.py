@@ -1,4 +1,3 @@
-import cattrs
 import pytest
 
 from rebdhuhn.models.ebd_table import (
@@ -52,8 +51,8 @@ class TestEbdTableModels:
         The test is successful already if the instantiation in the parametrization worked
         """
         assert table is not None
-        serialized_table = cattrs.unstructure(table)
-        deserialized_table = cattrs.structure(serialized_table, EbdTable)
+        serialized_table = table.model_dump(mode="json")
+        deserialized_table = EbdTable.model_validate(serialized_table)
         assert deserialized_table == table
 
     @pytest.mark.parametrize(

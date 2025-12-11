@@ -171,7 +171,7 @@ class TransitionalOutcomeNode(EbdGraphNode):  # networkx requirement: nodes are 
     """
     subsequent_step_number: SubsequentStepNumberDigitsOnly
     """
-    The number of the subsequent step, e.g. '2' or 'Ende'. Needed for key generation.
+    The number of the subsequent step, e.g. '2' or '110'. Needed for key generation.
     """
 
     note: Optional[str] = None

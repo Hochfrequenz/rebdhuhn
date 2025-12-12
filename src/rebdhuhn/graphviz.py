@@ -46,12 +46,11 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
 
 def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
     """
-    Convert a StartNode to dot code
+    Convert an EmptyNode to dot code
     """
-    formatted_label = (
-        f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-        f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
-    )
+    formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
+    if ebd_graph.metadata.remark:
+        formatted_label += f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long

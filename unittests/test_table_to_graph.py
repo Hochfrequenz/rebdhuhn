@@ -39,8 +39,8 @@ class InterceptedKrokiClient(Kroki):
     purposes.
     """
 
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, kroki_host: str = "http://localhost:8125") -> None:
+        super().__init__(kroki_host=kroki_host)
         self.intercepted_kroki_response: Optional[str] = None
         self.intercepted_kroki_response_with_xml_comment: Optional[str] = None
 
@@ -153,7 +153,7 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph(self, table: EbdTable, expected_description: str, snapshot):
+    def test_table_to_digraph(self, table: EbdTable, expected_description: str, kroki_client: Kroki, snapshot):
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
@@ -166,7 +166,7 @@ class TestEbdTableModels:
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml", "w+", encoding="utf-8"
         ) as uml_file:
             uml_file.write(plantuml_code)
-        svg_code = convert_plantuml_to_svg_kroki(plantuml_code, Kroki())  # Raises an error if conversion fails
+        svg_code = convert_plantuml_to_svg_kroki(plantuml_code, kroki_client)  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
             Path(__file__).parent / "output" / f"{ebd_graph.metadata.ebd_code}.puml.svg", "w+", encoding="utf-8"
@@ -175,15 +175,15 @@ class TestEbdTableModels:
         assert svg_code == snapshot(name=f"test_table_to_digraph_{table.metadata.ebd_code}")
 
     @staticmethod
-    def create_and_save_svg_test(ebd_graph: EbdGraph) -> str:
+    def create_and_save_svg_test(ebd_graph: EbdGraph, kroki_host: str) -> str:
         """
         Creates the test svgs and saves them to the output folder.
         Also returns the kroki answer svg code as string to be stored for the mock request.
         """
         dot_code = convert_graph_to_dot(ebd_graph)
-        kroki_client = InterceptedKrokiClient()
+        intercepted_client = InterceptedKrokiClient(kroki_host=kroki_host)
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, dot_to_svg_converter=kroki_client
+            dot_code, dot_to_svg_converter=intercepted_client
         )  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
@@ -194,7 +194,7 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
 
-        svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        svg_code_for_mock = intercepted_client.intercepted_kroki_response_with_xml_comment
         assert svg_code_for_mock is not None
         return svg_code_for_mock
 
@@ -229,21 +229,17 @@ class TestEbdTableModels:
         ],
     )
     def test_table_to_digraph_dot_real_kroki_request(
-        self, table: EbdTable, expected_description: str, snapshot
+        self, table: EbdTable, expected_description: str, kroki_client: Kroki, snapshot
     ) -> None:
         """
         Test the conversion pipeline. The results are stored in `unittests/output` for you to inspect the result
         manually. The test only checks if the svg can be built.
-        This test is disabled by default. To enable it, set `enable_request_to_kroki` to True.
         This will also update the mock files in `test_files` with the new responses from kroki.
         """
-        enable_request_to_kroki = True  # Set to True to enable the request to kroki and to also update the mock file
-        if not enable_request_to_kroki:
-            pytest.skip("Disable automatic recreation on test runs")
         ebd_graph = convert_table_to_graph(table)
         assert str(ebd_graph.graph) == expected_description
 
-        svg_code_for_mock = self.create_and_save_svg_test(ebd_graph)
+        svg_code_for_mock = self.create_and_save_svg_test(ebd_graph, kroki_client._host)
         file_name_test_files = (
             Path(__file__).parent / "test_files" / f"{ebd_graph.metadata.ebd_code}_kroki_response.dot.svg"
         )
@@ -317,19 +313,19 @@ class TestEbdTableModels:
         ) as infile:
             kroki_response_string: str = infile.read()
         requests_mock.post("http://localhost:8125/", text=kroki_response_string)
-        self.create_and_save_svg_test(ebd_graph)
+        self.create_and_save_svg_test(ebd_graph, "http://localhost:8125")
 
     @staticmethod
-    def create_and_save_watermark_and_background_svg(add_background: bool) -> str:
+    def create_and_save_watermark_and_background_svg(add_background: bool, kroki_host: str) -> str:
         """
         Creates the test svgs and saves them to the output folder.
         Also returns the kroki answer svg code as string to be stored for the mock request.
         """
         ebd_graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(ebd_graph)
-        kroki_client = InterceptedKrokiClient()
+        intercepted_client = InterceptedKrokiClient(kroki_host=kroki_host)
         svg_code = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=False, add_background=False, dot_to_svg_converter=kroki_client
+            dot_code, add_watermark=False, add_background=False, dot_to_svg_converter=intercepted_client
         )  # Raises an error if conversion fails
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
 
@@ -341,7 +337,7 @@ class TestEbdTableModels:
             svg_file.write(svg_code)
 
         svg_code_with_watermark = convert_dot_to_svg_kroki(
-            dot_code, add_watermark=True, add_background=add_background, dot_to_svg_converter=kroki_client
+            dot_code, add_watermark=True, add_background=add_background, dot_to_svg_converter=intercepted_client
         )  # Raises an error if conversion fails
 
         file_path2 = (
@@ -352,7 +348,7 @@ class TestEbdTableModels:
         with open(file_path2, "w", encoding="utf-8") as ebd_svg:
             ebd_svg.write(svg_code_with_watermark)
 
-        svg_code_for_mock = kroki_client.intercepted_kroki_response_with_xml_comment
+        svg_code_for_mock = intercepted_client.intercepted_kroki_response_with_xml_comment
         assert svg_code_for_mock is not None
         return svg_code_for_mock
 
@@ -368,17 +364,15 @@ class TestEbdTableModels:
             ),
         ],
     )
-    def test_table_to_digraph_dot_with_watermark_real_kroki_request(self, add_background: bool, snapshot):
+    def test_table_to_digraph_dot_with_watermark_real_kroki_request(
+        self, add_background: bool, kroki_client: Kroki, snapshot
+    ):
         """
         Test the combination of background and watermark addition to the svg. The results are stored in
         `unittests/output` for you to inspect the result manually.
-        This test is disabled by default. To enable it, set `enable_request_to_kroki` to True.
         This will also update the mock file in `test_files` with the new response from kroki.
         """
-        enable_request_to_kroki = True  # Set to True to enable the request to kroki and to also update the mock file
-        if not enable_request_to_kroki:
-            pytest.skip("Disable automatic recreation on test runs")
-        svg_code_for_mock = self.create_and_save_watermark_and_background_svg(add_background)
+        svg_code_for_mock = self.create_and_save_watermark_and_background_svg(add_background, kroki_client._host)
 
         file_name_test_files = Path(__file__).parent / "test_files" / "E_0003_kroki_response.dot.svg"
         with open(file_name_test_files, "w", encoding="utf-8") as ebd_svg:
@@ -409,7 +403,7 @@ class TestEbdTableModels:
         ) as infile:
             kroki_response_string: str = infile.read()
         requests_mock.post("http://localhost:8125/", text=kroki_response_string)
-        self.create_and_save_watermark_and_background_svg(add_background)
+        self.create_and_save_watermark_and_background_svg(add_background, "http://localhost:8125")
 
     def test_table_to_digraph_dot_with_background(self, requests_mock) -> None:
         """
@@ -565,10 +559,10 @@ class TestEbdTableModels:
             )
         ],
     )
-    def test_empty_table_to_graph(self, metadata_only: EbdTableMetaData, snapshot) -> None:
+    def test_empty_table_to_graph(self, metadata_only: EbdTableMetaData, kroki_client: Kroki, snapshot) -> None:
         empty_graph = convert_table_to_graph(EbdTable(metadata=metadata_only, rows=[]))
         dot_code = convert_graph_to_dot(empty_graph)
-        svg_code = Kroki().convert_dot_to_svg(dot_code)
+        svg_code = kroki_client.convert_dot_to_svg(dot_code)
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
             Path(__file__).parent / "output" / f"empty_{empty_graph.metadata.ebd_code}.dot.svg", "w+", encoding="utf-8"
@@ -584,10 +578,10 @@ class TestEbdTableModels:
             pytest.param(table_0594_partly, id="E_0594-partly"),
         ],
     )
-    def test_table_to_dot_to_svg(self, table: EbdTable, snapshot) -> None:
+    def test_table_to_dot_to_svg(self, table: EbdTable, kroki_client: Kroki, snapshot) -> None:
         graph = convert_table_to_graph(table)
         dot_code = convert_graph_to_dot(graph)
-        svg_code = Kroki().convert_dot_to_svg(dot_code)
+        svg_code = kroki_client.convert_dot_to_svg(dot_code)
         os.makedirs(Path(__file__).parent / "output", exist_ok=True)
         with open(
             Path(__file__).parent / "output" / f"table_dot_svg_{graph.metadata.ebd_code}.svg", "w+", encoding="utf-8"

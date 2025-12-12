@@ -1,6 +1,7 @@
 """
 Pytest fixtures for rebdhuhn tests.
 """
+
 from typing import Generator
 
 import pytest
@@ -8,7 +9,7 @@ import pytest
 from rebdhuhn.kroki import Kroki
 
 try:
-    from testcontainers.core.container import DockerContainer # type:ignore[import-untyped]
+    from testcontainers.core.container import DockerContainer  # type:ignore[import-untyped]
 
     TESTCONTAINERS_AVAILABLE = True
 except ImportError:
@@ -49,7 +50,7 @@ def wait_for_kroki(host: str, port: str, timeout: float = 30.0) -> None:
 
 
 @pytest.fixture(scope="session")
-def kroki_container()->Generator[DockerContainer,None,None]:
+def kroki_container() -> Generator[DockerContainer, None, None]:
     """
     Start a Kroki container for the entire test session.
     Skips if Docker is not available.
@@ -72,7 +73,7 @@ def kroki_container()->Generator[DockerContainer,None,None]:
 
 
 @pytest.fixture(scope="session")
-def kroki_client(kroki_container:DockerContainer) -> Kroki:
+def kroki_client(kroki_container: DockerContainer) -> Kroki:
     """Provides a Kroki client configured to use the testcontainer."""
     host = kroki_container.get_container_host_ip()
     port = kroki_container.get_exposed_port(8000)

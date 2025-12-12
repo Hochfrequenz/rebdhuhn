@@ -50,12 +50,14 @@ spellcheck = [
 ]
 tests = [
     "pytest==9.0.2",
-    "syrupy==5.0.0"
+    "syrupy==5.0.0",
+    "testcontainers>=4.0.0"
 ]
 type_check = [
     "mypy==1.19.0",
     "types-requests==2.32.4.20250913",
-    "lxml-stubs==0.5.1"
+    "lxml-stubs==0.5.1",
+    "types-docker>=7.0.0"
 ]
 
 [project.urls]

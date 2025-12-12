@@ -127,22 +127,11 @@ endif
 
 #### Export the graph as SVG
 
-First, make sure to have a local instance of [kroki](https://kroki.io) up and running via docker (localhost:8125):
+To export the graph as SVG, you need a [Kroki](https://kroki.io) instance. You can either:
+- Use the public instance at `https://kroki.io`
+- Run a local instance via Docker: `docker run -p 8125:8000 yuzutech/kroki:0.24.1`
 
-Add the required `.env` file to the repository root by opening a new terminal session, changing the directory to
-```bash
-cd path\to\rebdhuhn\repository\root
-```
-and executing the `create_env_file.py` script via
-```bash
-python create_env_file.py
-```
-Run the `docker-desktop` app on your local maschine and host the local kroki instance on PORT `8125` via
-```bash
-docker-compose up -d
-```
-
-To export the graph as SVG, use
+Then use
 ```python
 from rebdhuhn import convert_plantuml_to_svg_kroki
 from rebdhuhn.kroki import Kroki
@@ -160,6 +149,11 @@ with open("e_0003.svg", "w+", encoding="utf-8") as svg_file:
 Please follow the instructions in
 our [Python Template Repository](https://github.com/Hochfrequenz/python_template_repository#how-to-use-this-repository-on-your-machine)
 . And for further information, see the [Tox Repository](https://github.com/tox-dev/tox).
+
+### Running Tests
+
+Tests use [testcontainers](https://testcontainers-python.readthedocs.io/) to automatically start a Kroki instance when needed.
+Make sure Docker is installed and running. Tests that require Kroki will be skipped if Docker is not available.
 
 ## Contribute
 

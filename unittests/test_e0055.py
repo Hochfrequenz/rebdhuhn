@@ -86,7 +86,7 @@ class TestE0055:
         assert len(notes) == 2  # Two different notes
 
     @pytest.mark.snapshot
-    def test_e0055_svg_creation(self, snapshot: SnapshotAssertion) -> None:
+    def test_e0055_svg_creation(self, kroki_client: Kroki, snapshot: SnapshotAssertion) -> None:
         """
         Test that E_0055 can be converted to SVG via Kroki.
         The DOT code is snapshot-tested to ensure stable output.
@@ -97,7 +97,7 @@ class TestE0055:
 
         graph = convert_table_to_graph(e_0055_table)
         dot_code = convert_graph_to_dot(graph)
-        svg_code = Kroki().convert_dot_to_svg(dot_code)
+        svg_code = kroki_client.convert_dot_to_svg(dot_code)
 
         # Save SVG to output folder for manual inspection
         target_dir = Path(__file__).parent / "output"

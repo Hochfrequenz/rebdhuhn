@@ -1,4 +1,5 @@
 # mypy: disable-error-code="no-untyped-def"
+import json
 import os
 from pathlib import Path
 from typing import List, Optional
@@ -569,6 +570,31 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
         assert svg_code == snapshot(name=f"empty_{empty_graph.metadata.ebd_code}")
+
+    def test_empty_table_with_empty_remark_to_graph(self, kroki_client: Kroki) -> None:
+        """
+        Test that an empty EBD table with an empty remark string generates valid DOT code.
+        This is a regression test for the bug where empty remark generated <FONT></FONT>
+        which Kroki/Graphviz rejected as invalid.
+        """
+        json_path = Path(__file__).parent / "test_files" / "e0452_empty_remark.json"
+        with open(json_path, "r", encoding="utf-8") as f:
+            table_json = json.load(f)
+        table = EbdTable.model_validate(table_json)
+
+        assert table.metadata.ebd_code == "E_0452"
+        assert table.metadata.remark == ""  # Empty string, not None
+
+        graph = convert_table_to_graph(table)
+        dot_code = convert_graph_to_dot(graph)
+
+        # Verify no empty FONT tags in the output
+        assert "<FONT></FONT>" not in dot_code
+
+        # Verify it can be converted to SVG without error
+        svg_code = kroki_client.convert_dot_to_svg(dot_code)
+        assert svg_code is not None
+        assert "<svg" in svg_code
 
     @pytest.mark.snapshot
     @pytest.mark.parametrize(

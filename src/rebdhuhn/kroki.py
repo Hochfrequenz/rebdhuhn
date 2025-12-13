@@ -6,6 +6,8 @@ from typing import Protocol
 
 import requests
 
+from rebdhuhn.models.errors import PlantumlConversionError, SvgConversionError
+
 
 # pylint:disable=too-few-public-methods
 class DotToSvgConverter(Protocol):
@@ -30,7 +32,7 @@ class PlantUmlToSvgConverter(Protocol):
         """
 
 
-class KrokiDotBadRequestError(Exception):
+class KrokiDotBadRequestError(SvgConversionError):
     """
     is raised, when kroki rejects our dot-to-svg request
     """
@@ -43,7 +45,7 @@ class KrokiDotBadRequestError(Exception):
         return f"BadRequest while creating svg: {self.response_body} / {self.dot_code}"
 
 
-class KrokiPlantUmlBadRequestError(Exception):
+class KrokiPlantUmlBadRequestError(PlantumlConversionError):
     """
     is raised, when kroki rejects our puml-to-svg request
     """

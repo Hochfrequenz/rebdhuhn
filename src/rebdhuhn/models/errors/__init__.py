@@ -8,7 +8,34 @@ from typing import Optional
 from rebdhuhn.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode
 
 
-class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
+# Base exception classes for pipeline distinction
+class GraphConversionError(Exception):
+    """
+    Base class for errors during table-to-graph conversion.
+
+    These errors occur in the shared pipeline stage (table -> graph) and affect
+    both SVG and PlantUML generation.
+    """
+
+
+class PlantumlConversionError(Exception):
+    """
+    Base class for errors during PlantUML generation.
+
+    These errors occur only in the PlantUML pipeline (graph -> puml -> svg).
+    Catch this to handle PlantUML-specific failures while allowing SVG generation to proceed.
+    """
+
+
+class SvgConversionError(Exception):
+    """
+    Base class for errors during SVG/DOT generation.
+
+    These errors occur only in the SVG pipeline (graph -> dot -> svg via Kroki).
+    """
+
+
+class NotExactlyTwoOutgoingEdgesError(PlantumlConversionError, NotImplementedError):
     """
     Raised if a decision node has more or less than 2 outgoing edges. This is not implemented in our logic yet.
     (Because it would be a multi-di-graph, not a di-graph.)
@@ -27,7 +54,7 @@ class NotExactlyTwoOutgoingEdgesError(NotImplementedError):
         return f"The node {self.decision_node_key} has more than 2 outgoing edges: {', '.join(self.outgoing_edges)}"
 
 
-class PathsNotGreaterThanOneError(ValueError):
+class PathsNotGreaterThanOneError(PlantumlConversionError, ValueError):
     """
     If indegree > 1, the number of paths should always be greater than 1 too.
     Typically, this is a symptom for loops in the graph (which makes them not a Directed Graph / tree anymore).
@@ -42,7 +69,7 @@ class PathsNotGreaterThanOneError(ValueError):
         self.number_of_paths = number_of_paths
 
 
-class GraphTooComplexForPlantumlError(Exception):
+class GraphTooComplexForPlantumlError(PlantumlConversionError):
     """
     Exception raised when a Graph is too complex to convert with Plantuml.
 
@@ -70,7 +97,7 @@ class GraphTooComplexForPlantumlError(Exception):
         super().__init__(self.message)
 
 
-class EbdCrossReferenceNotSupportedError(NotImplementedError):
+class EbdCrossReferenceNotSupportedError(GraphConversionError, NotImplementedError):
     """
     Raised when there is no outcome for a given sub row but a reference to another EBD key instead.
     See https://github.com/Hochfrequenz/rebdhuhn/issues/105 for an example / a discussion.
@@ -90,7 +117,7 @@ class EbdCrossReferenceNotSupportedError(NotImplementedError):
         self.decision_node = decision_node
 
 
-class EndeInWrongColumnError(ValueError):
+class EndeInWrongColumnError(GraphConversionError, ValueError):
     """
     Raised when the subsequent step should be "Ende" but is not referenced in the respective column but as a note.
     This could be easily fixed but still, it needs to be done.
@@ -102,7 +129,7 @@ class EndeInWrongColumnError(ValueError):
         self.sub_row = sub_row
 
 
-class OutcomeNodeCreationError(ValueError):
+class OutcomeNodeCreationError(GraphConversionError, ValueError):
     """
     raised when the outcome node cannot be created from a sub row
     """
@@ -113,7 +140,7 @@ class OutcomeNodeCreationError(ValueError):
         self.decision_node = decision_node
 
 
-class OutcomeCodeAmbiguousError(ValueError):
+class OutcomeCodeAmbiguousError(GraphConversionError, ValueError):
     """
     Raised when the result nodes are ambiguous. This can be the case for "A**" results.
     """
@@ -123,7 +150,7 @@ class OutcomeCodeAmbiguousError(ValueError):
         self.outcome_nodes = [outcome_node1, outcome_node2]
 
 
-class OutcomeCodeAndFurtherStepError(NotImplementedError):
+class OutcomeCodeAndFurtherStepError(GraphConversionError, NotImplementedError):
     """
     Catches outcome nodes with further steps. This is not implemented yet. This error is not raised currently.
     """

@@ -2,7 +2,7 @@
 This module contains logic to convert EbdGraph data to dot code (Graphviz) and further to parse this code to SVG images.
 """
 
-from typing import List
+from typing import List, Optional, Set, Tuple
 from xml.sax.saxutils import escape
 
 from rebdhuhn.add_watermark import add_background as add_background_function
@@ -10,11 +10,13 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
+from rebdhuhn.models.ebd_table import MultiStepInstruction
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
 _LABEL_MAX_LINE_LENGTH = 80
+_MSI_LABEL_MAX_LINE_LENGTH = 50  #: Max line length for multi-step instruction labels
 
 
 def _format_label(label: str) -> str:
@@ -143,15 +145,199 @@ def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
             raise ValueError(f"Unknown node type: {ebd_graph.graph.nodes[node]['node']}")
 
 
+def _get_multi_step_instruction_node_key(instruction: MultiStepInstruction) -> str:
+    """
+    Returns the node key for a multi-step instruction node.
+    Format: msi_{first_step_number_affected}
+    """
+    return f"msi_{instruction.first_step_number_affected}"
+
+
+def _convert_multi_step_instruction_to_dot(instruction: MultiStepInstruction, indent: str) -> str:
+    """
+    Convert a MultiStepInstruction to a dot node.
+    Uses light blue background (#e6f3ff) to distinguish from outcome notes.
+    """
+    # Format the instruction text with word wrapping
+    label_with_linebreaks = add_line_breaks(
+        instruction.instruction_text, max_line_length=_MSI_LABEL_MAX_LINE_LENGTH, line_sep="\n"
+    )
+    formatted_label = escape(label_with_linebreaks).replace("\n", '<BR align="left"/>')
+    formatted_label = f'<FONT><I>{formatted_label}</I></FONT><BR align="left"/>'
+
+    node_key = _get_multi_step_instruction_node_key(instruction)
+    # pylint:disable=line-too-long
+    return (
+        f'{indent}"{node_key}" '
+        f'[margin="0.2,0.12", shape=note, style=filled, penwidth=0.0, fillcolor="#e6f3ff", '
+        f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
+    )
+
+
+def _convert_multi_step_instruction_edge_to_dot(instruction: MultiStepInstruction, indent: str) -> str:
+    """
+    Convert a MultiStepInstruction to a dashed edge connecting to its first affected step.
+    """
+    node_key = _get_multi_step_instruction_node_key(instruction)
+    target_step = instruction.first_step_number_affected
+    return f'{indent}"{node_key}" -> "{target_step}" [style=dashed, color="#888888", arrowhead=none];'
+
+
+def _convert_multi_step_instructions_to_dot(instructions: List[MultiStepInstruction], indent: str) -> str:
+    """
+    Convert all multi-step instructions to dot nodes.
+    """
+    return "\n".join([_convert_multi_step_instruction_to_dot(inst, indent) for inst in instructions])
+
+
+def _convert_multi_step_instruction_edges_to_dot(instructions: List[MultiStepInstruction], indent: str) -> List[str]:
+    """
+    Convert all multi-step instruction edges to dot.
+    """
+    return [_convert_multi_step_instruction_edge_to_dot(inst, indent) for inst in instructions]
+
+
+def _get_step_number_from_node(ebd_graph: EbdGraph, node: str) -> Optional[str]:
+    """
+    Extract the step number from a node if it has one (DecisionNode or TransitionNode).
+    Returns None for nodes without step numbers (Start, End, Outcome nodes).
+    """
+    node_data = ebd_graph.graph.nodes[node]["node"]
+    if hasattr(node_data, "step_number"):
+        return str(node_data.step_number)
+    return None
+
+
+def _compute_instruction_ranges(
+    instructions: List[MultiStepInstruction], all_step_numbers: Set[str]
+) -> List[Tuple[MultiStepInstruction, str, Optional[str]]]:
+    """
+    Compute the step number range for each multi-step instruction.
+    Returns list of (instruction, start_step, end_step) tuples.
+    end_step is None if the instruction applies to the end of the graph.
+    """
+    if not instructions:
+        return []
+
+    # Sort instructions by their first step number (numerically)
+    sorted_instructions = sorted(instructions, key=lambda x: int(x.first_step_number_affected))
+
+    ranges: List[Tuple[MultiStepInstruction, str, Optional[str]]] = []
+    for i, inst in enumerate(sorted_instructions):
+        start_step = inst.first_step_number_affected
+        # End step is the step before the next instruction starts, or None if last
+        if i + 1 < len(sorted_instructions):
+            next_start = int(sorted_instructions[i + 1].first_step_number_affected)
+            # Find the highest step number less than next_start
+            end_step: Optional[str] = None
+            for step in all_step_numbers:
+                step_int = int(step)
+                if int(start_step) <= step_int < next_start:
+                    if end_step is None or step_int > int(end_step):
+                        end_step = step
+        else:
+            end_step = None  # Last instruction applies to end of graph
+
+        ranges.append((inst, start_step, end_step))
+
+    return ranges
+
+
+def _get_nodes_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: Optional[str]) -> List[str]:
+    """
+    Get all node keys that have step numbers within the given range (inclusive).
+    If end_step is None, includes all steps >= start_step.
+    """
+    nodes_in_range: List[str] = []
+    start_int = int(start_step)
+    end_int = int(end_step) if end_step else None
+
+    for node in ebd_graph.graph.nodes:
+        step_number = _get_step_number_from_node(ebd_graph, node)
+        if step_number is not None:
+            step_int = int(step_number)
+            if step_int >= start_int and (end_int is None or step_int <= end_int):
+                nodes_in_range.append(node)
+
+    return nodes_in_range
+
+
+def _convert_multi_step_instruction_cluster_to_dot(
+    ebd_graph: EbdGraph,
+    instruction: MultiStepInstruction,
+    start_step: str,
+    end_step: Optional[str],
+    indent: str,
+) -> str:
+    """
+    Convert a multi-step instruction and its affected nodes to a DOT subgraph cluster.
+    The cluster creates a light box around all nodes affected by the instruction.
+    """
+    cluster_indent = indent
+    inner_indent = indent + ADD_INDENT
+
+    node_key = _get_multi_step_instruction_node_key(instruction)
+    cluster_name = f"cluster_{node_key}"
+
+    # Get all nodes in the step range
+    nodes_in_range = _get_nodes_in_step_range(ebd_graph, start_step, end_step)
+
+    lines: List[str] = []
+    lines.append(f'{cluster_indent}subgraph "{cluster_name}" {{')
+    # Light blue background with dashed border to match instruction node style
+    lines.append(f'{inner_indent}style="dashed,rounded";')
+    lines.append(f'{inner_indent}bgcolor="#f0f7ff";')  # Very light blue, lighter than instruction node
+    lines.append(f'{inner_indent}color="#888888";')
+    lines.append(f"{inner_indent}penwidth=1.5;")
+    lines.append(f"{inner_indent}margin=16;")
+
+    # Add the instruction node inside the cluster
+    lines.append(_convert_multi_step_instruction_to_dot(instruction, inner_indent))
+
+    # Add all affected step nodes inside the cluster
+    for node in nodes_in_range:
+        lines.append(_convert_node_to_dot(ebd_graph, node, inner_indent))
+
+    lines.append(f"{cluster_indent}}}")
+
+    return "\n".join(lines)
+
+
 def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
     """
     Convert all nodes of the EbdGraph to dot output and return it as a string.
+    Nodes affected by multi-step instructions are grouped into clusters.
     """
+    result_parts: List[str] = []
+
+    # Track which nodes are already rendered inside clusters
+    nodes_in_clusters: Set[str] = set()
+
+    # Add multi-step instruction clusters if present
     if ebd_graph.multi_step_instructions:
-        # pylint: disable=fixme
-        # TODO: Implement multi step instruction text to a graphical representation
-        pass
-    return "\n".join([_convert_node_to_dot(ebd_graph, node, indent) for node in ebd_graph.graph.nodes])
+        # Get all step numbers from the graph
+        all_step_numbers: Set[str] = set()
+        for node in ebd_graph.graph.nodes:
+            step_number = _get_step_number_from_node(ebd_graph, node)
+            if step_number is not None:
+                all_step_numbers.add(step_number)
+
+        # Compute ranges and create clusters
+        ranges = _compute_instruction_ranges(ebd_graph.multi_step_instructions, all_step_numbers)
+        for instruction, start_step, end_step in ranges:
+            result_parts.append(
+                _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, start_step, end_step, indent)
+            )
+            # Track nodes that are inside this cluster
+            nodes_in_range = _get_nodes_in_step_range(ebd_graph, start_step, end_step)
+            nodes_in_clusters.update(nodes_in_range)
+
+    # Add remaining nodes that are not inside any cluster
+    for node in ebd_graph.graph.nodes:
+        if node not in nodes_in_clusters:
+            result_parts.append(_convert_node_to_dot(ebd_graph, node, indent))
+
+    return "\n".join(result_parts)
 
 
 def _convert_yes_edge_to_dot(node_src: str, node_target: str, indent: str) -> str:
@@ -197,8 +383,15 @@ def _convert_edge_to_dot(ebd_graph: EbdGraph, node_src: str, node_target: str, i
 def _convert_edges_to_dot(ebd_graph: EbdGraph, indent: str) -> List[str]:
     """
     Convert all edges of the EbdGraph to dot output and return it as a string.
+    Note: Multi-step instruction edges are no longer needed since instruction nodes
+    are now inside clusters with their affected step nodes.
     """
-    return [_convert_edge_to_dot(ebd_graph, edge[0], edge[1], indent) for edge in ebd_graph.graph.edges]
+    edges: List[str] = []
+
+    # Add regular graph edges
+    edges.extend([_convert_edge_to_dot(ebd_graph, edge[0], edge[1], indent) for edge in ebd_graph.graph.edges])
+
+    return edges
 
 
 def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:

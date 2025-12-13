@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git merge:*)",
       "Bash(git fetch:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:api.github.com)"
     ]
   }
 }

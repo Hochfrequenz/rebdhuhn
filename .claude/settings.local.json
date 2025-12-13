@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git merge:*)",
+      "Bash(git fetch:*)",
+      "Bash(cat:*)",
+      "WebFetch(domain:api.github.com)"
+    ]
+  }
+}

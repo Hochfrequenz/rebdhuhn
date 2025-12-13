@@ -22,7 +22,7 @@ class PlantumlConversionError(Exception):
     """
     Base class for errors during PlantUML generation.
 
-    These errors occur only in the PlantUML pipeline (graph -> puml -> svg).
+    These errors occur only in the PlantUML pipeline (graph -> puml).
     Catch this to handle PlantUML-specific failures while allowing SVG generation to proceed.
     """
 

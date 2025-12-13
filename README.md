@@ -151,7 +151,7 @@ with open("e_0003.svg", "w+", encoding="utf-8") as svg_file:
 | Exception | Pipeline Stage | Description |
 |-----------|----------------|-------------|
 | `GraphConversionError` | table → graph | Errors during table-to-graph conversion. Affects both SVG and PlantUML. |
-| `PlantumlConversionError` | graph → puml → svg | Errors specific to PlantUML generation. |
+| `PlantumlConversionError` | graph → puml | Errors specific to PlantUML generation. |
 | `SvgConversionError` | graph → dot → svg | Errors specific to SVG/DOT generation via Kroki. |
 
 This allows you to handle PlantUML failures gracefully while still generating SVG output:
@@ -161,10 +161,15 @@ from rebdhuhn import (
     convert_table_to_graph,
     convert_graph_to_plantuml,
     convert_graph_to_dot,
+    convert_dot_to_svg_kroki,
     GraphConversionError,
     PlantumlConversionError,
     SvgConversionError,
 )
+from rebdhuhn.kroki import Kroki
+
+# ebd_table is an instance of EbdTable (see above for how to create one)
+kroki_client = Kroki()  # requires a running Kroki instance
 
 try:
     graph = convert_table_to_graph(ebd_table)
@@ -177,13 +182,13 @@ try:
     dot_code = convert_graph_to_dot(graph)
     svg = convert_dot_to_svg_kroki(dot_code, kroki_client)
 except SvgConversionError:
-    logger.error("SVG generation failed")
+    print("SVG generation failed")
 
 # PlantUML generation (secondary)
 try:
     puml_code = convert_graph_to_plantuml(graph)
 except PlantumlConversionError:
-    logger.warning("PlantUML generation failed (non-critical)")
+    print("PlantUML generation failed (non-critical)")
 ```
 
 ## How to use this Repository on Your Machine (for development)

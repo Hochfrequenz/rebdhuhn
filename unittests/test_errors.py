@@ -33,10 +33,11 @@ class TestErrors:
         with pytest.raises(NotExactlyTwoOutgoingEdgesError):
             _ = convert_graph_to_plantuml(ebd_graph)
 
-    @pytest.mark.parametrize("table", [pytest.param(table_e0266)])
-    def test_loops_in_the_tree_error(self, table: EbdTable) -> None:
-        with pytest.raises(OutcomeCodeAndFurtherStepError):
-            _ = convert_table_to_graph(table)
+    # not raised currently
+    # @pytest.mark.parametrize("table", [pytest.param(table_e0266)])
+    # def test_loops_in_the_tree_error(self, table: EbdTable) -> None:
+    #    with pytest.raises(OutcomeCodeAndFurtherStepError):
+    #        _ = convert_table_to_graph(table)
 
     @pytest.mark.parametrize("table", [pytest.param(table_e0454)])
     def test_too_complex_for_plantuml(self, table: EbdTable) -> None:
@@ -60,8 +61,10 @@ class TestErrors:
         with pytest.raises(EndeInWrongColumnError):
             _ = convert_table_to_graph(table)
 
-    @pytest.mark.parametrize("table", [pytest.param(table_e0462)])
-    def test_cross_reference_not_supported_error(self, table: EbdTable) -> None:
-        with pytest.raises(EbdCrossReferenceNotSupportedError) as exc_info:
-            _ = convert_table_to_graph(table)
-        assert exc_info.value.cross_reference == "E_0402_Prüfen,"
+    # @pytest.mark.parametrize("table", [pytest.param(table_e0462)])
+    # def test_cross_reference_not_supported_error(self, table: EbdTable) -> None:
+    #    with pytest.raises(EbdCrossReferenceNotSupportedError) as exc_info:
+    #        _ = convert_table_to_graph(table)
+    #    assert exc_info.value.cross_reference == "E_0402_Prüfen,"
+    # Removed this test as we do not support cross-references at this point and deal differently with those ebds. Thus,
+    # this error is not raised currently.

@@ -1,63 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440pt" height="1330pt" viewBox="0.00 0.00 1440.00 1329.95">
-<!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
-    labelloc="t";
-    label=<<B><FONT POINT-SIZE="18">WiM Strom</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">8.27.4: AD: Abrechnung einer f&#252;r den ESA erbrachten Leistung</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
-    ratio="compress";
-    concentrate=true;
-    pack=true;
-    rankdir=TB;
-    packmode="array";
-    size="20,20";
-    fontsize=12;
-    pad=0.25;
-    "Start" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label=<<B>E_0267</B><BR align="left"/><FONT>Pr&#252;fende Rolle: <B>ESA</B></FONT><BR align="center"/>>, fontname="Roboto, sans-serif"];
-    "10" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>10: </B>Ist die zu stornierende Rechnung beim Empf&#228;nger bekannt?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A01" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A01</B><BR align="left"/><BR align="left"/><FONT>Die zu stornierende Rechnung ist nicht vorhanden.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "15" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>15: </B>Liegt vom Rechnungssteller die in dieser Rechnung verwendete Rechnungsnummer<BR align="left"/>bereits vor?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A06" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A06</B><BR align="left"/><BR align="left"/><FONT>Rechnungsnummer wurde bereits verwendet.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "20" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>20: </B>Wurde die zu stornierende Rechnung bereits storniert?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A02" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A02</B><BR align="left"/><BR align="left"/><FONT>Die zu stornierende Rechnung wurde bereits storniert.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "30" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>30: </B>Ist der Rechnungstyp der Stornorechnung identisch mit dem Rechnungstyp der<BR align="left"/>urspr&#252;nglichen Rechnung?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A03" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A03</B><BR align="left"/><BR align="left"/><FONT>Der Rechnungstyp der Stornorechnung ist nicht identisch mit dem Rechnungstyp<BR align="left"/>der urspr&#252;nglichen Rechnung.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "40" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>40: </B>Ist der Abrechnungszeitraum bzw. das Ausf&#252;hrungsdatum der Stornorechnung<BR align="left"/>identisch mit dem Abrechnungszeitraum bzw. dem Ausf&#252;hrungsdatum der<BR align="left"/>urspr&#252;nglichen Rechnung?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A04" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A04</B><BR align="left"/><BR align="left"/><FONT>Der Abrechnungszeitraum bzw. das Ausf&#252;hrungsdatum der Stornorechnung ist nicht<BR align="left"/>identisch mit dem Abrechnungszeitraum bzw. dem Ausf&#252;hrungsdatum der<BR align="left"/>urspr&#252;nglichen Rechnung.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "50" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>50: </B>Entsprechen die Betr&#228;ge der Stornorechnung den Betr&#228;gen der urspr&#252;nglichen Rechnung?<BR align="left"/>Hinweis: Alle MOA-Segmente im Summenteil m&#252;ssen unter Nutzung der<BR align="left"/>Absolutbetragfunktion &#252;bereinstimmen.<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A05" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A05</B><BR align="left"/><BR align="left"/><FONT>Mindestens ein Betrag der Stornorechnung ist nicht identisch mit dem Betrag der<BR align="left"/>urspr&#252;nglichen Rechnung.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "60" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>60: </B>Ist ein zuvor nicht spezifizierter Fehler aufgetreten?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "A99" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<B>A99</B><BR align="left"/><BR align="left"/><FONT>Ablehnung Sonstiges<BR align="left"/>Hinweis: Das identifizierte Problem ist in der Antwort zu beschreiben/benennen.<BR align="left"/>Nutzungsm&#246;glichkeit Ende: 01.04.2026 00:00 Uhr<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "70" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>70: </B>Wurde der urspr&#252;nglichen Rechnung zugestimmt?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "Stornorechnung zustimmen und im Zahlungslauf ber&#252;cksichtigen" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<FONT>Stornorechnung zustimmen und im Zahlungslauf ber&#252;cksichtigen<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "80" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>80: </B>Wurde die urspr&#252;ngliche Rechnung abgelehnt?<BR align="left"/>>, fontname="Roboto, sans-serif"];
-    "Hinweis: 
-Wurde die urspr&#252;ngliche Rechnung mit einem Nichtzahlungsavis abgelehnt, dann ist auf die Stornorechnung keine Antwort zu senden" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<FONT>Hinweis:<BR align="left"/>Wurde die urspr&#252;ngliche Rechnung mit einem Nichtzahlungsavis abgelehnt, dann<BR align="left"/>ist auf die Stornorechnung keine Antwort zu senden<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-    "Hinweis: 
-Wurde die urspr&#252;ngliche Rechnung noch nicht beantwortet, weder mit einem Zahlungsavis noch mit einem Nichtzahlungsavis, dann ist weder auf die Rechnung noch auf die Stornorechnung eine Antwort zu senden." [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<<FONT>Hinweis:<BR align="left"/>Wurde die urspr&#252;ngliche Rechnung noch nicht beantwortet, weder mit einem<BR align="left"/>Zahlungsavis noch mit einem Nichtzahlungsavis, dann ist weder auf die Rechnung<BR align="left"/>noch auf die Stornorechnung eine Antwort zu senden.<BR align="left"/></FONT>>, fontname="Roboto, sans-serif"];
-
-    "Start" -> "10" [color="#88a0d6"];
-    "10" -> "A01" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "10" -> "15" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "15" -> "A06" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "15" -> "20" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "20" -> "A02" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "20" -> "30" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "30" -> "A03" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "30" -> "40" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "40" -> "A04" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "40" -> "50" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "50" -> "A05" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "50" -> "60" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "60" -> "A99" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "60" -> "70" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "70" -> "Stornorechnung zustimmen und im Zahlungslauf ber&#252;cksichtigen" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "70" -> "80" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "80" -> "Hinweis: 
-Wurde die urspr&#252;ngliche Rechnung mit einem Nichtzahlungsavis abgelehnt, dann ist auf die Stornorechnung keine Antwort zu senden" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-    "80" -> "Hinweis: 
-Wurde die urspr&#252;ngliche Rechnung noch nicht beantwortet, weder mit einem Zahlungsavis noch mit einem Nichtzahlungsavis, dann ist weder auf die Rechnung noch auf die Stornorechnung eine Antwort zu senden." [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
-
-    bgcolor="transparent";
-fontname="Roboto, sans-serif";
-}'--><g id="graph0" class="graph" transform="scale(0.988977 0.988977) rotate(0) translate(18 1326.77)">
+<?xml version='1.0' encoding='ASCII' standalone='yes'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1920.0px" viewBox="0 0 1920.0 1773.3333333333333" height="1773.3333333333333px">
+  <g>
+    <svg version="1.1" width="1920.0px" viewBox="0 0 1920.0 1773.3333333333333" height="1773.3333333333333px">
+  <rect fill="#e7e6e5" x="0" y="0" width="1920.0" height="1773.3333333333333" rx="20" ry="20"/><g>
+    <g transform="translate(236.8335680090114, 177.3333333333333) scale(1 1) translate(0, 0) scale(2.496949216183235 2.496949216183235) "><defs>
+    <style>.cls-1{fill:#ffffff88;}</style>
+    <!--
+    ffffff88 is white with 50% transparency; this matches the colour of the tesa strip on
+    ebd.hochfrequenz.de where it crosses the diagram SVG:
+    https://github.com/Hochfrequenz/entscheidungsbaumdiagramme/blob/01bd43fa0f1d0333fa93596bc8b9fd1e4b285c8c/src/lib/components/features/svg-container.svelte#L54
+    -->
+  </defs>
+  <path class="cls-1" d="M122.44,531.2h-56.1c-11,0-19.9-9.12-19.46-20.11C57.47,243.89,278.15,29.78,547.91,29.78v56.02c0,10.98-8.69,19.89-19.66,20.39-225.51,10.31-405.8,197-405.8,425Z"/>
+  <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
+  <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
+</g>
+    <svg width="1440pt" height="1330pt" viewBox="0.00 0.00 1440.00 1329.95">
+<g id="graph0" class="graph" transform="scale(0.988977 0.988977) rotate(0) translate(18 1326.77)">
 <title>D</title>
 <text text-anchor="start" x="428.03" y="-1288.67" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">WiM Strom</text>
 <text text-anchor="start" x="428.03" y="-1260.57" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">8.27.4: AD: Abrechnung einer f&#252;r den ESA erbrachten Leistung</text>
@@ -357,4 +316,8 @@ Wurde die urspr&#252;ngliche Rechnung noch nicht beantwortet, weder mit einem Za
 <text text-anchor="start" x="1116.65" y="-109.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 </g>
+</svg>
+  </g>
+</svg>
+  </g>
 </svg>

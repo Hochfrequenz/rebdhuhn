@@ -2,9 +2,10 @@
 This module contains logic to convert EbdTable data to EbdGraph data.
 """
 
-from typing import Dict, List, Optional
+import re
+from typing import Dict, List, Literal, Optional, overload
 
-from networkx import DiGraph  # type:ignore[import-untyped]
+from networkx import DiGraph, isolates  # type:ignore[import-untyped]
 
 from rebdhuhn.models import (
     DecisionNode,
@@ -22,14 +23,20 @@ from rebdhuhn.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_graph import EmptyNode
+from rebdhuhn.models.ebd_graph import (
+    EmptyNode,
+    TransitionalOutcomeEdge,
+    TransitionalOutcomeNode,
+    TransitionEdge,
+    TransitionNode,
+)
 from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,
     OutcomeCodeAmbiguousError,
-    OutcomeCodeAndFurtherStepError,
     OutcomeNodeCreationError,
 )
+from rebdhuhn.utils import assert_is_instance
 
 
 def _normalize_note_for_comparison(note: Optional[str]) -> Optional[str]:
@@ -57,10 +64,31 @@ def _is_ende_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     )
 
 
-def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode]:
+def _is_last_step_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
+    """
+    Returns True if the following step is None with no code but a note.
+    """
+    return (
+        sub_row.result_code is None and sub_row.note is not None and sub_row.check_result.subsequent_step_number is None
+    )
+
+
+def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode | TransitionalOutcomeNode]:
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
+    is_transitional_outcome = (
+        sub_row.check_result.subsequent_step_number is not None
+        and sub_row.check_result.subsequent_step_number not in ("Start", "Ende")
+        and sub_row.result_code is not None
+        and sub_row.note is not None
+    )
+    if is_transitional_outcome:
+        return TransitionalOutcomeNode(
+            result_code=assert_is_instance(sub_row.result_code, str),
+            note=sub_row.note,
+            subsequent_step_number=assert_is_instance(sub_row.check_result.subsequent_step_number, str),
+        )
     is_cross_reference = sub_row.note is not None and sub_row.note.startswith("EBD ")
     is_ende_in_wrong_column = (
         sub_row.result_code is None and sub_row.note is not None and sub_row.note.lower().startswith("ende")
@@ -69,31 +97,44 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     following_step = sub_row.check_result.subsequent_step_number is not None
     if is_ende_in_wrong_column:
         raise EndeInWrongColumnError(sub_row=sub_row)
-    if _is_ende_with_no_code_but_note(sub_row):
+    if _is_ende_with_no_code_but_note(sub_row) or _is_last_step_with_no_code_but_note(sub_row):
         return OutcomeNode(result_code=None, note=sub_row.note)
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.
         return None
-    if sub_row.check_result.subsequent_step_number is not None and (
-        sub_row.result_code is not None or sub_row.note is not None
-    ):
-        raise OutcomeCodeAndFurtherStepError(sub_row=sub_row)
     if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
 
 
-def _convert_row_to_decision_node(row: EbdTableRow) -> DecisionNode:
+def _convert_row_to_decision_or_transition_node(row: EbdTableRow) -> DecisionNode | TransitionNode:
     """
     converts a row into a decision node
     """
+    if len(row.sub_rows) == 1 and row.sub_rows[0].check_result.result is None:
+        # this is a transition node
+        return TransitionNode(step_number=row.step_number, question=row.description, note=row.sub_rows[0].note)
     return DecisionNode(step_number=row.step_number, question=row.description)
 
 
-def _yes_no_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge:
-    if decision:
+@overload
+def _yes_no_transition_edge(
+    decision: Literal[None], source: TransitionNode, target: EbdGraphNode
+) -> TransitionEdge: ...
+@overload
+def _yes_no_transition_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge: ...
+def _yes_no_transition_edge(
+    decision: Optional[bool], source: DecisionNode | TransitionNode, target: EbdGraphNode
+) -> EbdGraphEdge:
+    if decision is None and isinstance(source, TransitionNode):
+        return TransitionEdge(source=source, target=target, note=None)
+    assert not isinstance(source, TransitionNode), "Iff the decision is None, source must be a TransitionNode"
+    assert isinstance(source, DecisionNode)
+    if decision is True:
         return ToYesEdge(source=source, target=target, note=None)
-    return ToNoEdge(source=source, target=target, note=None)
+    if decision is False:
+        return ToNoEdge(source=source, target=target, note=None)
+    raise ValueError(f"Decision must be either True or False or None, but was {decision}")
 
 
 def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
@@ -104,10 +145,15 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
     result: List[EbdGraphNode] = [StartNode()]
     contains_ende = False
     for row in table.rows:
-        decision_node = _convert_row_to_decision_node(row)
-        result.append(decision_node)
+        decision_or_transition_node = _convert_row_to_decision_or_transition_node(row)
+        result.append(decision_or_transition_node)
+        if isinstance(decision_or_transition_node, TransitionNode):
+            continue
         for sub_row in row.sub_rows:
             outcome_node = _convert_sub_row_to_outcome_node(sub_row)
+            if isinstance(outcome_node, TransitionalOutcomeNode):
+                result.append(outcome_node)
+                continue
             if outcome_node is not None:
                 result.append(outcome_node)
             if (
@@ -131,6 +177,15 @@ def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str,
     return str(lowest_numeric_key), nodes[str(lowest_numeric_key)]
 
 
+def _notes_same_except_for_whitespace(note1: str | None, note2: str | None) -> bool:
+    """
+    Checks if two notes are the same except for whitespace characters.
+    """
+    if note1 is not None and note2 is not None:
+        return re.sub(r"\s+", "", note1) == re.sub(r"\s+", "", note2)
+    return note1 is None and note2 is None
+
+
 def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     """
     Returns a list with all edges from the given table.
@@ -140,49 +195,79 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
     first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
     result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
-    outcome_nodes_duplicates: dict[str, OutcomeNode] = {}  # map to check for duplicate outcome nodes
-
     for row in table.rows:
-        decision_node = _convert_row_to_decision_node(row)
+        row_node = _convert_row_to_decision_or_transition_node(row)
+        if isinstance(row_node, TransitionNode):
+            assert row.sub_rows[0].check_result.subsequent_step_number is not None
+            result.append(
+                TransitionEdge(
+                    source=row_node,
+                    target=nodes[row.sub_rows[0].check_result.subsequent_step_number],
+                    note=row_node.note,
+                )
+            )
+            continue
+        assert isinstance(row_node, DecisionNode)
         for sub_row in row.sub_rows:
-            if sub_row.check_result.subsequent_step_number is not None and not _is_ende_with_no_code_but_note(sub_row):
-                edge = _yes_no_edge(
-                    sub_row.check_result.result,
-                    source=decision_node,
-                    target=nodes[sub_row.check_result.subsequent_step_number],
+            assert isinstance(sub_row.check_result.result, bool)
+            if (
+                sub_row.check_result.subsequent_step_number is not None
+                and not _is_ende_with_no_code_but_note(sub_row)
+                and sub_row.result_code is None
+            ):
+                result.append(
+                    _yes_no_transition_edge(
+                        sub_row.check_result.result,
+                        source=row_node,
+                        target=nodes[sub_row.check_result.subsequent_step_number],
+                    )
                 )
             else:
-                outcome_node: Optional[OutcomeNode] = _convert_sub_row_to_outcome_node(sub_row)
+                outcome_node: Optional[OutcomeNode | TransitionalOutcomeNode] = _convert_sub_row_to_outcome_node(
+                    sub_row
+                )
 
+                if isinstance(outcome_node, TransitionalOutcomeNode):
+                    result.append(
+                        _yes_no_transition_edge(
+                            sub_row.check_result.result,
+                            source=row_node,
+                            target=outcome_node,
+                        )
+                    )
+                    result.append(
+                        TransitionalOutcomeEdge(
+                            source=outcome_node, target=nodes[outcome_node.subsequent_step_number], note=None
+                        )
+                    )
+                    continue
                 if outcome_node is None:
                     if all(sr.result_code is None for sr in row.sub_rows) and any(
                         sr.note is not None and sr.note.startswith("EBD ") for sr in row.sub_rows
                     ):
-                        raise EbdCrossReferenceNotSupportedError(row=row, decision_node=decision_node)
-                    raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
+                        raise EbdCrossReferenceNotSupportedError(row=row, decision_node=row_node)
+                    raise OutcomeNodeCreationError(decision_node=row_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes
-                # Use normalized notes for comparison to handle BDEW's inconsistent trailing punctuation
-                existing_note = outcome_nodes_duplicates.get(outcome_node.result_code)
-                is_ambiguous_outcome_node = (
-                    existing_note is not None
-                    and _normalize_note_for_comparison(existing_note.note)
-                    != _normalize_note_for_comparison(outcome_node.note)
+                # Use normalized notes (strip trailing punctuation) and whitespace-insensitive comparison
+                is_ambiguous_outcome_node = outcome_node.get_key() in nodes and not _notes_same_except_for_whitespace(
+                    _normalize_note_for_comparison(assert_is_instance(nodes[outcome_node.get_key()], OutcomeNode).note),
+                    _normalize_note_for_comparison(outcome_node.note),
                 )
 
-                if not is_ambiguous_outcome_node:
-                    outcome_nodes_duplicates[outcome_node.get_key()] = outcome_node
-                else:
+                if is_ambiguous_outcome_node:
                     raise OutcomeCodeAmbiguousError(
-                        outcome_node1=outcome_nodes_duplicates[outcome_node.get_key()], outcome_node2=outcome_node
+                        outcome_node1=assert_is_instance(nodes[outcome_node.get_key()], OutcomeNode),
+                        outcome_node2=outcome_node,
                     )
 
-                edge = _yes_no_edge(
-                    sub_row.check_result.result,
-                    source=decision_node,
-                    target=nodes[outcome_node.get_key()],
+                result.append(
+                    _yes_no_transition_edge(
+                        sub_row.check_result.result,
+                        source=row_node,
+                        target=nodes[outcome_node.get_key()],
+                    )
                 )
-            result.append(edge)
     return result
 
 
@@ -207,6 +292,7 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
     if not any(table.rows):
         return convert_empty_table_to_graph(table.metadata)
     graph = convert_table_to_digraph(table)
+    _apply_workaround_to_issue_383(graph)
     graph_metadata = EbdGraphMetaData(
         ebd_code=table.metadata.ebd_code,
         chapter=table.metadata.chapter,
@@ -215,6 +301,16 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         role=table.metadata.role,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)
+
+
+def _apply_workaround_to_issue_383(graph: DiGraph) -> None:
+    """
+    removes isolated hinweis nodes which are not connected to the graph, e.g. 'Es gibt 1..n Treffer'...
+    Ideally we'd not create them at all, then we wouldn't have to remove them in a post processing step.
+    https://github.com/Hochfrequenz/rebdhuhn/issues/383
+    """
+    isolated = list(isolates(graph))
+    graph.remove_nodes_from(isolated)
 
 
 def convert_empty_table_to_graph(metadata: EbdTableMetaData) -> EbdGraph:

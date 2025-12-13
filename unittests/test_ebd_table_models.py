@@ -1,4 +1,3 @@
-import cattrs
 import pytest
 
 from rebdhuhn.models.ebd_table import (
@@ -52,8 +51,8 @@ class TestEbdTableModels:
         The test is successful already if the instantiation in the parametrization worked
         """
         assert table is not None
-        serialized_table = cattrs.unstructure(table)
-        deserialized_table = cattrs.structure(serialized_table, EbdTable)
+        serialized_table = table.model_dump(mode="json")
+        deserialized_table = EbdTable.model_validate(serialized_table)
         assert deserialized_table == table
 
     @pytest.mark.parametrize(
@@ -157,6 +156,75 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         )
         assert isinstance(sub_row, EbdTableSubRow)
         assert sub_row.result_code == "A**"
+
+    def test_subrow_with_only_subsequent_step(self) -> None:
+        """
+        This is an example from E_0594 where there is no result code but only a subsequent step.
+        """
+        sub_row = EbdTableSubRow(
+            result_code=None,
+            check_result=EbdCheckResult(result=None, subsequent_step_number="110"),
+            note="Aufnahme von 0..n Treffern in die Trefferliste auf Basis eines Kriteriums",
+        )
+        assert isinstance(sub_row, EbdTableSubRow)
+
+    def test_subrow_not_both_must_be_null(self) -> None:
+        """
+        Check that the result code and the subsequent step are not both null.
+        """
+        with pytest.raises(ValueError):
+            _ = (EbdCheckResult(result=None, subsequent_step_number=None),)
+
+    def test_row_with_only_one_subrow(self) -> None:
+        """
+        This is an example from E_0594 where there is a step with only 1 subrow and no ja/nein distinction
+        """
+        row = EbdTableRow(
+            step_number="105",
+            # pylint:disable=line-too-long
+            description="[Adressprüfung] (Straße und PLZ oder geographische Koordinaten oder Flurstücknummer) Hinweis: Das Weglassen der Hausnummer, trägt dem Umstand Rechnung, dass einige NB eher die Adresse des Geräts und nicht die Lieferadresse hinterlegt haben. Wenn der Zähler im Doppelhaus nebenan zu finden ist, weiß der Kunde das ggf.",
+            sub_rows=[
+                EbdTableSubRow(
+                    result_code=None,
+                    check_result=EbdCheckResult(result=None, subsequent_step_number="110"),
+                    note="Aufnahme von 0..n Treffern in die Trefferliste auf Basis eines Kriteriums",
+                )
+            ],
+        )
+        assert isinstance(row, EbdTableRow)
+
+    def test_row_with_only_one_subrow_is_not_allowed_if_ja_nein_distinction(self) -> None:
+        with pytest.raises(ValueError):
+            _ = EbdTableRow(
+                step_number="105",
+                description="[Adressprüfung] (Straße und PLZ oder geographische Koordinaten oder Flurstücknummer) Hinweis: Das Weglassen der Hausnummer, trägt dem Umstand Rechnung, dass einige NB eher die Adresse des Geräts und nicht die Lieferadresse hinterlegt haben. Wenn der Zähler im Doppelhaus nebenan zu finden ist, weiß der Kunde das ggf.",
+                sub_rows=[
+                    EbdTableSubRow(
+                        result_code=None,
+                        check_result=EbdCheckResult(result=True, subsequent_step_number="110"),  # <--not allowed
+                        note="Aufnahme von 0..n Treffern in die Trefferliste auf Basis eines Kriteriums",
+                    )
+                ],
+            )
+
+    def test_row_with_two_subrows_does_not_allow_none_result(self) -> None:
+        with pytest.raises(ValueError):
+            _ = EbdTableRow(
+                step_number="105",
+                description="xyz.",
+                sub_rows=[
+                    EbdTableSubRow(
+                        result_code=None,
+                        check_result=EbdCheckResult(result=True, subsequent_step_number="110"),
+                        note="Foo",
+                    ),
+                    EbdTableSubRow(
+                        result_code=None,
+                        check_result=EbdCheckResult(result=None, subsequent_step_number="111"),  # <--not allowed
+                        note="Bar",
+                    ),
+                ],
+            )
 
     def test_2023_answer_code_regex(self) -> None:
         """

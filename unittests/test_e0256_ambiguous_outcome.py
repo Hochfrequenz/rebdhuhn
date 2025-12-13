@@ -9,8 +9,6 @@ by normalizing notes before comparison.
 import json
 from pathlib import Path
 
-import cattrs
-
 from rebdhuhn import convert_table_to_graph
 from rebdhuhn.models import EbdTable
 
@@ -22,7 +20,7 @@ class TestE0256AmbiguousOutcome:
         """Test that the JSON can be loaded and structured into an EbdTable."""
         with open(path_to_json, "r", encoding="utf-8") as f:
             table_json = json.load(f)
-        table = cattrs.structure(table_json, EbdTable)
+        table = EbdTable.model_validate(table_json)
 
         assert table.metadata.ebd_code == "E_0256"
         assert table.metadata.chapter == "WiM Strom"
@@ -43,7 +41,7 @@ class TestE0256AmbiguousOutcome:
         """
         with open(path_to_json, "r", encoding="utf-8") as f:
             table_json = json.load(f)
-        table = cattrs.structure(table_json, EbdTable)
+        table = EbdTable.model_validate(table_json)
 
         # Should not raise OutcomeCodeAmbiguousError anymore
         graph = convert_table_to_graph(table)

@@ -9,7 +9,7 @@ from typing import List, Tuple
 from networkx import DiGraph, all_simple_paths  # type:ignore[import-untyped]
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
-from rebdhuhn.models.errors import PathsNotGreaterThanOneError
+from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, PathsNotGreaterThanOneError
 
 COMMON_ANCESTOR_FIELD = "common_ancestor_for_node"
 # Defines the label to annotate the last common ancestor node with the information to which node
@@ -40,6 +40,10 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
     Each node which is such an ancestor will contain the information of which nodes it is the last common ancestor.
     It is stored in the dict field `COMMON_ANCESTOR_FIELD` as a list.
     """
+    if len(graph.nodes) > 90:
+        raise GraphTooComplexForPlantumlError(
+            message=f"Graph is too large to determine the last common ancestors." f"Number of Nodes: {len(graph.nodes)}"
+        )
     for node in graph:
         in_degree: int = graph.in_degree(node)
         if in_degree <= 1:

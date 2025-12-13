@@ -32,6 +32,20 @@ from rebdhuhn.models.errors import (
 )
 
 
+def _normalize_note_for_comparison(note: Optional[str]) -> Optional[str]:
+    """
+    Normalizes a note for comparison by stripping trailing punctuation.
+
+    The official BDEW EBD tables sometimes have the same outcome code with notes that differ
+    only by trailing punctuation (e.g., "Bestellung ist angenommen" vs "Bestellung ist angenommen.").
+    Because apparently consistent punctuation was too much to ask for in a regulatory document
+    that the entire German energy sector depends on.
+    """
+    if note is None:
+        return None
+    return note.rstrip(".!?;:,")
+
+
 def _is_ende_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     """
     Returns True if the following step is "Ende" with no code but a note.
@@ -148,9 +162,12 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                     raise OutcomeNodeCreationError(decision_node=decision_node, sub_row=sub_row)
 
                 # check for ambiguous outcome nodes, i.e. A** with different notes
+                # Use normalized notes for comparison to handle BDEW's inconsistent trailing punctuation
+                existing_note = outcome_nodes_duplicates.get(outcome_node.result_code)
                 is_ambiguous_outcome_node = (
-                    outcome_node.result_code in outcome_nodes_duplicates
-                    and outcome_nodes_duplicates[outcome_node.result_code].note != outcome_node.note
+                    existing_note is not None
+                    and _normalize_note_for_comparison(existing_note.note)
+                    != _normalize_note_for_comparison(outcome_node.note)
                 )
 
                 if not is_ambiguous_outcome_node:

@@ -4,7 +4,11 @@
       "Bash(git merge:*)",
       "Bash(git fetch:*)",
       "Bash(cat:*)",
-      "WebFetch(domain:api.github.com)"
+      "WebFetch(domain:api.github.com)",
+      "Bash(.toxtestsScriptspython -m pytest unittests/test_malo_ident.py --snapshot-update)",
+      "Bash(git reset:*)",
+      "Bash(gh api:*)",
+      "Bash(steps until end of graph\". Now sets end_step to start_step - 1 to create\nan empty range, ensuring _get_nodes_in_step_range returns an empty list.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n)\")"
     ]
   }
 }

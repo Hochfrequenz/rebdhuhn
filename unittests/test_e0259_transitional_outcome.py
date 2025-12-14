@@ -58,10 +58,6 @@ class TestE0259TransitionalOutcome:
         This test validates that TransitionalOutcomeNode is properly handled
         by the PlantUML converter. Previously this would fail with an assertion
         error or unknown node type error.
-
-        Note: E_0259 generates ~11MB of PlantUML code due to the recursive nature
-        of the converter and the complex graph structure. This is too large for
-        Kroki to render (413 Payload Too Large), so we only test the conversion.
         """
         graph = convert_table_to_graph(e0259_table)
         plantuml_code = convert_graph_to_plantuml(graph)
@@ -73,8 +69,35 @@ class TestE0259TransitionalOutcome:
         # Check for some expected result codes from E_0259
         assert "A90" in plantuml_code or "A" in plantuml_code  # Result codes should be present
 
-        # Save PlantUML output for manual inspection (SVG rendering skipped due to size)
+        # Save PlantUML output for manual inspection
         output_dir = Path(__file__).parent / "output"
         os.makedirs(output_dir, exist_ok=True)
         with open(output_dir / f"{graph.metadata.ebd_code}.puml", "w", encoding="utf-8") as puml_file:
             puml_file.write(plantuml_code)
+
+    def test_e0259_plantuml_size_is_reasonable(self, e0259_table: EbdTable) -> None:
+        """
+        Verify that PlantUML output size is proportional to graph size.
+
+        This is a regression test for a bug where TransitionalOutcomeNode successors
+        were rendered without checking indegree, causing exponential duplication.
+        The bug caused E_0259 (60 nodes) to generate 11MB of PlantUML code instead of ~18KB.
+        """
+        graph = convert_table_to_graph(e0259_table)
+        plantuml_code = convert_graph_to_plantuml(graph)
+
+        num_nodes = len(graph.graph.nodes)
+        num_if_statements = plantuml_code.count("if (")
+
+        # The number of 'if (' statements should be roughly proportional to decision nodes,
+        # not exponentially larger. Allow some slack for nested structures.
+        assert num_if_statements < num_nodes * 3, (
+            f"PlantUML has {num_if_statements} 'if (' statements for {num_nodes} nodes. "
+            f"This suggests exponential duplication (expected < {num_nodes * 3})."
+        )
+
+        # PlantUML size should be reasonable (< 100KB for a 60-node graph)
+        assert len(plantuml_code) < 100_000, (
+            f"PlantUML code is {len(plantuml_code):,} chars ({len(plantuml_code)/1024:.1f} KB). "
+            "This suggests exponential duplication."
+        )

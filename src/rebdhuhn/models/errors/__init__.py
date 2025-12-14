@@ -71,7 +71,7 @@ class PathsNotGreaterThanOneError(PlantumlConversionError, ValueError):
 
 class GraphTooComplexForPlantumlError(PlantumlConversionError):
     """
-    Exception raised when a Graph is too complex to convert with Plantuml.
+    Exception raised when a Graph is too complex to convert with PlantUML.
 
     To understand what this means exactly, we first define the term "last common ancestor" (LCA in the following).
     Let V be an arbitrary node with indegree > 1.
@@ -81,11 +81,16 @@ class GraphTooComplexForPlantumlError(PlantumlConversionError):
 
     The definition of the LCA is pictured in `src/last_common_ancestor.svg`.
 
-    The graph is too complex for plantuml if there are multiple different nodes V with the same LCA.
+    The graph is too complex for PlantUML if there are multiple different nodes V with the same LCA.
     This is also pictured in `src/plantuml_not_convertable.svg`.
 
-    Btw, the reason is the structure of the used Plantuml script language - as of now, maybe they change it in the
-    future.
+    Example: E_0210 has node 300 which is the LCA for both node 310 (indegree 5) and node 380
+    (indegree 4). PlantUML's if/else syntax only supports one "endif" merge point per "if" block,
+    so when a single common ancestor needs to merge multiple different nodes, it cannot be
+    represented in PlantUML.
+
+    Note: The DOT/Graphviz pipeline handles these complex graphs without issues.
+    Use `convert_graph_to_dot()` instead for EBDs that raise this error.
     """
 
     def __init__(

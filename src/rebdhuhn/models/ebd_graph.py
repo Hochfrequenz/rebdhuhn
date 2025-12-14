@@ -47,6 +47,7 @@ class InstructionScope(BaseModel):
             )
         return self
 
+
 #: Wildcard result code "A**" used in EBDs when the actual code is determined dynamically at runtime.
 #: This code can appear multiple times in an EBD with different notes explaining which codes it represents.
 #: Example: In E_0055, "A**" appears in steps 1 and 2 with different possible replacement codes.

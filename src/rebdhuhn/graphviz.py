@@ -154,7 +154,7 @@ def _convert_outcome_node_to_dot(
     ]
 
     # Add href for nodes with exactly one EBD reference (makes entire node clickable)
-    if ebd_link_template and len(outcome_node.ebd_references) == 1:
+    if ebd_link_template and hasattr(outcome_node, "ebd_references") and len(outcome_node.ebd_references) == 1:
         url = ebd_link_template.replace("{ebd_code}", outcome_node.ebd_references[0])
         attrs.append(f'href="{url}"')
         attrs.append('target="_blank"')

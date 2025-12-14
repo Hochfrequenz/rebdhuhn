@@ -174,29 +174,6 @@ def _convert_multi_step_instruction_to_dot(instruction: MultiStepInstruction, in
     )
 
 
-def _convert_multi_step_instruction_edge_to_dot(instruction: MultiStepInstruction, indent: str) -> str:
-    """
-    Convert a MultiStepInstruction to a dashed edge connecting to its first affected step.
-    """
-    node_key = _get_multi_step_instruction_node_key(instruction)
-    target_step = instruction.first_step_number_affected
-    return f'{indent}"{node_key}" -> "{target_step}" [style=dashed, color="#888888", arrowhead=none];'
-
-
-def _convert_multi_step_instructions_to_dot(instructions: List[MultiStepInstruction], indent: str) -> str:
-    """
-    Convert all multi-step instructions to dot nodes.
-    """
-    return "\n".join([_convert_multi_step_instruction_to_dot(inst, indent) for inst in instructions])
-
-
-def _convert_multi_step_instruction_edges_to_dot(instructions: List[MultiStepInstruction], indent: str) -> List[str]:
-    """
-    Convert all multi-step instruction edges to dot.
-    """
-    return [_convert_multi_step_instruction_edge_to_dot(inst, indent) for inst in instructions]
-
-
 def _get_step_number_from_node(ebd_graph: EbdGraph, node: str) -> Optional[str]:
     """
     Extract the step number from a node if it has one (DecisionNode or TransitionNode).

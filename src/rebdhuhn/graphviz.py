@@ -251,8 +251,7 @@ def _get_nodes_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: Opt
 def _convert_multi_step_instruction_cluster_to_dot(
     ebd_graph: EbdGraph,
     instruction: MultiStepInstruction,
-    start_step: str,
-    end_step: Optional[str],
+    nodes_in_range: List[str],
     indent: str,
 ) -> str:
     """
@@ -264,9 +263,6 @@ def _convert_multi_step_instruction_cluster_to_dot(
 
     node_key = _get_multi_step_instruction_node_key(instruction)
     cluster_name = f"cluster_{node_key}"
-
-    # Get all nodes in the step range
-    nodes_in_range = _get_nodes_in_step_range(ebd_graph, start_step, end_step)
 
     lines: List[str] = []
     lines.append(f'{cluster_indent}subgraph "{cluster_name}" {{')
@@ -311,11 +307,11 @@ def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
         # Compute ranges and create clusters
         ranges = _compute_instruction_ranges(ebd_graph.multi_step_instructions, all_step_numbers)
         for instruction, start_step, end_step in ranges:
-            result_parts.append(
-                _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, start_step, end_step, indent)
-            )
-            # Track nodes that are inside this cluster
+            # Compute nodes once and reuse for both cluster creation and tracking
             nodes_in_range = _get_nodes_in_step_range(ebd_graph, start_step, end_step)
+            result_parts.append(
+                _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, nodes_in_range, indent)
+            )
             nodes_in_clusters.update(nodes_in_range)
 
     # Add remaining nodes that are not inside any cluster

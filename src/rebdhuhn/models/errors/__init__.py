@@ -97,6 +97,33 @@ class GraphTooComplexForPlantumlError(PlantumlConversionError):
         super().__init__(self.message)
 
 
+class AmbiguousPlacementCasesError(PlantumlConversionError):
+    """
+    Raised when a decision node has multiple conflicting placement cases.
+
+    During PlantUML conversion, each decision node determines where to place its yes/no branches
+    based on three mutually exclusive cases:
+    - yes_below_no: The yes-branch should be drawn below the no-branch
+    - no_below_yes: The no-branch should be drawn below the yes-branch
+    - common_ancestor: The node is a last common ancestor for merge nodes
+
+    This error is raised when multiple cases are true simultaneously, which indicates
+    a graph structure that the PlantUML converter cannot handle correctly.
+    """
+
+    def __init__(self, node_key: str, yes_node: str, no_node: str, cases: tuple[bool, bool, bool]) -> None:
+        self.node_key = node_key
+        self.yes_node = yes_node
+        self.no_node = no_node
+        self.cases = cases
+        super().__init__(
+            f"Decision node '{node_key}' has ambiguous placement cases: "
+            f"yes_below_no={cases[0]}, no_below_yes={cases[1]}, common_ancestor={cases[2]}. "
+            f"Yes-node: '{yes_node}', No-node: '{no_node}'. "
+            "The graph structure is too complex for PlantUML conversion."
+        )
+
+
 class EbdCrossReferenceNotSupportedError(GraphConversionError, NotImplementedError):
     """
     Raised when there is no outcome for a given sub row but a reference to another EBD key instead.

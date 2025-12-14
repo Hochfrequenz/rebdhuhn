@@ -9,7 +9,11 @@ from networkx import DiGraph  # type:ignore[import-untyped]
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
 from rebdhuhn.kroki import PlantUmlToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
-from rebdhuhn.models.errors import GraphTooComplexForPlantumlError, NotExactlyTwoOutgoingEdgesError
+from rebdhuhn.models.errors import (
+    AmbiguousPlacementCasesError,
+    GraphTooComplexForPlantumlError,
+    NotExactlyTwoOutgoingEdgesError,
+)
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -91,7 +95,8 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
         _draw_node1_below_node2(graph, no_node, yes_node),
         COMMON_ANCESTOR_FIELD in graph.nodes[node],
     )
-    assert cases.count(True) <= 1, "This cannot actually fail."
+    if cases.count(True) > 1:
+        raise AmbiguousPlacementCasesError(node, yes_node, no_node, tuple(cases))
 
     result = (
         f"{indent}if (<b>{decision_node.step_number}: </b> {_escape_for_plantuml(decision_node.question)}) then (ja)\n"

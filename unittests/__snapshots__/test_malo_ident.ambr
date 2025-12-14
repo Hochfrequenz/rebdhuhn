@@ -13,6 +13,7 @@
       fontsize=12;
       pad=0.25;
       subgraph "cluster_msi_100" {
+          label="";
           style="dashed,rounded";
           bgcolor="#f0f7ff";
           color="#888888";
@@ -32,6 +33,7 @@
           "160" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>160: </B>Gibt es in der Trefferliste auf Basis eines Kriteriums 1..n Treffer mit einem<BR align="left"/>Identifikationskriterium?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       }
       subgraph "cluster_msi_205" {
+          label="";
           style="dashed,rounded";
           bgcolor="#f0f7ff";
           color="#888888";
@@ -58,6 +60,7 @@
           "280" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>280: </B>Gibt es in der Trefferliste auf Basis der alleinigen Adressprüfung genau einen<BR align="left"/>Treffer mit dem Identifikationskriterium „Adresse“?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       }
       subgraph "cluster_msi_305" {
+          label="";
           style="dashed,rounded";
           bgcolor="#f0f7ff";
           color="#888888";
@@ -83,6 +86,7 @@
           "395" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", label=<<B>395: </B>Ist nur eine MaLo in einem innerhalb der vergangenen drei Jahre abgegebenen<BR align="left"/>Netzgebiet ermittelbar?<BR align="left"/>>, fontname="Roboto, sans-serif"];
       }
       subgraph "cluster_msi_400" {
+          label="";
           style="dashed,rounded";
           bgcolor="#f0f7ff";
           color="#888888";

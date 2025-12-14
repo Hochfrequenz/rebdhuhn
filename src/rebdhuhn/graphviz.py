@@ -225,6 +225,7 @@ def _convert_multi_step_instruction_cluster_to_dot(
 
     lines: list[str] = [
         f'{indent}subgraph "cluster_{msi_node_key}" {{',
+        f'{inner_indent}label="";',
         f'{inner_indent}style="dashed,rounded";',
         f'{inner_indent}bgcolor="{_MSI_CLUSTER_BGCOLOR}";',
         f'{inner_indent}color="#888888";',

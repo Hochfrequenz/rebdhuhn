@@ -13,11 +13,7 @@ from pathlib import Path
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
-from rebdhuhn import convert_table_to_graph
-from rebdhuhn.graphviz import convert_graph_to_dot
-from rebdhuhn.kroki import Kroki
-from rebdhuhn.models import EbdTable
-from rebdhuhn.models.ebd_graph import DecisionNode, OutcomeNode
+from rebdhuhn import DecisionNode, EbdTable, Kroki, OutcomeNode, convert_graph_to_dot, convert_table_to_graph
 
 path_to_raw_table_json = Path(__file__).parent / "test_files" / "e0055.json"
 

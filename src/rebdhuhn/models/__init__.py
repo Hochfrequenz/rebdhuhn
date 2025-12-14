@@ -18,17 +18,19 @@ from rebdhuhn.models.ebd_graph import (
     ToYesEdge,
 )
 from rebdhuhn.models.ebd_table import (
+    _STEP_NUMBER_REGEX,
     EbdCheckResult,
     EbdDocumentReleaseInformation,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
+    MultiStepInstruction,
 )
 
 __all__ = [
+    # ebd_graph models
     "DecisionNode",
-    "EbdDocumentReleaseInformation",
     "EbdGraph",
     "EbdGraphEdge",
     "EbdGraphMetaData",
@@ -39,9 +41,13 @@ __all__ = [
     "StartNode",
     "ToNoEdge",
     "ToYesEdge",
+    # ebd_table models
+    "_STEP_NUMBER_REGEX",
     "EbdCheckResult",
+    "EbdDocumentReleaseInformation",
     "EbdTable",
     "EbdTableMetaData",
     "EbdTableRow",
     "EbdTableSubRow",
+    "MultiStepInstruction",
 ]

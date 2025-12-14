@@ -18,6 +18,7 @@ Not included in current visualization:
 - PlantUML output does not render multi-step instructions
 """
 
+import re
 from xml.sax.saxutils import escape
 
 from rebdhuhn.add_watermark import add_background as add_background_function
@@ -25,7 +26,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
-from rebdhuhn.models.ebd_table import MultiStepInstruction
+from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, MultiStepInstruction
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -36,16 +37,49 @@ _MSI_NODE_BGCOLOR = "#e6f3ff"  #: Light blue background for multi-step instructi
 _MSI_CLUSTER_BGCOLOR = "#f0f7ff"  #: Very light blue background for multi-step instruction clusters
 
 
-def _format_label(label: str) -> str:
+def _format_label(label: str, ebd_link_template: str | None = None) -> str:
     """
     Converts the given string e.g. a text for a node to a suitable output for dot. It replaces newlines (`\n`) with
     the HTML-tag `<BR>`.
+
+    Args:
+        label: The text to format
+        ebd_link_template: Optional URL template for EBD cross-references.
+            Use {ebd_code} as placeholder, e.g., "?ebd={ebd_code}"
+            If provided, EBD references like "EBD E_0621" will be rendered as clickable links.
     """
     label_with_linebreaks = add_line_breaks(label, max_line_length=_LABEL_MAX_LINE_LENGTH, line_sep="\n")
-    return escape(label_with_linebreaks).replace("\n", '<BR align="left"/>')
-    # escaped_str = re.sub(r"^(\d+): ", r"<B>\1: </B>", label)
-    # escaped_str = label.replace("\n", '<BR align="left"/>')
-    # return f'<{escaped_str}<BR align="left"/>>'
+    escaped_label = escape(label_with_linebreaks)
+
+    # Replace EBD references with styled text if template is provided
+    if ebd_link_template:
+        escaped_label = _replace_ebd_references_with_styled_text(escaped_label)
+
+    return escaped_label.replace("\n", '<BR align="left"/>')
+
+
+def _replace_ebd_references_with_styled_text(text: str) -> str:
+    """
+    Replaces EBD references like "EBD E_0621" with styled text indicating a link.
+
+    Graphviz HTML-like labels don't support <a href> tags directly in most contexts.
+    Instead, we style the reference text with underline and blue color to visually
+    indicate it's a link. The actual href is added at the node level for nodes
+    that contain EBD references.
+
+    Args:
+        text: The text containing potential EBD references
+
+    Returns:
+        Text with EBD references styled as links (underlined, blue)
+    """
+
+    def replace_match(match: re.Match[str]) -> str:
+        ebd_code = match.group(1)
+        # Style as link: underline and blue color
+        return f'<FONT COLOR="#0066cc"><U>EBD {ebd_code}</U></FONT>'
+
+    return re.sub(EBD_REFERENCE_REGEX, replace_match, text)
 
 
 def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -85,25 +119,48 @@ def _convert_end_node_to_dot(node: str, indent: str) -> str:
     return f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#8ba2d7", label="Ende", fontname="Roboto, sans-serif"];'
 
 
-def _convert_outcome_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
+def _convert_outcome_node_to_dot(
+    ebd_graph: EbdGraph, node: str, indent: str, ebd_link_template: str | None = None
+) -> str:
     """
     Convert an OutcomeNode to dot code
+
+    Args:
+        ebd_graph: The EBD graph
+        node: The node key
+        indent: Indentation string
+        ebd_link_template: Optional URL template for EBD cross-references.
+            Use {ebd_code} as placeholder, e.g., "?ebd={ebd_code}"
     """
-    is_outcome_without_code = ebd_graph.graph.nodes[node]["node"].result_code is None
+    outcome_node = ebd_graph.graph.nodes[node]["node"]
+    is_outcome_without_code = outcome_node.result_code is None
     formatted_label: str = ""
     if not is_outcome_without_code:
+        formatted_label += f'<B>{outcome_node.result_code}</B><BR align="left"/><BR align="left"/>'
+    if outcome_node.note:
         formatted_label += (
-            f'<B>{ebd_graph.graph.nodes[node]["node"].result_code}</B><BR align="left"/><BR align="left"/>'
+            f"<FONT>" f'{_format_label(outcome_node.note, ebd_link_template)}<BR align="left"/>' f"</FONT>"
         )
-    if ebd_graph.graph.nodes[node]["node"].note:
-        formatted_label += (
-            f"<FONT>" f'{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>' f"</FONT>"
-        )
-    return (
-        f'{indent}"{node}" '
-        # pylint:disable=line-too-long
-        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
-    )
+
+    # Build node attributes
+    attrs = [
+        'margin="0.2,0.12"',
+        "shape=box",
+        'style="filled,rounded"',
+        "penwidth=0.0",
+        'fillcolor="#c4cac1"',
+        f"label=<{formatted_label}>",
+        'fontname="Roboto, sans-serif"',
+    ]
+
+    # Add href for nodes with exactly one EBD reference (makes entire node clickable)
+    if ebd_link_template and len(outcome_node.ebd_references) == 1:
+        url = ebd_link_template.replace("{ebd_code}", outcome_node.ebd_references[0])
+        attrs.append(f'href="{url}"')
+        attrs.append('target="_blank"')
+
+    # pylint:disable=line-too-long
+    return f'{indent}"{node}" [{", ".join(attrs)}];'
 
 
 def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
@@ -140,16 +197,22 @@ def _convert_transition_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str)
     )
 
 
-def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:
+def _convert_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str, ebd_link_template: str | None = None) -> str:
     """
     A shorthand to convert an arbitrary node to dot code. It just determines the node type and calls the
     respective function.
+
+    Args:
+        ebd_graph: The EBD graph
+        node: The node key
+        indent: Indentation string
+        ebd_link_template: Optional URL template for EBD cross-references.
     """
     match ebd_graph.graph.nodes[node]["node"]:
         case DecisionNode():
             return _convert_decision_node_to_dot(ebd_graph, node, indent)
         case OutcomeNode() | TransitionalOutcomeNode():
-            return _convert_outcome_node_to_dot(ebd_graph, node, indent)
+            return _convert_outcome_node_to_dot(ebd_graph, node, indent, ebd_link_template)
         case EndNode():
             return _convert_end_node_to_dot(node, indent)
         case StartNode():
@@ -216,9 +279,17 @@ def _convert_multi_step_instruction_cluster_to_dot(
     instruction: MultiStepInstruction,
     affected_node_keys: set[str],
     indent: str,
+    ebd_link_template: str | None = None,
 ) -> str:
     """
     Renders a DOT subgraph cluster containing the instruction note and all affected step nodes.
+
+    Args:
+        ebd_graph: The EBD graph
+        instruction: The multi-step instruction
+        affected_node_keys: Node keys affected by this instruction
+        indent: Indentation string
+        ebd_link_template: Optional URL template for EBD cross-references.
     """
     inner_indent = indent + ADD_INDENT
     msi_node_key = _get_multi_step_instruction_node_key(instruction)
@@ -234,16 +305,21 @@ def _convert_multi_step_instruction_cluster_to_dot(
         _convert_multi_step_instruction_to_dot(instruction, inner_indent),
     ]
     for node_key in sorted(affected_node_keys, key=lambda k: int(k) if k.isdigit() else float("inf")):
-        lines.append(_convert_node_to_dot(ebd_graph, node_key, inner_indent))
+        lines.append(_convert_node_to_dot(ebd_graph, node_key, inner_indent, ebd_link_template))
     lines.append(f"{indent}}}")
 
     return "\n".join(lines)
 
 
-def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
+def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str, ebd_link_template: str | None = None) -> str:
     """
     Convert all nodes of the EbdGraph to dot output.
     Nodes affected by multi-step instructions are grouped into clusters.
+
+    Args:
+        ebd_graph: The EBD graph
+        indent: Indentation string
+        ebd_link_template: Optional URL template for EBD cross-references.
     """
     result_parts: list[str] = []
     node_keys_in_clusters: set[str] = set()
@@ -251,13 +327,15 @@ def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
     for scope in ebd_graph.get_instruction_scopes():
         affected_node_keys = _collect_node_keys_in_step_range(ebd_graph, scope.start_step, scope.end_step)
         result_parts.append(
-            _convert_multi_step_instruction_cluster_to_dot(ebd_graph, scope.instruction, affected_node_keys, indent)
+            _convert_multi_step_instruction_cluster_to_dot(
+                ebd_graph, scope.instruction, affected_node_keys, indent, ebd_link_template
+            )
         )
         node_keys_in_clusters.update(affected_node_keys)
 
     for node_key in ebd_graph.graph.nodes:
         if node_key not in node_keys_in_clusters:
-            result_parts.append(_convert_node_to_dot(ebd_graph, node_key, indent))
+            result_parts.append(_convert_node_to_dot(ebd_graph, node_key, indent, ebd_link_template))
 
     return "\n".join(result_parts)
 
@@ -316,9 +394,16 @@ def _convert_edges_to_dot(ebd_graph: EbdGraph, indent: str) -> list[str]:
     return edges
 
 
-def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
+def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = None) -> str:
     """
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
+
+    Args:
+        ebd_graph: The EBD graph to convert
+        ebd_link_template: Optional URL template for EBD cross-references.
+            Use {ebd_code} as placeholder, e.g., "?ebd={ebd_code}"
+            If provided, EBD references like "EBD E_0621" in outcome node notes
+            will be rendered as clickable links in the SVG output.
     """
     nx_graph = ebd_graph.graph
     # _mark_last_common_ancestors(nx_graph)
@@ -343,7 +428,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph) -> str:
     dot_code = "digraph D {\n"
     for dot_attr_key, dot_attr_value in dot_attributes.items():
         dot_code += f"{ADD_INDENT}{dot_attr_key}={dot_attr_value};\n"
-    dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT) + "\n\n"
+    dot_code += _convert_nodes_to_dot(ebd_graph, ADD_INDENT, ebd_link_template) + "\n\n"
     if "Start" in nx_graph:
         assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
         dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"

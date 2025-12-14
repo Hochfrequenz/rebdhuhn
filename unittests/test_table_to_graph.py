@@ -23,12 +23,13 @@ from rebdhuhn.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_table import EbdTable, EbdTableMetaData
+from rebdhuhn.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
 from .e0266 import table_e0266
 from .e0267 import e_0267
+from .e0462 import table_e0462
 from .e0487 import table_e0487
 from .table_with_transition_node import table_0594_partly
 
@@ -614,3 +615,213 @@ class TestEbdTableModels:
         ) as svg_file:
             svg_file.write(svg_code)
         assert dot_code == snapshot(name=f"table_dot_svg_{graph.metadata.ebd_code}")
+
+
+class TestEbdCrossReferenceLinks:
+    """Tests for EBD cross-reference link rendering in DOT output."""
+
+    def test_ebd_link_template_renders_styled_link(self) -> None:
+        """Verify that ebd_link_template parameter renders EBD references with styling and href."""
+        table_with_ebd_reference = EbdTable(
+            metadata=EbdTableMetaData(
+                ebd_code="E_TEST",
+                chapter="Test Chapter",
+                section="Test Section",
+                ebd_name="E_TEST_Test",
+                role="Test",
+            ),
+            rows=[
+                EbdTableRow(
+                    step_number="1",
+                    description="Is this a test?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                            result_code=None,
+                            note="EBD E_0621_Prüfen, ob Anfrage zur Beendigung der Zuordnung erforderlich",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+                            result_code="A01",
+                            note="Cluster: Ablehnung",
+                        ),
+                    ],
+                ),
+            ],
+        )
+
+        graph = convert_table_to_graph(table_with_ebd_reference)
+
+        # Without template - should have plain text "EBD E_0621"
+        dot_without_links = convert_graph_to_dot(graph)
+        assert "EBD E_0621" in dot_without_links
+        assert 'href="?ebd=' not in dot_without_links
+
+        # With template - should have styled text and href attribute
+        dot_with_links = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_with_links
+        assert 'href="?ebd=E_0621"' in dot_with_links
+
+    def test_ebd_link_template_with_full_url(self) -> None:
+        """Verify that full URL templates work correctly."""
+        table_with_ebd_reference = EbdTable(
+            metadata=EbdTableMetaData(
+                ebd_code="E_TEST",
+                chapter="Test Chapter",
+                section="Test Section",
+                ebd_name="E_TEST_Test",
+                role="Test",
+            ),
+            rows=[
+                EbdTableRow(
+                    step_number="1",
+                    description="Is this a test?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                            result_code=None,
+                            note="EBD E_0621_Prüfen",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+                            result_code="A01",
+                            note="Cluster: Ablehnung",
+                        ),
+                    ],
+                ),
+            ],
+        )
+
+        graph = convert_table_to_graph(table_with_ebd_reference)
+        dot_code = convert_graph_to_dot(graph, ebd_link_template="https://example.com/ebd/{ebd_code}")
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_code
+        assert 'href="https://example.com/ebd/E_0621"' in dot_code
+
+    def test_multiple_ebd_references_all_styled(self) -> None:
+        """Verify that multiple EBD references in one note all get styled."""
+        table_with_multiple_refs = EbdTable(
+            metadata=EbdTableMetaData(
+                ebd_code="E_TEST",
+                chapter="Test Chapter",
+                section="Test Section",
+                ebd_name="E_TEST_Test",
+                role="Test",
+            ),
+            rows=[
+                EbdTableRow(
+                    step_number="1",
+                    description="Is this a test?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                            result_code=None,
+                            note="Siehe EBD E_0621 und EBD E_0622 für Details",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+                            result_code="A01",
+                            note="Cluster: Ablehnung",
+                        ),
+                    ],
+                ),
+            ],
+        )
+
+        graph = convert_table_to_graph(table_with_multiple_refs)
+        dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
+        # Both references should be styled
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_code
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0622</U></FONT>' in dot_code
+        # Note: Node with multiple references won't have href (only single-ref nodes get href)
+
+    def test_no_ebd_reference_no_link(self) -> None:
+        """Verify that notes without EBD references are not affected."""
+        graph = convert_table_to_graph(table_e0003)
+        dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
+
+        # Should not have any styled links since table_e0003 has no EBD references
+        assert 'href="?ebd=' not in dot_code
+        assert "<U>EBD E_" not in dot_code
+
+    def test_real_ebd_e0462_integration(self) -> None:
+        """Integration test using real E_0462 data which contains EBD E_0402 cross-references."""
+        # E_0462 has EBD E_0402 references in steps 23 and 24
+        graph = convert_table_to_graph(table_e0462)
+
+        # Verify the outcome nodes have ebd_references extracted
+        outcome_nodes_with_refs: list[OutcomeNode] = []
+        for node_key in graph.graph.nodes:
+            node = graph.graph.nodes[node_key]["node"]
+            if isinstance(node, OutcomeNode) and any(node.ebd_references):
+                outcome_nodes_with_refs.append(node)
+
+        assert len(outcome_nodes_with_refs) > 0, "Expected at least one OutcomeNode with ebd_references"
+        assert any("E_0402" in refs for node in outcome_nodes_with_refs for refs in node.ebd_references)
+
+        # Verify DOT output has styled links and href attributes
+        dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0402</U></FONT>' in dot_code
+        assert 'href="?ebd=E_0402"' in dot_code
+
+
+class TestEbdReferencesPropagation:
+    """Tests for ebd_references propagation from EbdTableSubRow to OutcomeNode during graph conversion."""
+
+    def test_ebd_references_propagates_to_outcome_node(self) -> None:
+        """Verify that ebd_references from EbdTableSubRow note are available in the OutcomeNode after conversion."""
+        table_with_ebd_reference = EbdTable(
+            metadata=EbdTableMetaData(
+                ebd_code="E_TEST",
+                chapter="Test Chapter",
+                section="Test Section",
+                ebd_name="E_TEST_Test",
+                role="Test",
+            ),
+            rows=[
+                EbdTableRow(
+                    step_number="1",
+                    description="Is this a test?",
+                    sub_rows=[
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+                            result_code=None,
+                            note="EBD E_0621_Prüfen, ob Anfrage zur Beendigung der Zuordnung erforderlich",
+                        ),
+                        EbdTableSubRow(
+                            check_result=EbdCheckResult(result=False, subsequent_step_number=None),
+                            result_code="A01",
+                            note="Cluster: Ablehnung",
+                        ),
+                    ],
+                ),
+            ],
+        )
+
+        # Verify sub_row has the reference extracted
+        assert table_with_ebd_reference.rows[0].sub_rows[0].ebd_references == ["E_0621"]
+
+        # Convert to graph
+        graph = convert_table_to_graph(table_with_ebd_reference)
+
+        # Find the outcome node with the EBD reference note
+        outcome_node_with_ref: OutcomeNode | None = None
+        for node_key in graph.graph.nodes:
+            node = graph.graph.nodes[node_key]["node"]
+            if isinstance(node, OutcomeNode) and node.note and "EBD E_0621" in node.note:
+                outcome_node_with_ref = node
+                break
+
+        assert outcome_node_with_ref is not None, "OutcomeNode with EBD reference not found in graph"
+        assert outcome_node_with_ref.ebd_references == ["E_0621"]
+
+    def test_outcome_node_without_ebd_reference_has_empty_list(self) -> None:
+        """Verify that OutcomeNode without EBD references has an empty list."""
+        graph = convert_table_to_graph(table_e0003)
+
+        # Find outcome nodes
+        for node_key in graph.graph.nodes:
+            node = graph.graph.nodes[node_key]["node"]
+            if isinstance(node, OutcomeNode):
+                assert not any(
+                    node.ebd_references
+                ), f"Expected empty list for {node.get_key()}, got {node.ebd_references}"

@@ -2,6 +2,7 @@
 contains the graph side of things
 """
 
+import re
 from abc import ABC, abstractmethod
 from typing import Annotated, List, Optional, Union
 
@@ -9,7 +10,7 @@ from networkx import DiGraph  # type:ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # pylint:disable=too-few-public-methods
-from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
+from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, RESULT_CODE_REGEX, MultiStepInstruction
 
 
 class InstructionScope(BaseModel):
@@ -65,6 +66,12 @@ GraphResultCode = Annotated[str, Field(pattern=RESULT_CODE_REGEX)]
 
 #: Annotated type for subsequent step numbers (digits only, no 'Ende')
 SubsequentStepNumberDigitsOnly = Annotated[str, Field(pattern=r"^\d+$")]
+
+#: regex used to validate EBD codes, e.g. 'E_0621'
+_EBD_CODE_REGEX = r"^E_\d{4}$"
+
+#: Annotated type for EBD codes (e.g., 'E_0621')
+GraphEbdCode = Annotated[str, Field(pattern=_EBD_CODE_REGEX)]
 
 
 class EbdGraphMetaData(BaseModel):
@@ -165,6 +172,20 @@ class OutcomeNode(EbdGraphNode):  # networkx requirement: nodes are hashable (fr
     """
     An optional note for this outcome; e.g. 'Cluster:Ablehnung\nFristüberschreitung'
     """
+
+    ebd_references: list[GraphEbdCode] = Field(default_factory=list)
+    """
+    EBD codes referenced in the note field, e.g., ["E_0621"].
+    Automatically extracted from note using EBD_REFERENCE_REGEX.
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def extract_ebd_references(cls, data: dict) -> dict:  # type: ignore[type-arg]
+        """Extract EBD references from note using regex."""
+        if isinstance(data, dict) and data.get("note"):
+            data["ebd_references"] = re.findall(EBD_REFERENCE_REGEX, data["note"])
+        return data
 
     def get_key(self) -> str:
         if self.result_code is not None:

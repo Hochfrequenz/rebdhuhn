@@ -4,6 +4,7 @@ The central class in this module is the EbdTable.
 An EbdTable is the EDI@Energy raw representation of an "Entscheidungsbaum".
 """
 
+import re
 from datetime import date
 from typing import Annotated, List, Optional
 
@@ -15,6 +16,12 @@ _STEP_NUMBER_REGEX = r"^\d+\*?$"
 #: regex used to validate result codes, e.g. 'A01', 'A**', 'AA1'
 RESULT_CODE_REGEX = r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"
 
+#: regex used to detect EBD cross-references in notes, e.g. 'EBD E_0621'
+EBD_REFERENCE_REGEX = r"EBD (E_\d{4})"
+
+#: regex used to validate EBD codes, e.g. 'E_0621'
+_EBD_CODE_REGEX = r"^E_\d{4}$"
+
 #: Annotated type for step numbers
 StepNumber = Annotated[str, Field(pattern=_STEP_NUMBER_REGEX)]
 
@@ -23,6 +30,9 @@ ResultCode = Annotated[str, Field(pattern=RESULT_CODE_REGEX)]
 
 #: Annotated type for subsequent step numbers (includes 'Ende')
 SubsequentStepNumber = Annotated[str, Field(pattern=r"^(?:\d+\*?)|(Ende)$")]
+
+#: Annotated type for EBD codes (e.g., 'E_0621')
+EbdCode = Annotated[str, Field(pattern=_EBD_CODE_REGEX)]
 
 
 class EbdDocumentReleaseInformation(BaseModel):
@@ -169,6 +179,19 @@ class EbdTableSubRow(BaseModel):
     E.g. 'Cluster:Ablehnung\nFristüberschreitung'
     The German column header is 'Hinweis'.
     """
+
+    ebd_references: list[EbdCode] = Field(default_factory=list)
+    """
+    EBD codes referenced in the note field, e.g., ["E_0621"].
+    Automatically extracted from note using EBD_REFERENCE_REGEX.
+    """
+
+    @model_validator(mode="after")
+    def extract_ebd_references(self) -> "EbdTableSubRow":
+        """Extract EBD references from note using regex."""
+        if self.note:
+            self.ebd_references = re.findall(EBD_REFERENCE_REGEX, self.note)
+        return self
 
 
 class EbdTableRow(BaseModel):

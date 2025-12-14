@@ -51,29 +51,33 @@ def _format_label(label: str, ebd_link_template: str | None = None) -> str:
     label_with_linebreaks = add_line_breaks(label, max_line_length=_LABEL_MAX_LINE_LENGTH, line_sep="\n")
     escaped_label = escape(label_with_linebreaks)
 
-    # Replace EBD references with clickable links if template is provided
+    # Replace EBD references with styled text if template is provided
     if ebd_link_template:
-        escaped_label = _replace_ebd_references_with_links(escaped_label, ebd_link_template)
+        escaped_label = _replace_ebd_references_with_styled_text(escaped_label)
 
     return escaped_label.replace("\n", '<BR align="left"/>')
 
 
-def _replace_ebd_references_with_links(text: str, ebd_link_template: str) -> str:
+def _replace_ebd_references_with_styled_text(text: str) -> str:
     """
-    Replaces EBD references like "EBD E_0621" with clickable links.
+    Replaces EBD references like "EBD E_0621" with styled text indicating a link.
+
+    Graphviz HTML-like labels don't support <a href> tags directly in most contexts.
+    Instead, we style the reference text with underline and blue color to visually
+    indicate it's a link. The actual href is added at the node level for nodes
+    that contain EBD references.
 
     Args:
         text: The text containing potential EBD references
-        ebd_link_template: URL template with {ebd_code} placeholder
 
     Returns:
-        Text with EBD references wrapped in <a href="..."> tags
+        Text with EBD references styled as links (underlined, blue)
     """
 
     def replace_match(match: re.Match[str]) -> str:
         ebd_code = match.group(1)
-        url = ebd_link_template.replace("{ebd_code}", ebd_code)
-        return f'<a href="{url}">EBD {ebd_code}</a>'
+        # Style as link: underline and blue color
+        return f'<FONT COLOR="#0066cc"><U>EBD {ebd_code}</U></FONT>'
 
     return re.sub(EBD_REFERENCE_REGEX, replace_match, text)
 
@@ -128,23 +132,35 @@ def _convert_outcome_node_to_dot(
         ebd_link_template: Optional URL template for EBD cross-references.
             Use {ebd_code} as placeholder, e.g., "?ebd={ebd_code}"
     """
-    is_outcome_without_code = ebd_graph.graph.nodes[node]["node"].result_code is None
+    outcome_node = ebd_graph.graph.nodes[node]["node"]
+    is_outcome_without_code = outcome_node.result_code is None
     formatted_label: str = ""
     if not is_outcome_without_code:
+        formatted_label += f'<B>{outcome_node.result_code}</B><BR align="left"/><BR align="left"/>'
+    if outcome_node.note:
         formatted_label += (
-            f'<B>{ebd_graph.graph.nodes[node]["node"].result_code}</B><BR align="left"/><BR align="left"/>'
+            f"<FONT>" f'{_format_label(outcome_node.note, ebd_link_template)}<BR align="left"/>' f"</FONT>"
         )
-    if ebd_graph.graph.nodes[node]["node"].note:
-        formatted_label += (
-            f"<FONT>"
-            f'{_format_label(ebd_graph.graph.nodes[node]["node"].note, ebd_link_template)}<BR align="left"/>'
-            f"</FONT>"
-        )
-    return (
-        f'{indent}"{node}" '
-        # pylint:disable=line-too-long
-        f'[margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c4cac1", label=<{formatted_label}>, fontname="Roboto, sans-serif"];'
-    )
+
+    # Build node attributes
+    attrs = [
+        'margin="0.2,0.12"',
+        "shape=box",
+        'style="filled,rounded"',
+        "penwidth=0.0",
+        'fillcolor="#c4cac1"',
+        f"label=<{formatted_label}>",
+        'fontname="Roboto, sans-serif"',
+    ]
+
+    # Add href for nodes with exactly one EBD reference (makes entire node clickable)
+    if ebd_link_template and len(outcome_node.ebd_references) == 1:
+        url = ebd_link_template.replace("{ebd_code}", outcome_node.ebd_references[0])
+        attrs.append(f'href="{url}"')
+        attrs.append('target="_blank"')
+
+    # pylint:disable=line-too-long
+    return f'{indent}"{node}" [{", ".join(attrs)}];'
 
 
 def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> str:

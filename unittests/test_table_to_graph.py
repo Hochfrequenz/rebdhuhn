@@ -23,13 +23,7 @@ from rebdhuhn.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_table import (
-    EbdCheckResult,
-    EbdTable,
-    EbdTableMetaData,
-    EbdTableRow,
-    EbdTableSubRow,
-)
+from rebdhuhn.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 
@@ -626,8 +620,8 @@ class TestEbdTableModels:
 class TestEbdCrossReferenceLinks:
     """Tests for EBD cross-reference link rendering in DOT output."""
 
-    def test_ebd_link_template_renders_clickable_link(self) -> None:
-        """Verify that ebd_link_template parameter renders EBD references as clickable links."""
+    def test_ebd_link_template_renders_styled_link(self) -> None:
+        """Verify that ebd_link_template parameter renders EBD references with styling and href."""
         table_with_ebd_reference = EbdTable(
             metadata=EbdTableMetaData(
                 ebd_code="E_TEST",
@@ -661,11 +655,12 @@ class TestEbdCrossReferenceLinks:
         # Without template - should have plain text "EBD E_0621"
         dot_without_links = convert_graph_to_dot(graph)
         assert "EBD E_0621" in dot_without_links
-        assert '<a href="' not in dot_without_links
+        assert 'href="?ebd=' not in dot_without_links
 
-        # With template - should have clickable link
+        # With template - should have styled text and href attribute
         dot_with_links = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
-        assert '<a href="?ebd=E_0621">EBD E_0621</a>' in dot_with_links
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_with_links
+        assert 'href="?ebd=E_0621"' in dot_with_links
 
     def test_ebd_link_template_with_full_url(self) -> None:
         """Verify that full URL templates work correctly."""
@@ -699,10 +694,11 @@ class TestEbdCrossReferenceLinks:
 
         graph = convert_table_to_graph(table_with_ebd_reference)
         dot_code = convert_graph_to_dot(graph, ebd_link_template="https://example.com/ebd/{ebd_code}")
-        assert '<a href="https://example.com/ebd/E_0621">EBD E_0621</a>' in dot_code
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_code
+        assert 'href="https://example.com/ebd/E_0621"' in dot_code
 
-    def test_multiple_ebd_references_all_become_links(self) -> None:
-        """Verify that multiple EBD references in one note all become clickable links."""
+    def test_multiple_ebd_references_all_styled(self) -> None:
+        """Verify that multiple EBD references in one note all get styled."""
         table_with_multiple_refs = EbdTable(
             metadata=EbdTableMetaData(
                 ebd_code="E_TEST",
@@ -733,16 +729,19 @@ class TestEbdCrossReferenceLinks:
 
         graph = convert_table_to_graph(table_with_multiple_refs)
         dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
-        assert '<a href="?ebd=E_0621">EBD E_0621</a>' in dot_code
-        assert '<a href="?ebd=E_0622">EBD E_0622</a>' in dot_code
+        # Both references should be styled
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_code
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0622</U></FONT>' in dot_code
+        # Note: Node with multiple references won't have href (only single-ref nodes get href)
 
     def test_no_ebd_reference_no_link(self) -> None:
         """Verify that notes without EBD references are not affected."""
         graph = convert_table_to_graph(table_e0003)
         dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
 
-        # Should not have any links since table_e0003 has no EBD references
-        assert '<a href="?ebd=' not in dot_code
+        # Should not have any styled links since table_e0003 has no EBD references
+        assert 'href="?ebd=' not in dot_code
+        assert "<U>EBD E_" not in dot_code
 
     def test_real_ebd_e0462_integration(self) -> None:
         """Integration test using real E_0462 data which contains EBD E_0402 cross-references."""
@@ -759,9 +758,10 @@ class TestEbdCrossReferenceLinks:
         assert len(outcome_nodes_with_refs) > 0, "Expected at least one OutcomeNode with ebd_references"
         assert any("E_0402" in refs for node in outcome_nodes_with_refs for refs in node.ebd_references)
 
-        # Verify DOT output has clickable links
+        # Verify DOT output has styled links and href attributes
         dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
-        assert '<a href="?ebd=E_0402">EBD E_0402</a>' in dot_code
+        assert '<FONT COLOR="#0066cc"><U>EBD E_0402</U></FONT>' in dot_code
+        assert 'href="?ebd=E_0402"' in dot_code
 
 
 class TestEbdReferencesPropagation:
@@ -822,4 +822,6 @@ class TestEbdReferencesPropagation:
         for node_key in graph.graph.nodes:
             node = graph.graph.nodes[node_key]["node"]
             if isinstance(node, OutcomeNode):
-                assert not any(node.ebd_references), f"Expected empty list for {node.get_key()}, got {node.ebd_references}"
+                assert not any(
+                    node.ebd_references
+                ), f"Expected empty list for {node.get_key()}, got {node.ebd_references}"

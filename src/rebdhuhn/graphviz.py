@@ -1,5 +1,21 @@
 """
 This module contains logic to convert EbdGraph data to dot code (Graphviz) and further to parse this code to SVG images.
+
+Multi-Step Instructions (MSI) Visualization
+-------------------------------------------
+MultiStepInstruction objects from ebdamame define contextual notes that apply to multiple steps.
+The model provides only `first_step_number_affected` and `instruction_text` - there is no explicit end step.
+
+Assumptions made for visualization:
+- Instructions are sorted by first_step_number_affected (numerically)
+- Each instruction's scope extends from its first_step_number_affected until the next instruction begins
+- The last instruction's scope extends to the end of the graph
+- Step numbers can be parsed as integers for comparison
+
+Not included in current visualization:
+- Outcome nodes are not grouped into instruction clusters (only decision/transition nodes with step numbers)
+- No visual distinction between different instruction types (e.g., "per MaLo" vs "collect all answers")
+- PlantUML output does not render multi-step instructions
 """
 
 from xml.sax.saxutils import escape
@@ -175,150 +191,134 @@ def _convert_multi_step_instruction_to_dot(instruction: MultiStepInstruction, in
     )
 
 
-def _get_step_number_from_node(ebd_graph: EbdGraph, node: str) -> str | None:
+def _get_step_number(ebd_graph: EbdGraph, node_key: str) -> str | None:
     """
-    Extract the step number from a node if it has one (DecisionNode or TransitionNode).
-    Returns None for nodes without step numbers (Start, End, Outcome nodes).
+    Returns the step_number attribute if the node has one (DecisionNode, TransitionNode), else None.
     """
-    node_data = ebd_graph.graph.nodes[node]["node"]
-    if hasattr(node_data, "step_number"):
-        return str(node_data.step_number)
+    node = ebd_graph.graph.nodes[node_key]["node"]
+    if hasattr(node, "step_number"):
+        return str(node.step_number)
     return None
 
 
-def _compute_instruction_ranges(
+def _find_max_step_in_range(all_step_numbers: set[str], start: int, end_exclusive: int) -> str | None:
+    """
+    Returns the highest step number in [start, end_exclusive), or None if no steps exist in range.
+    """
+    max_step: str | None = None
+    max_value = -1
+    for step in all_step_numbers:
+        step_value = int(step)
+        if start <= step_value < end_exclusive and step_value > max_value:
+            max_value = step_value
+            max_step = step
+    return max_step
+
+
+def _compute_instruction_scope(
     instructions: list[MultiStepInstruction], all_step_numbers: set[str]
 ) -> list[tuple[MultiStepInstruction, str, str | None]]:
     """
-    Compute the step number range for each multi-step instruction.
-    Returns list of (instruction, start_step, end_step) tuples.
-    end_step is None only if the instruction applies to the end of the graph (last instruction).
-    For non-last instructions, end_step is the highest step number before the next instruction starts.
+    Determines which steps each instruction affects based on first_step_number_affected.
+
+    Returns (instruction, start_step, end_step) tuples where end_step is None for the last instruction
+    (meaning "until end of graph") or the highest step number before the next instruction begins.
     """
     if not instructions:
         return []
 
-    # Sort instructions by their first step number (numerically)
-    sorted_instructions = sorted(instructions, key=lambda x: int(x.first_step_number_affected))
+    by_start_step = sorted(instructions, key=lambda x: int(x.first_step_number_affected))
+    scopes: list[tuple[MultiStepInstruction, str, str | None]] = []
 
-    ranges: list[tuple[MultiStepInstruction, str, str | None]] = []
-    for i, inst in enumerate(sorted_instructions):
-        start_step = inst.first_step_number_affected
-        start_int = int(start_step)
+    for i, instruction in enumerate(by_start_step):
+        start_step = instruction.first_step_number_affected
+        is_last_instruction = i + 1 >= len(by_start_step)
 
-        if i + 1 < len(sorted_instructions):
-            # Non-last instruction: find the highest step number before next instruction starts
-            next_start = int(sorted_instructions[i + 1].first_step_number_affected)
-            # Find the highest step number in range [start_step, next_start)
-            end_step: str | None = None
-            max_step_int = -1
-            for step in all_step_numbers:
-                step_int = int(step)
-                if start_int <= step_int < next_start and step_int > max_step_int:
-                    max_step_int = step_int
-                    end_step = step
-            # If no steps found in range, use start_step - 1 as end to create empty range
-            # This ensures _get_nodes_in_step_range returns empty list for this cluster
-            if end_step is None:
-                end_step = str(start_int - 1)
-        else:
-            # Last instruction applies to end of graph
+        if is_last_instruction:
             end_step = None
+        else:
+            next_instruction_start = int(by_start_step[i + 1].first_step_number_affected)
+            end_step = _find_max_step_in_range(all_step_numbers, int(start_step), next_instruction_start)
+            if end_step is None:
+                end_step = str(int(start_step) - 1)
 
-        ranges.append((inst, start_step, end_step))
+        scopes.append((instruction, start_step, end_step))
 
-    return ranges
+    return scopes
 
 
-def _get_nodes_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: str | None) -> list[str]:
+def _collect_node_keys_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: str | None) -> list[str]:
     """
-    Get all node keys that have step numbers within the given range (inclusive).
+    Returns node keys for nodes with step numbers in [start_step, end_step].
     If end_step is None, includes all steps >= start_step.
     """
-    nodes_in_range: list[str] = []
-    start_int = int(start_step)
-    end_int = int(end_step) if end_step else None
+    start = int(start_step)
+    end = int(end_step) if end_step else None
 
-    for node in ebd_graph.graph.nodes:
-        step_number = _get_step_number_from_node(ebd_graph, node)
-        if step_number is not None:
-            step_int = int(step_number)
-            if step_int >= start_int and (end_int is None or step_int <= end_int):
-                nodes_in_range.append(node)
+    node_keys: list[str] = []
+    for node_key in ebd_graph.graph.nodes:
+        step_number = _get_step_number(ebd_graph, node_key)
+        if step_number is None:
+            continue
+        step = int(step_number)
+        if step >= start and (end is None or step <= end):
+            node_keys.append(node_key)
 
-    return nodes_in_range
+    return node_keys
 
 
 def _convert_multi_step_instruction_cluster_to_dot(
     ebd_graph: EbdGraph,
     instruction: MultiStepInstruction,
-    nodes_in_range: list[str],
+    affected_node_keys: list[str],
     indent: str,
 ) -> str:
     """
-    Convert a multi-step instruction and its affected nodes to a DOT subgraph cluster.
-    The cluster creates a light box around all nodes affected by the instruction.
+    Renders a DOT subgraph cluster containing the instruction note and all affected step nodes.
     """
-    cluster_indent = indent
     inner_indent = indent + ADD_INDENT
+    msi_node_key = _get_multi_step_instruction_node_key(instruction)
 
-    node_key = _get_multi_step_instruction_node_key(instruction)
-    cluster_name = f"cluster_{node_key}"
-
-    lines: list[str] = []
-    lines.append(f'{cluster_indent}subgraph "{cluster_name}" {{')
-    # Light blue background with dashed border to match instruction node style
-    lines.append(f'{inner_indent}style="dashed,rounded";')
-    lines.append(f'{inner_indent}bgcolor="{_MSI_CLUSTER_BGCOLOR}";')
-    lines.append(f'{inner_indent}color="#888888";')
-    lines.append(f"{inner_indent}penwidth=1.5;")
-    lines.append(f"{inner_indent}margin=16;")
-
-    # Add the instruction node inside the cluster
-    lines.append(_convert_multi_step_instruction_to_dot(instruction, inner_indent))
-
-    # Add all affected step nodes inside the cluster
-    for node in nodes_in_range:
-        lines.append(_convert_node_to_dot(ebd_graph, node, inner_indent))
-
-    lines.append(f"{cluster_indent}}}")
+    lines: list[str] = [
+        f'{indent}subgraph "cluster_{msi_node_key}" {{',
+        f'{inner_indent}style="dashed,rounded";',
+        f'{inner_indent}bgcolor="{_MSI_CLUSTER_BGCOLOR}";',
+        f'{inner_indent}color="#888888";',
+        f"{inner_indent}penwidth=1.5;",
+        f"{inner_indent}margin=16;",
+        _convert_multi_step_instruction_to_dot(instruction, inner_indent),
+    ]
+    for node_key in affected_node_keys:
+        lines.append(_convert_node_to_dot(ebd_graph, node_key, inner_indent))
+    lines.append(f"{indent}}}")
 
     return "\n".join(lines)
 
 
 def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
     """
-    Convert all nodes of the EbdGraph to dot output and return it as a string.
+    Convert all nodes of the EbdGraph to dot output.
     Nodes affected by multi-step instructions are grouped into clusters.
     """
     result_parts: list[str] = []
+    node_keys_in_clusters: set[str] = set()
 
-    # Track which nodes are already rendered inside clusters
-    nodes_in_clusters: set[str] = set()
-
-    # Add multi-step instruction clusters if present
     if ebd_graph.multi_step_instructions:
-        # Get all step numbers from the graph
-        all_step_numbers: set[str] = set()
-        for node in ebd_graph.graph.nodes:
-            step_number = _get_step_number_from_node(ebd_graph, node)
-            if step_number is not None:
-                all_step_numbers.add(step_number)
+        all_step_numbers: set[str] = {
+            step for node_key in ebd_graph.graph.nodes if (step := _get_step_number(ebd_graph, node_key)) is not None
+        }
+        instruction_scopes = _compute_instruction_scope(ebd_graph.multi_step_instructions, all_step_numbers)
 
-        # Compute ranges and create clusters
-        ranges = _compute_instruction_ranges(ebd_graph.multi_step_instructions, all_step_numbers)
-        for instruction, start_step, end_step in ranges:
-            # Compute nodes once and reuse for both cluster creation and tracking
-            nodes_in_range = _get_nodes_in_step_range(ebd_graph, start_step, end_step)
+        for instruction, start_step, end_step in instruction_scopes:
+            affected_node_keys = _collect_node_keys_in_step_range(ebd_graph, start_step, end_step)
             result_parts.append(
-                _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, nodes_in_range, indent)
+                _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, affected_node_keys, indent)
             )
-            nodes_in_clusters.update(nodes_in_range)
+            node_keys_in_clusters.update(affected_node_keys)
 
-    # Add remaining nodes that are not inside any cluster
-    for node in ebd_graph.graph.nodes:
-        if node not in nodes_in_clusters:
-            result_parts.append(_convert_node_to_dot(ebd_graph, node, indent))
+    for node_key in ebd_graph.graph.nodes:
+        if node_key not in node_keys_in_clusters:
+            result_parts.append(_convert_node_to_dot(ebd_graph, node_key, indent))
 
     return "\n".join(result_parts)
 

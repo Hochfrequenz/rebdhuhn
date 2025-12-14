@@ -6,10 +6,47 @@ from abc import ABC, abstractmethod
 from typing import Annotated, List, Optional, Union
 
 from networkx import DiGraph  # type:ignore[import-untyped]
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
+
+
+class InstructionScope(BaseModel):
+    """
+    Represents the scope of a multi-step instruction within an EBD graph.
+
+    The scope defines which steps are affected by the instruction, from start_step
+    until end_step (inclusive), or until the end of the graph if end_step is None.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    instruction: MultiStepInstruction
+    """The multi-step instruction."""
+
+    start_step: str
+    """The first step number affected (from instruction.first_step_number_affected)."""
+
+    end_step: str | None
+    """
+    The last step number affected (inclusive), or None if this is the last instruction
+    (meaning it extends to the end of the graph).
+
+    When end_step is set to a value less than start_step (e.g., start_step - 1),
+    it indicates an empty range with no steps.
+    """
+
+    @model_validator(mode="after")
+    def validate_start_step_matches_instruction(self) -> "InstructionScope":
+        """Validate that start_step matches the instruction's first_step_number_affected."""
+        if self.start_step != self.instruction.first_step_number_affected:
+            raise ValueError(
+                f"start_step ({self.start_step}) must match "
+                f"instruction.first_step_number_affected ({self.instruction.first_step_number_affected})"
+            )
+        return self
+
 
 #: Wildcard result code "A**" used in EBDs when the actual code is determined dynamically at runtime.
 #: This code can appear multiple times in an EBD with different notes explaining which codes it represents.
@@ -308,6 +345,61 @@ class EbdGraph(BaseModel):
     If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
     instructions. There might be more than one of these instructions in one EBD table.
     """
+
+    def get_all_step_numbers(self) -> set[str]:
+        """Returns all step numbers from nodes that have a step_number attribute."""
+        step_numbers: set[str] = set()
+        for node_key in self.graph.nodes:
+            node = self.graph.nodes[node_key]["node"]
+            if hasattr(node, "step_number"):
+                step_numbers.add(str(node.step_number))
+        return step_numbers
+
+    def get_instruction_scopes(self) -> list[InstructionScope]:
+        """
+        Determines which steps each multi-step instruction affects.
+
+        Instructions are sorted by first_step_number_affected. Each instruction's scope
+        extends from its start step until the step before the next instruction begins.
+        The last instruction's scope extends to the end of the graph (end_step=None).
+
+        Step numbers are compared as integers, so "100" < "205" < "305".
+        """
+        if not self.multi_step_instructions:
+            return []
+
+        all_step_numbers = self.get_all_step_numbers()
+        by_start_step = sorted(self.multi_step_instructions, key=lambda x: int(x.first_step_number_affected))
+        scopes: list[InstructionScope] = []
+
+        for i, instruction in enumerate(by_start_step):
+            start_step = instruction.first_step_number_affected
+            is_last_instruction = i + 1 >= len(by_start_step)
+
+            if is_last_instruction:
+                end_step = None
+            else:
+                next_instruction_start = int(by_start_step[i + 1].first_step_number_affected)
+                end_step = self._find_max_step_in_range(all_step_numbers, int(start_step), next_instruction_start)
+                if end_step is None:
+                    # No steps in range: create empty scope by setting end < start
+                    end_step = str(int(start_step) - 1)
+
+            scopes.append(InstructionScope(instruction=instruction, start_step=start_step, end_step=end_step))
+
+        return scopes
+
+    @staticmethod
+    def _find_max_step_in_range(all_step_numbers: set[str], start: int, end_exclusive: int) -> str | None:
+        """Returns the highest step number in [start, end_exclusive), or None if empty."""
+        max_step: str | None = None
+        max_value = -1
+        for step in all_step_numbers:
+            step_value = int(step)
+            if start <= step_value < end_exclusive and step_value > max_value:
+                max_value = step_value
+                max_step = step
+        return max_step
 
     # pylint:disable=fixme
     # todo @leon: fill it with all the things you need

@@ -181,7 +181,7 @@ class TestEbdGraphInstructionScopes:
         graph = convert_table_to_graph(table)
 
         scopes = graph.get_instruction_scopes()
-        start_steps = [start_step for _, start_step, _ in scopes]
+        start_steps = [scope.start_step for scope in scopes]
 
         assert start_steps == ["100", "205", "305", "400"]
 
@@ -194,9 +194,9 @@ class TestEbdGraphInstructionScopes:
 
         scopes = graph.get_instruction_scopes()
 
-        last_instruction, last_start, last_end = scopes[-1]
-        assert last_start == "400"
-        assert last_end is None
+        last_scope = scopes[-1]
+        assert last_scope.start_step == "400"
+        assert last_scope.end_step is None
 
     def test_get_instruction_scopes_non_last_have_end_step(self) -> None:
         """Non-last instruction scopes have end_step set."""
@@ -207,9 +207,9 @@ class TestEbdGraphInstructionScopes:
 
         scopes = graph.get_instruction_scopes()
 
-        for instruction, start_step, end_step in scopes[:-1]:
-            assert end_step is not None
-            assert int(end_step) >= int(start_step)
+        for scope in scopes[:-1]:
+            assert scope.end_step is not None
+            assert int(scope.end_step) >= int(scope.start_step)
 
     def test_get_instruction_scopes_empty_when_no_instructions(self) -> None:
         """get_instruction_scopes returns empty list when no instructions."""

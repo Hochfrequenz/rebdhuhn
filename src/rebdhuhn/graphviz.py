@@ -247,10 +247,10 @@ def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str) -> str:
     result_parts: list[str] = []
     node_keys_in_clusters: set[str] = set()
 
-    for instruction, start_step, end_step in ebd_graph.get_instruction_scopes():
-        affected_node_keys = _collect_node_keys_in_step_range(ebd_graph, start_step, end_step)
+    for scope in ebd_graph.get_instruction_scopes():
+        affected_node_keys = _collect_node_keys_in_step_range(ebd_graph, scope.start_step, scope.end_step)
         result_parts.append(
-            _convert_multi_step_instruction_cluster_to_dot(ebd_graph, instruction, affected_node_keys, indent)
+            _convert_multi_step_instruction_cluster_to_dot(ebd_graph, scope.instruction, affected_node_keys, indent)
         )
         node_keys_in_clusters.update(affected_node_keys)
 

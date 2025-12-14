@@ -3,22 +3,24 @@ contains the graph side of things
 """
 
 from abc import ABC, abstractmethod
-from typing import Annotated, List, NamedTuple, Optional, Union
+from typing import Annotated, List, Optional, Union
 
 from networkx import DiGraph  # type:ignore[import-untyped]
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
 
 
-class InstructionScope(NamedTuple):
+class InstructionScope(BaseModel):
     """
     Represents the scope of a multi-step instruction within an EBD graph.
 
     The scope defines which steps are affected by the instruction, from start_step
     until end_step (inclusive), or until the end of the graph if end_step is None.
     """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
 
     instruction: MultiStepInstruction
     """The multi-step instruction."""
@@ -34,6 +36,16 @@ class InstructionScope(NamedTuple):
     When end_step is set to a value less than start_step (e.g., start_step - 1),
     it indicates an empty range with no steps.
     """
+
+    @model_validator(mode="after")
+    def validate_start_step_matches_instruction(self) -> "InstructionScope":
+        """Validate that start_step matches the instruction's first_step_number_affected."""
+        if self.start_step != self.instruction.first_step_number_affected:
+            raise ValueError(
+                f"start_step ({self.start_step}) must match "
+                f"instruction.first_step_number_affected ({self.instruction.first_step_number_affected})"
+            )
+        return self
 
 #: Wildcard result code "A**" used in EBDs when the actual code is determined dynamically at runtime.
 #: This code can appear multiple times in an EBD with different notes explaining which codes it represents.
@@ -372,7 +384,7 @@ class EbdGraph(BaseModel):
                     # No steps in range: create empty scope by setting end < start
                     end_step = str(int(start_step) - 1)
 
-            scopes.append(InstructionScope(instruction, start_step, end_step))
+            scopes.append(InstructionScope(instruction=instruction, start_step=start_step, end_step=end_step))
 
         return scopes
 

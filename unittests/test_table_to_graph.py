@@ -8,22 +8,26 @@ import pytest
 from lxml import etree
 from networkx import DiGraph, empty_graph  # type:ignore[import-untyped]
 
-from rebdhuhn import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki, convert_table_to_graph
-from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes
-from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
-from rebdhuhn.kroki import Kroki
-from rebdhuhn.models import EbdGraph, EbdGraphMetaData
-from rebdhuhn.models.ebd_graph import (
+from rebdhuhn import (
     DecisionNode,
-    EbdGraphEdge,
-    EbdGraphNode,
+    EbdCheckResult,
+    EbdGraph,
+    EbdGraphMetaData,
+    EbdTable,
+    EbdTableMetaData,
+    EbdTableRow,
+    EbdTableSubRow,
     EndNode,
+    Kroki,
     OutcomeNode,
-    StartNode,
-    ToNoEdge,
-    ToYesEdge,
+    convert_dot_to_svg_kroki,
+    convert_graph_to_dot,
+    convert_graph_to_plantuml,
+    convert_plantuml_to_svg_kroki,
+    convert_table_to_graph,
 )
-from rebdhuhn.models.ebd_table import EbdCheckResult, EbdTable, EbdTableMetaData, EbdTableRow, EbdTableSubRow
+from rebdhuhn.graph_conversion import convert_empty_table_to_graph, get_all_edges, get_all_nodes
+from rebdhuhn.models.ebd_graph import EbdGraphEdge, EbdGraphNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.errors import GraphTooComplexForPlantumlError
 from unittests.examples import table_e0003, table_e0015, table_e0025, table_e0401
 

@@ -10,10 +10,7 @@ from pathlib import Path
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
-from rebdhuhn import convert_graph_to_dot, convert_table_to_graph
-from rebdhuhn.kroki import Kroki
-from rebdhuhn.models import EbdTable
-from rebdhuhn.models.ebd_graph import OutcomeNode
+from rebdhuhn import EbdTable, Kroki, OutcomeNode, convert_graph_to_dot, convert_table_to_graph
 
 path_to_e0622_json = Path(__file__).parent / "test_files" / "e0622.json"
 assert path_to_e0622_json.exists()

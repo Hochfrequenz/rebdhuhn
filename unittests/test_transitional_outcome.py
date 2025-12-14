@@ -9,9 +9,7 @@ from pathlib import Path
 import pytest
 from syrupy.assertion import SnapshotAssertion
 
-from rebdhuhn import convert_graph_to_dot, convert_table_to_graph
-from rebdhuhn.kroki import Kroki
-from rebdhuhn.models import EbdTable
+from rebdhuhn import EbdTable, Kroki, convert_graph_to_dot, convert_table_to_graph
 
 path_to_raw_table_json = Path(__file__).parent / "test_files" / "fv2504_ebd40b_e0610.json"
 assert path_to_raw_table_json.exists()

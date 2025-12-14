@@ -9,8 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from rebdhuhn import convert_graph_to_dot, convert_graph_to_plantuml, convert_table_to_graph
-from rebdhuhn.models import EbdTable
+from rebdhuhn import EbdTable, convert_graph_to_dot, convert_graph_to_plantuml, convert_table_to_graph
 from rebdhuhn.models.ebd_graph import TransitionalOutcomeNode
 
 path_to_e0259_json = Path(__file__).parent / "test_files" / "e0259.json"

@@ -1,7 +1,6 @@
 import pytest
 
-from rebdhuhn import convert_graph_to_plantuml, convert_table_to_graph
-from rebdhuhn.models import EbdTable
+from rebdhuhn import EbdTable, convert_graph_to_plantuml, convert_table_to_graph
 from rebdhuhn.models.errors import (
     EbdCrossReferenceNotSupportedError,
     EndeInWrongColumnError,

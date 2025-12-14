@@ -1,13 +1,13 @@
 import pytest
 
-from rebdhuhn.models.ebd_graph import OutcomeNode
-from rebdhuhn.models.ebd_table import (
+from rebdhuhn import (
     EbdCheckResult,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
     MultiStepInstruction,
+    OutcomeNode,
 )
 
 

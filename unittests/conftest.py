@@ -6,7 +6,7 @@ from typing import Generator
 
 import pytest
 
-from rebdhuhn.kroki import Kroki
+from rebdhuhn import Kroki
 
 try:
     from testcontainers.core.container import DockerContainer  # type:ignore[import-untyped]

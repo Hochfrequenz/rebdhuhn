@@ -309,5 +309,58 @@ class EbdGraph(BaseModel):
     instructions. There might be more than one of these instructions in one EBD table.
     """
 
+    def get_all_step_numbers(self) -> set[str]:
+        """Returns all step numbers from nodes that have a step_number attribute."""
+        step_numbers: set[str] = set()
+        for node_key in self.graph.nodes:
+            node = self.graph.nodes[node_key]["node"]
+            if hasattr(node, "step_number"):
+                step_numbers.add(str(node.step_number))
+        return step_numbers
+
+    def get_instruction_scopes(self) -> list[tuple["MultiStepInstruction", str, str | None]]:
+        """
+        Determines which steps each multi-step instruction affects.
+
+        Returns (instruction, start_step, end_step) tuples where:
+        - start_step is instruction.first_step_number_affected
+        - end_step is the highest step number before the next instruction begins,
+          or None for the last instruction (meaning "until end of graph")
+        """
+        if not self.multi_step_instructions:
+            return []
+
+        all_step_numbers = self.get_all_step_numbers()
+        by_start_step = sorted(self.multi_step_instructions, key=lambda x: int(x.first_step_number_affected))
+        scopes: list[tuple[MultiStepInstruction, str, str | None]] = []
+
+        for i, instruction in enumerate(by_start_step):
+            start_step = instruction.first_step_number_affected
+            is_last_instruction = i + 1 >= len(by_start_step)
+
+            if is_last_instruction:
+                end_step = None
+            else:
+                next_instruction_start = int(by_start_step[i + 1].first_step_number_affected)
+                end_step = self._find_max_step_in_range(all_step_numbers, int(start_step), next_instruction_start)
+                if end_step is None:
+                    end_step = str(int(start_step) - 1)
+
+            scopes.append((instruction, start_step, end_step))
+
+        return scopes
+
+    @staticmethod
+    def _find_max_step_in_range(all_step_numbers: set[str], start: int, end_exclusive: int) -> str | None:
+        """Returns the highest step number in [start, end_exclusive), or None if empty."""
+        max_step: str | None = None
+        max_value = -1
+        for step in all_step_numbers:
+            step_value = int(step)
+            if start <= step_value < end_exclusive and step_value > max_value:
+                max_value = step_value
+                max_step = step
+        return max_step
+
     # pylint:disable=fixme
     # todo @leon: fill it with all the things you need

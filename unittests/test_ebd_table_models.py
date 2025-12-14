@@ -1,5 +1,6 @@
 import pytest
 
+from rebdhuhn.models.ebd_graph import OutcomeNode
 from rebdhuhn.models.ebd_table import (
     EbdCheckResult,
     EbdTable,
@@ -277,3 +278,75 @@ dem Wert „Marktlokations-ID“ angegeben?""",
         )
         assert snippet_from_e0453.multi_step_instructions is not None
         # If it can be instantiated that's test enough for the model.
+
+    def test_ebd_references_extracted_from_note(self) -> None:
+        """EBD references like 'EBD E_0621' should be extracted from the note field."""
+        sub_row = EbdTableSubRow(
+            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+            result_code=None,
+            note="EBD E_0621_Prüfen, ob Anfrage zur Beendigung der Zuordnung erforderlich",
+        )
+        assert sub_row.ebd_references == ["E_0621"]
+
+    def test_ebd_references_empty_when_no_reference(self) -> None:
+        """ebd_references should be empty list when note contains no EBD reference."""
+        sub_row = EbdTableSubRow(
+            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+            result_code="A01",
+            note="Cluster Ablehnung\nFristüberschreitung",
+        )
+        assert not any(sub_row.ebd_references)
+
+    def test_ebd_references_empty_when_note_is_none(self) -> None:
+        """ebd_references should be empty list when note is None."""
+        sub_row = EbdTableSubRow(
+            check_result=EbdCheckResult(result=False, subsequent_step_number="2"),
+            result_code=None,
+            note=None,
+        )
+        assert not any(sub_row.ebd_references)
+
+    def test_ebd_references_multiple_references(self) -> None:
+        """Multiple EBD references in one note should all be captured."""
+        sub_row = EbdTableSubRow(
+            check_result=EbdCheckResult(result=True, subsequent_step_number=None),
+            result_code=None,
+            note="Siehe EBD E_0621 und EBD E_0622 für weitere Details",
+        )
+        assert sub_row.ebd_references == ["E_0621", "E_0622"]
+
+
+class TestOutcomeNodeEbdReferences:
+    """Tests for OutcomeNode.ebd_references extraction."""
+
+    def test_ebd_references_extracted_from_note(self) -> None:
+        """EBD references like 'EBD E_0621' should be extracted from the note field."""
+        node = OutcomeNode(
+            result_code=None,
+            note="EBD E_0621_Prüfen, ob Anfrage zur Beendigung der Zuordnung erforderlich",
+        )
+        assert node.ebd_references == ["E_0621"]
+
+    def test_ebd_references_empty_when_no_reference(self) -> None:
+        """ebd_references should be empty list when note contains no EBD reference."""
+        node = OutcomeNode(
+            result_code="A01",
+            note="Cluster Ablehnung\nFristüberschreitung",
+        )
+        assert not any(node.ebd_references)
+
+    def test_ebd_references_empty_when_note_is_none(self) -> None:
+        """ebd_references should be empty list when note is None."""
+        node = OutcomeNode(
+            result_code="A01",
+            note=None,
+        )
+        assert not any(node.ebd_references)
+
+    def test_ebd_references_multiple_references(self) -> None:
+        """Multiple EBD references in one note should all be captured."""
+        node = OutcomeNode(
+            result_code=None,
+            note="Siehe EBD E_0621 und EBD E_0622 für weitere Details",
+        )
+        assert node.ebd_references == ["E_0621", "E_0622"]

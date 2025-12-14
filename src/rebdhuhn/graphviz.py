@@ -232,7 +232,7 @@ def _convert_multi_step_instruction_cluster_to_dot(
         f"{inner_indent}margin=16;",
         _convert_multi_step_instruction_to_dot(instruction, inner_indent),
     ]
-    for node_key in affected_node_keys:
+    for node_key in sorted(affected_node_keys, key=lambda k: int(k) if k.isdigit() else float("inf")):
         lines.append(_convert_node_to_dot(ebd_graph, node_key, inner_indent))
     lines.append(f"{indent}}}")
 

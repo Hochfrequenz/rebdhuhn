@@ -31,3 +31,22 @@ def test_e0610_svg_creation(kroki_client: Kroki, snapshot: SnapshotAssertion) ->
     ) as svg_file:
         svg_file.write(svg_code)
     assert dot_code == snapshot(name=f"table_dot_svg_transitional_outcome_{graph.metadata.ebd_code}")
+
+
+def test_e0610_dot_with_ebd_link_template() -> None:
+    """
+    Regression test: Verify that ebd_link_template works with TransitionalOutcomeNode.
+
+    Previously, using ebd_link_template with EBDs containing TransitionalOutcomeNode
+    caused AttributeError because TransitionalOutcomeNode doesn't have ebd_references.
+    """
+    with open(path_to_raw_table_json, "r", encoding="utf-8") as f:
+        table_json = json.load(f)
+    e_0610_table = EbdTable.model_validate(table_json)
+    graph = convert_table_to_graph(e_0610_table)
+
+    # This should not raise AttributeError
+    dot_code = convert_graph_to_dot(graph, ebd_link_template="?ebd={ebd_code}")
+
+    assert len(dot_code) > 0
+    assert "digraph" in dot_code

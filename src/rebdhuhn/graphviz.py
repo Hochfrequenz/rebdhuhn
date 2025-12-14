@@ -191,7 +191,8 @@ def _compute_instruction_ranges(
     """
     Compute the step number range for each multi-step instruction.
     Returns list of (instruction, start_step, end_step) tuples.
-    end_step is None if the instruction applies to the end of the graph.
+    end_step is None only if the instruction applies to the end of the graph (last instruction).
+    For non-last instructions, end_step is the highest step number before the next instruction starts.
     """
     if not instructions:
         return []
@@ -202,18 +203,26 @@ def _compute_instruction_ranges(
     ranges: List[Tuple[MultiStepInstruction, str, Optional[str]]] = []
     for i, inst in enumerate(sorted_instructions):
         start_step = inst.first_step_number_affected
-        # End step is the step before the next instruction starts, or None if last
+        start_int = int(start_step)
+
         if i + 1 < len(sorted_instructions):
+            # Non-last instruction: find the highest step number before next instruction starts
             next_start = int(sorted_instructions[i + 1].first_step_number_affected)
-            # Find the highest step number less than next_start
+            # Find the highest step number in range [start_step, next_start)
             end_step: Optional[str] = None
+            max_step_int = -1
             for step in all_step_numbers:
                 step_int = int(step)
-                if int(start_step) <= step_int < next_start:
-                    if end_step is None or step_int > int(end_step):
-                        end_step = step
+                if start_int <= step_int < next_start and step_int > max_step_int:
+                    max_step_int = step_int
+                    end_step = step
+            # If no steps found in range, use start_step - 1 as end to create empty range
+            # This ensures _get_nodes_in_step_range returns empty list for this cluster
+            if end_step is None:
+                end_step = str(start_int - 1)
         else:
-            end_step = None  # Last instruction applies to end of graph
+            # Last instruction applies to end of graph
+            end_step = None
 
         ranges.append((inst, start_step, end_step))
 

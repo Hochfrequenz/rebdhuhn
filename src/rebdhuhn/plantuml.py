@@ -9,6 +9,7 @@ from networkx import DiGraph  # type:ignore[import-untyped]
 from rebdhuhn.graph_utils import COMMON_ANCESTOR_FIELD, _get_yes_no_edges, _mark_last_common_ancestors
 from rebdhuhn.kroki import PlantUmlToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EndNode, OutcomeNode
+from rebdhuhn.models.ebd_graph import TransitionalOutcomeNode
 from rebdhuhn.models.errors import (
     AmbiguousPlacementCasesError,
     GraphTooComplexForPlantumlError,
@@ -66,6 +67,29 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     return f"{result}{indent}kill;\n"
 
 
+def _convert_transitional_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
+    """
+    Converts a TransitionalOutcomeNode to plantuml code.
+
+    Unlike OutcomeNode, TransitionalOutcomeNode has subsequent steps, so we show
+    the result code and then continue to the next node (no kill statement).
+    """
+    trans_outcome_node: TransitionalOutcomeNode = graph.nodes[node]["node"]
+    assert isinstance(trans_outcome_node, TransitionalOutcomeNode), f"{node} is not a transitional outcome node."
+
+    result = f"{indent}:{trans_outcome_node.result_code};\n"
+    if trans_outcome_node.note is not None:
+        note = trans_outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
+        result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
+
+    # Get the subsequent node and convert it
+    successors = list(graph.successors(node))
+    if len(successors) == 1:
+        result += _convert_node_to_plantuml(graph, successors[0], indent)
+
+    return result
+
+
 def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
     """
     Converts a DecisionNode to plantuml code.
@@ -89,12 +113,17 @@ def _convert_decision_node_to_plantuml(graph: DiGraph, node: str, indent: str) -
     yes_node = str(yes_edge.target)
     no_node = str(no_edge.target)
 
+    common_ancestor_targets = graph.nodes[node].get(COMMON_ANCESTOR_FIELD, [])
+    has_common_ancestor = len(common_ancestor_targets) > 0
+
+    # Determine if yes/no branches should be drawn below the other for layout purposes.
+    # However, if the branch node is already a common ancestor target, the common_ancestor
+    # case will handle it, so we should not also mark it for below-drawing.
+    yes_below_no = _draw_node1_below_node2(graph, yes_node, no_node) and yes_node not in common_ancestor_targets
+    no_below_yes = _draw_node1_below_node2(graph, no_node, yes_node) and no_node not in common_ancestor_targets
+
     Cases = namedtuple("Cases", "yes_below_no no_below_yes common_ancestor")
-    cases = Cases(
-        _draw_node1_below_node2(graph, yes_node, no_node),
-        _draw_node1_below_node2(graph, no_node, yes_node),
-        COMMON_ANCESTOR_FIELD in graph.nodes[node],
-    )
+    cases = Cases(yes_below_no, no_below_yes, has_common_ancestor)
     if cases.count(True) > 1:
         raise AmbiguousPlacementCasesError(node, yes_node, no_node, tuple(cases))
 
@@ -137,10 +166,12 @@ def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
             return _convert_decision_node_to_plantuml(graph, node, indent)
         case OutcomeNode():
             return _convert_outcome_node_to_plantuml(graph, node, indent)
+        case TransitionalOutcomeNode():
+            return _convert_transitional_outcome_node_to_plantuml(graph, node, indent)
         case EndNode():
             return _convert_end_node_to_plantuml(graph, node, indent)
         case _:
-            raise ValueError(f"Unknown node type: {graph[node]['node']}")
+            raise ValueError(f"Unknown node type: {graph.nodes[node]['node']}")
 
 
 def convert_graph_to_plantuml(graph: EbdGraph) -> str:

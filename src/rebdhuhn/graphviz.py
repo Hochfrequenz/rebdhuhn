@@ -191,7 +191,7 @@ def _convert_multi_step_instruction_to_dot(instruction: MultiStepInstruction, in
     )
 
 
-def _collect_node_keys_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: str | None) -> list[str]:
+def _collect_node_keys_in_step_range(ebd_graph: EbdGraph, start_step: str, end_step: str | None) -> set[str]:
     """
     Returns node keys for nodes with step numbers in [start_step, end_step].
     If end_step is None, includes all steps >= start_step.
@@ -199,14 +199,14 @@ def _collect_node_keys_in_step_range(ebd_graph: EbdGraph, start_step: str, end_s
     start = int(start_step)
     end = int(end_step) if end_step else None
 
-    node_keys: list[str] = []
+    node_keys: set[str] = set()
     for node_key in ebd_graph.graph.nodes:
         node = ebd_graph.graph.nodes[node_key]["node"]
         if not hasattr(node, "step_number"):
             continue
         step = int(node.step_number)
         if step >= start and (end is None or step <= end):
-            node_keys.append(node_key)
+            node_keys.add(node_key)
 
     return node_keys
 
@@ -214,7 +214,7 @@ def _collect_node_keys_in_step_range(ebd_graph: EbdGraph, start_step: str, end_s
 def _convert_multi_step_instruction_cluster_to_dot(
     ebd_graph: EbdGraph,
     instruction: MultiStepInstruction,
-    affected_node_keys: list[str],
+    affected_node_keys: set[str],
     indent: str,
 ) -> str:
     """

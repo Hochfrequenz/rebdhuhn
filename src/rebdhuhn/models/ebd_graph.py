@@ -3,13 +3,37 @@ contains the graph side of things
 """
 
 from abc import ABC, abstractmethod
-from typing import Annotated, List, Optional, Union
+from typing import Annotated, List, NamedTuple, Optional, Union
 
 from networkx import DiGraph  # type:ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field
 
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import RESULT_CODE_REGEX, MultiStepInstruction
+
+
+class InstructionScope(NamedTuple):
+    """
+    Represents the scope of a multi-step instruction within an EBD graph.
+
+    The scope defines which steps are affected by the instruction, from start_step
+    until end_step (inclusive), or until the end of the graph if end_step is None.
+    """
+
+    instruction: MultiStepInstruction
+    """The multi-step instruction."""
+
+    start_step: str
+    """The first step number affected (from instruction.first_step_number_affected)."""
+
+    end_step: str | None
+    """
+    The last step number affected (inclusive), or None if this is the last instruction
+    (meaning it extends to the end of the graph).
+
+    When end_step is set to a value less than start_step (e.g., start_step - 1),
+    it indicates an empty range with no steps.
+    """
 
 #: Wildcard result code "A**" used in EBDs when the actual code is determined dynamically at runtime.
 #: This code can appear multiple times in an EBD with different notes explaining which codes it represents.
@@ -318,21 +342,22 @@ class EbdGraph(BaseModel):
                 step_numbers.add(str(node.step_number))
         return step_numbers
 
-    def get_instruction_scopes(self) -> list[tuple["MultiStepInstruction", str, str | None]]:
+    def get_instruction_scopes(self) -> list[InstructionScope]:
         """
         Determines which steps each multi-step instruction affects.
 
-        Returns (instruction, start_step, end_step) tuples where:
-        - start_step is instruction.first_step_number_affected
-        - end_step is the highest step number before the next instruction begins,
-          or None for the last instruction (meaning "until end of graph")
+        Instructions are sorted by first_step_number_affected. Each instruction's scope
+        extends from its start step until the step before the next instruction begins.
+        The last instruction's scope extends to the end of the graph (end_step=None).
+
+        Step numbers are compared as integers, so "100" < "205" < "305".
         """
         if not self.multi_step_instructions:
             return []
 
         all_step_numbers = self.get_all_step_numbers()
         by_start_step = sorted(self.multi_step_instructions, key=lambda x: int(x.first_step_number_affected))
-        scopes: list[tuple[MultiStepInstruction, str, str | None]] = []
+        scopes: list[InstructionScope] = []
 
         for i, instruction in enumerate(by_start_step):
             start_step = instruction.first_step_number_affected
@@ -344,9 +369,10 @@ class EbdGraph(BaseModel):
                 next_instruction_start = int(by_start_step[i + 1].first_step_number_affected)
                 end_step = self._find_max_step_in_range(all_step_numbers, int(start_step), next_instruction_start)
                 if end_step is None:
+                    # No steps in range: create empty scope by setting end < start
                     end_step = str(int(start_step) - 1)
 
-            scopes.append((instruction, start_step, end_step))
+            scopes.append(InstructionScope(instruction, start_step, end_step))
 
         return scopes
 

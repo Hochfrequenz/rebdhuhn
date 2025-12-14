@@ -82,9 +82,10 @@ def _convert_transitional_outcome_node_to_plantuml(graph: DiGraph, node: str, in
         note = trans_outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
         result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
 
-    # Get the subsequent node and convert it
+    # Get the subsequent node and convert it (unless it has indegree > 1,
+    # in which case it will be rendered at its common ancestor)
     successors = list(graph.successors(node))
-    if len(successors) == 1:
+    if len(successors) == 1 and graph.in_degree(successors[0]) <= 1:
         result += _convert_node_to_plantuml(graph, successors[0], indent)
 
     return result

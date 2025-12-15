@@ -18,7 +18,7 @@ from rebdhuhn.models.ebd_graph import (
     ToYesEdge,
 )
 from rebdhuhn.models.ebd_table import (
-    _STEP_NUMBER_REGEX,
+    STEP_NUMBER_REGEX,
     EbdCheckResult,
     EbdDocumentReleaseInformation,
     EbdTable,
@@ -42,7 +42,7 @@ __all__ = [
     "ToNoEdge",
     "ToYesEdge",
     # ebd_table models
-    "_STEP_NUMBER_REGEX",
+    "STEP_NUMBER_REGEX",
     "EbdCheckResult",
     "EbdDocumentReleaseInformation",
     "EbdTable",

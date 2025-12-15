@@ -54,7 +54,7 @@ tests = [
     "testcontainers>=4.0.0"
 ]
 type_check = [
-    "mypy==1.19.0",
+    "mypy==1.19.1",
     "types-requests==2.32.4.20250913",
     "lxml-stubs==0.5.1",
     "types-docker>=7.0.0"

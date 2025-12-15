@@ -8,10 +8,13 @@ Afterwards it gets placed into the center of the EBD diagram.
 import re
 from io import BytesIO
 from pathlib import Path
-from typing import TextIO, Tuple, Union
+from typing import TYPE_CHECKING, TextIO, Tuple, Union
 
 from lxml import etree
 from svgutils.compose import SVG, Figure  # type:ignore[import-untyped]
+
+if TYPE_CHECKING:
+    from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
@@ -113,3 +116,47 @@ def add_watermark(ebd_svg: str) -> str:
     ).tostr()
 
     return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]
+
+
+def add_release_info_footer(
+    svg: str, release_info: "EbdDocumentReleaseInformation", padding: float = 15.0
+) -> str:
+    """
+    Adds release information as a footer text to the bottom-right corner of the SVG.
+
+    :param svg: The SVG code to add the footer to
+    :param release_info: The release information to display
+    :param padding: Padding from the edges in pixels
+    :return: SVG with release info footer added
+    """
+    from rebdhuhn.utils import format_release_info
+
+    release_text = format_release_info(release_info)
+    if not release_text:
+        return svg
+
+    ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
+    tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
+    root = tree.getroot()
+
+    # Create text element positioned at bottom-right
+    # SVG namespace handling
+    ns = {"svg": "http://www.w3.org/2000/svg"}
+    nsmap = root.nsmap if hasattr(root, "nsmap") else {}
+
+    text_element = etree.Element(  # pylint:disable=c-extension-no-member
+        "text",
+        attrib={
+            "x": str(ebd_width_in_px - padding),
+            "y": str(ebd_height_in_px - padding),
+            "text-anchor": "end",
+            "font-family": "Roboto, sans-serif",
+            "font-size": "10",
+            "fill": "#666666",
+        },
+    )
+    text_element.text = release_text
+    root.append(text_element)
+
+    svg_with_footer = Figure(ebd_width_in_px, ebd_height_in_px, root).tostr()
+    return svg_with_footer.decode("utf-8")  # type:ignore[no-any-return]

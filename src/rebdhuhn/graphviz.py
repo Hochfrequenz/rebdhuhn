@@ -19,15 +19,20 @@ Not included in current visualization:
 """
 
 import re
+from typing import TYPE_CHECKING
 from xml.sax.saxutils import escape
 
+if TYPE_CHECKING:
+    from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+
 from rebdhuhn.add_watermark import add_background as add_background_function
+from rebdhuhn.add_watermark import add_release_info_footer
 from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
 from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, MultiStepInstruction
-from rebdhuhn.utils import add_line_breaks, format_release_info
+from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -398,30 +403,6 @@ def _convert_edges_to_dot(ebd_graph: EbdGraph, indent: str) -> list[str]:
     return edges
 
 
-def _convert_release_info_to_dot(ebd_graph: EbdGraph, indent: str) -> str | None:
-    """
-    Convert release information to a footer node in dot format.
-    Returns None if no release information is available.
-    """
-    if not ebd_graph.metadata.release_information:
-        return None
-
-    release_text = format_release_info(ebd_graph.metadata.release_information)
-    if not release_text:
-        return None
-
-    # Create a subtle footer node positioned at the bottom-right
-    # Using rank=sink ensures it's at the bottom, and the node style is minimal
-    return (
-        f"{indent}subgraph cluster_footer {{\n"
-        f"{indent}{ADD_INDENT}rank=sink;\n"
-        f"{indent}{ADD_INDENT}style=invis;\n"
-        f'{indent}{ADD_INDENT}"_footer" [shape=plaintext, fontsize=10, fontcolor="#666666", '
-        f'fontname="Roboto, sans-serif", label="{release_text}"];\n'
-        f"{indent}}}"
-    )
-
-
 def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = None) -> str:
     """
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
@@ -460,28 +441,29 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     if "Start" in nx_graph:
         assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
         dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
-
-    # Add release information footer if available
-    footer = _convert_release_info_to_dot(ebd_graph, ADD_INDENT)
-    if footer:
-        dot_code += "\n" + footer + "\n"
-
     dot_code += '\n    bgcolor="transparent";\nfontname="Roboto, sans-serif";\n'
     return dot_code + "}"
 
 
 def convert_dot_to_svg_kroki(
-    dot_code: str, dot_to_svg_converter: DotToSvgConverter, add_watermark: bool = True, add_background: bool = True
+    dot_code: str,
+    dot_to_svg_converter: DotToSvgConverter,
+    add_watermark: bool = True,
+    add_background: bool = True,
+    release_info: "EbdDocumentReleaseInformation | None" = None,
 ) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
     Optionally add the HF watermark to the svg code, controlled by the argument 'add_watermark'
     Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
     If 'add_background' is False, the background is transparent.
+    If 'release_info' is provided, adds release information footer to the bottom-right corner.
     """
     svg_out = dot_to_svg_converter.convert_dot_to_svg(dot_code)
     if add_watermark:
         svg_out = add_watermark_function(svg_out)
     if add_background:
         svg_out = add_background_function(svg_out)
+    if release_info:
+        svg_out = add_release_info_footer(svg_out, release_info)
     return svg_out

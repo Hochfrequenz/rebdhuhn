@@ -45,12 +45,6 @@
       "3" -> "A01" [label=<<B>JA</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
       "3" -> "A04" [label=<<B>NEIN</B>>, color="#88a0d6", fontname="Roboto, sans-serif"];
   
-      subgraph cluster_footer {
-          rank=sink;
-          style=invis;
-          "_footer" [shape=plaintext, fontsize=10, fontcolor="#666666", fontname="Roboto, sans-serif", label="v4.2 | 11.12.2025 (urspr. 01.10.2025)"];
-      }
-  
       bgcolor="transparent";
   fontname="Roboto, sans-serif";
   }

@@ -11,7 +11,7 @@ from typing import Annotated, List, Optional
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 #: regex used to validate step numbers, e.g. '4' or '7*'
-_STEP_NUMBER_REGEX = r"^\d+\*?$"
+STEP_NUMBER_REGEX = r"^\d+\*?$"
 
 #: regex used to validate result codes, e.g. 'A01', 'A**', 'AA1'
 RESULT_CODE_REGEX = r"^((?:[A-Z]\d+)|(?:A\*{2})|(?:A[A-Z]\d))$"
@@ -23,7 +23,7 @@ EBD_REFERENCE_REGEX = r"EBD (E_\d{4})"
 _EBD_CODE_REGEX = r"^E_\d{4}$"
 
 #: Annotated type for step numbers
-StepNumber = Annotated[str, Field(pattern=_STEP_NUMBER_REGEX)]
+StepNumber = Annotated[str, Field(pattern=STEP_NUMBER_REGEX)]
 
 #: Annotated type for result codes
 ResultCode = Annotated[str, Field(pattern=RESULT_CODE_REGEX)]

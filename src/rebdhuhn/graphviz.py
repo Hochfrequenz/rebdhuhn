@@ -155,9 +155,13 @@ def _convert_outcome_node_to_dot(
 
     # Add href for nodes with exactly one EBD reference (makes entire node clickable)
     if ebd_link_template and hasattr(outcome_node, "ebd_references") and len(outcome_node.ebd_references) == 1:
-        url = ebd_link_template.replace("{ebd_code}", outcome_node.ebd_references[0])
+        ebd_code = outcome_node.ebd_references[0]
+        url = ebd_link_template.replace("{ebd_code}", ebd_code)
         attrs.append(f'href="{url}"')
         attrs.append('target="_blank"')
+        # Set tooltip to just the EBD code to prevent raw HTML appearing in xlink:title
+        # (Graphviz defaults tooltip to label, which shows raw HTML-like label text on hover)
+        attrs.append(f'tooltip="{ebd_code}"')
 
     # pylint:disable=line-too-long
     return f'{indent}"{node}" [{", ".join(attrs)}];'

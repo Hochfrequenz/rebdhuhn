@@ -68,6 +68,8 @@ class TestE0622CrossReferences:
         assert '<FONT COLOR="#0066cc"><U>EBD E_0621</U></FONT>' in dot_with_links
         # Check for href attribute on nodes with single EBD reference
         assert 'href="?ebd=E_0621"' in dot_with_links
+        # Check that tooltip is set to just the EBD code (not the full HTML label)
+        assert 'tooltip="E_0621"' in dot_with_links
 
     @pytest.mark.snapshot
     def test_e0622_full_svg_pipeline(self, kroki_client: Kroki, snapshot: SnapshotAssertion) -> None:
@@ -94,6 +96,13 @@ class TestE0622CrossReferences:
 
         # Verify SVG contains the clickable link (href attribute becomes xlink:href in SVG)
         assert "?ebd=E_0621" in svg_code
+
+        # Verify xlink:title contains just the EBD code, not raw HTML
+        # The tooltip attribute in DOT sets xlink:title in SVG
+        # See: https://github.com/Hochfrequenz/entscheidungsbaumdiagramme/issues/570
+        assert 'xlink:title="E_0621"' in svg_code
+        # Ensure no raw HTML-like label content in xlink:title
+        assert 'xlink:title="&lt;FONT' not in svg_code
 
         # Snapshot the DOT code
         assert dot_code == snapshot(name="e0622_with_ebd_links")

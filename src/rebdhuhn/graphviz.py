@@ -413,12 +413,12 @@ def _convert_release_info_to_dot(ebd_graph: EbdGraph, indent: str) -> str | None
     # Create a subtle footer node positioned at the bottom-right
     # Using rank=sink ensures it's at the bottom, and the node style is minimal
     return (
-        f'{indent}subgraph cluster_footer {{\n'
-        f'{indent}{ADD_INDENT}rank=sink;\n'
-        f'{indent}{ADD_INDENT}style=invis;\n'
+        f"{indent}subgraph cluster_footer {{\n"
+        f"{indent}{ADD_INDENT}rank=sink;\n"
+        f"{indent}{ADD_INDENT}style=invis;\n"
         f'{indent}{ADD_INDENT}"_footer" [shape=plaintext, fontsize=10, fontcolor="#666666", '
         f'fontname="Roboto, sans-serif", label="{release_text}"];\n'
-        f'{indent}}}'
+        f"{indent}}}"
     )
 
 

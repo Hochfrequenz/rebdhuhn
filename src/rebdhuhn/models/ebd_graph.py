@@ -12,8 +12,8 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 # pylint:disable=too-few-public-methods
 from rebdhuhn.models.ebd_table import (
     EBD_REFERENCE_REGEX,
-    EbdDocumentReleaseInformation,
     RESULT_CODE_REGEX,
+    EbdDocumentReleaseInformation,
     MultiStepInstruction,
 )
 

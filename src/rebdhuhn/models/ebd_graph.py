@@ -10,7 +10,12 @@ from networkx import DiGraph  # type:ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # pylint:disable=too-few-public-methods
-from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, RESULT_CODE_REGEX, MultiStepInstruction
+from rebdhuhn.models.ebd_table import (
+    EBD_REFERENCE_REGEX,
+    EbdDocumentReleaseInformation,
+    RESULT_CODE_REGEX,
+    MultiStepInstruction,
+)
 
 
 class InstructionScope(BaseModel):
@@ -111,6 +116,11 @@ class EbdGraphMetaData(BaseModel):
     """
     remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
     da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
+    """
+
+    release_information: Optional[EbdDocumentReleaseInformation] = None
+    """
+    metadata of the entire EBD document (not the single EBD table)
     """
 
 

@@ -27,7 +27,7 @@ from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
 from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, MultiStepInstruction
-from rebdhuhn.utils import add_line_breaks
+from rebdhuhn.utils import add_line_breaks, format_release_info
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -398,6 +398,30 @@ def _convert_edges_to_dot(ebd_graph: EbdGraph, indent: str) -> list[str]:
     return edges
 
 
+def _convert_release_info_to_dot(ebd_graph: EbdGraph, indent: str) -> str | None:
+    """
+    Convert release information to a footer node in dot format.
+    Returns None if no release information is available.
+    """
+    if not ebd_graph.metadata.release_information:
+        return None
+
+    release_text = format_release_info(ebd_graph.metadata.release_information)
+    if not release_text:
+        return None
+
+    # Create a subtle footer node positioned at the bottom-right
+    # Using rank=sink ensures it's at the bottom, and the node style is minimal
+    return (
+        f'{indent}subgraph cluster_footer {{\n'
+        f'{indent}{ADD_INDENT}rank=sink;\n'
+        f'{indent}{ADD_INDENT}style=invis;\n'
+        f'{indent}{ADD_INDENT}"_footer" [shape=plaintext, fontsize=10, fontcolor="#666666", '
+        f'fontname="Roboto, sans-serif", label="{release_text}"];\n'
+        f'{indent}}}'
+    )
+
+
 def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = None) -> str:
     """
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
@@ -436,6 +460,12 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     if "Start" in nx_graph:
         assert len(nx_graph["Start"]) == 1, "Start node must have exactly one outgoing edge."
         dot_code += "\n".join(_convert_edges_to_dot(ebd_graph, ADD_INDENT)) + "\n"
+
+    # Add release information footer if available
+    footer = _convert_release_info_to_dot(ebd_graph, ADD_INDENT)
+    if footer:
+        dot_code += "\n" + footer + "\n"
+
     dot_code += '\n    bgcolor="transparent";\nfontname="Roboto, sans-serif";\n'
     return dot_code + "}"
 

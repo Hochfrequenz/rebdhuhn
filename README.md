@@ -20,6 +20,7 @@ Also assume, that the result of your scraping is a [`rebdhuhn.models.EbdTable`](
 
 The package `rebdhuhn` contains logic to convert your scraped data into a graph.
 This graph can then be exported e.g. as SVG and/or UML.
+`ebdamame` and `rebdhuhn` combined are the core of our [ebd_toolchain](https://github.com/Hochfrequenz/ebd_toolchain/) which scrapes EBD.docx files from the [edi_energy_mirror](https://github.com/Hochfrequenz/edi_energy_mirror) and pushes them to [machine_readable-entscheidungsbaumdiagramme](https://github.com/Hochfrequenz/machine-readable_entscheidungsbaumdiagramme).
 
 ## How to use `rebdhuhn`?
 

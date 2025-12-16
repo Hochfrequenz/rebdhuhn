@@ -1,9 +1,8 @@
 """utility functions"""
 
-from typing import TYPE_CHECKING, Any, TypeVar, overload
+from typing import Any, TypeVar, overload
 
-if TYPE_CHECKING:
-    from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
 
 
 def _split_string(input_string: str, max_length: int) -> list[str]:
@@ -99,7 +98,7 @@ def assert_is_instance(obj: Any, *cls: type[Any]) -> Any:
     return obj
 
 
-def format_release_info(release_info: "EbdDocumentReleaseInformation") -> str | None:
+def format_release_info(release_info: EbdDocumentReleaseInformation) -> str | None:
     """
     Formats release information in compact German format.
 

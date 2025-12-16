@@ -8,13 +8,13 @@ Afterwards it gets placed into the center of the EBD diagram.
 import re
 from io import BytesIO
 from pathlib import Path
-from typing import TYPE_CHECKING, TextIO, Tuple, Union
+from typing import TextIO, Tuple, Union
 
 from lxml import etree
 from svgutils.compose import SVG, Figure  # type:ignore[import-untyped]
 
-if TYPE_CHECKING:
-    from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+from rebdhuhn.utils import format_release_info
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
@@ -118,7 +118,7 @@ def add_watermark(ebd_svg: str) -> str:
     return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]
 
 
-def add_release_info_footer(svg: str, release_info: "EbdDocumentReleaseInformation", padding: float = 15.0) -> str:
+def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformation, padding: float = 15.0) -> str:
     """
     Adds release information as a footer text to the bottom-right corner of the SVG.
 
@@ -127,8 +127,6 @@ def add_release_info_footer(svg: str, release_info: "EbdDocumentReleaseInformati
     :param padding: Padding from the edges in pixels
     :return: SVG with release info footer added
     """
-    from rebdhuhn.utils import format_release_info
-
     release_text = format_release_info(release_info)
     if not release_text:
         return svg

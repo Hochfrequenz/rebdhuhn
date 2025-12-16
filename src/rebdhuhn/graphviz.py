@@ -19,11 +19,7 @@ Not included in current visualization:
 """
 
 import re
-from typing import TYPE_CHECKING
 from xml.sax.saxutils import escape
-
-if TYPE_CHECKING:
-    from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
 
 from rebdhuhn.add_watermark import add_background as add_background_function
 from rebdhuhn.add_watermark import add_release_info_footer
@@ -31,7 +27,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
-from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, MultiStepInstruction
+from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, EbdDocumentReleaseInformation, MultiStepInstruction
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -450,7 +446,7 @@ def convert_dot_to_svg_kroki(
     dot_to_svg_converter: DotToSvgConverter,
     add_watermark: bool = True,
     add_background: bool = True,
-    release_info: "EbdDocumentReleaseInformation | None" = None,
+    release_info: EbdDocumentReleaseInformation | None = None,
 ) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.

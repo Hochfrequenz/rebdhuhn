@@ -102,7 +102,7 @@ def format_release_info(release_info: EbdDocumentReleaseInformation) -> str | No
     """
     Formats release information in compact German format.
 
-    Output format: "v4.2 | 11.12.2025 (urspr. 01.10.2025)"
+    Output format: "v4.2 | 11.12.2025 (urspr. 01.10.2025) | ebdamame v0.5.0 | rebdhuhn v0.18.2"
 
     Returns None if version is missing.
     """
@@ -116,5 +116,12 @@ def format_release_info(release_info: EbdDocumentReleaseInformation) -> str | No
 
     if release_info.original_release_date:
         result += f" (urspr. {release_info.original_release_date.strftime('%d.%m.%Y')})"
+
+    # Add toolchain versions
+    if release_info.ebdamame_version:
+        result += f" | ebdamame {release_info.ebdamame_version}"
+
+    if release_info.rebdhuhn_version:
+        result += f" | rebdhuhn {release_info.rebdhuhn_version}"
 
     return result

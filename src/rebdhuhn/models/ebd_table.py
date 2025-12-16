@@ -6,9 +6,28 @@ An EbdTable is the EDI@Energy raw representation of an "Entscheidungsbaum".
 
 import re
 from datetime import date
+from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, List, Optional
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+
+def _get_package_version(package_name: str) -> str | None:
+    """
+    Get the version of an installed package, prefixed with 'v'.
+    Returns None if the package is not installed.
+    """
+    try:
+        return f"v{version(package_name)}"
+    except PackageNotFoundError:
+        return None
+
+
+#: regex used to validate semantic versions with 'v' prefix, e.g. 'v0.18.2' or 'v1.2.3.dev1+g123abc'
+SEMANTIC_VERSION_REGEX = r"^v\d+\.\d+\.\d+.*$"
+
+#: Annotated type for semantic versions
+SemanticVersion = Annotated[str, Field(pattern=SEMANTIC_VERSION_REGEX)]
 
 #: regex used to validate step numbers, e.g. '4' or '7*'
 STEP_NUMBER_REGEX = r"^\d+\*?$"
@@ -63,6 +82,18 @@ class EbdDocumentReleaseInformation(BaseModel):
     """
     # I think that one could validate that if a `release_date` is set, then the `original_release_date` must be set and
     # before it. But we don't add this validation yet, because we all know the data integrity is... to be improved.
+
+    rebdhuhn_version: Optional[SemanticVersion] = Field(default_factory=lambda: _get_package_version("rebdhuhn"))
+    """
+    Version of rebdhuhn used to process this EBD, e.g. 'v0.18.2'.
+    Automatically populated from the installed package version.
+    """
+
+    ebdamame_version: Optional[SemanticVersion] = Field(default_factory=lambda: _get_package_version("ebdamame"))
+    """
+    Version of ebdamame used to parse this EBD, e.g. 'v0.5.0'.
+    Automatically populated from the installed package version.
+    """
 
 
 # pylint:disable=too-few-public-methods, too-many-instance-attributes

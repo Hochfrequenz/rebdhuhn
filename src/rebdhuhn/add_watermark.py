@@ -118,9 +118,7 @@ def add_watermark(ebd_svg: str) -> str:
     return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]
 
 
-def add_release_info_footer(
-    svg: str, release_info: "EbdDocumentReleaseInformation", padding: float = 15.0
-) -> str:
+def add_release_info_footer(svg: str, release_info: "EbdDocumentReleaseInformation", padding: float = 15.0) -> str:
     """
     Adds release information as a footer text to the bottom-right corner of the SVG.
 

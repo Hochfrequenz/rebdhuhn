@@ -15,6 +15,7 @@ from rebdhuhn.models.errors import (
     GraphTooComplexForPlantumlError,
     NotExactlyTwoOutgoingEdgesError,
 )
+from rebdhuhn.utils import format_release_info
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
 
@@ -175,6 +176,20 @@ def _convert_node_to_plantuml(graph: DiGraph, node: str, indent: str) -> str:
             raise ValueError(f"Unknown node type: {graph.nodes[node]['node']}")
 
 
+def _get_release_info_footer(graph: EbdGraph) -> str:
+    """
+    Returns PlantUML footer block with release information, or empty string if not available.
+    """
+    if not graph.metadata.release_information:
+        return ""
+
+    release_text = format_release_info(graph.metadata.release_information)
+    if not release_text:
+        return ""
+
+    return f"footer\n{release_text}\nendfooter\n\n"
+
+
 def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     """
     Converts given graph to plantuml code and returns it as a string.
@@ -203,6 +218,7 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
         "2022-12-12\n"
         "endheader\n"
         "\n"
+        f"{_get_release_info_footer(graph)}"
         "title\n"
         f"{graph.metadata.chapter}\n"
         "\n"

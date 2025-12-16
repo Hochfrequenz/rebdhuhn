@@ -3,7 +3,11 @@
     "chapter": "MaBiS",
     "ebd_code": "E_0055",
     "ebd_name": "E_0055_Datenstatus nach Vorliegen einer Pr\u00fcfmitteilung vergeben",
-    "release_information": null,
+    "release_information": {
+      "original_release_date": "2025-10-01",
+      "release_date": "2025-12-11",
+      "version": "4.2"
+    },
     "remark": null,
     "role": "BIKO",
     "section": "7.27.3: AD: \u00dcbermittlung Datenstatus f\u00fcr die Bilanzierungsgebietssummenzeitreihe vom BIKO an \u00dcNB und NB"

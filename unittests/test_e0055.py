@@ -14,6 +14,7 @@ import pytest
 from syrupy.assertion import SnapshotAssertion
 
 from rebdhuhn import DecisionNode, EbdTable, Kroki, OutcomeNode, convert_graph_to_dot, convert_table_to_graph
+from rebdhuhn.graphviz import convert_dot_to_svg_kroki
 
 path_to_raw_table_json = Path(__file__).parent / "test_files" / "e0055.json"
 
@@ -93,7 +94,13 @@ class TestE0055:
 
         graph = convert_table_to_graph(e_0055_table)
         dot_code = convert_graph_to_dot(graph)
-        svg_code = kroki_client.convert_dot_to_svg(dot_code)
+        svg_code = convert_dot_to_svg_kroki(
+            dot_code,
+            kroki_client,
+            add_watermark=False,
+            add_background=False,
+            release_info=graph.metadata.release_information,
+        )
 
         # Save SVG to output folder for manual inspection
         target_dir = Path(__file__).parent / "output"

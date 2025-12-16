@@ -2,6 +2,8 @@
 
 from typing import Any, TypeVar, overload
 
+from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+
 
 def _split_string(input_string: str, max_length: int) -> list[str]:
     """
@@ -94,3 +96,25 @@ def assert_is_instance(obj: Any, *cls: type[Any]) -> Any:
         raise TypeError(f"Expected {cls}, got {type(obj)}")
 
     return obj
+
+
+def format_release_info(release_info: EbdDocumentReleaseInformation) -> str | None:
+    """
+    Formats release information in compact German format.
+
+    Output format: "v4.2 | 11.12.2025 (urspr. 01.10.2025)"
+
+    Returns None if version is missing.
+    """
+    if not release_info.version:
+        return None
+
+    result = f"v{release_info.version}"
+
+    if release_info.release_date:
+        result += f" | {release_info.release_date.strftime('%d.%m.%Y')}"
+
+    if release_info.original_release_date:
+        result += f" (urspr. {release_info.original_release_date.strftime('%d.%m.%Y')})"
+
+    return result

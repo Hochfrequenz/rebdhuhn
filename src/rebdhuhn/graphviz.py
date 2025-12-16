@@ -403,6 +403,11 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     """
     Convert the EbdGraph to dot output for Graphviz. Returns the dot code as string.
 
+    Note: Unlike PlantUML (which embeds release information directly in the generated code),
+    DOT/Graphviz doesn't have a clean "footer" concept. Release information is added as SVG
+    post-processing in `convert_dot_to_svg_kroki()`. When calling that function, pass
+    `release_info=ebd_graph.metadata.release_information` to include the release info footer.
+
     Args:
         ebd_graph: The EBD graph to convert
         ebd_link_template: Optional URL template for EBD cross-references.

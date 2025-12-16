@@ -118,33 +118,41 @@ def add_watermark(ebd_svg: str) -> str:
     return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]
 
 
-def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformation, padding: float = 15.0) -> str:
+def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformation, padding: float = 10.0) -> str:
     """
     Adds release information as a footer text to the bottom-right corner of the SVG.
 
     :param svg: The SVG code to add the footer to
     :param release_info: The release information to display
-    :param padding: Padding from the edges in pixels
+    :param padding: Padding from the edges in viewBox units
     :return: SVG with release info footer added
     """
     release_text = format_release_info(release_info)
     if not release_text:
         return svg
 
-    ebd_width_in_px, ebd_height_in_px = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
 
-    # Create text element positioned at bottom-right
-    # SVG namespace handling
-    ns = {"svg": "http://www.w3.org/2000/svg"}
-    nsmap = root.nsmap if hasattr(root, "nsmap") else {}
+    # Get viewBox dimensions (more reliable than width/height attributes which may use different units)
+    viewbox = root.attrib.get("viewBox", "")
+    if viewbox:
+        parts = viewbox.split()
+        if len(parts) == 4:
+            viewbox_width = float(parts[2])
+            viewbox_height = float(parts[3])
+        else:
+            # Fallback to width/height if viewBox parsing fails
+            viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
+    else:
+        viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
+    # Create text element positioned at bottom-right within viewBox coordinates
     text_element = etree.Element(  # pylint:disable=c-extension-no-member
         "text",
         attrib={
-            "x": str(ebd_width_in_px - padding),
-            "y": str(ebd_height_in_px - padding),
+            "x": str(viewbox_width - padding),
+            "y": str(viewbox_height - padding),
             "text-anchor": "end",
             "font-family": "Roboto, sans-serif",
             "font-size": "10",
@@ -154,5 +162,4 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
     text_element.text = release_text
     root.append(text_element)
 
-    svg_with_footer = Figure(ebd_width_in_px, ebd_height_in_px, root).tostr()
-    return svg_with_footer.decode("utf-8")  # type:ignore[no-any-return]
+    return etree.tostring(root, encoding="unicode")  # pylint:disable=c-extension-no-member

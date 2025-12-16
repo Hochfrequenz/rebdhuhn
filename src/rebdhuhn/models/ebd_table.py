@@ -22,6 +22,7 @@ def _get_package_version(package_name: str) -> str | None:
     except PackageNotFoundError:
         return None
 
+
 #: regex used to validate semantic versions with 'v' prefix, e.g. 'v0.18.2' or 'v1.2.3.dev1+g123abc'
 SEMANTIC_VERSION_REGEX = r"^v\d+\.\d+\.\d+.*$"
 

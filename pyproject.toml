@@ -55,7 +55,7 @@ tests = [
 ]
 type_check = [
     "mypy==1.19.1",
-    "types-requests==2.32.4.20250913",
+    "types-requests==2.32.4.20260107",
     "lxml-stubs==0.5.1",
     "types-docker>=7.0.0"
 ]

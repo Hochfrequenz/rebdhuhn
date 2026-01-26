@@ -50,7 +50,7 @@ spellcheck = [
 ]
 tests = [
     "pytest==9.0.2",
-    "syrupy==5.0.0",
+    "syrupy==5.1.0",
     "testcontainers>=4.0.0"
 ]
 type_check = [

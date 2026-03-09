@@ -6,7 +6,7 @@ from typing import List, Optional
 
 import pytest
 from lxml import etree
-from networkx import DiGraph, empty_graph  # type:ignore[import-untyped]
+from networkx import DiGraph, empty_graph  # type: ignore[import-untyped]
 
 from rebdhuhn import (
     DecisionNode,

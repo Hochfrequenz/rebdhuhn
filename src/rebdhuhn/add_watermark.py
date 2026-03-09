@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import TextIO, Tuple, Union
 
 from lxml import etree
-from svgutils.compose import SVG, Figure  # type:ignore[import-untyped]
+from svgutils.compose import SVG, Figure  # type: ignore[import-untyped]
 
 from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
 from rebdhuhn.utils import format_release_info
@@ -80,7 +80,7 @@ def add_background(svg: str) -> str:
     root.insert(0, xml_element)
 
     svg_with_background = Figure(ebd_width_in_px, ebd_height_in_px, root).tostr()
-    return svg_with_background.decode("utf-8")  # type:ignore[no-any-return]
+    return svg_with_background.decode("utf-8")  # type: ignore[no-any-return]
 
 
 # pylint: disable = c-extension-no-member
@@ -115,7 +115,7 @@ def add_watermark(ebd_svg: str) -> str:
         etree.fromstring(ebd_svg_as_bytes),
     ).tostr()
 
-    return ebd_with_watermark.decode("utf-8")  # type:ignore[no-any-return]
+    return ebd_with_watermark.decode("utf-8")  # type: ignore[no-any-return]
 
 
 def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformation, padding: float = 10.0) -> str:

@@ -5,7 +5,7 @@ This module contains logic to convert EbdTable data to EbdGraph data.
 import re
 from typing import Dict, List, Literal, Optional, overload
 
-from networkx import DiGraph, isolates  # type:ignore[import-untyped]
+from networkx import DiGraph, isolates  # type: ignore[import-untyped]
 
 from rebdhuhn.models import (
     DecisionNode,

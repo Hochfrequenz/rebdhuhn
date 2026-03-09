@@ -6,7 +6,7 @@ import re
 from abc import ABC, abstractmethod
 from typing import Annotated, List, Optional, Union
 
-from networkx import DiGraph  # type:ignore[import-untyped]
+from networkx import DiGraph  # type: ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 # pylint:disable=too-few-public-methods

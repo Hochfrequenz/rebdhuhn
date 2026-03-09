@@ -9,7 +9,7 @@ import pytest
 from rebdhuhn import Kroki
 
 try:
-    from testcontainers.core.container import DockerContainer  # type:ignore[import-untyped]
+    from testcontainers.core.container import DockerContainer  # type: ignore[import-untyped]
 
     TESTCONTAINERS_AVAILABLE = True
 except ImportError:

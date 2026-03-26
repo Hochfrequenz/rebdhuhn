@@ -22,7 +22,7 @@ pydantic==2.12.5
     # via rebdhuhn (pyproject.toml)
 pydantic-core==2.41.5
     # via pydantic
-requests==2.32.5
+requests==2.33.0
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)

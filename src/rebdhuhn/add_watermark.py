@@ -147,8 +147,17 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
     else:
         viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
+    # Create anchor element linking to ebd.hochfrequenz.de
+    link_element = etree.Element(  # pylint:disable=c-extension-no-member
+        "a",
+        attrib={
+            "href": "https://ebd.hochfrequenz.de",
+            "target": "_blank",
+        },
+    )
     # Create text element positioned at bottom-right within viewBox coordinates
-    text_element = etree.Element(  # pylint:disable=c-extension-no-member
+    text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
+        link_element,
         "text",
         attrib={
             "x": str(viewbox_width - padding),
@@ -157,9 +166,10 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
             "font-family": "Roboto, sans-serif",
             "font-size": "10",
             "fill": "#666666",
+            "text-decoration": "none",
         },
     )
     text_element.text = release_text
-    root.append(text_element)
+    root.append(link_element)
 
     return etree.tostring(root, encoding="unicode")  # pylint:disable=c-extension-no-member

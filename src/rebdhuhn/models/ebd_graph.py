@@ -15,7 +15,7 @@ from rebdhuhn.models.ebd_table import (
     RESULT_CODE_REGEX,
     EbdDocumentReleaseInformation,
     MultiStepInstruction,
-    Pruefidentifikator,
+    EbdPruefidentifikator,
 )
 
 
@@ -123,10 +123,10 @@ class EbdGraphMetaData(BaseModel):
     metadata of the entire EBD document (not the single EBD table)
     """
 
-    pruefidentifikatoren: Optional[list[Pruefidentifikator]] = None
+    pruefidentifikatoren: Optional[list[EbdPruefidentifikator]] = None
     """
-    Pruefidentifikatoren associated with this EBD, e.g. ['11039', '11040'].
-    Populated from AHB data where this EBD code appears as a qualifier.
+    Pruefidentifikatoren associated with this EBD, paired with their format version
+    for link generation to ahb-tabellen.hochfrequenz.de.
     None means we didn't check; an empty list means no Pruefidentifikator refers to this EBD.
     """
 

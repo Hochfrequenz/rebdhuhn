@@ -26,6 +26,7 @@ dependencies = [
     "requests",
     "lxml>=4.9.3",
     "svgutils",
+    "efoli>=2.2.0",
     # write here line by line the dependencies for your package
 ]
 dynamic = ["readme", "version"]

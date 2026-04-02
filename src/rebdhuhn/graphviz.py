@@ -27,7 +27,7 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
-from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, EbdDocumentReleaseInformation, MultiStepInstruction
+from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, EbdDocumentReleaseInformation, EbdPruefidentifikator, MultiStepInstruction
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.
@@ -36,6 +36,7 @@ _LABEL_MAX_LINE_LENGTH = 80
 _MSI_LABEL_MAX_LINE_LENGTH = 50  #: Max line length for multi-step instruction labels
 _MSI_NODE_BGCOLOR = "#e6f3ff"  #: Light blue background for multi-step instruction nodes
 _MSI_CLUSTER_BGCOLOR = "#f0f7ff"  #: Very light blue background for multi-step instruction clusters
+_AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.de/ahb"
 
 
 def _format_label(label: str, ebd_link_template: str | None = None) -> str:
@@ -91,9 +92,6 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
         f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     )
-    if ebd_graph.metadata.pruefidentifikatoren:
-        pruefis_str = ", ".join(ebd_graph.metadata.pruefidentifikatoren)
-        formatted_label += f'<FONT>Prüfidentifikator(en): {pruefis_str}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
@@ -319,6 +317,27 @@ def _convert_multi_step_instruction_cluster_to_dot(
     return "\n".join(lines)
 
 
+def _convert_pruefidentifikatoren_node_to_dot(
+    pruefidentifikatoren: list[EbdPruefidentifikator], indent: str
+) -> str:
+    """
+    Renders a standalone node in the bottom-left corner showing clickable Pruefidentifikator links.
+    Each link points to the respective page on ahb-tabellen.hochfrequenz.de.
+    """
+    # Build an HTML table with one row per Pruefidentifikator
+    rows = ""
+    for pruefi in pruefidentifikatoren:
+        url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
+        rows += (
+            f'<TR><TD ALIGN="LEFT" HREF="{url}" TARGET="_blank">'
+            f'<FONT COLOR="#0066cc">{pruefi.pruefidentifikator} ({pruefi.format_version.value})</FONT>'
+            f"</TD></TR>"
+        )
+    table_label = f'<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2"><TR><TD ALIGN="LEFT"><B>Prüfidentifikator(en)</B></TD></TR>{rows}</TABLE>'
+    # pylint:disable=line-too-long
+    return f'{indent}"pruefidentifikatoren" [shape=plain, label=<{table_label}>, fontname="Roboto, sans-serif"];'
+
+
 def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str, ebd_link_template: str | None = None) -> str:
     """
     Convert all nodes of the EbdGraph to dot output.
@@ -344,6 +363,9 @@ def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str, ebd_link_template: s
     for node_key in ebd_graph.graph.nodes:
         if node_key not in node_keys_in_clusters:
             result_parts.append(_convert_node_to_dot(ebd_graph, node_key, indent, ebd_link_template))
+
+    if ebd_graph.metadata.pruefidentifikatoren:
+        result_parts.append(_convert_pruefidentifikatoren_node_to_dot(ebd_graph.metadata.pruefidentifikatoren, indent))
 
     return "\n".join(result_parts)
 

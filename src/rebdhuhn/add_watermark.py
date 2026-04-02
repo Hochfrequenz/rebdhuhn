@@ -182,7 +182,7 @@ def add_pruefidentifikatoren_footer(
 ) -> str:
     """
     Adds clickable Pruefidentifikator links to the bottom-left corner of the SVG,
-    mirroring the release info footer on the bottom-right.
+    mirroring the release info footer style on the bottom-right.
     Each link points to ahb-tabellen.hochfrequenz.de/ahb/{format_version}/{pruefidentifikator}.
     """
     if not pruefidentifikatoren:
@@ -201,50 +201,52 @@ def add_pruefidentifikatoren_footer(
     else:
         _, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
-    line_height = 14.0
-    # Start from the bottom, going upward for each entry
-    base_y = viewbox_height - padding - (len(pruefidentifikatoren) * line_height)
+    # Render as a single line: "Prüfidentifikator(en): 19204, 55066"
+    pruefi_texts = [p.pruefidentifikator for p in pruefidentifikatoren]
+    display_text = f"Prüfidentifikator(en): {', '.join(pruefi_texts)}"
 
-    # Add header text
-    header_element = etree.SubElement(  # pylint:disable=c-extension-no-member
-        root,
-        "text",
-        attrib={
-            "x": str(padding),
-            "y": str(base_y),
-            "text-anchor": "start",
-            "font-family": "Roboto, sans-serif",
-            "font-size": "10",
-            "fill": "#666666",
-        },
-    )
-    header_element.text = "Prüfidentifikator(en):"
-
-    for i, pruefi in enumerate(pruefidentifikatoren):
+    # If there's exactly one, make the whole text a single clickable link
+    if len(pruefidentifikatoren) == 1:
+        pruefi = pruefidentifikatoren[0]
         url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
-        y_pos = base_y + ((i + 1) * line_height)
-
-        link_element = etree.SubElement(  # pylint:disable=c-extension-no-member
-            root,
-            "a",
-            attrib={
-                "href": url,
-                "target": "_blank",
-            },
-        )
+        link_element = etree.SubElement(root, "a", attrib={"href": url, "target": "_blank"})  # pylint:disable=c-extension-no-member
         text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
             link_element,
             "text",
             attrib={
                 "x": str(padding),
-                "y": str(y_pos),
+                "y": str(viewbox_height - padding),
                 "text-anchor": "start",
                 "font-family": "Roboto, sans-serif",
                 "font-size": "10",
-                "fill": "#0066cc",
+                "fill": "#666666",
                 "text-decoration": "none",
             },
         )
-        text_element.text = f"{pruefi.pruefidentifikator} ({pruefi.format_version.value})"
+        text_element.text = display_text
+    else:
+        # Multiple pruefis: render each number as its own clickable link
+        text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
+            root,
+            "text",
+            attrib={
+                "x": str(padding),
+                "y": str(viewbox_height - padding),
+                "text-anchor": "start",
+                "font-family": "Roboto, sans-serif",
+                "font-size": "10",
+                "fill": "#666666",
+            },
+        )
+        # Add the prefix as a plain tspan
+        prefix_tspan = etree.SubElement(text_element, "tspan")  # pylint:disable=c-extension-no-member
+        prefix_tspan.text = "Prüfidentifikator(en): "
+        for i, pruefi in enumerate(pruefidentifikatoren):
+            url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
+            link = etree.SubElement(text_element, "a", attrib={"href": url, "target": "_blank"})  # pylint:disable=c-extension-no-member
+            tspan = etree.SubElement(link, "tspan", attrib={"fill": "#666666", "text-decoration": "none"})  # pylint:disable=c-extension-no-member
+            tspan.text = pruefi.pruefidentifikator
+            if i < len(pruefidentifikatoren) - 1:
+                tspan.tail = ", "
 
     return etree.tostring(root, encoding="unicode")  # pylint:disable=c-extension-no-member

@@ -15,6 +15,7 @@ from rebdhuhn.models.ebd_table import (
     RESULT_CODE_REGEX,
     EbdDocumentReleaseInformation,
     MultiStepInstruction,
+    Pruefi,
 )
 
 
@@ -86,8 +87,7 @@ class EbdGraphMetaData(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    # This class is (as of now) identical to EbdTableMetaData,
-    # but they should be independent/decoupled from each other (no inheritance)
+    # This class is similar to EbdTableMetaData but intentionally decoupled (no inheritance).
     # pylint:disable=duplicate-code
     ebd_code: str
     """
@@ -121,6 +121,12 @@ class EbdGraphMetaData(BaseModel):
     release_information: Optional[EbdDocumentReleaseInformation] = None
     """
     metadata of the entire EBD document (not the single EBD table)
+    """
+
+    pruefidentifikatoren: list[Pruefi] = Field(default_factory=list)
+    """
+    Pruefidentifikatoren associated with this EBD, e.g. ['11039', '11040'].
+    Populated from AHB data where this EBD code appears as a qualifier.
     """
 
 

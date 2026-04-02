@@ -300,6 +300,7 @@ def convert_table_to_graph(table: EbdTable) -> EbdGraph:
         ebd_name=table.metadata.ebd_name,
         role=table.metadata.role,
         release_information=table.metadata.release_information,
+        pruefidentifikatoren=table.metadata.pruefidentifikatoren,
     )
     return EbdGraph(metadata=graph_metadata, graph=graph, multi_step_instructions=table.multi_step_instructions)
 
@@ -330,5 +331,6 @@ def convert_empty_table_to_graph(metadata: EbdTableMetaData) -> EbdGraph:
         role=metadata.role,
         remark=metadata.remark,
         release_information=metadata.release_information,
+        pruefidentifikatoren=metadata.pruefidentifikatoren,
     )
     return EbdGraph(metadata=graph_metadata, graph=empty_digraph, multi_step_instructions=None)

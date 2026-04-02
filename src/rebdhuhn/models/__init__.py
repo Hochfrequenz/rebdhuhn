@@ -26,6 +26,7 @@ from rebdhuhn.models.ebd_table import (
     EbdTableRow,
     EbdTableSubRow,
     MultiStepInstruction,
+    Pruefi,
 )
 
 __all__ = [
@@ -50,4 +51,5 @@ __all__ = [
     "EbdTableRow",
     "EbdTableSubRow",
     "MultiStepInstruction",
+    "Pruefi",
 ]

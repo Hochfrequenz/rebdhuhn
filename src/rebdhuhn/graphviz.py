@@ -91,6 +91,9 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
         f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
         f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     )
+    if ebd_graph.metadata.pruefidentifikatoren:
+        pruefis_str = ", ".join(ebd_graph.metadata.pruefidentifikatoren)
+        formatted_label += f'<FONT>Prüfidentifikator(en): {pruefis_str}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long

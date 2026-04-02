@@ -53,6 +53,12 @@ SubsequentStepNumber = Annotated[str, Field(pattern=r"^(?:\d+\*?)|(Ende)$")]
 #: Annotated type for EBD codes (e.g., 'E_0621')
 EbdCode = Annotated[str, Field(pattern=_EBD_CODE_REGEX)]
 
+#: regex used to validate Pruefidentifikatoren, e.g. '11039'
+_PRUEFI_REGEX = r"^\d{5}$"
+
+#: Annotated type for Pruefidentifikatoren (5-digit numeric string)
+Pruefi = Annotated[str, Field(pattern=_PRUEFI_REGEX)]
+
 
 class EbdDocumentReleaseInformation(BaseModel):
     """
@@ -148,6 +154,12 @@ class EbdTableMetaData(BaseModel):
     """
     Optional link to the source document.
     E.g. 'https://github.com/Hochfrequenz/edi_energy_mirror/blob/.../EBD_4.0b_20250606_....docx'
+    """
+
+    pruefidentifikatoren: list[Pruefi] = Field(default_factory=list)
+    """
+    Pruefidentifikatoren associated with this EBD, e.g. ['11039', '11040'].
+    Populated from AHB data where this EBD code appears as a qualifier.
     """
 
 

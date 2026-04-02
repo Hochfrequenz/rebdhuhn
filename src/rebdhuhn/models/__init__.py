@@ -21,12 +21,12 @@ from rebdhuhn.models.ebd_table import (
     STEP_NUMBER_REGEX,
     EbdCheckResult,
     EbdDocumentReleaseInformation,
+    EbdPruefidentifikator,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
     MultiStepInstruction,
-    EbdPruefidentifikator,
     Pruefidentifikator,
 )
 

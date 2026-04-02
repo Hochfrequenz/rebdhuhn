@@ -14,8 +14,8 @@ from rebdhuhn.models.ebd_table import (
     EBD_REFERENCE_REGEX,
     RESULT_CODE_REGEX,
     EbdDocumentReleaseInformation,
-    MultiStepInstruction,
     EbdPruefidentifikator,
+    MultiStepInstruction,
 )
 
 

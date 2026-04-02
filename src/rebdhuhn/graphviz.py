@@ -27,7 +27,12 @@ from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
 from rebdhuhn.models.ebd_graph import EmptyNode, TransitionalOutcomeNode, TransitionNode
-from rebdhuhn.models.ebd_table import EBD_REFERENCE_REGEX, EbdDocumentReleaseInformation, EbdPruefidentifikator, MultiStepInstruction
+from rebdhuhn.models.ebd_table import (
+    EBD_REFERENCE_REGEX,
+    EbdDocumentReleaseInformation,
+    EbdPruefidentifikator,
+    MultiStepInstruction,
+)
 from rebdhuhn.utils import add_line_breaks
 
 ADD_INDENT = "    "  #: This is just for style purposes to make the plantuml files human-readable.

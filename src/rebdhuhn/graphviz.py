@@ -451,7 +451,7 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     return dot_code + "}"
 
 
-def convert_dot_to_svg_kroki(
+def convert_dot_to_svg_kroki(  # pylint:disable=too-many-arguments,too-many-positional-arguments
     dot_code: str,
     dot_to_svg_converter: DotToSvgConverter,
     add_watermark: bool = True,

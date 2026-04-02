@@ -22,7 +22,7 @@ import re
 from xml.sax.saxutils import escape
 
 from rebdhuhn.add_watermark import add_background as add_background_function
-from rebdhuhn.add_watermark import add_release_info_footer
+from rebdhuhn.add_watermark import add_pruefidentifikatoren_footer, add_release_info_footer
 from rebdhuhn.add_watermark import add_watermark as add_watermark_function
 from rebdhuhn.kroki import DotToSvgConverter
 from rebdhuhn.models import DecisionNode, EbdGraph, EbdGraphEdge, EndNode, OutcomeNode, StartNode, ToNoEdge, ToYesEdge
@@ -36,7 +36,6 @@ _LABEL_MAX_LINE_LENGTH = 80
 _MSI_LABEL_MAX_LINE_LENGTH = 50  #: Max line length for multi-step instruction labels
 _MSI_NODE_BGCOLOR = "#e6f3ff"  #: Light blue background for multi-step instruction nodes
 _MSI_CLUSTER_BGCOLOR = "#f0f7ff"  #: Very light blue background for multi-step instruction clusters
-_AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.de/ahb"
 
 
 def _format_label(label: str, ebd_link_template: str | None = None) -> str:
@@ -317,27 +316,6 @@ def _convert_multi_step_instruction_cluster_to_dot(
     return "\n".join(lines)
 
 
-def _convert_pruefidentifikatoren_node_to_dot(
-    pruefidentifikatoren: list[EbdPruefidentifikator], indent: str
-) -> str:
-    """
-    Renders a standalone node in the bottom-left corner showing clickable Pruefidentifikator links.
-    Each link points to the respective page on ahb-tabellen.hochfrequenz.de.
-    """
-    # Build an HTML table with one row per Pruefidentifikator
-    rows = ""
-    for pruefi in pruefidentifikatoren:
-        url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
-        rows += (
-            f'<TR><TD ALIGN="LEFT" HREF="{url}" TARGET="_blank">'
-            f'<FONT COLOR="#0066cc">{pruefi.pruefidentifikator} ({pruefi.format_version.value})</FONT>'
-            f"</TD></TR>"
-        )
-    table_label = f'<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2"><TR><TD ALIGN="LEFT"><B>Prüfidentifikator(en)</B></TD></TR>{rows}</TABLE>'
-    # pylint:disable=line-too-long
-    return f'{indent}"pruefidentifikatoren" [shape=plain, label=<{table_label}>, fontname="Roboto, sans-serif"];'
-
-
 def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str, ebd_link_template: str | None = None) -> str:
     """
     Convert all nodes of the EbdGraph to dot output.
@@ -363,9 +341,6 @@ def _convert_nodes_to_dot(ebd_graph: EbdGraph, indent: str, ebd_link_template: s
     for node_key in ebd_graph.graph.nodes:
         if node_key not in node_keys_in_clusters:
             result_parts.append(_convert_node_to_dot(ebd_graph, node_key, indent, ebd_link_template))
-
-    if ebd_graph.metadata.pruefidentifikatoren:
-        result_parts.append(_convert_pruefidentifikatoren_node_to_dot(ebd_graph.metadata.pruefidentifikatoren, indent))
 
     return "\n".join(result_parts)
 
@@ -477,6 +452,7 @@ def convert_dot_to_svg_kroki(
     add_watermark: bool = True,
     add_background: bool = True,
     release_info: EbdDocumentReleaseInformation | None = None,
+    pruefidentifikatoren: list[EbdPruefidentifikator] | None = None,
 ) -> str:
     """
     Converts dot code to svg (code) and returns the result as string. It uses kroki.io.
@@ -484,6 +460,7 @@ def convert_dot_to_svg_kroki(
     Optionally add a background with the color 'HF white', controlled by the argument 'add_background'
     If 'add_background' is False, the background is transparent.
     If 'release_info' is provided, adds release information footer to the bottom-right corner.
+    If 'pruefidentifikatoren' is provided, adds clickable links to the bottom-left corner.
     """
     svg_out = dot_to_svg_converter.convert_dot_to_svg(dot_code)
     if add_watermark:
@@ -492,4 +469,6 @@ def convert_dot_to_svg_kroki(
         svg_out = add_background_function(svg_out)
     if release_info:
         svg_out = add_release_info_footer(svg_out, release_info)
+    if pruefidentifikatoren:
+        svg_out = add_pruefidentifikatoren_footer(svg_out, pruefidentifikatoren)
     return svg_out

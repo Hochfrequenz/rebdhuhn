@@ -13,11 +13,34 @@ from typing import TextIO, Tuple, Union
 from lxml import etree
 from svgutils.compose import SVG, Figure  # type: ignore[import-untyped]
 
-from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation
+from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation, EbdPruefidentifikator
 from rebdhuhn.utils import format_release_info
+
+_AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.de/ahb"
+
+_FOOTER_TEXT_STYLE: dict[str, str] = {
+    "text-anchor": "start",
+    "font-family": "Roboto, sans-serif",
+    "font-size": "10",
+    "fill": "#666666",
+    "text-decoration": "none",
+}
 
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
+
+
+def _get_viewbox_dimensions(root: etree._Element, svg: str) -> tuple[float, float]:
+    """
+    Extracts viewBox width and height from a parsed SVG root element.
+    Falls back to width/height attributes if viewBox is missing or malformed.
+    """
+    viewbox = root.attrib.get("viewBox", "")
+    if viewbox:
+        parts = viewbox.split()
+        if len(parts) == 4:
+            return float(parts[2]), float(parts[3])
+    return get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
 
 def convert_dimension_to_float(dimension: str) -> float:
@@ -133,19 +156,7 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
 
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
-
-    # Get viewBox dimensions (more reliable than width/height attributes which may use different units)
-    viewbox = root.attrib.get("viewBox", "")
-    if viewbox:
-        parts = viewbox.split()
-        if len(parts) == 4:
-            viewbox_width = float(parts[2])
-            viewbox_height = float(parts[3])
-        else:
-            # Fallback to width/height if viewBox parsing fails
-            viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-    else:
-        viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
+    viewbox_width, viewbox_height = _get_viewbox_dimensions(root, svg)
 
     # Create anchor element linking to ebd.hochfrequenz.de
     link_element = etree.Element(  # pylint:disable=c-extension-no-member
@@ -155,21 +166,76 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
             "target": "_blank",
         },
     )
-    # Create text element positioned at bottom-right within viewBox coordinates
     text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
         link_element,
         "text",
         attrib={
             "x": str(viewbox_width - padding),
             "y": str(viewbox_height - padding),
-            "text-anchor": "end",
-            "font-family": "Roboto, sans-serif",
-            "font-size": "10",
-            "fill": "#666666",
-            "text-decoration": "none",
+            **_FOOTER_TEXT_STYLE,
+            "text-anchor": "end",  # override: right-aligned
         },
     )
     text_element.text = release_text
     root.append(link_element)
+
+    return etree.tostring(root, encoding="unicode")  # pylint:disable=c-extension-no-member
+
+
+def add_pruefidentifikatoren_footer(
+    svg: str, pruefidentifikatoren: list[EbdPruefidentifikator], padding: float = 10.0
+) -> str:
+    """
+    Adds clickable Pruefidentifikator links to the bottom-left corner of the SVG,
+    mirroring the release info footer style on the bottom-right.
+    Each link points to ahb-tabellen.hochfrequenz.de/ahb/{format_version}/{pruefidentifikator}.
+    """
+    if not pruefidentifikatoren:
+        return svg
+
+    tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
+    root = tree.getroot()
+    _, viewbox_height = _get_viewbox_dimensions(root, svg)
+
+    if len(pruefidentifikatoren) == 1:
+        pruefi = pruefidentifikatoren[0]
+        url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
+        link_element = etree.SubElement(
+            root, "a", attrib={"href": url, "target": "_blank"}
+        )  # pylint:disable=c-extension-no-member
+        text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
+            link_element,
+            "text",
+            attrib={
+                "x": str(padding),
+                "y": str(viewbox_height - padding),
+                **_FOOTER_TEXT_STYLE,
+            },
+        )
+        text_element.text = f"PI: {pruefi.pruefidentifikator}"
+    else:
+        text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
+            root,
+            "text",
+            attrib={
+                "x": str(padding),
+                "y": str(viewbox_height - padding),
+                **_FOOTER_TEXT_STYLE,
+            },
+        )
+        # Add the prefix as a plain tspan
+        prefix_tspan = etree.SubElement(text_element, "tspan")  # pylint:disable=c-extension-no-member
+        prefix_tspan.text = "PI:"
+        for i, pruefi in enumerate(pruefidentifikatoren):
+            url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
+            link = etree.SubElement(
+                text_element, "a", attrib={"href": url, "target": "_blank"}
+            )  # pylint:disable=c-extension-no-member
+            tspan = etree.SubElement(
+                link, "tspan", attrib={"fill": "#666666", "text-decoration": "none"}
+            )  # pylint:disable=c-extension-no-member
+            tspan.text = pruefi.pruefidentifikator
+            if i < len(pruefidentifikatoren) - 1:
+                tspan.tail = ", "
 
     return etree.tostring(root, encoding="unicode")  # pylint:disable=c-extension-no-member

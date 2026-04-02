@@ -9,6 +9,7 @@ from datetime import date
 from importlib.metadata import PackageNotFoundError, version
 from typing import Annotated, List, Optional
 
+from efoli import EdifactFormatVersion
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
@@ -52,6 +53,24 @@ SubsequentStepNumber = Annotated[str, Field(pattern=r"^(?:\d+\*?)|(Ende)$")]
 
 #: Annotated type for EBD codes (e.g., 'E_0621')
 EbdCode = Annotated[str, Field(pattern=_EBD_CODE_REGEX)]
+
+#: regex used to validate Pruefidentifikatoren, e.g. '11039'
+_PRUEFI_REGEX = r"^\d{5}$"
+
+#: Annotated type for Pruefidentifikatoren (5-digit numeric string)
+Pruefidentifikator = Annotated[str, Field(pattern=_PRUEFI_REGEX)]
+
+
+class EbdPruefidentifikator(BaseModel):
+    """
+    A Pruefidentifikator paired with its Edifact format version,
+    allowing generation of links to ahb-tabellen.hochfrequenz.de.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    format_version: EdifactFormatVersion
+    pruefidentifikator: Pruefidentifikator
 
 
 class EbdDocumentReleaseInformation(BaseModel):
@@ -148,6 +167,13 @@ class EbdTableMetaData(BaseModel):
     """
     Optional link to the source document.
     E.g. 'https://github.com/Hochfrequenz/edi_energy_mirror/blob/.../EBD_4.0b_20250606_....docx'
+    """
+
+    pruefidentifikatoren: Optional[list[EbdPruefidentifikator]] = None
+    """
+    Pruefidentifikatoren associated with this EBD, paired with their format version
+    for link generation to ahb-tabellen.hochfrequenz.de.
+    None means we didn't check; an empty list means no Pruefidentifikator refers to this EBD.
     """
 
 

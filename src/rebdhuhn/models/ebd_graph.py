@@ -14,6 +14,7 @@ from rebdhuhn.models.ebd_table import (
     EBD_REFERENCE_REGEX,
     RESULT_CODE_REGEX,
     EbdDocumentReleaseInformation,
+    EbdPruefidentifikator,
     MultiStepInstruction,
 )
 
@@ -86,8 +87,7 @@ class EbdGraphMetaData(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    # This class is (as of now) identical to EbdTableMetaData,
-    # but they should be independent/decoupled from each other (no inheritance)
+    # This class is similar to EbdTableMetaData but intentionally decoupled (no inheritance).
     # pylint:disable=duplicate-code
     ebd_code: str
     """
@@ -121,6 +121,13 @@ class EbdGraphMetaData(BaseModel):
     release_information: Optional[EbdDocumentReleaseInformation] = None
     """
     metadata of the entire EBD document (not the single EBD table)
+    """
+
+    pruefidentifikatoren: Optional[list[EbdPruefidentifikator]] = None
+    """
+    Pruefidentifikatoren associated with this EBD, paired with their format version
+    for link generation to ahb-tabellen.hochfrequenz.de.
+    None means we didn't check; an empty list means no Pruefidentifikator refers to this EBD.
     """
 
 

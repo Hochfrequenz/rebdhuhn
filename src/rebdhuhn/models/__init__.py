@@ -21,11 +21,13 @@ from rebdhuhn.models.ebd_table import (
     STEP_NUMBER_REGEX,
     EbdCheckResult,
     EbdDocumentReleaseInformation,
+    EbdPruefidentifikator,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
     MultiStepInstruction,
+    Pruefidentifikator,
 )
 
 __all__ = [
@@ -50,4 +52,6 @@ __all__ = [
     "EbdTableRow",
     "EbdTableSubRow",
     "MultiStepInstruction",
+    "EbdPruefidentifikator",
+    "Pruefidentifikator",
 ]

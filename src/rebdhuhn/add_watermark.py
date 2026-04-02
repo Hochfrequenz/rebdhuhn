@@ -18,8 +18,29 @@ from rebdhuhn.utils import format_release_info
 
 _AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.de/ahb"
 
+_FOOTER_TEXT_STYLE: dict[str, str] = {
+    "text-anchor": "start",
+    "font-family": "Roboto, sans-serif",
+    "font-size": "10",
+    "fill": "#666666",
+    "text-decoration": "none",
+}
+
 # Sets the size of the watermark compared to the smaller dimension of the ebd diagram
 FINAL_SCALING_FACTOR = 0.8
+
+
+def _get_viewbox_dimensions(root: etree._Element, svg: str) -> tuple[float, float]:
+    """
+    Extracts viewBox width and height from a parsed SVG root element.
+    Falls back to width/height attributes if viewBox is missing or malformed.
+    """
+    viewbox = root.attrib.get("viewBox", "")
+    if viewbox:
+        parts = viewbox.split()
+        if len(parts) == 4:
+            return float(parts[2]), float(parts[3])
+    return get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
 
 def convert_dimension_to_float(dimension: str) -> float:
@@ -135,19 +156,7 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
 
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
-
-    # Get viewBox dimensions (more reliable than width/height attributes which may use different units)
-    viewbox = root.attrib.get("viewBox", "")
-    if viewbox:
-        parts = viewbox.split()
-        if len(parts) == 4:
-            viewbox_width = float(parts[2])
-            viewbox_height = float(parts[3])
-        else:
-            # Fallback to width/height if viewBox parsing fails
-            viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-    else:
-        viewbox_width, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
+    viewbox_width, viewbox_height = _get_viewbox_dimensions(root, svg)
 
     # Create anchor element linking to ebd.hochfrequenz.de
     link_element = etree.Element(  # pylint:disable=c-extension-no-member
@@ -157,18 +166,14 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
             "target": "_blank",
         },
     )
-    # Create text element positioned at bottom-right within viewBox coordinates
     text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
         link_element,
         "text",
         attrib={
             "x": str(viewbox_width - padding),
             "y": str(viewbox_height - padding),
-            "text-anchor": "end",
-            "font-family": "Roboto, sans-serif",
-            "font-size": "10",
-            "fill": "#666666",
-            "text-decoration": "none",
+            **_FOOTER_TEXT_STYLE,
+            "text-anchor": "end",  # override: right-aligned
         },
     )
     text_element.text = release_text
@@ -190,22 +195,8 @@ def add_pruefidentifikatoren_footer(
 
     tree = etree.parse(BytesIO(svg.encode("utf-8")))  # pylint:disable=c-extension-no-member
     root = tree.getroot()
+    _, viewbox_height = _get_viewbox_dimensions(root, svg)
 
-    viewbox = root.attrib.get("viewBox", "")
-    if viewbox:
-        parts = viewbox.split()
-        if len(parts) == 4:
-            viewbox_height = float(parts[3])
-        else:
-            _, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-    else:
-        _, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
-
-    # Render as a single line: "PI:19204, 55066"
-    pruefi_texts = [p.pruefidentifikator for p in pruefidentifikatoren]
-    display_text = f"PI:{', '.join(pruefi_texts)}"
-
-    # If there's exactly one, make the whole text a single clickable link
     if len(pruefidentifikatoren) == 1:
         pruefi = pruefidentifikatoren[0]
         url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
@@ -216,26 +207,18 @@ def add_pruefidentifikatoren_footer(
             attrib={
                 "x": str(padding),
                 "y": str(viewbox_height - padding),
-                "text-anchor": "start",
-                "font-family": "Roboto, sans-serif",
-                "font-size": "10",
-                "fill": "#666666",
-                "text-decoration": "none",
+                **_FOOTER_TEXT_STYLE,
             },
         )
-        text_element.text = display_text
+        text_element.text = f"PI: {pruefi.pruefidentifikator}"
     else:
-        # Multiple pruefis: render each number as its own clickable link
         text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
             root,
             "text",
             attrib={
                 "x": str(padding),
                 "y": str(viewbox_height - padding),
-                "text-anchor": "start",
-                "font-family": "Roboto, sans-serif",
-                "font-size": "10",
-                "fill": "#666666",
+                **_FOOTER_TEXT_STYLE,
             },
         )
         # Add the prefix as a plain tspan

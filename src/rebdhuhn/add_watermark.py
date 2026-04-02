@@ -201,9 +201,9 @@ def add_pruefidentifikatoren_footer(
     else:
         _, viewbox_height = get_dimensions_of_svg(BytesIO(svg.encode("utf-8")))
 
-    # Render as a single line: "Prüfidentifikator(en): 19204, 55066"
+    # Render as a single line: "PI:19204, 55066"
     pruefi_texts = [p.pruefidentifikator for p in pruefidentifikatoren]
-    display_text = f"Prüfidentifikator(en): {', '.join(pruefi_texts)}"
+    display_text = f"PI:{', '.join(pruefi_texts)}"
 
     # If there's exactly one, make the whole text a single clickable link
     if len(pruefidentifikatoren) == 1:
@@ -240,7 +240,7 @@ def add_pruefidentifikatoren_footer(
         )
         # Add the prefix as a plain tspan
         prefix_tspan = etree.SubElement(text_element, "tspan")  # pylint:disable=c-extension-no-member
-        prefix_tspan.text = "Prüfidentifikator(en): "
+        prefix_tspan.text = "PI:"
         for i, pruefi in enumerate(pruefidentifikatoren):
             url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
             link = etree.SubElement(text_element, "a", attrib={"href": url, "target": "_blank"})  # pylint:disable=c-extension-no-member

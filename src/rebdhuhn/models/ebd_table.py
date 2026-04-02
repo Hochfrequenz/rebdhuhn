@@ -156,10 +156,11 @@ class EbdTableMetaData(BaseModel):
     E.g. 'https://github.com/Hochfrequenz/edi_energy_mirror/blob/.../EBD_4.0b_20250606_....docx'
     """
 
-    pruefidentifikatoren: list[Pruefidentifikator] = Field(default_factory=list)
+    pruefidentifikatoren: Optional[list[Pruefidentifikator]] = None
     """
     Pruefidentifikatoren associated with this EBD, e.g. ['11039', '11040'].
     Populated from AHB data where this EBD code appears as a qualifier.
+    None means we didn't check; an empty list means no Pruefidentifikator refers to this EBD.
     """
 
 

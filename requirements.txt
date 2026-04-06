@@ -10,7 +10,7 @@ certifi==2026.2.25
     # via requests
 charset-normalizer==3.4.7
     # via requests
-efoli==2.2.0
+efoli==2.3.0
     # via rebdhuhn (pyproject.toml)
 idna==3.11
     # via requests

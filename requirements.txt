@@ -14,7 +14,7 @@ efoli==2.3.0
     # via rebdhuhn (pyproject.toml)
 idna==3.11
     # via requests
-lxml==6.0.2
+lxml==6.0.4
     # via
     #   rebdhuhn (pyproject.toml)
     #   svgutils

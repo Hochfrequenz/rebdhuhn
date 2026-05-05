@@ -20,7 +20,7 @@ lxml==6.1.0
     #   svgutils
 networkx==3.6.1
     # via rebdhuhn (pyproject.toml)
-pydantic==2.12.5
+pydantic==2.13.3
     # via rebdhuhn (pyproject.toml)
 pydantic-core==2.41.5
     # via pydantic

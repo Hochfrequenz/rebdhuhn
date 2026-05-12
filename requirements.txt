@@ -26,7 +26,7 @@ pydantic-core==2.41.5
     # via pydantic
 pytz==2026.2
     # via efoli
-requests==2.33.1
+requests==2.34.0
     # via rebdhuhn (pyproject.toml)
 svgutils==0.3.4
     # via rebdhuhn (pyproject.toml)

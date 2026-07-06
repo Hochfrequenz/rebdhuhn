@@ -8,7 +8,7 @@ annotated-types==0.7.0
     # via pydantic
 certifi==2026.6.17
     # via requests
-charset-normalizer==3.4.7
+charset-normalizer==3.4.8
     # via requests
 efoli==2.3.0
     # via rebdhuhn (pyproject.toml)

@@ -8,12 +8,12 @@ repos:
       - id: trailing-whitespace
         exclude: ^unittests/__snapshots__/
   - repo: https://github.com/psf/black
-    rev: 24.4.2
+    rev: 26.5.1
     hooks:
       - id: black
         language_version: python3
   - repo: https://github.com/pycqa/isort
-    rev: 5.13.2
+    rev: 8.0.1
     hooks:
       - id: isort
         name: isort (python)
@@ -23,3 +23,7 @@ repos:
       - id: isort
         name: isort (pyi)
         types: [pyi]
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.11.31
+    hooks:
+      - id: uv-lock

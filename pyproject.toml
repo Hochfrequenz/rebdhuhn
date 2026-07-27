@@ -31,9 +31,16 @@ dependencies = [
 ]
 dynamic = ["readme", "version"]
 
-[project.optional-dependencies]
+[project.urls]
+Homepage = "https://github.com/Hochfrequenz/rebdhuhn"
+Changelog = "https://github.com/Hochfrequenz/rebdhuhn/releases"
+Repository = "https://github.com/Hochfrequenz/rebdhuhn"
+Issue-Tracker = "https://github.com/Hochfrequenz/rebdhuhn/issues"
+
+[dependency-groups]
 coverage = [
-    "coverage==7.15.0"
+    "coverage==7.15.0",
+    { include-group = "tests" },
 ]
 formatting = [
     "black==26.5.1",
@@ -42,30 +49,33 @@ formatting = [
 linting = [
     "pylint==4.0.6"
 ]
-packaging = [
-    "build==1.5.1",
-    "twine==6.2.0"
-]
 spellcheck = [
     "codespell==2.4.2"
 ]
 tests = [
     "pytest==9.1.1",
     "syrupy==2026.4.6.124150327040",
-    "testcontainers>=4.0.0"
+    "testcontainers>=4.0.0",
+    "requests-mock",
 ]
 type_check = [
     "mypy==2.3.0",
     "types-requests==2.33.0.20260518",
     "lxml-stubs==0.5.1",
-    "types-docker>=7.0.0"
+    "types-docker>=7.0.0",
+    { include-group = "tests" },
+]
+dev = [
+    { include-group = "tests" },
+    { include-group = "linting" },
+    { include-group = "type_check" },
+    { include-group = "coverage" },
+    { include-group = "formatting" },
+    "pre-commit",
 ]
 
-[project.urls]
-Homepage = "https://github.com/Hochfrequenz/rebdhuhn"
-Changelog = "https://github.com/Hochfrequenz/rebdhuhn/releases"
-Repository = "https://github.com/Hochfrequenz/rebdhuhn"
-Issue-Tracker = "https://github.com/Hochfrequenz/rebdhuhn/issues"
+[tool.uv]
+default-groups = []
 
 [tool.black]
 line-length = 120

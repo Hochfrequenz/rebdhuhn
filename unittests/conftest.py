@@ -9,7 +9,7 @@ import pytest
 from rebdhuhn import Kroki
 
 try:
-    from testcontainers.core.container import DockerContainer  # type: ignore[import-untyped]
+    from testcontainers.core.container import DockerContainer
 
     TESTCONTAINERS_AVAILABLE = True
 except ImportError:
@@ -65,7 +65,7 @@ def kroki_container() -> Generator[DockerContainer, None, None]:
     # Wait for Kroki to be ready
     host = container.get_container_host_ip()
     port = container.get_exposed_port(8000)
-    wait_for_kroki(host, port)
+    wait_for_kroki(host, str(port))
 
     yield container
 

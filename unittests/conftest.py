@@ -2,6 +2,8 @@
 Pytest fixtures for rebdhuhn tests.
 """
 
+from __future__ import annotations
+
 from typing import Generator
 
 import pytest

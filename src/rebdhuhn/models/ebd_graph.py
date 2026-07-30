@@ -4,7 +4,7 @@ contains the graph side of things
 
 import re
 from abc import ABC, abstractmethod
-from typing import Annotated, List, Optional, Union
+from typing import Annotated
 
 from networkx import DiGraph  # type: ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -112,18 +112,18 @@ class EbdGraphMetaData(BaseModel):
     """
     e.g. 'BIKO' for "Prüfende Rolle: 'BIKO'"
     """
-    remark: Optional[str] = None
+    remark: str | None = None
     """
     remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
     da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
     """
 
-    release_information: Optional[EbdDocumentReleaseInformation] = None
+    release_information: EbdDocumentReleaseInformation | None = None
     """
     metadata of the entire EBD document (not the single EBD table)
     """
 
-    pruefidentifikatoren: Optional[list[EbdPruefidentifikator]] = None
+    pruefidentifikatoren: list[EbdPruefidentifikator] | None = None
     """
     Pruefidentifikatoren associated with this EBD, paired with their format version
     for link generation to ahb-tabellen.hochfrequenz.de.
@@ -180,12 +180,12 @@ class OutcomeNode(EbdGraphNode):  # networkx requirement: nodes are hashable (fr
     An outcome node is a leaf of the Entscheidungsbaum tree. It has no subsequent steps.
     """
 
-    result_code: Optional[GraphResultCode] = None
+    result_code: GraphResultCode | None = None
     """
     The outcome of the decision tree check; e.g. 'A55'
     """
 
-    note: Optional[str] = None
+    note: str | None = None
     """
     An optional note for this outcome; e.g. 'Cluster:Ablehnung\nFristüberschreitung'
     """
@@ -258,7 +258,7 @@ class TransitionalOutcomeNode(EbdGraphNode):  # networkx requirement: nodes are 
     The number of the subsequent step, e.g. '2' or '110'. Needed for key generation.
     """
 
-    note: Optional[str] = None
+    note: str | None = None
     """
     An optional note for this outcome; e.g. 'Cluster:Ablehnung\nFristüberschreitung'
     """
@@ -283,7 +283,7 @@ class TransitionNode(EbdGraphNode):
     """
     the questions which is asked at this node in the tree
     """
-    note: Optional[str] = None
+    note: str | None = None
     """
     An optional note that explains the purpose, e.g.
     'Aufnahme von 0..n Treffern in die neue Trefferliste auf Basis von drei Kriterien'
@@ -308,7 +308,7 @@ class EbdGraphEdge(BaseModel):
     """
     the destination/target of the edge
     """
-    note: Optional[str] = None
+    note: str | None = None
     """
     An optional note for this edge.
     If the note doesn't refer to a OutcomeNode - e.g. 'Cluster:Ablehnung\nFristüberschreitung' -
@@ -354,7 +354,7 @@ class TransitionalOutcomeEdge(EbdGraphEdge):
     an edge that connects a transitional outcome node from the last or to the respective next step
     """
 
-    source: Union[DecisionNode, TransitionalOutcomeNode]
+    source: DecisionNode | TransitionalOutcomeNode
     """
     ths source which refers to the next step
     """
@@ -378,7 +378,7 @@ class EbdGraph(BaseModel):
     """
 
     # pylint: disable=duplicate-code
-    multi_step_instructions: Optional[List[MultiStepInstruction]] = None
+    multi_step_instructions: list[MultiStepInstruction] | None = None
     """
     If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
     instructions. There might be more than one of these instructions in one EBD table.

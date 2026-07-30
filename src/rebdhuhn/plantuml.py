@@ -64,7 +64,7 @@ def _convert_outcome_node_to_plantuml(graph: DiGraph, node: str, indent: str) ->
     result = f"{indent}:{outcome_node.result_code};\n"
     if outcome_node.note is not None:
         note = outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
-        result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
+        result += f"{indent}note left\n{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n{indent}endnote\n"
     return f"{result}{indent}kill;\n"
 
 
@@ -81,7 +81,7 @@ def _convert_transitional_outcome_node_to_plantuml(graph: DiGraph, node: str, in
     result = f"{indent}:{trans_outcome_node.result_code};\n"
     if trans_outcome_node.note is not None:
         note = trans_outcome_node.note.replace("\n", f"\n{indent}{ADD_INDENT}")
-        result += f"{indent}note left\n" f"{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n" f"{indent}endnote\n"
+        result += f"{indent}note left\n{indent}{ADD_INDENT}{_escape_for_plantuml(note)}\n{indent}endnote\n"
 
     # Get the subsequent node and convert it (unless it has indegree > 1,
     # in which case it will be rendered at its common ancestor)
@@ -238,7 +238,7 @@ def convert_graph_to_plantuml(graph: EbdGraph) -> str:
     if "1" in nx_graph["Start"]:
         key_of_first_node = "1"
     else:
-        key_of_first_node = list(nx_graph["Start"].keys())[0]
+        key_of_first_node = next(iter(nx_graph["Start"].keys()))
     plantuml_code += _convert_node_to_plantuml(nx_graph, key_of_first_node, "")
 
     return plantuml_code + "\n@enduml\n"

@@ -144,9 +144,7 @@ def _convert_outcome_node_to_dot(
     if not is_outcome_without_code:
         formatted_label += f'<B>{outcome_node.result_code}</B><BR align="left"/><BR align="left"/>'
     if outcome_node.note:
-        formatted_label += (
-            f"<FONT>" f'{_format_label(outcome_node.note, ebd_link_template)}<BR align="left"/>' f"</FONT>"
-        )
+        formatted_label += f'<FONT>{_format_label(outcome_node.note, ebd_link_template)}<BR align="left"/></FONT>'
 
     # Build node attributes
     attrs = [
@@ -178,8 +176,8 @@ def _convert_decision_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -
     Convert a DecisionNode to dot code
     """
     formatted_label = (
-        f'<B>{ebd_graph.graph.nodes[node]["node"].step_number}: </B>'
-        f'{_format_label(ebd_graph.graph.nodes[node]["node"].question)}'
+        f"<B>{ebd_graph.graph.nodes[node]['node'].step_number}: </B>"
+        f"{_format_label(ebd_graph.graph.nodes[node]['node'].question)}"
         f'<BR align="left"/>'
     )
     return (
@@ -193,14 +191,12 @@ def _convert_transition_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str)
     Convert a TransitionNode to dot code
     """
     formatted_label = (
-        f'<B>{ebd_graph.graph.nodes[node]["node"].step_number}: </B>'
-        f'{_format_label(ebd_graph.graph.nodes[node]["node"].question)}'
+        f"<B>{ebd_graph.graph.nodes[node]['node'].step_number}: </B>"
+        f"{_format_label(ebd_graph.graph.nodes[node]['node'].question)}"
         f'<BR align="left"/>'
     )
     if ebd_graph.graph.nodes[node]["node"].note:
-        formatted_label += (
-            f"<FONT>" f'{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/>' f"</FONT>"
-        )
+        formatted_label += f'<FONT>{_format_label(ebd_graph.graph.nodes[node]["node"].note)}<BR align="left"/></FONT>'
     return (
         f'{indent}"{node}" [margin="0.2,0.12", shape=box, style="filled,rounded", penwidth=0.0, fillcolor="#c2cee9", '
         f'label=<{formatted_label}>, fontname="Roboto, sans-serif"];'

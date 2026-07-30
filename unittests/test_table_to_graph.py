@@ -59,9 +59,7 @@ class InterceptedKrokiClient(Kroki):
             "--url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/"
             "--header 'Content-Type: application/json' "
             f"--data '{args[0]}'"
-        ).replace(
-            "--", "- -"
-        )  # replace double hyphen for xml compatability
+        ).replace("--", "- -")  # replace double hyphen for xml compatability
         result_tree.insert(0, etree.Comment(my_comment))
         self.intercepted_kroki_response_with_xml_comment = etree.tostring(result_tree).decode("utf-8")
         return result
@@ -826,6 +824,6 @@ class TestEbdReferencesPropagation:
         for node_key in graph.graph.nodes:
             node = graph.graph.nodes[node_key]["node"]
             if isinstance(node, OutcomeNode):
-                assert not any(
-                    node.ebd_references
-                ), f"Expected empty list for {node.get_key()}, got {node.ebd_references}"
+                assert not any(node.ebd_references), (
+                    f"Expected empty list for {node.get_key()}, got {node.ebd_references}"
+                )

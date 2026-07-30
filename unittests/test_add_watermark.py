@@ -34,9 +34,9 @@ class TestAddReleaseInfoFooter:
 
         # Find all <a> elements
         a_elements = root.findall(".//{http://www.w3.org/2000/svg}a") + root.findall(".//a")
-        assert any(
-            elem.attrib.get("href") == "https://ebd.hochfrequenz.de" for elem in a_elements
-        ), "Footer must contain a hyperlink to https://ebd.hochfrequenz.de"
+        assert any(elem.attrib.get("href") == "https://ebd.hochfrequenz.de" for elem in a_elements), (
+            "Footer must contain a hyperlink to https://ebd.hochfrequenz.de"
+        )
 
     def test_footer_link_text_is_not_underlined(self) -> None:
         """The footer text must not have an underline (text-decoration: none)."""
@@ -49,9 +49,9 @@ class TestAddReleaseInfoFooter:
         root = etree.fromstring(svg_result.encode("utf-8"))
 
         text_elements = root.findall(".//{http://www.w3.org/2000/svg}text") + root.findall(".//text")
-        assert any(
-            elem.attrib.get("text-decoration") == "none" for elem in text_elements
-        ), "Footer text must have text-decoration='none' to avoid an ugly underline"
+        assert any(elem.attrib.get("text-decoration") == "none" for elem in text_elements), (
+            "Footer text must have text-decoration='none' to avoid an ugly underline"
+        )
 
     def test_footer_returns_unchanged_svg_when_version_is_missing(self) -> None:
         """If the release info has no version, the SVG should be returned unchanged."""

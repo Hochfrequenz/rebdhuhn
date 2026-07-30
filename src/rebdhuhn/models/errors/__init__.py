@@ -3,8 +3,6 @@ Specific error classes for errors that may occur in the data.
 Using these exceptions allows to catch/filter more fine-grained.
 """
 
-from typing import Optional
-
 from rebdhuhn.models import DecisionNode, EbdTableRow, EbdTableSubRow, OutcomeNode
 
 
@@ -96,7 +94,7 @@ class GraphTooComplexForPlantumlError(PlantumlConversionError):
     def __init__(
         self,
         # pylint:disable=line-too-long
-        message: str = "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",
+        message: str = "Plantuml conversion doesn't support multiple nodes for an ancestor node. The graph is too complex.",  # noqa: E501
     ) -> None:
         self.message = message
         super().__init__(self.message)
@@ -136,7 +134,7 @@ class EbdCrossReferenceNotSupportedError(GraphConversionError, NotImplementedErr
     """
 
     def __init__(self, decision_node: DecisionNode, row: EbdTableRow):
-        cross_reference: Optional[str] = None
+        cross_reference: str | None = None
         for sub_row in row.sub_rows:
             if sub_row.note is not None and sub_row.note.startswith("EBD "):
                 cross_reference = sub_row.note.split(" ")[1]

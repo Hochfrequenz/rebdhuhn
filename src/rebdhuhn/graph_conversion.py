@@ -3,7 +3,7 @@ This module contains logic to convert EbdTable data to EbdGraph data.
 """
 
 import re
-from typing import Dict, List, Literal, Optional, overload
+from typing import Literal, overload
 
 from networkx import DiGraph, isolates  # type: ignore[import-untyped]
 
@@ -39,7 +39,7 @@ from rebdhuhn.models.errors import (
 from rebdhuhn.utils import assert_is_instance
 
 
-def _normalize_note_for_comparison(note: Optional[str]) -> Optional[str]:
+def _normalize_note_for_comparison(note: str | None) -> str | None:
     """
     Normalizes a note for comparison by stripping trailing punctuation.
 
@@ -73,7 +73,7 @@ def _is_last_step_with_no_code_but_note(sub_row: EbdTableSubRow) -> bool:
     )
 
 
-def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[OutcomeNode | TransitionalOutcomeNode]:
+def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> OutcomeNode | TransitionalOutcomeNode | None:
     """
     converts a sub_row into an outcome node (or None if not applicable)
     """
@@ -102,7 +102,7 @@ def _convert_sub_row_to_outcome_node(sub_row: EbdTableSubRow) -> Optional[Outcom
     if is_hinweis and sub_row.result_code is None and following_step:
         # We ignore Hinweise, if they are in during a decision process.
         return None
-    if sub_row.result_code is not None or sub_row.note is not None and not is_cross_reference:
+    if sub_row.result_code is not None or (sub_row.note is not None and not is_cross_reference):
         return OutcomeNode(result_code=sub_row.result_code, note=sub_row.note)
     return None
 
@@ -124,7 +124,7 @@ def _yes_no_transition_edge(
 @overload
 def _yes_no_transition_edge(decision: bool, source: DecisionNode, target: EbdGraphNode) -> EbdGraphEdge: ...
 def _yes_no_transition_edge(
-    decision: Optional[bool], source: DecisionNode | TransitionNode, target: EbdGraphNode
+    decision: bool | None, source: DecisionNode | TransitionNode, target: EbdGraphNode
 ) -> EbdGraphEdge:
     if decision is None and isinstance(source, TransitionNode):
         return TransitionEdge(source=source, target=target, note=None)
@@ -137,12 +137,12 @@ def _yes_no_transition_edge(
     raise ValueError(f"Decision must be either True or False or None, but was {decision}")
 
 
-def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
+def get_all_nodes(table: EbdTable) -> list[EbdGraphNode]:
     """
     Returns a list with all nodes from the table.
     Nodes may both be actual EBD check outcome codes (e.g. "A55") but also points where decisions are made.
     """
-    result: List[EbdGraphNode] = [StartNode()]
+    result: list[EbdGraphNode] = [StartNode()]
     contains_ende = False
     for row in table.rows:
         decision_or_transition_node = _convert_row_to_decision_or_transition_node(row)
@@ -167,7 +167,7 @@ def get_all_nodes(table: EbdTable) -> List[EbdGraphNode]:
 
 
 def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str, EbdGraphNode]:
-    nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(ebd_table)}
+    nodes: dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(ebd_table)}
     first_node_after_start: EbdGraphNode
     if "1" in nodes:
         first_node_after_start = nodes["1"]
@@ -186,14 +186,14 @@ def _notes_same_except_for_whitespace(note1: str | None, note2: str | None) -> b
     return note1 is None and note2 is None
 
 
-def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
+def get_all_edges(table: EbdTable) -> list[EbdGraphEdge]:
     """
     Returns a list with all edges from the given table.
     Edges connect decisions with outcomes or subsequent steps.
     """
-    nodes: Dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
+    nodes: dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(table)}
     first_node_after_start = _get_key_and_node_with_lowest_step_number(table)[1]
-    result: List[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
+    result: list[EbdGraphEdge] = [EbdGraphEdge(source=nodes["Start"], target=first_node_after_start, note=None)]
 
     for row in table.rows:
         row_node = _convert_row_to_decision_or_transition_node(row)
@@ -223,9 +223,7 @@ def get_all_edges(table: EbdTable) -> List[EbdGraphEdge]:
                     )
                 )
             else:
-                outcome_node: Optional[OutcomeNode | TransitionalOutcomeNode] = _convert_sub_row_to_outcome_node(
-                    sub_row
-                )
+                outcome_node: OutcomeNode | TransitionalOutcomeNode | None = _convert_sub_row_to_outcome_node(sub_row)
 
                 if isinstance(outcome_node, TransitionalOutcomeNode):
                     result.append(

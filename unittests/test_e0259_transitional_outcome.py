@@ -38,9 +38,9 @@ class TestE0259TransitionalOutcome:
 
         assert len(transitional_nodes) > 0, "Expected E_0259 to have TransitionalOutcomeNode nodes"
         # E_0259 has 12 TransitionalOutcomeNode nodes
-        assert (
-            len(transitional_nodes) >= 10
-        ), f"Expected at least 10 TransitionalOutcomeNodes, got {len(transitional_nodes)}"
+        assert len(transitional_nodes) >= 10, (
+            f"Expected at least 10 TransitionalOutcomeNodes, got {len(transitional_nodes)}"
+        )
 
     def test_e0259_dot_conversion_succeeds(self, e0259_table: EbdTable) -> None:
         """Verify that E_0259 can be converted to DOT format."""
@@ -97,6 +97,6 @@ class TestE0259TransitionalOutcome:
 
         # PlantUML size should be reasonable (< 100KB for a 60-node graph)
         assert len(plantuml_code) < 100_000, (
-            f"PlantUML code is {len(plantuml_code):,} chars ({len(plantuml_code)/1024:.1f} KB). "
+            f"PlantUML code is {len(plantuml_code):,} chars ({len(plantuml_code) / 1024:.1f} KB). "
             "This suggests exponential duplication."
         )

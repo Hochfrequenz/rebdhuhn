@@ -8,7 +8,7 @@ Afterwards it gets placed into the center of the EBD diagram.
 import re
 from io import BytesIO
 from pathlib import Path
-from typing import TextIO, Tuple, Union
+from typing import TextIO
 
 from lxml import etree
 from svgutils.compose import SVG, Figure  # type: ignore[import-untyped]
@@ -61,7 +61,7 @@ def convert_dimension_to_float(dimension: str) -> float:
     return dimension_float
 
 
-def get_dimensions_of_svg(svg_as_bytes: Union[BytesIO, TextIO]) -> Tuple[float, float]:
+def get_dimensions_of_svg(svg_as_bytes: BytesIO | TextIO) -> tuple[float, float]:
     """
     Extract the dimensions of an svg image.
     :param svg_as_bytes:
@@ -200,9 +200,7 @@ def add_pruefidentifikatoren_footer(
     if len(pruefidentifikatoren) == 1:
         pruefi = pruefidentifikatoren[0]
         url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
-        link_element = etree.SubElement(
-            root, "a", attrib={"href": url, "target": "_blank"}
-        )  # pylint:disable=c-extension-no-member
+        link_element = etree.SubElement(root, "a", attrib={"href": url, "target": "_blank"})  # pylint:disable=c-extension-no-member
         text_element = etree.SubElement(  # pylint:disable=c-extension-no-member
             link_element,
             "text",
@@ -228,12 +226,8 @@ def add_pruefidentifikatoren_footer(
         prefix_tspan.text = "PI:"
         for i, pruefi in enumerate(pruefidentifikatoren):
             url = f"{_AHB_TABELLEN_BASE_URL}/{pruefi.format_version.value}/{pruefi.pruefidentifikator}"
-            link = etree.SubElement(
-                text_element, "a", attrib={"href": url, "target": "_blank"}
-            )  # pylint:disable=c-extension-no-member
-            tspan = etree.SubElement(
-                link, "tspan", attrib={"fill": "#666666", "text-decoration": "none"}
-            )  # pylint:disable=c-extension-no-member
+            link = etree.SubElement(text_element, "a", attrib={"href": url, "target": "_blank"})  # pylint:disable=c-extension-no-member
+            tspan = etree.SubElement(link, "tspan", attrib={"fill": "#666666", "text-decoration": "none"})  # pylint:disable=c-extension-no-member
             tspan.text = pruefi.pruefidentifikator
             if i < len(pruefidentifikatoren) - 1:
                 tspan.tail = ", "

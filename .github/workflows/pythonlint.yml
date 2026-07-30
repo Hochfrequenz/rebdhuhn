@@ -18,7 +18,7 @@ jobs:
         run: uv sync --group ${{ matrix.linter-env }}
       - name: Run linting
         if: matrix.linter-env == 'linting'
-        run: uv run --group linting pylint rebdhuhn --ignore=_version.py
+        run: uv run --group linting ruff check src/rebdhuhn
       - name: Run type_check
         if: matrix.linter-env == 'type_check'
         run: |

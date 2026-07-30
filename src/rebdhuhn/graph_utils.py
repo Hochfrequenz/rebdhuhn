@@ -4,8 +4,6 @@ Some of these functions may store some information in the "attribute dictionarie
 (for later use in the conversion logic).
 """
 
-from typing import List, Tuple
-
 from networkx import DiGraph, all_simple_paths  # type: ignore[import-untyped]
 
 from rebdhuhn.models import ToNoEdge, ToYesEdge
@@ -15,7 +13,7 @@ COMMON_ANCESTOR_FIELD = "common_ancestor_for_node"
 # Defines the label to annotate the last common ancestor node with the information to which node
 
 
-def _find_last_common_ancestor(paths: List[List[str]]) -> str:
+def _find_last_common_ancestor(paths: list[list[str]]) -> str:
     """
     This function calculates the last common ancestor node for the defined paths (these paths should be all paths
     between two nodes in the graph).
@@ -42,7 +40,7 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
     """
     if len(graph.nodes) > 90:
         raise GraphTooComplexForPlantumlError(
-            message=f"Graph is too large to determine the last common ancestors." f"Number of Nodes: {len(graph.nodes)}"
+            message=f"Graph is too large to determine the last common ancestors. Number of Nodes: {len(graph.nodes)}"
         )
     for node in graph:
         in_degree: int = graph.in_degree(node)
@@ -65,14 +63,14 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
             graph.nodes[common_ancestor][COMMON_ANCESTOR_FIELD].append(node)
 
 
-def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
+def _get_yes_no_edges(graph: DiGraph, node: str) -> tuple[ToYesEdge, ToNoEdge]:
     """
     A shorthand to get the yes-edge and the no-edge of a decision node.
     """
     yes_edge: ToYesEdge
     no_edge: ToNoEdge
-    for edge in graph[node].values():
-        edge = edge["edge"]
+    for edge_data in graph[node].values():
+        edge = edge_data["edge"]
         match edge:
             case ToYesEdge():
                 assert "yes_edge" not in locals(), f"Multiple yes edges found for node {node}"
@@ -81,7 +79,7 @@ def _get_yes_no_edges(graph: DiGraph, node: str) -> Tuple[ToYesEdge, ToNoEdge]:
                 assert "no_edge" not in locals(), f"Multiple no edges found for node {node}"
                 no_edge = edge
             case _:
-                assert False, f"Unknown edge type: {edge}"
+                raise AssertionError(f"Unknown edge type: {edge}")
     assert "yes_edge" in locals(), f"No yes edge found for node {node}"
     assert "no_edge" in locals(), f"No no edge found for node {node}"
     return yes_edge, no_edge

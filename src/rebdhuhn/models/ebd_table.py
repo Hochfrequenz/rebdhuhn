@@ -7,7 +7,7 @@ An EbdTable is the EDI@Energy raw representation of an "Entscheidungsbaum".
 import re
 from datetime import date
 from importlib.metadata import PackageNotFoundError, version
-from typing import Annotated, List, Optional
+from typing import Annotated
 
 from efoli import EdifactFormatVersion
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -85,7 +85,7 @@ class EbdDocumentReleaseInformation(BaseModel):
     the version of the .docx document/file on which this EBD table is based.
     E.g. '4.0b', because (proper) semantic versioning is for loosers ;)
     """
-    release_date: Optional[date] = None
+    release_date: date | None = None
     """
     date on which the .docx document/file was released.
     This corresponds to the 'Stand' field in the EDI@Energy document title page, e.g. '2025-06-23'.
@@ -94,7 +94,7 @@ class EbdDocumentReleaseInformation(BaseModel):
     """
     # https://imgflip.com/i/a2saev
 
-    original_release_date: Optional[date] = None
+    original_release_date: date | None = None
     """
     date on which the EBD was originally released; It's called 'Ursprüngliches Publikationsdatum' on the EBD document
     title page. E.g. '2024-10-01'.
@@ -102,13 +102,13 @@ class EbdDocumentReleaseInformation(BaseModel):
     # I think that one could validate that if a `release_date` is set, then the `original_release_date` must be set and
     # before it. But we don't add this validation yet, because we all know the data integrity is... to be improved.
 
-    rebdhuhn_version: Optional[SemanticVersion] = Field(default_factory=lambda: _get_package_version("rebdhuhn"))
+    rebdhuhn_version: SemanticVersion | None = Field(default_factory=lambda: _get_package_version("rebdhuhn"))
     """
     Version of rebdhuhn used to process this EBD, e.g. 'v0.18.2'.
     Automatically populated from the installed package version.
     """
 
-    ebdamame_version: Optional[SemanticVersion] = Field(default_factory=lambda: _get_package_version("ebdamame"))
+    ebdamame_version: SemanticVersion | None = Field(default_factory=lambda: _get_package_version("ebdamame"))
     """
     Version of ebdamame used to parse this EBD, e.g. 'v0.5.0'.
     Automatically populated from the installed package version.
@@ -146,30 +146,30 @@ class EbdTableMetaData(BaseModel):
     EBD name from the EDI@Energy Document
     e.g. 'E_0003_Bestellung der Aggregationsebene RZ prüfen'
     """
-    remark: Optional[str] = None
+    remark: str | None = None
     """
     remark for empty ebd sections, e.g. 'Derzeit ist für diese Entscheidung kein Entscheidungsbaum notwendig,
     da keine Antwort gegeben wird und ausschließlich die Liste versandt wird.'
     """
 
-    release_information: Optional[EbdDocumentReleaseInformation] = None
+    release_information: EbdDocumentReleaseInformation | None = None
     """
     metadata of the entire EBD document (not the single EBD table)
     """
 
-    note: Optional[str] = None
+    note: str | None = None
     """
     Optional note about the source of this EBD table.
     E.g. 'Diese Tabelle stammt aus dem ebd.docx EBD_4.0b_20250606_20250930_20250430'
     """
 
-    link: Optional[str] = None
+    link: str | None = None
     """
     Optional link to the source document.
     E.g. 'https://github.com/Hochfrequenz/edi_energy_mirror/blob/.../EBD_4.0b_20250606_....docx'
     """
 
-    pruefidentifikatoren: Optional[list[EbdPruefidentifikator]] = None
+    pruefidentifikatoren: list[EbdPruefidentifikator] | None = None
     """
     Pruefidentifikatoren associated with this EBD, paired with their format version
     for link generation to ahb-tabellen.hochfrequenz.de.
@@ -190,12 +190,12 @@ class EbdCheckResult(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    result: Optional[bool] = None
+    result: bool | None = None
     """
     Either "ja"=True or "nein"=False
     """
 
-    subsequent_step_number: Optional[SubsequentStepNumber] = None
+    subsequent_step_number: SubsequentStepNumber | None = None
     """
     Key of the following/subsequent step, e.g. '2', or '6*' or None, if there is no follow up step
     """
@@ -206,7 +206,7 @@ class EbdCheckResult(BaseModel):
         if self.result is None and self.subsequent_step_number is None:
             raise ValueError(
                 # pylint:disable=line-too-long
-                "If the result is not boolean (meaning neither 'ja' nor 'nein' but null), the subsequent step has to be set"
+                "If the result is not boolean (meaning neither 'ja' nor 'nein' but null), the subsequent step has to be set"  # noqa: E501
             )
         return self
 
@@ -224,13 +224,13 @@ class EbdTableSubRow(BaseModel):
     """
     The column 'Prüfergebnis'
     """
-    result_code: Optional[ResultCode] = None
+    result_code: ResultCode | None = None
     """
     The outcome if no subsequent step was defined in the CheckResult.
     The German column header is 'Code'.
     """
 
-    note: Optional[str] = None
+    note: str | None = None
     """
     An optional note for this outcome.
     E.g. 'Cluster:Ablehnung\nFristüberschreitung'
@@ -269,11 +269,11 @@ class EbdTableRow(BaseModel):
     E.g. 'Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?'
     The German column header is 'Prüfschritt'.
     """
-    sub_rows: List[EbdTableSubRow]
+    sub_rows: list[EbdTableSubRow]
     """
     One table row splits into multiple sub rows: one sub row for each check result (ja/nein)
     """
-    use_cases: Optional[List[str]] = None
+    use_cases: list[str] | None = None
     """
     If certain rows of the EBD table are only relevant for specific use cases/scenarios, you can denote them here.
     E.g. E_0462 step_number 15 may only be applied for use_cases=["Einzug"].
@@ -365,13 +365,13 @@ class EbdTable(BaseModel):
     """
     meta data about the table.
     """
-    rows: List[EbdTableRow]
+    rows: list[EbdTableRow]
     """
     rows are the body of the table;
     might have 0 rows, if the EBD exists but is just a paragraph of text, no real table
     """
     # pylint: disable=duplicate-code
-    multi_step_instructions: Optional[List[MultiStepInstruction]] = None
+    multi_step_instructions: list[MultiStepInstruction] | None = None
     """
     If this is not None, it means that from some point in the EBD onwards, the user is thought to obey additional
     instructions. There might be more than one of these instructions in one EBD table.

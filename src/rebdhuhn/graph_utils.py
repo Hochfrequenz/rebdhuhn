@@ -40,7 +40,7 @@ def _mark_last_common_ancestors(graph: DiGraph) -> None:
     """
     if len(graph.nodes) > 90:
         raise GraphTooComplexForPlantumlError(
-            message=f"Graph is too large to determine the last common ancestors.Number of Nodes: {len(graph.nodes)}"
+            message=f"Graph is too large to determine the last common ancestors. Number of Nodes: {len(graph.nodes)}"
         )
     for node in graph:
         in_degree: int = graph.in_degree(node)

@@ -55,7 +55,7 @@ tests = [
     "requests-mock",
 ]
 type_check = [
-    "mypy==2.3.1",
+    "mypy==2.4.0",
     "types-requests==2.33.0.20260906",
     "lxml-stubs==0.5.1",
     "types-docker>=7.0.0",

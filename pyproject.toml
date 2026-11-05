@@ -50,7 +50,7 @@ spellcheck = [
     "codespell==2.4.3"
 ]
 tests = [
-    "pytest==9.1.1",
+    "pytest==9.2.0",
     "syrupy==2026.4.6.124150327040",
     "testcontainers>=4.0.0",
     "requests-mock",

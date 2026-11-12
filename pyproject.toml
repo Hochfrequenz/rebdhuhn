@@ -57,7 +57,7 @@ tests = [
 ]
 type_check = [
     "mypy==2.4.1",
-    "types-requests==2.33.0.20261006",
+    "types-requests==2.33.0.20261030",
     "lxml-stubs==0.5.1",
     "types-docker>=7.0.0",
     { include-group = "tests" },

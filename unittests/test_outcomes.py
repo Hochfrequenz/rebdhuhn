@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 import pytest
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 from syrupy.assertion import SnapshotAssertion
 
 from rebdhuhn import EbdGraph, EbdOutcomes, EbdTable, convert_table_to_graph, explain_outcomes
@@ -351,11 +351,39 @@ def test_certain_and_possible_agree_with_routes(name: str) -> None:
     assert checked > 0 or name in _no_route_lists
 
 
+def _with_pinned_versions(graph: EbdGraph) -> EbdGraph:
+    """
+    Returns the graph with fixed versions in its release information (if it has any).
+    The versions default to the installed package versions, which are not always valid semantic versions (e.g.
+    'v0.1.dev1+g...' in a shallow checkout, where the version is derived from git). Defaults are not validated, but the
+    JSON round trip validates, so the tests must not depend on the version that happens to be installed.
+    """
+    release_information = graph.metadata.release_information
+    if release_information is None:
+        return graph
+    pinned = release_information.model_copy(update={"rebdhuhn_version": "v1.2.3", "ebdamame_version": "v1.2.3"})
+    return graph.model_copy(update={"metadata": graph.metadata.model_copy(update={"release_information": pinned})})
+
+
 @pytest.mark.parametrize("name", list(_all_tables))
 def test_json_round_trip_and_determinism(name: str) -> None:
-    result = explain_outcomes(_all_tables[name])
+    graph = _with_pinned_versions(_all_tables[name])
+    result = explain_outcomes(graph)
     assert EbdOutcomes.model_validate_json(result.model_dump_json()) == result
-    assert explain_outcomes(_all_tables[name]).model_dump_json() == result.model_dump_json()
+    assert explain_outcomes(graph).model_dump_json() == result.model_dump_json()
+
+
+def test_json_round_trip_does_not_depend_on_the_installed_version() -> None:
+    """a version as in a shallow CI checkout must not break the round trip (reproduces the CI failure)"""
+    graph = _all_tables["e0055"]
+    release_information = graph.metadata.release_information
+    assert release_information is not None
+    shallow = release_information.model_copy(update={"rebdhuhn_version": "v0.1.dev1+gabc"})
+    graph = graph.model_copy(update={"metadata": graph.metadata.model_copy(update={"release_information": shallow})})
+    with pytest.raises(ValidationError):  # this is what the unpinned test did in CI
+        EbdOutcomes.model_validate_json(explain_outcomes(graph).model_dump_json())
+    result = explain_outcomes(_with_pinned_versions(graph))
+    assert EbdOutcomes.model_validate_json(result.model_dump_json()) == result
 
 
 def test_largest_example_is_fast() -> None:

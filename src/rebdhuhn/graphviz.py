@@ -92,10 +92,11 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     Convert a StartNode to dot code
     """
-    formatted_label = (
-        f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
-        f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
-    )
+    formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
+    # Graphviz rejects empty HTML elements like `<B></B>`; a "Prüfende Rolle:" line without a role says nothing,
+    # so the whole line is left out if the role is empty/blank.
+    if ebd_graph.metadata.role.strip():
+        formatted_label += f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
@@ -107,8 +108,11 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     Convert an EmptyNode to dot code
     """
+    # The label assumes a non-empty ebd_code (the identity of an EBD); an empty one would give a rejected `<B></B>`.
     formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-    if ebd_graph.metadata.remark:
+    if (
+        ebd_graph.metadata.remark and ebd_graph.metadata.remark.strip()
+    ):  # a blank remark would give an empty <FONT></FONT>
         formatted_label += f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
@@ -249,6 +253,8 @@ def _convert_multi_step_instruction_to_dot(instruction: MultiStepInstruction, in
         instruction.instruction_text, max_line_length=_MSI_LABEL_MAX_LINE_LENGTH, line_sep="\n"
     )
     formatted_label = escape(label_with_linebreaks).replace("\n", '<BR align="left"/>')
+    if not instruction.instruction_text.strip():
+        formatted_label = "&#160;"  # `<I></I>` (empty HTML element) is a syntax error in Graphviz
     formatted_label = f'<FONT><I>{formatted_label}</I></FONT><BR align="left"/>'
 
     node_key = _get_multi_step_instruction_node_key(instruction)
@@ -418,15 +424,17 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     """
     nx_graph = ebd_graph.graph
     # _mark_last_common_ancestors(nx_graph)
-    header = (
-        f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
-        f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
-    )
+    # Graphviz rejects empty HTML elements (`<FONT></FONT>`), so blank chapter/section lines are left out.
+    header = ""
+    if ebd_graph.metadata.chapter.strip():
+        header += f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
+    if ebd_graph.metadata.section.strip():
+        header += f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
 
     dot_attributes: dict[str, str] = {
         # https://graphviz.org/doc/info/attrs.html
         "labelloc": '"t"',
-        "label": f"<{header}>",
+        **({"label": f"<{header}>"} if header else {}),
         "ratio": '"compress"',
         "concentrate": "true",
         "pack": "true",

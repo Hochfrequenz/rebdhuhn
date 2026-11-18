@@ -168,11 +168,8 @@ def get_all_nodes(table: EbdTable) -> list[EbdGraphNode]:
 
 def _get_key_and_node_with_lowest_step_number(ebd_table: EbdTable) -> tuple[str, EbdGraphNode]:
     nodes: dict[str, EbdGraphNode] = {node.get_key(): node for node in get_all_nodes(ebd_table)}
-    first_node_after_start: EbdGraphNode
-    if "1" in nodes:
-        first_node_after_start = nodes["1"]
-        return "1", first_node_after_start
-    # not all tables have a "1" node, so we need to find the first numeric node; e.g. "10" for E_0401
+    # the start node is connected to the step with the lowest number; this is not always "1", e.g. "0" for E_0407
+    # or "10" for E_0401
     lowest_numeric_key = min(int(key) for key in nodes.keys() if key.isnumeric())
     return str(lowest_numeric_key), nodes[str(lowest_numeric_key)]
 

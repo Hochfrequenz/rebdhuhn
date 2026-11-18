@@ -6,19 +6,27 @@ from rebdhuhn.graph_conversion import convert_table_to_digraph, convert_table_to
 from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from rebdhuhn.kroki import DotToSvgConverter, Kroki, PlantUmlToSvgConverter
 from rebdhuhn.models import (
+    DecisionConsequence,
     DecisionNode,
     EbdCheckResult,
     EbdGraph,
     EbdGraphMetaData,
+    EbdOutcomes,
     EbdTable,
     EbdTableMetaData,
     EbdTableRow,
     EbdTableSubRow,
     EndNode,
     MultiStepInstruction,
+    OutcomeExplanation,
     OutcomeNode,
+    PassedStep,
+    Route,
+    RouteStep,
+    StepDescription,
 )
 from rebdhuhn.models.errors import GraphConversionError, PlantumlConversionError, SvgConversionError
+from rebdhuhn.outcomes import explain_outcomes
 from rebdhuhn.plantuml import convert_graph_to_plantuml, convert_plantuml_to_svg_kroki
 
 # pylint: disable=duplicate-code
@@ -30,6 +38,7 @@ __all__ = [
     "convert_graph_to_dot",
     "convert_graph_to_plantuml",
     "convert_plantuml_to_svg_kroki",
+    "explain_outcomes",
     # Kroki converters
     "DotToSvgConverter",
     "Kroki",
@@ -40,6 +49,14 @@ __all__ = [
     "EbdGraphMetaData",
     "EndNode",
     "OutcomeNode",
+    # Outcome lookup models
+    "DecisionConsequence",
+    "EbdOutcomes",
+    "OutcomeExplanation",
+    "PassedStep",
+    "Route",
+    "RouteStep",
+    "StepDescription",
     # Table models
     "EbdCheckResult",
     "EbdTable",

@@ -145,6 +145,46 @@ with open("e_0003.svg", "w+", encoding="utf-8") as svg_file:
 
 ![](mwe_e0003.svg)
 
+### Explain the Outcomes (Which Checks Lead to a Result Code?)
+
+`explain_outcomes` answers "what does this result code imply?" for every outcome of an EBD and "which result codes are
+still reachable?" for every answer to every decision step:
+
+```python
+from rebdhuhn import convert_table_to_graph, explain_outcomes
+
+graph = convert_table_to_graph(ebd_table)  # ebd_table is an instance of EbdTable (see above)
+outcomes = explain_outcomes(graph, max_routes=20)
+a05 = next(outcome for outcome in outcomes.outcomes if outcome.key == "A05")
+questions = {step.step_number: step.question for step in outcomes.steps}  # the legend: every step exactly once
+print([(step.step_number, questions[step.step_number], step.answers) for step in a05.certain_steps])  # on every route
+print(a05.route_count, a05.routes)  # routes are None if there are more than max_routes of them
+print(outcomes.model_dump_json(indent=2))  # self-contained and deterministic
+```
+
+The question texts are only in `steps`; `certain_steps`, `possible_steps`, `routes` and `decisions` refer to a step
+by its `step_number`. `certain_steps` lie on every route to the outcome, `possible_steps` only on some. The number of
+routes is counted without enumerating them (`E_0594` has hundreds of thousands), so it is cheap even for the biggest
+EBDs.
+
+Some notes on the details:
+
+- Some EBDs contain loops (iterations over a list of hits). There a step can be passed more than once:
+  `answers` is the answer given the last time the step is passed, and `possible_steps` also contains steps that are
+  only passed by going round a loop.
+- `route_count` and `routes` are `None` if routes to this outcome can loop. `routes` is also `None` if there are more
+  than `max_routes` routes (`max_routes=0` disables the route lists). An unreachable outcome has `route_count == 0`.
+- The outcome `Ende` means "the check ran to a bare Ende". It has no special rule: routes that passed a result code
+  with subsequent steps (a transitional outcome) earlier count like any other route. Accordingly
+  `can_reach_end_without_result_code` says that an end (or an outcome without result code) is reachable after an
+  answer, although result codes with subsequent steps may have been produced on the way.
+- Result codes are grouped literally. If the EBD has a wildcard outcome `A**` (`has_wildcard_outcome` is `True`), a
+  received code may also come from that outcome, so read its notes and steps too.
+- `multi_step_instructions` of the EBD (e.g. "Je Marktlokation erfolgen die nachstehenden Prüfungen") are passed
+  through unchanged but **not evaluated**: routes and step implications are derived from the graph structure only.
+- Transition steps carry their `note` in `steps`.
+- Limitation: a transitional outcome that lies on the way to a *different* outcome is not reported as a step.
+
 ### Error Handling
 
 `rebdhuhn` provides three base exception classes to help you distinguish between errors in different pipeline stages:

@@ -26,7 +26,7 @@ from rebdhuhn.models import (
     ToNoEdge,
     ToYesEdge,
 )
-from rebdhuhn.models.ebd_graph import EbdGraphNode, TransitionalOutcomeNode, TransitionNode
+from rebdhuhn.models.ebd_graph import _WILDCARD_RESULT_CODE, EbdGraphNode, TransitionalOutcomeNode, TransitionNode
 
 _START_KEY = StartNode().get_key()
 #: key of the virtual sink; contains a NUL character, so it cannot collide with a real node key
@@ -285,7 +285,11 @@ def _explain_decisions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list
 def _describe_steps(graph: nx.DiGraph) -> list[StepDescription]:
     """the legend: every decision and transition step exactly once"""
     steps = [
-        StepDescription(step_number=node.step_number, question=node.question)
+        StepDescription(
+            step_number=node.step_number,
+            question=node.question,
+            note=node.note if isinstance(node, TransitionNode) else None,
+        )
         for _, node in graph.nodes(data="node")
         if isinstance(node, (DecisionNode, TransitionNode))
     ]
@@ -303,10 +307,20 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
     The route count is None if routes to an outcome can loop.
     The outcome 'Ende' (the EndNode) has no special rule: it means "the check ran to a bare Ende"; routes that passed
     a transitional outcome earlier count like any other route.
+    Multi-step instructions of the graph are passed through to the result but NOT evaluated: routes and step
+    implications are derived from the graph structure only. Result codes are grouped literally; see
+    `EbdOutcomes.has_wildcard_outcome` for the wildcard code 'A**'.
     """
     digraph: nx.DiGraph = graph.graph
     if _START_KEY not in digraph:  # e.g. the empty EBD
-        return EbdOutcomes(metadata=graph.metadata, steps=[], outcomes=[], decisions=[])
+        return EbdOutcomes(
+            metadata=graph.metadata,
+            steps=[],
+            multi_step_instructions=graph.multi_step_instructions,
+            has_wildcard_outcome=False,
+            outcomes=[],
+            decisions=[],
+        )
     answer_graph = _get_answer_graph(digraph)
     outcomes = [
         _explain_outcome(digraph, answer_graph, outcome_key, outcome_keys, max_routes)
@@ -316,6 +330,8 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
     return EbdOutcomes(
         metadata=graph.metadata,
         steps=_describe_steps(digraph),
+        multi_step_instructions=graph.multi_step_instructions,
+        has_wildcard_outcome=any(outcome.result_code == _WILDCARD_RESULT_CODE for outcome in outcomes),
         outcomes=outcomes,
         decisions=_explain_decisions(digraph, answer_graph),
     )

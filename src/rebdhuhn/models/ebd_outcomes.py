@@ -5,6 +5,7 @@ contains the models for the outcome lookup, i.e. the answer to "what does a resu
 from pydantic import BaseModel, ConfigDict
 
 from rebdhuhn.models.ebd_graph import EbdGraphMetaData
+from rebdhuhn.models.ebd_table import MultiStepInstruction
 
 
 class StepDescription(BaseModel):
@@ -22,6 +23,12 @@ class StepDescription(BaseModel):
     question: str
     """
     the question of the DecisionNode or TransitionNode
+    """
+
+    note: str | None = None
+    """
+    The note of a transition step, which explains what the step does (e.g. how a list of hits is filled).
+    None for decision steps and for transition steps without note.
     """
 
 
@@ -95,6 +102,9 @@ class OutcomeExplanation(BaseModel):
     result_code: str | None
     """
     The result code of the outcome, e.g. 'A55'. None for the EndNode and for outcomes without result code.
+    Result codes are grouped literally: this explanation covers only nodes that carry exactly this code. If the EBD
+    has a wildcard outcome 'A**' (see EbdOutcomes.has_wildcard_outcome), a received code may also come from that
+    outcome, so read its notes and steps as well.
     """
 
     notes: list[str]
@@ -179,6 +189,19 @@ class EbdOutcomes(BaseModel):
     every decision and transition step of the EBD exactly once (also steps that cannot be reached), sorted by step
     number (numeric part, then suffix). This is the only place of the question texts; the other parts of the file
     refer to a step by its step_number.
+    """
+
+    multi_step_instructions: list[MultiStepInstruction] | None = None
+    """
+    The multi-step instructions of the EBD, copied unchanged from the graph (None if there are none). They can change
+    how the following steps are to be read (checks per item, collecting several codes). They are passed through but
+    NOT evaluated: routes and step implications are derived from the graph structure only.
+    """
+
+    has_wildcard_outcome: bool
+    """
+    True if the EBD has an outcome with the wildcard result code 'A**'. Such an outcome stands for "some code, see
+    note", so a received code may also stem from it, although the explanation of that code does not cover it.
     """
 
     outcomes: list[OutcomeExplanation]

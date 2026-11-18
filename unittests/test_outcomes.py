@@ -120,6 +120,11 @@ class TestSteps:
         steps = explain_outcomes(convert_table_to_graph(table_0594_partly)).steps
         assert [step.step_number for step in steps] == ["270", "275", "280"]
         assert steps[1].question == "Vollständige [Adressprüfung]"
+        assert [step.note for step in steps] == [
+            None,
+            "Aufnahme von 0..n Treffern in die Trefferliste auf Basis der alleinigen Adressprüfung",
+            None,
+        ]  # only transition steps have a note
 
     def test_unreachable_step_is_in_the_legend_and_steps_are_sorted(self) -> None:
         graph = convert_table_to_graph(_diamond)
@@ -127,11 +132,40 @@ class TestSteps:
         graph.graph.add_node("10", node=nine)
         assert [step.step_number for step in explain_outcomes(graph).steps] == ["1", "2", "3", "10"]
 
+    def test_multi_step_instructions_are_passed_through(self) -> None:
+        graph = _all_tables["e0594_fv2504"]
+        assert graph.multi_step_instructions is not None
+        result = explain_outcomes(graph)
+        assert result.multi_step_instructions == graph.multi_step_instructions
+        assert [i.first_step_number_affected for i in result.multi_step_instructions or []] == [
+            "100",
+            "205",
+            "305",
+            "400",
+        ]
+        assert EbdOutcomes.model_validate_json(result.model_dump_json()).multi_step_instructions == (
+            graph.multi_step_instructions
+        )
+        assert explain_outcomes(convert_table_to_graph(table_e0003)).multi_step_instructions is None
+        assert list(EbdOutcomes.model_fields)[:3] == ["metadata", "steps", "multi_step_instructions"]
+
+    def test_wildcard_flag(self) -> None:
+        assert explain_outcomes(_all_tables["e0055"]).has_wildcard_outcome
+        assert not explain_outcomes(convert_table_to_graph(table_e0003)).has_wildcard_outcome
+        assert not explain_outcomes(convert_table_to_graph(_diamond)).has_wildcard_outcome
+
     def test_empty_ebd_has_no_steps(self) -> None:
         assert explain_outcomes(convert_table_to_graph(_load("e0452_empty_remark.json"))).steps == []
 
     def test_steps_come_before_the_outcomes_in_the_json(self) -> None:
-        assert list(EbdOutcomes.model_fields) == ["metadata", "steps", "outcomes", "decisions"]
+        assert list(EbdOutcomes.model_fields) == [
+            "metadata",
+            "steps",
+            "multi_step_instructions",
+            "has_wildcard_outcome",
+            "outcomes",
+            "decisions",
+        ]
 
 
 class TestLinear:
@@ -682,7 +716,9 @@ _snapshot_table = _table(
             description="drei (Uebergang)",
             sub_rows=[
                 EbdTableSubRow(
-                    check_result=EbdCheckResult(result=None, subsequent_step_number="4"), result_code=None, note=None
+                    check_result=EbdCheckResult(result=None, subsequent_step_number="4"),
+                    result_code=None,
+                    note="Die Trefferliste fuer Schritt 4 wird gefuellt",
                 )
             ],
         ),
@@ -705,6 +741,14 @@ def test_snapshot_loops_transitions_and_notes(snapshot: SnapshotAssertion) -> No
     assert wildcard.notes == ["x", "y"]
     assert _by_key(result)["A05"].has_subsequent_steps
     assert any(step.answers == [] for step in wildcard.possible_steps)
+    assert [step.note for step in result.steps] == [
+        None,
+        None,
+        "Die Trefferliste fuer Schritt 4 wird gefuellt",
+        None,
+        None,
+    ]
+    assert result.has_wildcard_outcome
     assert any(step.answers == [False, True] for step in wildcard.certain_steps)
     assert result.model_dump_json(indent=2) == snapshot
 

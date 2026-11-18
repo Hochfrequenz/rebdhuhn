@@ -178,6 +178,11 @@ Some notes on the details:
   with subsequent steps (a transitional outcome) earlier count like any other route. Accordingly
   `can_reach_end_without_result_code` says that an end (or an outcome without result code) is reachable after an
   answer, although result codes with subsequent steps may have been produced on the way.
+- Result codes are grouped literally. If the EBD has a wildcard outcome `A**` (`has_wildcard_outcome` is `True`), a
+  received code may also come from that outcome, so read its notes and steps too.
+- `multi_step_instructions` of the EBD (e.g. "Je Marktlokation erfolgen die nachstehenden Prüfungen") are passed
+  through unchanged but **not evaluated**: routes and step implications are derived from the graph structure only.
+- Transition steps carry their `note` in `steps`.
 - Limitation: a transitional outcome that lies on the way to a *different* outcome is not reported as a step.
 
 ### Error Handling

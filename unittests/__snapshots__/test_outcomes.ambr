@@ -15,45 +15,57 @@
     "steps": [
       {
         "step_number": "1",
-        "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?"
+        "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
+        "note": null
       },
       {
         "step_number": "2",
-        "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?"
+        "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
+        "note": null
       },
       {
         "step_number": "3",
-        "question": "Ist die richtige Regelzone angegeben"
+        "question": "Ist die richtige Regelzone angegeben",
+        "note": null
       },
       {
         "step_number": "4",
-        "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?"
+        "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
+        "note": null
       },
       {
         "step_number": "5",
-        "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?"
+        "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
+        "note": null
       },
       {
         "step_number": "6",
-        "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?"
+        "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
+        "note": null
       },
       {
         "step_number": "7",
-        "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?"
+        "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
+        "note": null
       },
       {
         "step_number": "8",
-        "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?"
+        "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
+        "note": null
       },
       {
         "step_number": "9",
-        "question": "Passt die OBIS-Kennzahl zum ZRT?"
+        "question": "Passt die OBIS-Kennzahl zum ZRT?",
+        "note": null
       },
       {
         "step_number": "10",
-        "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?"
+        "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?",
+        "note": null
       }
     ],
+    "multi_step_instructions": null,
+    "has_wildcard_outcome": false,
     "outcomes": [
       {
         "key": "A01",
@@ -1130,25 +1142,32 @@
     "steps": [
       {
         "step_number": "1",
-        "question": "eins?"
+        "question": "eins?",
+        "note": null
       },
       {
         "step_number": "2",
-        "question": "zwei?"
+        "question": "zwei?",
+        "note": null
       },
       {
         "step_number": "3",
-        "question": "drei (Uebergang)"
+        "question": "drei (Uebergang)",
+        "note": "Die Trefferliste fuer Schritt 4 wird gefuellt"
       },
       {
         "step_number": "4",
-        "question": "vier?"
+        "question": "vier?",
+        "note": null
       },
       {
         "step_number": "5",
-        "question": "fuenf?"
+        "question": "fuenf?",
+        "note": null
       }
     ],
+    "multi_step_instructions": null,
+    "has_wildcard_outcome": true,
     "outcomes": [
       {
         "key": "A05",

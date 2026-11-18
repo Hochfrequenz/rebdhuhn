@@ -823,3 +823,38 @@ def test_json_schema_guard_detects_anonymous_json() -> None:
     assert any("untyped" in p for p in problems)
     assert any("tuple" in p for p in problems)
     assert any("open object" in p for p in problems)
+
+
+def _start_table(first: str, second: str) -> EbdTable:
+    """first nein -> A01, first ja -> second; second nein -> A02, second ja -> Ende"""
+    return _table(
+        [
+            EbdTableRow(
+                step_number=first, description="erste?", sub_rows=[_sub_row(True, second), _sub_row(False, None, "A01")]
+            ),
+            EbdTableRow(
+                step_number=second,
+                description="zweite?",
+                sub_rows=[_sub_row(True, "Ende"), _sub_row(False, None, "A02")],
+            ),
+        ]
+    )
+
+
+class TestStartEdge:
+    """Start is connected to the step with the lowest number (E_0407 begins with step 0)"""
+
+    def test_table_starting_at_zero(self) -> None:
+        graph = convert_table_to_graph(_start_table("0", "1"))
+        assert list(graph.graph.successors("Start")) == ["0"]
+        assert list(graph.graph.predecessors("0")) == ["Start"]
+        outcome = _by_key(explain_outcomes(graph))["A01"]
+        assert outcome.route_count == 1
+        assert _steps(outcome) == [("0", [False])]
+
+    @pytest.mark.parametrize("first, second", [("1", "2"), ("10", "20")])
+    def test_table_starting_at_other_numbers(self, first: str, second: str) -> None:
+        graph = convert_table_to_graph(_start_table(first, second))
+        assert list(graph.graph.successors("Start")) == [first]
+        assert list(graph.graph.predecessors(first)) == ["Start"]
+        assert _by_key(explain_outcomes(graph))["A01"].route_count == 1

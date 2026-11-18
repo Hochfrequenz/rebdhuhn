@@ -58,6 +58,16 @@ def _table(
     )
 
 
+def _tableless(remark: str | None) -> EbdTable:
+    """an EBD without rows, which is rendered as a single Empty node"""
+    return EbdTable(
+        metadata=EbdTableMetaData(
+            ebd_code="E_9998", chapter="MaBiS", section="7.2 Test", ebd_name="E_9998_Test", role="N/A", remark=remark
+        ),
+        rows=[],
+    )
+
+
 def _dot(table: EbdTable) -> str:
     return convert_graph_to_dot(convert_table_to_graph(table))
 
@@ -100,4 +110,23 @@ class TestEmptyHtmlElements:
     )
     def test_kroki_renders_svg(self, kroki_client: Kroki, table: EbdTable) -> None:
         svg = convert_dot_to_svg_kroki(_dot(table), kroki_client)
+        assert "<svg" in svg
+
+    @pytest.mark.parametrize("remark", ["\n", " ", " \n\t "])
+    def test_blank_remark_emits_no_empty_element(self, remark: str) -> None:
+        dot = _dot(_tableless(remark))
+        assert not _EMPTY_ELEMENT_REGEX.search(dot)
+        assert "<B>E_9998</B>" in dot
+
+    @pytest.mark.parametrize("remark", [None, ""])
+    def test_no_remark_is_unchanged(self, remark: str | None) -> None:
+        dot = _dot(_tableless(remark))
+        assert "<FONT>" not in dot.split("label=<<B>E_9998")[1].split(">,")[0]
+
+    def test_normal_remark_is_rendered(self) -> None:
+        assert "<FONT>Kein Baum notwendig.</FONT>" in _dot(_tableless("Kein Baum notwendig."))
+
+    @pytest.mark.parametrize("remark", ["\n", "", "Kein Baum notwendig."])
+    def test_kroki_renders_tableless_ebd(self, kroki_client: Kroki, remark: str) -> None:
+        svg = convert_dot_to_svg_kroki(_dot(_tableless(remark)), kroki_client)
         assert "<svg" in svg

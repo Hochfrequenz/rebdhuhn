@@ -108,8 +108,11 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     Convert an EmptyNode to dot code
     """
+    # The label assumes a non-empty ebd_code (the identity of an EBD); an empty one would give a rejected `<B></B>`.
     formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
-    if ebd_graph.metadata.remark:
+    if (
+        ebd_graph.metadata.remark and ebd_graph.metadata.remark.strip()
+    ):  # a blank remark would give an empty <FONT></FONT>
         formatted_label += f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '

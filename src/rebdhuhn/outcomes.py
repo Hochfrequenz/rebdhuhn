@@ -22,6 +22,7 @@ from rebdhuhn.models import (
     Route,
     RouteStep,
     StartNode,
+    StepDescription,
     ToNoEdge,
     ToYesEdge,
 )
@@ -210,9 +211,9 @@ def _explain_outcome(  # pylint:disable=too-many-locals
     def passed_step(key: str) -> PassedStep | None:
         node = _node(graph, key)
         if isinstance(node, DecisionNode):
-            return PassedStep(step_number=node.step_number, question=node.question, answers=answers_of(key))
+            return PassedStep(step_number=node.step_number, answers=answers_of(key))
         if isinstance(node, TransitionNode):
-            return PassedStep(step_number=node.step_number, question=node.question, answers=[])
+            return PassedStep(step_number=node.step_number, answers=[])
         return None
 
     certain = [step for step in (passed_step(key) for key in certain_keys) if step is not None]
@@ -272,7 +273,6 @@ def _explain_decisions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list
         decisions.append(
             DecisionConsequence(
                 step_number=node.step_number,
-                question=node.question,
                 answer=bool(answer),
                 reachable_result_codes=codes,
                 can_reach_end_without_result_code=reaches_end,
@@ -280,6 +280,17 @@ def _explain_decisions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list
         )
     decisions.sort(key=lambda decision: (_step_sort_key(decision.step_number), decision.answer))
     return decisions
+
+
+def _describe_steps(graph: nx.DiGraph) -> list[StepDescription]:
+    """the legend: every decision and transition step exactly once"""
+    steps = [
+        StepDescription(step_number=node.step_number, question=node.question)
+        for _, node in graph.nodes(data="node")
+        if isinstance(node, (DecisionNode, TransitionNode))
+    ]
+    steps.sort(key=lambda step: _step_sort_key(step.step_number))
+    return steps
 
 
 def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
@@ -295,11 +306,16 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
     """
     digraph: nx.DiGraph = graph.graph
     if _START_KEY not in digraph:  # e.g. the empty EBD
-        return EbdOutcomes(metadata=graph.metadata, outcomes=[], decisions=[])
+        return EbdOutcomes(metadata=graph.metadata, steps=[], outcomes=[], decisions=[])
     answer_graph = _get_answer_graph(digraph)
     outcomes = [
         _explain_outcome(digraph, answer_graph, outcome_key, outcome_keys, max_routes)
         for outcome_key, outcome_keys in _group_outcome_nodes(digraph).items()
     ]
     outcomes.sort(key=lambda outcome: _natural_key(outcome.key))
-    return EbdOutcomes(metadata=graph.metadata, outcomes=outcomes, decisions=_explain_decisions(digraph, answer_graph))
+    return EbdOutcomes(
+        metadata=graph.metadata,
+        steps=_describe_steps(digraph),
+        outcomes=outcomes,
+        decisions=_explain_decisions(digraph, answer_graph),
+    )

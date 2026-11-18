@@ -7,9 +7,9 @@ from pydantic import BaseModel, ConfigDict
 from rebdhuhn.models.ebd_graph import EbdGraphMetaData
 
 
-class PassedStep(BaseModel):
+class StepDescription(BaseModel):
     """
-    A step that was passed on the way to an outcome.
+    The description of one step (a decision or a transition); the legend of an outcomes file.
     """
 
     model_config = ConfigDict(frozen=True, extra="forbid")
@@ -22,6 +22,19 @@ class PassedStep(BaseModel):
     question: str
     """
     the question of the DecisionNode or TransitionNode
+    """
+
+
+class PassedStep(BaseModel):
+    """
+    A step that was passed on the way to an outcome.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the Prüfschritt, e.g. '1', '2' or '6*'; the question is found in EbdOutcomes.steps
     """
 
     answers: list[bool]
@@ -129,12 +142,7 @@ class DecisionConsequence(BaseModel):
 
     step_number: str
     """
-    number of the decision step, e.g. '1', '2' or '6*'
-    """
-
-    question: str
-    """
-    the question of the decision step
+    number of the decision step, e.g. '1', '2' or '6*'; the question is found in EbdOutcomes.steps
     """
 
     answer: bool
@@ -164,6 +172,13 @@ class EbdOutcomes(BaseModel):
     metadata: EbdGraphMetaData
     """
     meta data of the EBD
+    """
+
+    steps: list[StepDescription]
+    """
+    every decision and transition step of the EBD exactly once (also steps that cannot be reached), sorted by step
+    number (numeric part, then suffix). This is the only place of the question texts; the other parts of the file
+    refer to a step by its step_number.
     """
 
     outcomes: list[OutcomeExplanation]

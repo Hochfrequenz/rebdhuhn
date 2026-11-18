@@ -23,6 +23,7 @@ from rebdhuhn.models import (
     PassedStep,
     Route,
     RouteStep,
+    StepDescription,
 )
 from rebdhuhn.models.errors import GraphConversionError, PlantumlConversionError, SvgConversionError
 from rebdhuhn.outcomes import explain_outcomes
@@ -55,6 +56,7 @@ __all__ = [
     "PassedStep",
     "Route",
     "RouteStep",
+    "StepDescription",
     # Table models
     "EbdCheckResult",
     "EbdTable",

@@ -151,3 +151,16 @@ The top level of a file is the `EbdOutcomes` object, never a bare array.
 ## Left to the builder
 
 Internal helper structure, exact docstrings, README section (short usage example).
+
+### Amendment before release: question texts only once per file (2026-11-18)
+
+Measured on FV2610 (242 EBDs with a table, JSON with `indent=2`): the outcomes files add up to 19.75 MB, while the
+whole format version directory (svg, dot, json, puml) is 13.3 MB today. About half of that is the question text
+repeated in every `PassedStep` and `DecisionConsequence`. Without the repetition it is 10.6 MB.
+(`E_0406`/`E_0407` alone are about 3 MB each afterwards: 129 outcomes, 424 decision entries, one big loop.)
+
+- New model `StepDescription` (`step_number: str`, `question: str`) and new field
+  `EbdOutcomes.steps: list[StepDescription]`: every `DecisionNode` and `TransitionNode` of the graph exactly once,
+  sorted by step number like `decisions`. It is the legend of the file; the file stays self-contained.
+- `question` is removed from `PassedStep` and from `DecisionConsequence`; both refer to `steps` via `step_number`.
+- Every `step_number` used anywhere in the file must exist in `steps` (test this over all example tables).

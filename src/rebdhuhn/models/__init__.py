@@ -24,6 +24,7 @@ from rebdhuhn.models.ebd_outcomes import (
     PassedStep,
     Route,
     RouteStep,
+    StepDescription,
 )
 from rebdhuhn.models.ebd_table import (
     STEP_NUMBER_REGEX,
@@ -58,6 +59,7 @@ __all__ = [
     "PassedStep",
     "Route",
     "RouteStep",
+    "StepDescription",
     # ebd_table models
     "STEP_NUMBER_REGEX",
     "EbdCheckResult",

@@ -156,13 +156,16 @@ from rebdhuhn import convert_table_to_graph, explain_outcomes
 graph = convert_table_to_graph(ebd_table)  # ebd_table is an instance of EbdTable (see above)
 outcomes = explain_outcomes(graph, max_routes=20)
 a05 = next(outcome for outcome in outcomes.outcomes if outcome.key == "A05")
-print([(step.step_number, step.answers) for step in a05.certain_steps])  # steps on every route to A05
+questions = {step.step_number: step.question for step in outcomes.steps}  # the legend: every step exactly once
+print([(step.step_number, questions[step.step_number], step.answers) for step in a05.certain_steps])  # on every route
 print(a05.route_count, a05.routes)  # routes are None if there are more than max_routes of them
 print(outcomes.model_dump_json(indent=2))  # self-contained and deterministic
 ```
 
-`certain_steps` lie on every route to the outcome, `possible_steps` only on some. The number of routes is counted
-without enumerating them (`E_0594` has hundreds of thousands), so it is cheap even for the biggest EBDs.
+The question texts are only in `steps`; `certain_steps`, `possible_steps`, `routes` and `decisions` refer to a step
+by its `step_number`. `certain_steps` lie on every route to the outcome, `possible_steps` only on some. The number of
+routes is counted without enumerating them (`E_0594` has hundreds of thousands), so it is cheap even for the biggest
+EBDs.
 
 Some notes on the details:
 

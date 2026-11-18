@@ -12,6 +12,48 @@
       "release_information": null,
       "pruefidentifikatoren": null
     },
+    "steps": [
+      {
+        "step_number": "1",
+        "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?"
+      },
+      {
+        "step_number": "2",
+        "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?"
+      },
+      {
+        "step_number": "3",
+        "question": "Ist die richtige Regelzone angegeben"
+      },
+      {
+        "step_number": "4",
+        "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?"
+      },
+      {
+        "step_number": "5",
+        "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?"
+      },
+      {
+        "step_number": "6",
+        "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?"
+      },
+      {
+        "step_number": "7",
+        "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?"
+      },
+      {
+        "step_number": "8",
+        "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?"
+      },
+      {
+        "step_number": "9",
+        "question": "Passt die OBIS-Kennzahl zum ZRT?"
+      },
+      {
+        "step_number": "10",
+        "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?"
+      }
+    ],
     "outcomes": [
       {
         "key": "A01",
@@ -23,7 +65,6 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               true
             ]
@@ -52,14 +93,12 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               false
             ]
@@ -92,21 +131,18 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               false
             ]
@@ -143,28 +179,24 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               false
             ]
@@ -205,35 +237,30 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               false
             ]
@@ -278,42 +305,36 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               true
             ]
@@ -362,49 +383,42 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "7",
-            "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
             "answers": [
               true
             ]
@@ -457,56 +471,48 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "7",
-            "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "8",
-            "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
             "answers": [
               false
             ]
@@ -563,63 +569,54 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "7",
-            "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "8",
-            "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "9",
-            "question": "Passt die OBIS-Kennzahl zum ZRT?",
             "answers": [
               false
             ]
@@ -680,70 +677,60 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "7",
-            "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "8",
-            "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "9",
-            "question": "Passt die OBIS-Kennzahl zum ZRT?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "10",
-            "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?",
             "answers": [
               true
             ]
@@ -808,70 +795,60 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "2",
-            "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "3",
-            "question": "Ist die richtige Regelzone angegeben",
             "answers": [
               true
             ]
           },
           {
             "step_number": "4",
-            "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "5",
-            "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "6",
-            "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "7",
-            "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
             "answers": [
               false
             ]
           },
           {
             "step_number": "8",
-            "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "9",
-            "question": "Passt die OBIS-Kennzahl zum ZRT?",
             "answers": [
               true
             ]
           },
           {
             "step_number": "10",
-            "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?",
             "answers": [
               false
             ]
@@ -930,7 +907,6 @@
     "decisions": [
       {
         "step_number": "1",
-        "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
         "answer": false,
         "reachable_result_codes": [
           "A02",
@@ -948,7 +924,6 @@
       },
       {
         "step_number": "1",
-        "question": "Erfolgt die Aktivierung nach Ablauf der Clearingfrist für die KBKA?",
         "answer": true,
         "reachable_result_codes": [
           "A01"
@@ -957,7 +932,6 @@
       },
       {
         "step_number": "2",
-        "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
         "answer": false,
         "reachable_result_codes": [
           "A02"
@@ -966,7 +940,6 @@
       },
       {
         "step_number": "2",
-        "question": "Erfolgt die Aktivierung zum Monatsersten 00:00 Uhr?",
         "answer": true,
         "reachable_result_codes": [
           "A03",
@@ -983,7 +956,6 @@
       },
       {
         "step_number": "3",
-        "question": "Ist die richtige Regelzone angegeben",
         "answer": false,
         "reachable_result_codes": [
           "A03"
@@ -992,7 +964,6 @@
       },
       {
         "step_number": "3",
-        "question": "Ist die richtige Regelzone angegeben",
         "answer": true,
         "reachable_result_codes": [
           "A04",
@@ -1008,7 +979,6 @@
       },
       {
         "step_number": "4",
-        "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
         "answer": false,
         "reachable_result_codes": [
           "A04"
@@ -1017,7 +987,6 @@
       },
       {
         "step_number": "4",
-        "question": "Ist das Bilanzierungsgebiet zum Aktivierungsbeginn in der Regelzone des BIKO gültig?",
         "answer": true,
         "reachable_result_codes": [
           "A05",
@@ -1032,7 +1001,6 @@
       },
       {
         "step_number": "5",
-        "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
         "answer": false,
         "reachable_result_codes": [
           "A05"
@@ -1041,7 +1009,6 @@
       },
       {
         "step_number": "5",
-        "question": "Ist der ÜNB zum Aktivierungsbeginn für das Bilanzierungsgebiet zuständig?",
         "answer": true,
         "reachable_result_codes": [
           "A06",
@@ -1055,7 +1022,6 @@
       },
       {
         "step_number": "6",
-        "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
         "answer": false,
         "reachable_result_codes": [
           "A07",
@@ -1068,7 +1034,6 @@
       },
       {
         "step_number": "6",
-        "question": "Existiert bereits ein abweichendes Tupel unter der ID des MaBiS-ZP?",
         "answer": true,
         "reachable_result_codes": [
           "A06"
@@ -1077,7 +1042,6 @@
       },
       {
         "step_number": "7",
-        "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
         "answer": false,
         "reachable_result_codes": [
           "A08",
@@ -1089,7 +1053,6 @@
       },
       {
         "step_number": "7",
-        "question": "Existiert bereits für das genannte Tupel aus Aggregations-verantwortlicher, Bilanzierungsgebiet, Spannungsebene und ZRT eine abweichende ID des MaBiS-ZP?",
         "answer": true,
         "reachable_result_codes": [
           "A07"
@@ -1098,7 +1061,6 @@
       },
       {
         "step_number": "8",
-        "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
         "answer": false,
         "reachable_result_codes": [
           "A08"
@@ -1107,7 +1069,6 @@
       },
       {
         "step_number": "8",
-        "question": "Ist der ÜNB zur Aktivierung des ZRT berechtigt?",
         "answer": true,
         "reachable_result_codes": [
           "A09",
@@ -1118,7 +1079,6 @@
       },
       {
         "step_number": "9",
-        "question": "Passt die OBIS-Kennzahl zum ZRT?",
         "answer": false,
         "reachable_result_codes": [
           "A09"
@@ -1127,7 +1087,6 @@
       },
       {
         "step_number": "9",
-        "question": "Passt die OBIS-Kennzahl zum ZRT?",
         "answer": true,
         "reachable_result_codes": [
           "A10",
@@ -1137,7 +1096,6 @@
       },
       {
         "step_number": "10",
-        "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?",
         "answer": false,
         "reachable_result_codes": [
           "A11"
@@ -1146,7 +1104,6 @@
       },
       {
         "step_number": "10",
-        "question": "Ist der MaBiS-ZP zum Zeitpunkt der Aktivierung bereits aktiviert?",
         "answer": true,
         "reachable_result_codes": [
           "A10"
@@ -1170,6 +1127,28 @@
       "release_information": null,
       "pruefidentifikatoren": null
     },
+    "steps": [
+      {
+        "step_number": "1",
+        "question": "eins?"
+      },
+      {
+        "step_number": "2",
+        "question": "zwei?"
+      },
+      {
+        "step_number": "3",
+        "question": "drei (Uebergang)"
+      },
+      {
+        "step_number": "4",
+        "question": "vier?"
+      },
+      {
+        "step_number": "5",
+        "question": "fuenf?"
+      }
+    ],
     "outcomes": [
       {
         "key": "A05",
@@ -1181,7 +1160,6 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "eins?",
             "answers": [
               false,
               true
@@ -1189,12 +1167,10 @@
           },
           {
             "step_number": "3",
-            "question": "drei (Uebergang)",
             "answers": []
           },
           {
             "step_number": "4",
-            "question": "vier?",
             "answers": [
               true
             ]
@@ -1203,7 +1179,6 @@
         "possible_steps": [
           {
             "step_number": "2",
-            "question": "zwei?",
             "answers": [
               false
             ]
@@ -1260,7 +1235,6 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "eins?",
             "answers": [
               false,
               true
@@ -1270,7 +1244,6 @@
         "possible_steps": [
           {
             "step_number": "2",
-            "question": "zwei?",
             "answers": [
               false,
               true
@@ -1278,12 +1251,10 @@
           },
           {
             "step_number": "3",
-            "question": "drei (Uebergang)",
             "answers": []
           },
           {
             "step_number": "4",
-            "question": "vier?",
             "answers": [
               false,
               true
@@ -1291,7 +1262,6 @@
           },
           {
             "step_number": "5",
-            "question": "fuenf?",
             "answers": [
               true
             ]
@@ -1409,7 +1379,6 @@
         "certain_steps": [
           {
             "step_number": "1",
-            "question": "eins?",
             "answers": [
               false,
               true
@@ -1417,12 +1386,10 @@
           },
           {
             "step_number": "3",
-            "question": "drei (Uebergang)",
             "answers": []
           },
           {
             "step_number": "4",
-            "question": "vier?",
             "answers": [
               false,
               true
@@ -1430,7 +1397,6 @@
           },
           {
             "step_number": "5",
-            "question": "fuenf?",
             "answers": [
               false
             ]
@@ -1439,7 +1405,6 @@
         "possible_steps": [
           {
             "step_number": "2",
-            "question": "zwei?",
             "answers": [
               false
             ]
@@ -1541,7 +1506,6 @@
     "decisions": [
       {
         "step_number": "1",
-        "question": "eins?",
         "answer": false,
         "reachable_result_codes": [
           "A**",
@@ -1551,7 +1515,6 @@
       },
       {
         "step_number": "1",
-        "question": "eins?",
         "answer": true,
         "reachable_result_codes": [
           "A**",
@@ -1561,7 +1524,6 @@
       },
       {
         "step_number": "2",
-        "question": "zwei?",
         "answer": false,
         "reachable_result_codes": [
           "A**",
@@ -1571,7 +1533,6 @@
       },
       {
         "step_number": "2",
-        "question": "zwei?",
         "answer": true,
         "reachable_result_codes": [
           "A**"
@@ -1580,7 +1541,6 @@
       },
       {
         "step_number": "4",
-        "question": "vier?",
         "answer": false,
         "reachable_result_codes": [
           "A**"
@@ -1589,7 +1549,6 @@
       },
       {
         "step_number": "4",
-        "question": "vier?",
         "answer": true,
         "reachable_result_codes": [
           "A**",
@@ -1599,14 +1558,12 @@
       },
       {
         "step_number": "5",
-        "question": "fuenf?",
         "answer": false,
         "reachable_result_codes": [],
         "can_reach_end_without_result_code": true
       },
       {
         "step_number": "5",
-        "question": "fuenf?",
         "answer": true,
         "reachable_result_codes": [
           "A**"

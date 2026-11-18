@@ -22,6 +22,7 @@ from rebdhuhn.models import (
     OutcomeNode,
     Route,
     RouteStep,
+    StepDescription,
     ToNoEdge,
     ToYesEdge,
 )
@@ -101,6 +102,38 @@ def _steps(outcome: OutcomeExplanation, certain: bool = True) -> list[tuple[str,
     return [(s.step_number, s.answers) for s in (outcome.certain_steps if certain else outcome.possible_steps)]
 
 
+class TestSteps:
+    """the legend: every step exactly once, with its question"""
+
+    def test_steps_of_hand_made_tables(self) -> None:
+        assert explain_outcomes(convert_table_to_graph(_diamond)).steps == [
+            StepDescription(step_number="1", question="eins?"),
+            StepDescription(step_number="2", question="zwei?"),
+            StepDescription(step_number="3", question="drei?"),
+        ]
+        assert explain_outcomes(convert_table_to_graph(table_e0003)).steps == [
+            StepDescription(step_number="1", question="Erfolgt der Eingang der Bestellung fristgerecht?"),
+            StepDescription(step_number="2", question="Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?"),
+        ]
+
+    def test_transition_step_is_in_the_legend(self) -> None:
+        steps = explain_outcomes(convert_table_to_graph(table_0594_partly)).steps
+        assert [step.step_number for step in steps] == ["270", "275", "280"]
+        assert steps[1].question == "Vollständige [Adressprüfung]"
+
+    def test_unreachable_step_is_in_the_legend_and_steps_are_sorted(self) -> None:
+        graph = convert_table_to_graph(_diamond)
+        nine = DecisionNode(step_number="10", question="zehn?")
+        graph.graph.add_node("10", node=nine)
+        assert [step.step_number for step in explain_outcomes(graph).steps] == ["1", "2", "3", "10"]
+
+    def test_empty_ebd_has_no_steps(self) -> None:
+        assert explain_outcomes(convert_table_to_graph(_load("e0452_empty_remark.json"))).steps == []
+
+    def test_steps_come_before_the_outcomes_in_the_json(self) -> None:
+        assert list(EbdOutcomes.model_fields) == ["metadata", "steps", "outcomes", "decisions"]
+
+
 class TestLinear:
     """E_0003 is linear and can be checked by hand"""
 
@@ -113,7 +146,6 @@ class TestLinear:
         assert a01.notes == ["Fristüberschreitung"]
         assert not a01.has_subsequent_steps
         assert _steps(a01) == [("1", [False])]
-        assert a01.certain_steps[0].question == "Erfolgt der Eingang der Bestellung fristgerecht?"
         assert a01.possible_steps == []
         assert a01.route_count == 1
         assert a01.routes == [Route(steps=[RouteStep(step_number="1", answer=False)])]
@@ -349,6 +381,22 @@ def test_certain_and_possible_agree_with_routes(name: str) -> None:
         numbers = [s.step_number for s in outcome.possible_steps]
         assert numbers == sorted(numbers, key=lambda n: (int(n.rstrip("*")), n.endswith("*")))
     assert checked > 0 or name in _no_route_lists
+
+
+@pytest.mark.parametrize("name", list(_all_tables))
+def test_every_step_used_is_in_the_legend(name: str) -> None:
+    graph = _all_tables[name]
+    result = explain_outcomes(graph, max_routes=1000)
+    numbers = [step.step_number for step in result.steps]
+    assert len(numbers) == len(set(numbers))
+    expected = {str(node.step_number) for _, node in graph.graph.nodes(data="node") if hasattr(node, "step_number")}
+    assert set(numbers) == expected
+    assert numbers == sorted(numbers, key=lambda n: (int(n.rstrip("*")), n.endswith("*")))
+    used = {d.step_number for d in result.decisions}
+    for outcome in result.outcomes:
+        used |= {s.step_number for s in outcome.certain_steps + outcome.possible_steps}
+        used |= {s.step_number for route in outcome.routes or [] for s in route.steps}
+    assert used <= set(numbers)
 
 
 def _with_pinned_versions(graph: EbdGraph) -> EbdGraph:

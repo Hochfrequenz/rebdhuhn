@@ -1,0 +1,177 @@
+"""
+contains the models for the outcome lookup, i.e. the answer to "what does a result code imply?"
+"""
+
+from pydantic import BaseModel, ConfigDict
+
+from rebdhuhn.models.ebd_graph import EbdGraphMetaData
+
+
+class PassedStep(BaseModel):
+    """
+    A step that was passed on the way to an outcome.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the Prüfschritt, e.g. '1', '2' or '6*'
+    """
+
+    question: str
+    """
+    the question of the DecisionNode or TransitionNode
+    """
+
+    answers: list[bool]
+    """
+    The answers that can lead to the outcome. In EBDs with loops a step can be passed more than once; an answer
+    counts if the outcome can be reached after it without passing this step again (the answer given the last time).
+    On EBDs without loops this is simply every answer that can lead to the outcome.
+    [] means this is a transition step (no decision), [True] means "ja", [False] means "nein"
+    and [False, True] means that either answer can lead to the outcome.
+    """
+
+
+class RouteStep(BaseModel):
+    """
+    One step of one concrete route from the start to an outcome.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the Prüfschritt, e.g. '1', '2' or '6*'
+    """
+
+    answer: bool | None
+    """
+    the answer given in this step on this route; None for transition steps
+    """
+
+
+class Route(BaseModel):
+    """
+    One concrete route from the start to an outcome.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    steps: list[RouteStep]
+    """
+    the steps of the route in order of traversal
+    """
+
+
+class OutcomeExplanation(BaseModel):
+    """
+    Explains which steps were passed on the way to an outcome.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    key: str
+    """
+    The result code if there is one; 'Ende' for the EndNode; otherwise the key of the outcome node (its note).
+    'Ende' means "the check ran to a bare Ende": routes that passed a transitional outcome (a result code with
+    subsequent steps) earlier count like any other route.
+    """
+
+    result_code: str | None
+    """
+    The result code of the outcome, e.g. 'A55'. None for the EndNode and for outcomes without result code.
+    """
+
+    notes: list[str]
+    """
+    The distinct notes of all nodes that carry this outcome, in graph order. Notes that differ only in whitespace
+    (or trailing punctuation) are the same note.
+    """
+
+    has_subsequent_steps: bool
+    """
+    True if at least one occurrence of this outcome is a TransitionalOutcomeNode.
+    """
+
+    certain_steps: list[PassedStep]
+    """
+    Steps that lie on every route from the start to this outcome, in order of traversal.
+    Limitation: a transitional outcome on the way to a different outcome is not reported as a step.
+    """
+
+    possible_steps: list[PassedStep]
+    """
+    Steps that lie on at least one but not on every route to this outcome, sorted by step number.
+    In EBDs with loops this includes steps that are only passed by going round a loop.
+    """
+
+    route_count: int | None
+    """
+    The number of distinct routes from the start to this outcome. None if routes to this outcome can loop (the steps
+    between the start and this outcome contain a cycle). 0 if the outcome cannot be reached.
+    """
+
+    routes: list[Route] | None
+    """
+    All routes from the start to this outcome. None if there are more than max_routes of them,
+    if the route count is unknown or if max_routes is 0.
+    """
+
+
+class DecisionConsequence(BaseModel):
+    """
+    The forward direction: which result codes are still reachable after a given answer to a decision step.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the decision step, e.g. '1', '2' or '6*'
+    """
+
+    question: str
+    """
+    the question of the decision step
+    """
+
+    answer: bool
+    """
+    the answer given
+    """
+
+    reachable_result_codes: list[str]
+    """
+    sorted, distinct result codes that are reachable after this answer
+    """
+
+    can_reach_end_without_result_code: bool
+    """
+    True if an EndNode or an outcome node that itself carries no result code is reachable after this answer
+    (result codes with subsequent steps may have been produced on the way)
+    """
+
+
+class EbdOutcomes(BaseModel):
+    """
+    The outcome lookup of one EBD.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    metadata: EbdGraphMetaData
+    """
+    meta data of the EBD
+    """
+
+    outcomes: list[OutcomeExplanation]
+    """
+    one explanation per outcome, in natural order of the key (A01 < A99 < A100)
+    """
+
+    decisions: list[DecisionConsequence]
+    """
+    one entry per decision step and answer; sorted by step number (numeric part, then suffix), "nein" before "ja"
+    """

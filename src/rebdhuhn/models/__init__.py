@@ -17,6 +17,14 @@ from rebdhuhn.models.ebd_graph import (
     ToNoEdge,
     ToYesEdge,
 )
+from rebdhuhn.models.ebd_outcomes import (
+    DecisionConsequence,
+    EbdOutcomes,
+    OutcomeExplanation,
+    PassedStep,
+    Route,
+    RouteStep,
+)
 from rebdhuhn.models.ebd_table import (
     STEP_NUMBER_REGEX,
     EbdCheckResult,
@@ -43,6 +51,13 @@ __all__ = [
     "StartNode",
     "ToNoEdge",
     "ToYesEdge",
+    # ebd_outcomes models
+    "DecisionConsequence",
+    "EbdOutcomes",
+    "OutcomeExplanation",
+    "PassedStep",
+    "Route",
+    "RouteStep",
     # ebd_table models
     "STEP_NUMBER_REGEX",
     "EbdCheckResult",

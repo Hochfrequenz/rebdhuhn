@@ -13,7 +13,7 @@
   <path class="cls-1" d="M273.78,531.2h-55.93c-11.23,0-20.09-9.48-19.43-20.69,10.74-183.44,163.39-329.39,349.48-329.39v56.26c0,10.71-8.27,19.62-18.96,20.35-142.35,9.77-255.17,128.69-255.17,273.46Z"/>
   <path class="cls-1" d="M425.77,531.2h-55.45c-11.65,0-20.6-10.17-19.33-21.75,10.87-99.03,95.03-176.34,196.92-176.34v57.01c0,10.05-7.28,18.75-17.23,20.16-59.22,8.4-104.91,59.42-104.91,120.92Z"/>
 </g>
-    <svg width="1080pt" height="469pt" viewBox="0.00 0.00 1079.50 469.34">
+    <svg width="1080pt" height="469pt" viewBox="0.00 0.00 1080.00 469.00">
 <!--curl - -request POST - -url https://kroki.io/ via local kroki docker container instance hosted at http://localhost:8125/- -header 'Content-Type: application/json' - -data 'digraph D {
     labelloc="t";
     label=<<B><FONT POINT-SIZE="18">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</FONT></B><BR align="left"/><BR/><B><FONT POINT-SIZE="16">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</FONT></B><BR align="left"/><BR/><BR/><BR/>>;
@@ -42,22 +42,22 @@
 fontname="Roboto, sans-serif";
 }'--><g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(18 451.34)">
 <title>D</title>
-<text text-anchor="start" x="8" y="-413.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
-<text text-anchor="start" x="8" y="-385.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-413.24" font-family="Roboto, sans-serif" font-weight="bold" font-size="18.00">7.39 AD: Bestellung der Aggregationsebene der Bilanzkreissummenzeitreihe auf Ebene der Regelzone</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-385.14" font-family="Roboto, sans-serif" font-weight="bold" font-size="16.00">7.39.1 E_0003_Bestellung der Aggregationsebene RZ pr&#252;fen</text>
 <!-- Start -->
 <g id="node1" class="node">
 <title>Start</title>
 <path fill="#8ba2d7" stroke="black" stroke-width="0" d="M514.65,-343.34C514.65,-343.34 366.6,-343.34 366.6,-343.34 360.6,-343.34 354.6,-337.34 354.6,-331.34 354.6,-331.34 354.6,-310.06 354.6,-310.06 354.6,-304.06 360.6,-298.06 366.6,-298.06 366.6,-298.06 514.65,-298.06 514.65,-298.06 520.65,-298.06 526.65,-304.06 526.65,-310.06 526.65,-310.06 526.65,-331.34 526.65,-331.34 526.65,-337.34 520.65,-343.34 514.65,-343.34"/>
-<text text-anchor="start" x="369" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
-<text text-anchor="start" x="369" y="-308.4" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
-<text text-anchor="start" x="478.5" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">&#220;NB</text>
+<text xml:space="preserve" text-anchor="start" x="369" y="-322.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">E_0003</text>
+<text xml:space="preserve" text-anchor="start" x="369" y="-308.4" font-family="Roboto, sans-serif" font-size="14.00">Pr&#252;fende Rolle: </text>
+<text xml:space="preserve" text-anchor="start" x="478.5" y="-308.4" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">&#220;NB</text>
 </g>
 <!-- 1 -->
 <g id="node2" class="node">
 <title>1</title>
 <path fill="#c2cee9" stroke="black" stroke-width="0" d="M619.65,-261.06C619.65,-261.06 261.6,-261.06 261.6,-261.06 255.6,-261.06 249.6,-255.06 249.6,-249.06 249.6,-249.06 249.6,-237.06 249.6,-237.06 249.6,-231.06 255.6,-225.06 261.6,-225.06 261.6,-225.06 619.65,-225.06 619.65,-225.06 625.65,-225.06 631.65,-231.06 631.65,-237.06 631.65,-237.06 631.65,-249.06 631.65,-249.06 631.65,-255.06 625.65,-261.06 619.65,-261.06"/>
-<text text-anchor="start" x="264" y="-239.38" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">1: </text>
-<text text-anchor="start" x="283.5" y="-239.38" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt der Eingang der Bestellung fristgerecht?</text>
+<text xml:space="preserve" text-anchor="start" x="264" y="-239.38" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">1: </text>
+<text xml:space="preserve" text-anchor="start" x="283.5" y="-239.38" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt der Eingang der Bestellung fristgerecht?</text>
 </g>
 <!-- Start&#45;&gt;1 -->
 <g id="edge1" class="edge">
@@ -69,56 +69,56 @@ fontname="Roboto, sans-serif";
 <g id="node3" class="node">
 <title>A01</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M375.52,-171.81C375.52,-171.81 235.72,-171.81 235.72,-171.81 229.72,-171.81 223.72,-165.81 223.72,-159.81 223.72,-159.81 223.72,-124.53 223.72,-124.53 223.72,-118.53 229.72,-112.53 235.72,-112.53 235.72,-112.53 375.52,-112.53 375.52,-112.53 381.52,-112.53 387.52,-118.53 387.52,-124.53 387.52,-124.53 387.52,-159.81 387.52,-159.81 387.52,-165.81 381.52,-171.81 375.52,-171.81"/>
-<text text-anchor="start" x="238.12" y="-150.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A01</text>
-<text text-anchor="start" x="238.12" y="-122.87" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
+<text xml:space="preserve" text-anchor="start" x="238.12" y="-150.87" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A01</text>
+<text xml:space="preserve" text-anchor="start" x="238.12" y="-122.87" font-family="Roboto, sans-serif" font-size="14.00">Frist&#252;berschreitung</text>
 </g>
 <!-- 1&#45;&gt;A01 -->
 <g id="edge2" class="edge">
 <title>1-&gt;A01</title>
 <path fill="none" stroke="#88a0d6" d="M417.42,-225.06C399.94,-212.26 375.36,-194.25 353.7,-178.39"/>
 <polygon fill="#88a0d6" stroke="#88a0d6" points="355.98,-175.72 345.85,-172.63 351.85,-181.37 355.98,-175.72"/>
-<text text-anchor="start" x="388.62" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<text xml:space="preserve" text-anchor="start" x="389.19" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- 2 -->
 <g id="node4" class="node">
 <title>2</title>
 <path fill="#c2cee9" stroke="black" stroke-width="0" d="M807.77,-160.17C807.77,-160.17 417.48,-160.17 417.48,-160.17 411.48,-160.17 405.48,-154.17 405.48,-148.17 405.48,-148.17 405.48,-136.17 405.48,-136.17 405.48,-130.17 411.48,-124.17 417.48,-124.17 417.48,-124.17 807.77,-124.17 807.77,-124.17 813.77,-124.17 819.77,-130.17 819.77,-136.17 819.77,-136.17 819.77,-148.17 819.77,-148.17 819.77,-154.17 813.77,-160.17 807.77,-160.17"/>
-<text text-anchor="start" x="419.88" y="-138.5" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">2: </text>
-<text text-anchor="start" x="439.38" y="-138.5" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?</text>
+<text xml:space="preserve" text-anchor="start" x="419.88" y="-138.5" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">2: </text>
+<text xml:space="preserve" text-anchor="start" x="439.38" y="-138.5" font-family="Roboto, sans-serif" font-size="14.00">Erfolgt die Bestellung zum Monatsersten 00:00 Uhr?</text>
 </g>
 <!-- 1&#45;&gt;2 -->
 <g id="edge3" class="edge">
 <title>1-&gt;2</title>
 <path fill="none" stroke="#88a0d6" d="M470.19,-225.06C498.71,-208.67 542.04,-183.75 573.42,-165.71"/>
 <polygon fill="#88a0d6" stroke="#88a0d6" points="574.92,-168.89 581.84,-160.87 571.43,-162.82 574.92,-168.89"/>
-<text text-anchor="start" x="526.62" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<text xml:space="preserve" text-anchor="start" x="526.62" y="-194.76" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 <!-- A02 -->
 <g id="node5" class="node">
 <title>A02</title>
 <path fill="#c4cac1" stroke="black" stroke-width="0" d="M643.15,-59.28C643.15,-59.28 396.1,-59.28 396.1,-59.28 390.1,-59.28 384.1,-53.28 384.1,-47.28 384.1,-47.28 384.1,-12 384.1,-12 384.1,-6 390.1,0 396.1,0 396.1,0 643.15,0 643.15,0 649.15,0 655.15,-6 655.15,-12 655.15,-12 655.15,-47.28 655.15,-47.28 655.15,-53.28 649.15,-59.28 643.15,-59.28"/>
-<text text-anchor="start" x="398.5" y="-38.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A02</text>
-<text text-anchor="start" x="398.5" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
+<text xml:space="preserve" text-anchor="start" x="398.5" y="-38.34" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">A02</text>
+<text xml:space="preserve" text-anchor="start" x="398.5" y="-10.34" font-family="Roboto, sans-serif" font-size="14.00">Gew&#228;hlter Zeitpunkt nicht zul&#228;ssig</text>
 </g>
 <!-- 2&#45;&gt;A02 -->
 <g id="edge4" class="edge">
 <title>2-&gt;A02</title>
 <path fill="none" stroke="#88a0d6" d="M598.5,-124.38C585.95,-109.47 567.17,-87.14 551.07,-68.02"/>
 <polygon fill="#88a0d6" stroke="#88a0d6" points="553.76,-65.77 544.64,-60.37 548.4,-70.28 553.76,-65.77"/>
-<text text-anchor="start" x="571.62" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
+<text xml:space="preserve" text-anchor="start" x="571.69" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">NEIN</text>
 </g>
 <!-- Ende -->
 <g id="node6" class="node">
 <title>Ende</title>
 <path fill="#8ba2d7" stroke="black" stroke-width="0" d="M725.65,-47.64C725.65,-47.64 685.6,-47.64 685.6,-47.64 679.6,-47.64 673.6,-41.64 673.6,-35.64 673.6,-35.64 673.6,-23.64 673.6,-23.64 673.6,-17.64 679.6,-11.64 685.6,-11.64 685.6,-11.64 725.65,-11.64 725.65,-11.64 731.65,-11.64 737.65,-17.64 737.65,-23.64 737.65,-23.64 737.65,-35.64 737.65,-35.64 737.65,-41.64 731.65,-47.64 725.65,-47.64"/>
-<text text-anchor="middle" x="705.62" y="-24.96" font-family="Roboto, sans-serif" font-size="14.00">Ende</text>
+<text xml:space="preserve" text-anchor="middle" x="705.62" y="-24.96" font-family="Roboto, sans-serif" font-size="14.00">Ende</text>
 </g>
 <!-- 2&#45;&gt;Ende -->
 <g id="edge5" class="edge">
 <title>2-&gt;Ende</title>
 <path fill="none" stroke="#88a0d6" d="M626.75,-124.38C641.98,-106.29 666.4,-77.26 684.03,-56.3"/>
 <polygon fill="#88a0d6" stroke="#88a0d6" points="686.63,-58.65 690.39,-48.74 681.28,-54.14 686.63,-58.65"/>
-<text text-anchor="start" x="664.62" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
+<text xml:space="preserve" text-anchor="start" x="664.69" y="-82.23" font-family="Roboto, sans-serif" font-weight="bold" font-size="14.00">JA</text>
 </g>
 </g>
 </svg>

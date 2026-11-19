@@ -92,11 +92,11 @@ def _convert_start_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     """
     Convert a StartNode to dot code
     """
-    formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="left"/>'
+    formatted_label = f'<B>{escape(ebd_graph.metadata.ebd_code)}</B><BR align="left"/>'
     # Graphviz rejects empty HTML elements like `<B></B>`; a "Prüfende Rolle:" line without a role says nothing,
     # so the whole line is left out if the role is empty/blank.
     if ebd_graph.metadata.role.strip():
-        formatted_label += f'<FONT>Prüfende Rolle: <B>{ebd_graph.metadata.role}</B></FONT><BR align="center"/>'
+        formatted_label += f'<FONT>Prüfende Rolle: <B>{escape(ebd_graph.metadata.role)}</B></FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
@@ -109,11 +109,11 @@ def _convert_empty_node_to_dot(ebd_graph: EbdGraph, node: str, indent: str) -> s
     Convert an EmptyNode to dot code
     """
     # The label assumes a non-empty ebd_code (the identity of an EBD); an empty one would give a rejected `<B></B>`.
-    formatted_label = f'<B>{ebd_graph.metadata.ebd_code}</B><BR align="center"/>'
+    formatted_label = f'<B>{escape(ebd_graph.metadata.ebd_code)}</B><BR align="center"/>'
     if (
         ebd_graph.metadata.remark and ebd_graph.metadata.remark.strip()
     ):  # a blank remark would give an empty <FONT></FONT>
-        formatted_label += f'<FONT>{ebd_graph.metadata.remark}</FONT><BR align="center"/>'
+        formatted_label += f'<FONT>{escape(ebd_graph.metadata.remark)}</FONT><BR align="center"/>'
     return (
         f'{indent}"{node}" '
         # pylint:disable=line-too-long
@@ -427,9 +427,11 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     # Graphviz rejects empty HTML elements (`<FONT></FONT>`), so blank chapter/section lines are left out.
     header = ""
     if ebd_graph.metadata.chapter.strip():
-        header += f'<B><FONT POINT-SIZE="18">{ebd_graph.metadata.chapter}</FONT></B><BR align="left"/><BR/>'
+        header += f'<B><FONT POINT-SIZE="18">{escape(ebd_graph.metadata.chapter)}</FONT></B><BR align="left"/><BR/>'
     if ebd_graph.metadata.section.strip():
-        header += f'<B><FONT POINT-SIZE="16">{ebd_graph.metadata.section}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
+        header += (
+            f'<B><FONT POINT-SIZE="16">{escape(ebd_graph.metadata.section)}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
+        )
 
     dot_attributes: dict[str, str] = {
         # https://graphviz.org/doc/info/attrs.html

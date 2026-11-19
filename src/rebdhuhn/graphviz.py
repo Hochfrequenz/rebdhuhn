@@ -429,7 +429,9 @@ def convert_graph_to_dot(ebd_graph: EbdGraph, ebd_link_template: str | None = No
     if ebd_graph.metadata.chapter.strip():
         header += f'<B><FONT POINT-SIZE="18">{escape(ebd_graph.metadata.chapter)}</FONT></B><BR align="left"/><BR/>'
     if ebd_graph.metadata.section.strip():
-        header += f'<B><FONT POINT-SIZE="16">{escape(ebd_graph.metadata.section)}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
+        header += (
+            f'<B><FONT POINT-SIZE="16">{escape(ebd_graph.metadata.section)}</FONT></B><BR align="left"/><BR/><BR/><BR/>'
+        )
 
     dot_attributes: dict[str, str] = {
         # https://graphviz.org/doc/info/attrs.html

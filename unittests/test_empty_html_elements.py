@@ -25,7 +25,11 @@ _EMPTY_ELEMENT_REGEX = re.compile(r"<(B|I|U|FONT)\b[^>]*>\s*</\1>")
 
 
 def _table(
-    role: str = "ÜNB", chapter: str = "MaBiS", section: str = "7.1 Test", instruction: str | None = None
+    role: str = "ÜNB",
+    chapter: str = "MaBiS",
+    section: str = "7.1 Test",
+    instruction: str | None = None,
+    ebd_code: str = "E_9999",
 ) -> EbdTable:
     multi_step_instructions = (
         None
@@ -34,7 +38,7 @@ def _table(
     )
     return EbdTable(
         metadata=EbdTableMetaData(
-            ebd_code="E_9999", chapter=chapter, section=section, ebd_name="E_9999_Test", role=role
+            ebd_code=ebd_code, chapter=chapter, section=section, ebd_name="E_9999_Test", role=role
         ),
         rows=[
             EbdTableRow(
@@ -109,6 +113,20 @@ class TestEmptyHtmlElements:
         ids=["empty-role", "empty-header", "empty-instruction"],
     )
     def test_kroki_renders_svg(self, kroki_client: Kroki, table: EbdTable) -> None:
+        svg = convert_dot_to_svg_kroki(_dot(table), kroki_client)
+        assert "<svg" in svg
+
+    @pytest.mark.parametrize(
+        "table",
+        [
+            pytest.param(_table(ebd_code="A & <B>"), id="ebd-code"),
+            pytest.param(_table(role="A & <B>"), id="role"),
+            pytest.param(_table(chapter="A & <B>"), id="chapter"),
+            pytest.param(_table(section="A & <B>"), id="section"),
+            pytest.param(_tableless("A & <B>"), id="remark"),
+        ],
+    )
+    def test_kroki_renders_metadata_with_html_characters(self, kroki_client: Kroki, table: EbdTable) -> None:
         svg = convert_dot_to_svg_kroki(_dot(table), kroki_client)
         assert "<svg" in svg
 

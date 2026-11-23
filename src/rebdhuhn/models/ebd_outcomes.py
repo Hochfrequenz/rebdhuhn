@@ -172,6 +172,24 @@ class DecisionConsequence(BaseModel):
     """
 
 
+class AssumedAnswer(BaseModel):
+    """
+    An answer assumed for a decision step (what-if), see `explain_outcomes(assume=...)`.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the decision step
+    """
+
+    answer: bool
+    """
+    the assumed answer; True = "ja", False = "nein"
+    """
+
+
 class EbdOutcomes(BaseModel):
     """
     The outcome lookup of one EBD.
@@ -202,6 +220,18 @@ class EbdOutcomes(BaseModel):
     """
     True if the EBD has an outcome with the wildcard result code 'A**'. Such an outcome stands for "some code, see
     note", so a received code may also stem from it, although the explanation of that code does not cover it.
+    """
+
+    assumed_answers: list[AssumedAnswer] = []
+    """
+    the answers assumed when computing this result (see `explain_outcomes(assume=...)`), sorted by step number;
+    empty if nothing was assumed
+    """
+
+    unreachable_steps: list[str] = []
+    """
+    numbers of the decision and transition steps that cannot be reached from the start (under the assumed answers),
+    sorted by step number; such steps cannot influence any outcome
     """
 
     outcomes: list[OutcomeExplanation]

@@ -297,6 +297,17 @@ def _describe_steps(graph: nx.DiGraph) -> list[StepDescription]:
     return steps
 
 
+def _unreachable_steps(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list[str]:
+    """the numbers of the decision and transition steps that cannot be reached from the start"""
+    reachable = nx.descendants(answer_graph, _START_KEY) | {_START_KEY}
+    numbers = [
+        node.step_number
+        for key, node in graph.nodes(data="node")
+        if isinstance(node, (DecisionNode, TransitionNode)) and key not in reachable
+    ]
+    return sorted(numbers, key=_step_sort_key)
+
+
 def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
     """
     Explains the outcomes of the given EBD graph.
@@ -331,6 +342,7 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
         metadata=graph.metadata,
         steps=_describe_steps(digraph),
         multi_step_instructions=graph.multi_step_instructions,
+        unreachable_steps=_unreachable_steps(digraph, answer_graph),
         has_wildcard_outcome=any(outcome.result_code == _WILDCARD_RESULT_CODE for outcome in outcomes),
         outcomes=outcomes,
         decisions=_explain_decisions(digraph, answer_graph),

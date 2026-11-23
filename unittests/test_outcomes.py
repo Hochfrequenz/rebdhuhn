@@ -102,6 +102,12 @@ def _steps(outcome: OutcomeExplanation, certain: bool = True) -> list[tuple[str,
     return [(s.step_number, s.answers) for s in (outcome.certain_steps if certain else outcome.possible_steps)]
 
 
+def _diamond_with_unreachable_step() -> EbdGraph:
+    graph = convert_table_to_graph(_diamond)
+    graph.graph.add_node("10", node=DecisionNode(step_number="10", question="zehn?"))
+    return graph
+
+
 class TestSteps:
     """the legend: every step exactly once, with its question"""
 
@@ -127,9 +133,7 @@ class TestSteps:
         ]  # only transition steps have a note
 
     def test_unreachable_step_is_in_the_legend_and_steps_are_sorted(self) -> None:
-        graph = convert_table_to_graph(_diamond)
-        nine = DecisionNode(step_number="10", question="zehn?")
-        graph.graph.add_node("10", node=nine)
+        graph = _diamond_with_unreachable_step()
         assert [step.step_number for step in explain_outcomes(graph).steps] == ["1", "2", "3", "10"]
 
     def test_multi_step_instructions_are_passed_through(self) -> None:
@@ -163,9 +167,27 @@ class TestSteps:
             "steps",
             "multi_step_instructions",
             "has_wildcard_outcome",
+            "assumed_answers",
+            "unreachable_steps",
             "outcomes",
             "decisions",
         ]
+
+
+class TestUnreachableSteps:
+    def test_no_unreachable_steps_and_no_assumptions_by_default(self) -> None:
+        result = explain_outcomes(convert_table_to_graph(_diamond))
+        assert result.unreachable_steps == []
+        assert result.assumed_answers == []
+
+    def test_unreachable_step_is_reported(self) -> None:
+        assert explain_outcomes(_diamond_with_unreachable_step()).unreachable_steps == ["10"]
+
+    def test_old_json_without_the_new_fields_still_validates(self) -> None:
+        data = json.loads(explain_outcomes(convert_table_to_graph(_diamond)).model_dump_json())
+        del data["assumed_answers"]
+        del data["unreachable_steps"]
+        assert EbdOutcomes.model_validate(data).unreachable_steps == []
 
 
 class TestLinear:

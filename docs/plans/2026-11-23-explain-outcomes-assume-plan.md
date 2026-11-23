@@ -96,8 +96,8 @@ Check first which steps of that existing table are really unreachable and use th
   (`AttributeError`/`ValidationError` about unknown fields).
 - [ ] **Step 3: Implement** the model changes, the exports and `_unreachable_steps`; call it in `explain_outcomes`
   (empty EBD: `unreachable_steps=[]`).
-- [ ] **Step 4: Run** `uv run pytest unittests/test_outcomes.py -v` — expected: only `test_snapshot` fails, with the
-  two new keys as the only diff. Update with `uv run pytest unittests/test_outcomes.py --snapshot-update`, check with
+- [ ] **Step 4: Run** `uv run pytest unittests/test_outcomes.py -v` — expected: only the two snapshot tests
+  `test_snapshot` and `test_snapshot_loops_transitions_and_notes` fail, with the two new keys as the only diff. Update with `uv run pytest unittests/test_outcomes.py --snapshot-update`, check with
   `git diff unittests/__snapshots__` that only the two keys were added, rerun: all PASS.
 - [ ] **Step 5: Commit** `feat: report unreachable steps in explain_outcomes`
 
@@ -111,13 +111,17 @@ Check first which steps of that existing table are really unreachable and use th
 **Interfaces:**
 - Consumes: `AssumedAnswer`, `EbdOutcomes.assumed_answers`, `EbdOutcomes.unreachable_steps`, `_unreachable_steps`
   from Task 1.
-- Produces: `explain_outcomes(graph: EbdGraph, max_routes: int = 20, assume: Mapping[str, bool] | None = None)
-  -> EbdOutcomes` (`Mapping` from `collections.abc`). Extend its docstring with one paragraph on `assume`.
+- Produces: `explain_outcomes(graph: EbdGraph, max_routes: int = 20, *, assume: Mapping[str, bool] | None = None)
+  -> EbdOutcomes` (`assume` keyword-only; `Mapping` from `collections.abc`). Extend its docstring with one paragraph
+  on `assume`. Extend the docstring of `EbdOutcomes.decisions`: entries of steps listed in `unreachable_steps` stay
+  in the list (computed on the cut graph) and must be read together with `unreachable_steps`.
 - Internal: `_apply_assumptions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph, assume: Mapping[str, bool]) ->
   list[AssumedAnswer]` — validates, removes from `answer_graph` (in place; it is a fresh copy) every out edge of the
   step whose key is the excluded answer (`not answer`), returns the sorted `AssumedAnswer`s. Validation, in this
   order per step: key not in the graph → `ValueError(f"Step {step!r} does not exist in {ebd_code}")`; node is not a
-  `DecisionNode` → `ValueError(f"Step {step!r} is no decision step (only decision steps have answers)")`. Exact
+  `DecisionNode` (transition steps, but also outcome/start/end keys like `"A05"` or `"Start"`) →
+  `ValueError(f"Step {step!r} is no decision step (only decision steps have answers)")`. Never let such a key reach
+  `_step_sort_key` (it asserts on non-step numbers). Exact
   wording is free, but the message must contain the step number.
 - Call order in `explain_outcomes`: empty-EBD check (raise for non-empty `assume`: unknown step) →
   `_get_answer_graph` → `_apply_assumptions` → everything else as today on the cut answer graph.
@@ -139,6 +143,8 @@ def test_diamond_step_1_nein(self) -> None:
     assert a05.route_count == 1
     assert ("1", True) not in {(d.step_number, d.answer) for d in result.decisions}
     assert ("1", False) in {(d.step_number, d.answer) for d in result.decisions}
+    # entries of the now unreachable step 2 stay (documented)
+    assert {("2", False), ("2", True)} <= {(d.step_number, d.answer) for d in result.decisions}
 
 def test_diamond_two_assumptions_make_an_outcome_unreachable(self) -> None:
     result = explain_outcomes(convert_table_to_graph(_diamond), assume={"1": False, "3": True})
@@ -165,6 +171,15 @@ def test_transition_step(self) -> None:
     with pytest.raises(ValueError, match=...):
         explain_outcomes(convert_table_to_graph(table_0594_partly), assume={<transition step>: True})
 
+@pytest.mark.parametrize("key", ["A05", "Start"])
+def test_non_step_key(self, key: str) -> None:
+    with pytest.raises(ValueError, match=repr(key)):
+        explain_outcomes(convert_table_to_graph(_diamond), assume={key: True})
+
+def test_assume_is_keyword_only(self) -> None:
+    with pytest.raises(TypeError):
+        explain_outcomes(convert_table_to_graph(_diamond), 20, {"1": True})  # type: ignore[misc]
+
 def test_empty_ebd(self) -> None:
     with pytest.raises(ValueError):
         explain_outcomes(convert_table_to_graph(_load("e0452_empty_remark.json")), assume={"1": True})
@@ -182,8 +197,10 @@ Verify the exact expectations by hand against the diagram comments of `_diamond`
 2 ja → A05, 2 nein → 3; 3 ja → A05, 3 nein → A06) and `_same_target` before relying on them; fix the test, not the
 code, if an expectation above is wrong, and say so in the report.
 
-Property test (module level, parametrized over `_all_tables`, `max_routes=1000` only where routes are compared,
-otherwise `max_routes=0`; the whole test must stay well under ~10 s — measure with `--durations=5`):
+Property test (module level, parametrized over `_all_tables`). A full sweep over every decision step takes ~7 s
+(the per-outcome dominator analysis dominates; `max_routes=0` does not help), so sample from the start: every n-th
+decision step with n = max(1, len(decision_steps) // 10), i.e. at most ~10 steps per table, both answers each.
+Budget: about 3 s for the whole parametrized test — measure with `--durations=10` and report the number:
 
 ```python
 @pytest.mark.parametrize("name", list(_all_tables))
@@ -191,7 +208,7 @@ def test_assumptions_are_respected(name: str) -> None:
     graph = _all_tables[name]
     base = explain_outcomes(graph, max_routes=0)
     reachable_base = {o.key for o in base.outcomes if o.route_count != 0}
-    for step in [s.step_number for s in base.steps if <is a decision step>]:
+    for step in <sampled decision steps, see above>:
         for answer in (False, True):
             result = explain_outcomes(graph, max_routes=20, assume={step: answer})
             # no step used anywhere is unreachable
@@ -201,8 +218,7 @@ def test_assumptions_are_respected(name: str) -> None:
             # set(base.unreachable_steps) ⊆ set(result.unreachable_steps)
 ```
 
-Decision steps: those with an entry in `base.decisions`. If the test is too slow on the largest tables, limit the
-steps per table (e.g. the first 15 decision steps) and note it in a comment.
+Decision steps: those with an entry in `base.decisions` (distinct, in order of `base.steps`).
 
 Extend `test_input_graph_is_not_modified` so it also calls `explain_outcomes(graph, assume={<first decision step>:
 True})` and checks that the passed mapping is unchanged.
@@ -218,11 +234,23 @@ True})` and checks that the passed mapping is unchanged.
 # "If I always answer 'nein' at step 17, does step 39 still matter?"
 assumed = explain_outcomes(graph, assume={"17": False})
 print("39" in assumed.unreachable_steps)
+a05 = next(outcome for outcome in assumed.outcomes if outcome.key == "A05")
+print(a05.route_count == 0)  # if "node 39" is a result code: can it still be produced?
 print([outcome.key for outcome in assumed.outcomes if outcome.route_count != 0])  # codes still reachable
 ```
 
   One sentence each: an assumption holds on every pass of a loop; answers excluded by an assumption are missing
-  from `decisions`; unknown steps and transition steps raise `ValueError`.
+  from `decisions`, while entries of unreachable steps stay there (check `unreachable_steps`); unknown steps,
+  transition steps and other node keys raise `ValueError`.
+  Also add the recipe "which outcomes does a change at step X affect?": the outcomes whose `certain_steps` or
+  `possible_steps` contain X (`routes` is capped by `max_routes` and `None` for loops, so use the step lists).
 - [ ] **Step 6: Run all gates** from Global Constraints — expected: all green (except docker-dependent tests that
   fail on `main` too).
 - [ ] **Step 7: Commit** `feat: explain_outcomes(assume=...) for what-if analysis`
+
+## Notes for the PR (orchestrator, not the builder)
+
+- Title `feat: explain_outcomes(assume=...) for what-if analysis`; body says "Refs #516" (no auto-close).
+- State the forward-compatibility break: new `.outcomes.json` files carry `assumed_answers` and `unreachable_steps`
+  and fail validation with older rebdhuhn versions / older `ebd_outcomes.schema.json` (`extra="forbid"`); the
+  toolchain must regenerate schema and files together.

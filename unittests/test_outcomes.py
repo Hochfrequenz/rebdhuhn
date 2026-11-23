@@ -13,6 +13,7 @@ from syrupy.assertion import SnapshotAssertion
 
 from rebdhuhn import EbdGraph, EbdOutcomes, EbdTable, convert_table_to_graph, explain_outcomes
 from rebdhuhn.models import (
+    AssumedAnswer,
     DecisionNode,
     EbdCheckResult,
     EbdTableMetaData,
@@ -668,6 +669,11 @@ def test_input_graph_is_not_modified(name: str) -> None:
     before = _snapshot_of_graph(graph)
     explain_outcomes(graph)
     assert _snapshot_of_graph(graph) == before
+    first_step = next(d.step_number for d in explain_outcomes(graph, max_routes=0).decisions)
+    assumption = {first_step: True}
+    explain_outcomes(graph, assume=assumption)
+    assert assumption == {first_step: True}
+    assert _snapshot_of_graph(graph) == before
 
 
 @pytest.mark.parametrize("name", list(_all_tables))
@@ -675,6 +681,93 @@ def test_max_routes_zero_disables_routes_for_every_outcome(name: str) -> None:
     result = explain_outcomes(_all_tables[name], max_routes=0)
     assert result.outcomes
     assert all(outcome.routes is None for outcome in result.outcomes)
+
+
+class TestAssume:
+    """what-if: assumed answers cut the graph"""
+
+    def test_diamond_step_1_nein(self) -> None:
+        result = explain_outcomes(convert_table_to_graph(_diamond), assume={"1": False})
+        assert result.assumed_answers == [AssumedAnswer(step_number="1", answer=False)]
+        assert result.unreachable_steps == ["2"]
+        a05 = _by_key(result)["A05"]
+        assert [(s.step_number, s.answers) for s in a05.certain_steps] == [("1", [False]), ("3", [True])]
+        assert a05.possible_steps == []
+        assert a05.route_count == 1
+        decisions = {(d.step_number, d.answer) for d in result.decisions}
+        assert ("1", True) not in decisions
+        assert ("1", False) in decisions
+        # entries of the now unreachable step 2 stay (documented)
+        assert {("2", False), ("2", True)} <= decisions
+
+    def test_diamond_two_assumptions_make_an_outcome_unreachable(self) -> None:
+        result = explain_outcomes(convert_table_to_graph(_diamond), assume={"1": False, "3": True})
+        a06 = _by_key(result)["A06"]
+        assert a06.route_count == 0 and a06.certain_steps == [] and a06.possible_steps == []
+
+    def test_assumed_step_that_becomes_unreachable(self) -> None:
+        result = explain_outcomes(convert_table_to_graph(_diamond), assume={"1": False, "2": True})
+        assert result.unreachable_steps == ["2"]
+        assert [a.step_number for a in result.assumed_answers] == ["1", "2"]
+
+    @pytest.mark.parametrize("answer", [True, False])
+    def test_both_answers_to_the_same_node(self, answer: bool) -> None:
+        result = explain_outcomes(convert_table_to_graph(_same_target), assume={"2": answer})
+        ende = _by_key(result)["Ende"]
+        assert ende.route_count == 1
+        assert [(s.step_number, s.answers) for s in ende.certain_steps] == [("1", [True]), ("2", [answer])]
+
+    def test_unknown_step(self) -> None:
+        with pytest.raises(ValueError, match="'42'"):
+            explain_outcomes(convert_table_to_graph(_diamond), assume={"42": True})
+
+    def test_transition_step(self) -> None:
+        with pytest.raises(ValueError, match="'275'"):
+            explain_outcomes(convert_table_to_graph(table_0594_partly), assume={"275": True})
+
+    @pytest.mark.parametrize("key", ["A05", "Start"])
+    def test_non_step_key(self, key: str) -> None:
+        with pytest.raises(ValueError, match=repr(key)):
+            explain_outcomes(convert_table_to_graph(_diamond), assume={key: True})
+
+    def test_assume_is_keyword_only(self) -> None:
+        with pytest.raises(TypeError):
+            explain_outcomes(convert_table_to_graph(_diamond), 20, {"1": True})  # type: ignore[call-arg]
+
+    def test_empty_ebd(self) -> None:
+        with pytest.raises(ValueError):
+            explain_outcomes(convert_table_to_graph(_load("e0452_empty_remark.json")), assume={"1": True})
+
+    def test_no_assumption_equals_empty_assumption(self) -> None:
+        graph = convert_table_to_graph(_diamond)
+        assert explain_outcomes(graph, assume={}) == explain_outcomes(graph) == explain_outcomes(graph, assume=None)
+
+    def test_json_round_trip_with_assumptions(self) -> None:
+        result = explain_outcomes(convert_table_to_graph(_diamond), assume={"1": False})
+        assert EbdOutcomes.model_validate_json(result.model_dump_json()) == result
+
+
+@pytest.mark.parametrize("name", list(_all_tables))
+def test_assumptions_are_respected(name: str) -> None:
+    graph = _all_tables[name]
+    base = explain_outcomes(graph, max_routes=0)
+    reachable_base = {o.key for o in base.outcomes if o.route_count != 0}
+    decision_steps = list(dict.fromkeys(d.step_number for d in base.decisions))
+    decision_steps.sort(key=[s.step_number for s in base.steps].index)
+    for step in decision_steps[:: max(1, len(decision_steps) // 10)]:
+        for answer in (False, True):
+            result = explain_outcomes(graph, max_routes=20, assume={step: answer})
+            unreachable = set(result.unreachable_steps)
+            assert set(base.unreachable_steps) <= unreachable
+            assert (step, not answer) not in {(d.step_number, d.answer) for d in result.decisions}
+            assert {o.key for o in result.outcomes if o.route_count != 0} <= reachable_base
+            for outcome in result.outcomes:
+                passed = [*outcome.certain_steps, *outcome.possible_steps]
+                assert not {p.step_number for p in passed} & unreachable
+                assert all(p.answers in ([], [answer]) for p in passed if p.step_number == step)
+                for route in outcome.routes or []:
+                    assert not {r.step_number for r in route.steps} & unreachable
+                    assert all(r.answer == answer for r in route.steps if r.step_number == step)
 
 
 class TestNotesAndOrder:

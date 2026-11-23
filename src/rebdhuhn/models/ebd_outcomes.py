@@ -241,5 +241,7 @@ class EbdOutcomes(BaseModel):
 
     decisions: list[DecisionConsequence]
     """
-    one entry per decision step and answer; sorted by step number (numeric part, then suffix), "nein" before "ja"
+    one entry per decision step and answer; sorted by step number (numeric part, then suffix), "nein" before "ja".
+    Entries of steps listed in `unreachable_steps` stay in the list (computed on the graph cut by the assumptions);
+    read them together with `unreachable_steps`. Answers excluded by an assumed answer have no entry.
     """

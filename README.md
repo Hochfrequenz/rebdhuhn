@@ -167,6 +167,27 @@ by its `step_number`. `certain_steps` lie on every route to the outcome, `possib
 routes is counted without enumerating them (`E_0594` has hundreds of thousands), so it is cheap even for the biggest
 EBDs.
 
+#### What if ... (`assume`)
+
+`assume` answers decision steps in advance and analyses the EBD under that assumption:
+
+```python
+# "If I always answer 'nein' at step 17, does step 39 still matter?"
+assumed = explain_outcomes(graph, assume={"17": False})
+print("39" in assumed.unreachable_steps)
+a05 = next(outcome for outcome in assumed.outcomes if outcome.key == "A05")
+print(a05.route_count == 0)  # if "node 39" is a result code: can it still be produced?
+print([outcome.key for outcome in assumed.outcomes if outcome.route_count != 0])  # codes still reachable
+```
+
+- An assumption holds on every pass of a loop.
+- Answers excluded by an assumption are missing from `decisions`, while the entries of unreachable steps stay there
+  (check `unreachable_steps`).
+- Unknown steps, transition steps and other node keys raise a `ValueError`.
+
+Recipe "which outcomes does a change at step X affect?": the outcomes whose `certain_steps` or `possible_steps` contain
+X (`routes` is capped by `max_routes` and `None` for loops, so use the step lists).
+
 Some notes on the details:
 
 - Some EBDs contain loops (iterations over a list of hits). There a step can be passed more than once:

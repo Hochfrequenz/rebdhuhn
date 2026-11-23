@@ -60,7 +60,7 @@ def kroki_container() -> Generator[DockerContainer, None, None]:
     if not is_docker_available():
         pytest.skip("Docker is not available - skipping Kroki tests")
 
-    container = DockerContainer("yuzutech/kroki:0.36.0")
+    container = DockerContainer("yuzutech/kroki:0.37.1")
     container.with_exposed_ports(8000)
     container.start()
 

@@ -130,7 +130,7 @@ endif
 
 To export the graph as SVG, you need a [Kroki](https://kroki.io) instance. You can either:
 - Use the public instance at `https://kroki.io`
-- Run a local instance via Docker: `docker run -p 8125:8000 yuzutech/kroki:0.36.0`
+- Run a local instance via Docker: `docker run -p 8125:8000 yuzutech/kroki:0.37.1`
 
 Then use
 ```python

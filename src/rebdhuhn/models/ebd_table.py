@@ -64,7 +64,7 @@ Pruefidentifikator = Annotated[str, Field(pattern=_PRUEFI_REGEX)]
 class EbdPruefidentifikator(BaseModel):
     """
     A Pruefidentifikator paired with its Edifact format version,
-    allowing generation of links to ahb-tabellen.hochfrequenz.de.
+    allowing generation of links to ahb-tabellen.hochfrequenz.app.
     """
 
     model_config = ConfigDict(extra="forbid")
@@ -172,7 +172,7 @@ class EbdTableMetaData(BaseModel):
     pruefidentifikatoren: list[EbdPruefidentifikator] | None = None
     """
     Pruefidentifikatoren associated with this EBD, paired with their format version
-    for link generation to ahb-tabellen.hochfrequenz.de.
+    for link generation to ahb-tabellen.hochfrequenz.app.
     None means we didn't check; an empty list means no Pruefidentifikator refers to this EBD.
     """
 

@@ -22,7 +22,7 @@ class TestAddReleaseInfoFooter:
     """Tests for add_release_info_footer in add_watermark.py."""
 
     def test_footer_contains_link_to_ebd_hochfrequenz(self) -> None:
-        """The footer must wrap the version text in a hyperlink to ebd.hochfrequenz.de."""
+        """The footer must wrap the version text in a hyperlink to ebd.hochfrequenz.app."""
         release_info = EbdDocumentReleaseInformation(
             version="4.2",
             release_date=date(2025, 12, 11),
@@ -34,8 +34,8 @@ class TestAddReleaseInfoFooter:
 
         # Find all <a> elements
         a_elements = root.findall(".//{http://www.w3.org/2000/svg}a") + root.findall(".//a")
-        assert any(elem.attrib.get("href") == "https://ebd.hochfrequenz.de" for elem in a_elements), (
-            "Footer must contain a hyperlink to https://ebd.hochfrequenz.de"
+        assert any(elem.attrib.get("href") == "https://ebd.hochfrequenz.app" for elem in a_elements), (
+            "Footer must contain a hyperlink to https://ebd.hochfrequenz.app"
         )
 
     def test_footer_link_text_is_not_underlined(self) -> None:

@@ -16,7 +16,7 @@ from svgutils.compose import SVG, Figure  # type: ignore[import-untyped]
 from rebdhuhn.models.ebd_table import EbdDocumentReleaseInformation, EbdPruefidentifikator
 from rebdhuhn.utils import format_release_info
 
-_AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.de/ahb"
+_AHB_TABELLEN_BASE_URL = "https://ahb-tabellen.hochfrequenz.app/ahb"
 
 _FOOTER_TEXT_STYLE: dict[str, str] = {
     "text-anchor": "start",
@@ -158,11 +158,11 @@ def add_release_info_footer(svg: str, release_info: EbdDocumentReleaseInformatio
     root = tree.getroot()
     viewbox_width, viewbox_height = _get_viewbox_dimensions(root, svg)
 
-    # Create anchor element linking to ebd.hochfrequenz.de
+    # Create anchor element linking to ebd.hochfrequenz.app
     link_element = etree.Element(  # pylint:disable=c-extension-no-member
         "a",
         attrib={
-            "href": "https://ebd.hochfrequenz.de",
+            "href": "https://ebd.hochfrequenz.app",
             "target": "_blank",
         },
     )
@@ -188,7 +188,7 @@ def add_pruefidentifikatoren_footer(
     """
     Adds clickable Pruefidentifikator links to the bottom-left corner of the SVG,
     mirroring the release info footer style on the bottom-right.
-    Each link points to ahb-tabellen.hochfrequenz.de/ahb/{format_version}/{pruefidentifikator}.
+    Each link points to ahb-tabellen.hochfrequenz.app/ahb/{format_version}/{pruefidentifikator}.
     """
     if not pruefidentifikatoren:
         return svg

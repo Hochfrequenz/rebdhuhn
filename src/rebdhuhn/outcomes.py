@@ -6,11 +6,13 @@ after a given answer to a decision step.
 
 import re
 from collections import defaultdict
+from collections.abc import Mapping
 
 import networkx as nx  # type: ignore[import-untyped]
 
 from rebdhuhn.graph_conversion import _normalize_note_for_comparison, _notes_same_except_for_whitespace
 from rebdhuhn.models import (
+    AssumedAnswer,
     DecisionConsequence,
     DecisionNode,
     EbdGraph,
@@ -245,6 +247,34 @@ def _explain_outcome(  # pylint:disable=too-many-locals
     )
 
 
+def _apply_assumptions(
+    graph: nx.DiGraph, answer_graph: nx.MultiDiGraph, assume: Mapping[str, bool], ebd_code: str | None
+) -> list[AssumedAnswer]:
+    """
+    Validates the assumed answers and removes (in place) every edge that stands for the excluded answer.
+    Raises a ValueError for steps that do not exist or are no decision steps.
+    """
+    for step in assume:
+        if step not in graph:
+            raise ValueError(f"Step {step!r} does not exist in {ebd_code}")
+        if not isinstance(_node(graph, step), DecisionNode):
+            raise ValueError(f"Step {step!r} is no decision step (only decision steps have answers) in {ebd_code}")
+        if not isinstance(assume[step], bool):
+            raise ValueError(f"The answer assumed for step {step!r} must be True or False, not {assume[step]!r}")
+    answer_graph.remove_edges_from(
+        [
+            (key, target, excluded)
+            for key, answer in assume.items()
+            for _, target, excluded in answer_graph.out_edges(key, keys=True)
+            if excluded is not answer
+        ]
+    )
+    return sorted(
+        (AssumedAnswer(step_number=step, answer=answer) for step, answer in assume.items()),
+        key=lambda assumed: _step_sort_key(assumed.step_number),
+    )
+
+
 def _explain_decisions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list[DecisionConsequence]:
     """
     the forward direction: which result codes are reachable after which answer
@@ -255,7 +285,7 @@ def _explain_decisions(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list
         if key not in cache:
             codes: set[str] = set()
             reaches_end = False
-            for reached_key in nx.descendants(graph, key) | {key}:
+            for reached_key in nx.descendants(answer_graph, key) | {key}:
                 node = _node(graph, reached_key)
                 if isinstance(node, (OutcomeNode, TransitionalOutcomeNode)) and node.result_code is not None:
                     codes.add(node.result_code)
@@ -297,7 +327,18 @@ def _describe_steps(graph: nx.DiGraph) -> list[StepDescription]:
     return steps
 
 
-def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
+def _unreachable_steps(graph: nx.DiGraph, answer_graph: nx.MultiDiGraph) -> list[str]:
+    """the numbers of the decision and transition steps that cannot be reached from the start"""
+    reachable = nx.descendants(answer_graph, _START_KEY) | {_START_KEY}
+    numbers = [
+        node.step_number
+        for key, node in graph.nodes(data="node")
+        if isinstance(node, (DecisionNode, TransitionNode)) and key not in reachable
+    ]
+    return sorted(numbers, key=_step_sort_key)
+
+
+def explain_outcomes(graph: EbdGraph, max_routes: int = 20, *, assume: Mapping[str, bool] | None = None) -> EbdOutcomes:
     """
     Explains the outcomes of the given EBD graph.
 
@@ -310,9 +351,16 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
     Multi-step instructions of the graph are passed through to the result but NOT evaluated: routes and step
     implications are derived from the graph structure only. Result codes are grouped literally; see
     `EbdOutcomes.has_wildcard_outcome` for the wildcard code 'A**'.
+    With `assume` (step number of a decision step -> answer, True = "ja") the analysis is done under the assumption
+    that these steps are always answered so (on every pass of a loop). Steps that then cannot be reached are listed in
+    `unreachable_steps`, an outcome that cannot be produced any more has `route_count == 0`. Unknown steps and steps
+    that are no decision steps (transition steps, outcome keys, ...) raise a ValueError.
     """
     digraph: nx.DiGraph = graph.graph
+    assume = assume or {}
     if _START_KEY not in digraph:  # e.g. the empty EBD
+        if assume:
+            raise ValueError(f"Step {next(iter(assume))!r} does not exist in {graph.metadata.ebd_code}")
         return EbdOutcomes(
             metadata=graph.metadata,
             steps=[],
@@ -322,6 +370,7 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
             decisions=[],
         )
     answer_graph = _get_answer_graph(digraph)
+    assumed_answers = _apply_assumptions(digraph, answer_graph, assume, graph.metadata.ebd_code)
     outcomes = [
         _explain_outcome(digraph, answer_graph, outcome_key, outcome_keys, max_routes)
         for outcome_key, outcome_keys in _group_outcome_nodes(digraph).items()
@@ -331,6 +380,8 @@ def explain_outcomes(graph: EbdGraph, max_routes: int = 20) -> EbdOutcomes:
         metadata=graph.metadata,
         steps=_describe_steps(digraph),
         multi_step_instructions=graph.multi_step_instructions,
+        assumed_answers=assumed_answers,
+        unreachable_steps=_unreachable_steps(digraph, answer_graph),
         has_wildcard_outcome=any(outcome.result_code == _WILDCARD_RESULT_CODE for outcome in outcomes),
         outcomes=outcomes,
         decisions=_explain_decisions(digraph, answer_graph),

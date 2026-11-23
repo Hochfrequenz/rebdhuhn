@@ -66,6 +66,8 @@
     ],
     "multi_step_instructions": null,
     "has_wildcard_outcome": false,
+    "assumed_answers": [],
+    "unreachable_steps": [],
     "outcomes": [
       {
         "key": "A01",
@@ -1168,6 +1170,8 @@
     ],
     "multi_step_instructions": null,
     "has_wildcard_outcome": true,
+    "assumed_answers": [],
+    "unreachable_steps": [],
     "outcomes": [
       {
         "key": "A05",

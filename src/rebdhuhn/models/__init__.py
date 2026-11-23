@@ -18,6 +18,7 @@ from rebdhuhn.models.ebd_graph import (
     ToYesEdge,
 )
 from rebdhuhn.models.ebd_outcomes import (
+    AssumedAnswer,
     DecisionConsequence,
     EbdOutcomes,
     OutcomeExplanation,
@@ -53,6 +54,7 @@ __all__ = [
     "ToNoEdge",
     "ToYesEdge",
     # ebd_outcomes models
+    "AssumedAnswer",
     "DecisionConsequence",
     "EbdOutcomes",
     "OutcomeExplanation",

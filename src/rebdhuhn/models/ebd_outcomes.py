@@ -172,6 +172,24 @@ class DecisionConsequence(BaseModel):
     """
 
 
+class AssumedAnswer(BaseModel):
+    """
+    An answer assumed for a decision step (what-if), see `explain_outcomes(assume=...)`.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    step_number: str
+    """
+    number of the decision step
+    """
+
+    answer: bool
+    """
+    the assumed answer; True = "ja", False = "nein"
+    """
+
+
 class EbdOutcomes(BaseModel):
     """
     The outcome lookup of one EBD.
@@ -204,6 +222,18 @@ class EbdOutcomes(BaseModel):
     note", so a received code may also stem from it, although the explanation of that code does not cover it.
     """
 
+    assumed_answers: list[AssumedAnswer] = []
+    """
+    the answers assumed when computing this result (see `explain_outcomes(assume=...)`), sorted by step number;
+    empty if nothing was assumed
+    """
+
+    unreachable_steps: list[str] = []
+    """
+    numbers of the decision and transition steps that cannot be reached from the start (under the assumed answers),
+    sorted by step number; such steps cannot influence any outcome
+    """
+
     outcomes: list[OutcomeExplanation]
     """
     one explanation per outcome, in natural order of the key (A01 < A99 < A100)
@@ -211,5 +241,7 @@ class EbdOutcomes(BaseModel):
 
     decisions: list[DecisionConsequence]
     """
-    one entry per decision step and answer; sorted by step number (numeric part, then suffix), "nein" before "ja"
+    one entry per decision step and answer; sorted by step number (numeric part, then suffix), "nein" before "ja".
+    Entries of steps listed in `unreachable_steps` stay in the list (computed on the graph cut by the assumptions);
+    read them together with `unreachable_steps`. Answers excluded by an assumed answer have no entry.
     """

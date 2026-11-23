@@ -6,6 +6,7 @@ from rebdhuhn.graph_conversion import convert_table_to_digraph, convert_table_to
 from rebdhuhn.graphviz import convert_dot_to_svg_kroki, convert_graph_to_dot
 from rebdhuhn.kroki import DotToSvgConverter, Kroki, PlantUmlToSvgConverter
 from rebdhuhn.models import (
+    AssumedAnswer,
     DecisionConsequence,
     DecisionNode,
     EbdCheckResult,
@@ -50,6 +51,7 @@ __all__ = [
     "EndNode",
     "OutcomeNode",
     # Outcome lookup models
+    "AssumedAnswer",
     "DecisionConsequence",
     "EbdOutcomes",
     "OutcomeExplanation",

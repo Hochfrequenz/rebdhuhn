@@ -3,10 +3,12 @@ Tests for the outcome lookup (explain_outcomes)
 """
 
 import json
+import math
 import time
 from pathlib import Path
 from typing import Any, Literal
 
+import networkx as nx  # type: ignore[import-untyped]
 import pytest
 from pydantic import BaseModel, ValidationError
 from syrupy.assertion import SnapshotAssertion
@@ -28,6 +30,7 @@ from rebdhuhn.models import (
     ToYesEdge,
 )
 from rebdhuhn.models.ebd_graph import TransitionalOutcomeNode
+from rebdhuhn.outcomes import _step_sort_key
 from unittests.e0266 import table_e0266
 from unittests.e0454 import table_e0454
 from unittests.e0459 import table_e0459
@@ -730,6 +733,11 @@ class TestAssume:
         with pytest.raises(ValueError, match=repr(key)):
             explain_outcomes(convert_table_to_graph(_diamond), assume={key: True})
 
+    @pytest.mark.parametrize("answer", [1, 0, "ja"])
+    def test_answer_must_be_a_bool(self, answer: Any) -> None:
+        with pytest.raises(ValueError, match="'1'"):
+            explain_outcomes(convert_table_to_graph(_diamond), assume={"1": answer})
+
     def test_assume_is_keyword_only(self) -> None:
         with pytest.raises(TypeError):
             explain_outcomes(convert_table_to_graph(_diamond), 20, {"1": True})  # type: ignore[call-arg]
@@ -747,27 +755,51 @@ class TestAssume:
         assert EbdOutcomes.model_validate_json(result.model_dump_json()) == result
 
 
+def _assert_assumption_is_respected(graph: EbdGraph, base: EbdOutcomes, step: str, answer: bool) -> None:
+    reachable_base = {o.key for o in base.outcomes if o.route_count != 0}
+    base_unreachable = set(base.unreachable_steps)
+    result = explain_outcomes(graph, max_routes=20, assume={step: answer})
+    unreachable = set(result.unreachable_steps)
+    assert base_unreachable <= unreachable
+    assert (step, not answer) not in {(d.step_number, d.answer) for d in result.decisions}
+    assert {o.key for o in result.outcomes if o.route_count != 0} <= reachable_base
+    for outcome in result.outcomes:
+        passed = [*outcome.certain_steps, *outcome.possible_steps]
+        assert not {p.step_number for p in passed} & unreachable
+        assert all(p.answers in ([], [answer]) for p in passed if p.step_number == step)
+        for route in outcome.routes or []:
+            assert not {r.step_number for r in route.steps} & unreachable
+            assert all(r.answer == answer for r in route.steps if r.step_number == step)
+
+
 @pytest.mark.parametrize("name", list(_all_tables))
 def test_assumptions_are_respected(name: str) -> None:
     graph = _all_tables[name]
     base = explain_outcomes(graph, max_routes=0)
-    reachable_base = {o.key for o in base.outcomes if o.route_count != 0}
     decision_steps = list(dict.fromkeys(d.step_number for d in base.decisions))
     decision_steps.sort(key=[s.step_number for s in base.steps].index)
-    for step in decision_steps[:: max(1, len(decision_steps) // 10)]:
+    sampled = decision_steps[:: max(1, math.ceil(len(decision_steps) / 10))]
+    for step in sampled:
         for answer in (False, True):
-            result = explain_outcomes(graph, max_routes=20, assume={step: answer})
-            unreachable = set(result.unreachable_steps)
-            assert set(base.unreachable_steps) <= unreachable
-            assert (step, not answer) not in {(d.step_number, d.answer) for d in result.decisions}
-            assert {o.key for o in result.outcomes if o.route_count != 0} <= reachable_base
-            for outcome in result.outcomes:
-                passed = [*outcome.certain_steps, *outcome.possible_steps]
-                assert not {p.step_number for p in passed} & unreachable
-                assert all(p.answers in ([], [answer]) for p in passed if p.step_number == step)
-                for route in outcome.routes or []:
-                    assert not {r.step_number for r in route.steps} & unreachable
-                    assert all(r.answer == answer for r in route.steps if r.step_number == step)
+            _assert_assumption_is_respected(graph, base, step, answer)
+
+
+def test_assumption_on_a_step_on_a_cycle() -> None:
+    graph = _all_tables["e0259"]
+    base = explain_outcomes(graph, max_routes=0)
+    on_a_cycle = sorted(
+        {
+            graph.graph.nodes[key]["node"].step_number
+            for component in nx.strongly_connected_components(graph.graph)
+            if len(component) > 1
+            for key in component
+            if isinstance(graph.graph.nodes[key]["node"], DecisionNode)
+        },
+        key=_step_sort_key,
+    )
+    assert on_a_cycle
+    for answer in (False, True):
+        _assert_assumption_is_respected(graph, base, on_a_cycle[0], answer)
 
 
 class TestNotesAndOrder:

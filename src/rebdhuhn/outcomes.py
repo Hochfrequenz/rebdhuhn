@@ -258,7 +258,9 @@ def _apply_assumptions(
         if step not in graph:
             raise ValueError(f"Step {step!r} does not exist in {ebd_code}")
         if not isinstance(_node(graph, step), DecisionNode):
-            raise ValueError(f"Step {step!r} is no decision step (only decision steps have answers)")
+            raise ValueError(f"Step {step!r} is no decision step (only decision steps have answers) in {ebd_code}")
+        if not isinstance(assume[step], bool):
+            raise ValueError(f"The answer assumed for step {step!r} must be True or False, not {assume[step]!r}")
     answer_graph.remove_edges_from(
         [
             (key, target, excluded)
